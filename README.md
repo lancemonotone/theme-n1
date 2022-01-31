@@ -4,4 +4,4 @@ Theme for the literary magazine n+1, with volume/issue functionality, custom wid
 [See the theme in the wild](https://www.nplusonemag.com/)
 
 Homepage
-![Screenshot of Events home page](nplusonemag.png)
+![Screenshot of n+1 home page](nplusonemag.png)
