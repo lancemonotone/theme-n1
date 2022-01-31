@@ -1,0 +1,227 @@
+{
+    "key": "group_60ef2eaed4aa2",
+    "title": "Site Settings",
+    "fields": [
+        {
+            "key": "field_5352b1050c4fd",
+            "label": "Paper Monument Image",
+            "name": "options_paper_monument_img",
+            "type": "image",
+            "instructions": "Upload or choose the Paper Monument module's background image here. The file should be a JPG or PNG and must be exactly 500w x 650h (px).",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "preview_size": "thumbnail",
+            "return_format": "array",
+            "library": "all",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": ""
+        },
+        {
+            "key": "field_5257443be80fa",
+            "label": "Shop Link",
+            "name": "options_shopify_link",
+            "type": "text",
+            "instructions": "Enter the primary Shopify link here.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "formatting": "none",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_531cd9b961327",
+            "label": "Force Paywall",
+            "name": "options_force_paywall",
+            "type": "true_false",
+            "instructions": "Check this to view the site as a paywalled visitor in order to see adverts and article roadblocks.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_538d31c8ac499",
+            "label": "Offline Module Header",
+            "name": "offline_header",
+            "type": "text",
+            "instructions": "Enter the header text for the Offline Module here.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "formatting": "html",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_538d31c8ad439",
+            "label": "Offline Module Dek",
+            "name": "offline_dek",
+            "type": "text",
+            "instructions": "Enter the dek for the Offline Module here.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "formatting": "html",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_538d31c8ae3da",
+            "label": "Offline Module Copy",
+            "name": "offline_copy",
+            "type": "wysiwyg",
+            "instructions": "Enter the copy for the Offline Module here.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "toolbar": "full",
+            "media_upload": 0,
+            "the_content": "no",
+            "tabs": "all",
+            "default_value": "",
+            "delay": 0
+        },
+        {
+            "key": "field_52a5f41e71d39",
+            "label": "Subscribe Prompt",
+            "name": "options_subscribe_prompt",
+            "type": "text",
+            "instructions": "Enter the Subscribe Prompt text here.  This will appear in Subscribe modules throughout the site.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Subscribe online and get 50% off the cover price.",
+            "formatting": "html",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_52a5f41e7ca69",
+            "label": "Subscribe Action",
+            "name": "options_subscribe_action",
+            "type": "text",
+            "instructions": "Enter the Subscribe Action text here.  This will appear in Subscribe modules throughout the site.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Or sign in and read it now.",
+            "formatting": "html",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_52e5399132dff",
+            "label": "Scroll Landing Page Dek",
+            "name": "options_online-only_landing_page_dek",
+            "type": "text",
+            "instructions": "This is the short content under 'The Scroll' title on the Scroll home page.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "formatting": "html",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_52a3a34b6552a",
+            "label": "Footer Dek",
+            "name": "options_footer_copy",
+            "type": "wysiwyg",
+            "instructions": "Update the footer copy here.  Use the tags {{issue-number}} and {{issue-name}} to output each within the content.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "toolbar": "basic",
+            "media_upload": 0,
+            "the_content": "no",
+            "tabs": "all",
+            "default_value": "",
+            "delay": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1626632437
+}

@@ -1,0 +1,211 @@
+{
+    "key": "group_60ef2eaee8801",
+    "title": "Article Options",
+    "fields": [
+        {
+            "key": "field_5241f8a167858",
+            "label": "Dek",
+            "name": "article_subhead",
+            "type": "text",
+            "instructions": "One to three lines of lead-in text. Appears below the article title. Optional, but recommended.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "formatting": "html",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_51f71ba6bf4d7",
+            "label": "Long Excerpt",
+            "name": "article_long_excerpt",
+            "type": "wysiwyg",
+            "instructions": "Appears on paywalled articles only.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "toolbar": "full",
+            "media_upload": 0,
+            "the_content": "no",
+            "tabs": "all",
+            "default_value": "",
+            "delay": 0
+        },
+        {
+            "key": "field_51f71ba6c6f93",
+            "label": "Pullquotes",
+            "name": "article_pullquote_repeater",
+            "type": "repeater",
+            "instructions": "Limit 120 characters. Select the \"Featured\" checkbox to use this pullquote in content promotion. Click the \"Add Pullquote\" button to add additional pullquotes.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "row_min": 1,
+            "row_limit": "",
+            "layout": "table",
+            "button_label": "Add Pullquote",
+            "sub_fields": [
+                {
+                    "key": "field_51f71ba6c6fc1",
+                    "label": "Pullquote",
+                    "name": "article_pullquote",
+                    "type": "text",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "formatting": "html",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_51f71ba6c6fda",
+                    "label": "Featured?",
+                    "name": "article_pullquote_featured",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                }
+            ],
+            "min": 0,
+            "max": 0,
+            "collapsed": ""
+        },
+        {
+            "key": "field_51f71ba6cf449",
+            "label": "Headnote",
+            "name": "article_headnote",
+            "type": "wysiwyg",
+            "instructions": "This will appear at the top of an article, e.g., editor's note, intro, etc.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "toolbar": "basic",
+            "media_upload": 0,
+            "the_content": "yes",
+            "tabs": "all",
+            "default_value": "",
+            "delay": 0
+        },
+        {
+            "key": "field_51f71ba6d750e",
+            "label": "Endnote",
+            "name": "article_appendix",
+            "type": "wysiwyg",
+            "instructions": "This is like a headnote, but appears at the bottom of the main article content.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "toolbar": "basic",
+            "media_upload": 0,
+            "the_content": "yes",
+            "tabs": "all",
+            "default_value": "",
+            "delay": 0
+        },
+        {
+            "key": "field_5436f769c90f0",
+            "label": "Hide Content Ads",
+            "name": "hide_content_ads",
+            "type": "true_false",
+            "instructions": "Check to hide inline ads in content area on a per-article basis.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_554fc83fe386e",
+            "label": "Issue Gallery Order",
+            "name": "article_issue_gallery_order",
+            "type": "number",
+            "instructions": "This will determine the order of the featured image in the Issue Gallery. If this field is not populated, the order will default to the TOC order of this article for this issue.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": "",
+            "max": "",
+            "step": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "article"
+            }
+        ]
+    ],
+    "menu_order": 10,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "discussion",
+        "comments",
+        "author",
+        "format"
+    ],
+    "active": true,
+    "description": "",
+    "modified": 1626632509
+}

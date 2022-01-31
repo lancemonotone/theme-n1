@@ -1,0 +1,2 @@
+<p>The Offline Header, Offline Dek and Offline Copy options for this module are configured in Site Settings.</p>
+<p>The file must be uploaded to the 'dl/issues/' directory on the server. The current 10-character filename must be entered in Issue Settings.</p>
