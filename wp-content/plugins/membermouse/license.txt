@@ -1,0 +1,113 @@
+Last Updated: April 24, 2018
+
+This End User License Agreement (“Agreement”) is a contract between you and MemberMouse, LLC (“MemberMouse” or 
+“we” or “us”) for you to use this software (the “Software”).
+
+PLEASE READ THIS AGREEMENT CAREFULLY. IT CONTAINS IMPORTANT TERMS THAT AFFECT YOU, YOUR USE OF THE SOFTWARE, 
+AND ANY FEEDBACK (DEFINED BELOW) YOU PROVIDE TO US. BY CLICKING ‘I ACCEPT’ OR BY DOWNLOADING, INSTALLING OR 
+USING THE SOFTWARE OR BY PROVIDING ANY FEEDBACK TO US, YOU AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT. 
+IF YOU DO NOT AGREE TO THESE TERMS, DO NOT INSTALL, COPY, OR USE THE SOFTWARE OR SUBMIT ANY FEEDBACK TO US.
+
+1. Software License.
+Subject to the terms of this Agreement and your compliance with any other agreement you may have entered with 
+us governing your use of Software-related services (the “Service”) including but not limited to the Terms of 
+Sale (https://membermouse.com/terms-of-sale) which is hereby incorporated by reference, we grant you a 
+nonexclusive, nontransferable license to install and use one copy of the Software in binary executable 
+form [only on a single personal computing device] solely for your own business purposes. Any MemberMouse 
+software that updates, supplements or replaces the original Software is governed by this Agreement unless 
+separate license terms accompany such update, supplement or replacement, in which case such separate terms 
+will govern in the event of a conflict with this Agreement or as otherwise provided in such separate terms.
+
+2. License Limitations.
+The preceding states the entirety of your rights with respect to the Software, and we reserve all rights in and 
+to the Software and Services not expressly granted to you in this Agreement. Without limiting the foregoing, 
+you will not do, or authorize or permit any third party to do, any of the following: (a) distribute, license 
+or sell the Software; (b) use the Software for any purpose other than your own business use; (c) reverse engineer, 
+decompile, disassemble or attempt to discover the source code for the Software; (d) modify, alter or create any 
+derivative works of the Software; or (e) remove, alter or obscure any copyright, trademark or other proprietary 
+rights notice on or in the Software.
+
+3. Ownership.
+The Software is the valuable property of MemberMouse and its licensors and is protected by copyright and other 
+intellectual property laws and treaties. We and our licensors own all right, title and interest in and to the 
+Software, including all copyright and other intellectual property rights in the Software.
+
+4. Feedback.
+You may voluntarily post, submit or otherwise communicate to us any questions, comments, suggestions, ideas, 
+original or creative materials or other information about MemberMouse or the Service (collectively, “Feedback”). 
+You understand that we may use such Feedback for any purpose, commercial or otherwise, without acknowledgment or 
+compensation to you, including, without limitation, to develop, copy, publish, or improve the Software or 
+Services in MemberMouse’s sole discretion. You understand MemberMouse may treat Feedback as non-confidential.
+
+5. Disclaimers.
+THE SOFTWARE AND SERVICE ARE PROVIDED “AS IS,” WITH ALL FAULTS, DEFECTS AND ERRORS, AND WITHOUT WARRANTY OF 
+ANY KIND. MEMBERMOUSE DISCLAIMS ALL WARRANTIES (EXPRESS OR IMPLIED AND ARISING BY LAW OR OTHERWISE) REGARDING 
+THE SOFTWARE AND SERVICE AND THEIR PERFORMANCE OR SUITABILITY FOR YOUR INTENDED USE, INCLUDING WITHOUT LIMITATION 
+ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NONINFRINGEMENT. MEMBERMOUSE SHALL 
+HAVE NO LIABILITY OF ANY KIND FOR THE USE OF OR INABILITY TO USE THE SOFTWARE OR ANY SERVICE THAT THE SOFTWARE 
+IS INTENDED TO ACCESS, OR FOR ANY LOSS OF DATA.
+
+6. Indemnification.
+You will defend, indemnify and hold harmless MemberMouse, its affiliates, independent contractors and service 
+providers, and each of their respective members, directors, officers, employees and agents (“MemberMouse Parties”), 
+from and against all claims, damages, costs, liabilities and expenses (including, but not limited to, reasonable 
+attorneys’ fees) arising out of or related to your use of, or inability to use, the Software or Service.
+
+7. Limitation of Liability.
+THE MEMBERMOUSE PARTIES SHALL HAVE NO, AND YOU RELEASE THE MEMBERMOUSE PARTIES FROM, ANY LIABILITY (WHETHER IN 
+CONTRACT, WARRANTY, TORT, NEGLIGENCE OR OTHERWISE) FOR ANY DAMAGES SUSTAINED BY YOU ARISING FROM YOUR USE OR 
+INABILITY TO USE THE SOFTWARE OR SERVICE, INCLUDING WITHOUT LIMITATION ANY DIRECT, INDIRECT, INCIDENTAL, 
+CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES OR LOSS OF DATA, EVEN IF A MEMBERMOUSE PARTY HAS BEEN ADVISED OF THE 
+POSSIBILITY OF SUCH DAMAGES. IN NO EVENT SHALL THE AGGREGATE LIABILITY OF THE MEMBERMOUSE PARTIES WITH RESPECT TO 
+THE SOFTWARE, SERVICE, OR ANY USE OR INABILITY TO USE THE SOFTWARE OR SERVICE EXCEED THE AMOUNT PAID BY YOU TO 
+MEMBERMOUSE IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO THE APPLICABLE CLAIM.
+
+8. Arbitration; Governing Law.
+PLEASE READ THE FOLLOWING PARAGRAPH CAREFULLY BECAUSE IT REQUIRES YOU TO ARBITRATE DISPUTES AND LIMITS THE 
+MANNER IN WHICH YOU CAN SEEK RELIEF FROM US.
+
+You and MemberMouse agree to arbitrate any dispute arising from this Agreement and your use of the Software, 
+except that you and MemberMouse are NOT required to arbitrate any dispute in which either party seeks equitable 
+and other relief for the alleged unlawful use of copyrights, trademarks, trade names, logos, trade secrets, or 
+patents. ARBITRATION PREVENTS YOU FROM SUING IN COURT OR FROM HAVING A JURY TRIAL.
+
+You and MemberMouse agree that you will notify each other in writing of any dispute within thirty (30) days of 
+when it arises. Notice to MemberMouse will be sent to MemberMouse, LLC, Attn: Legal Dept, 1425 Broadway #20-2565 
+Seattle, WA 98122. You and MemberMouse further agree: to attempt informal resolution prior to any demand for 
+arbitration; that any arbitration will occur in Castle County, Delaware; that arbitration will be conducted 
+confidentially by a single arbitrator in accordance with the JAMS Streamlined Arbitration Rules; and that the 
+state or federal courts in Castle County, Delaware have exclusive jurisdiction over any appeals of an arbitration 
+award and over any suit between the parties not subject to arbitration. Other than class procedures and remedies 
+discussed below, the arbitrator has the authority to grant any remedy that would otherwise be available in court. 
+Any dispute between the parties will be governed by this Agreement and the laws of the State of Delaware and 
+applicable United States law, without giving effect to any conflict of laws principles that may provide for the 
+application of the law of another jurisdiction. Whether the dispute is heard in arbitration or in court, you and 
+MemberMouse will not commence against the other a class action, class arbitration or other representative action 
+or proceeding.
+
+9. Termination.
+MemberMouse may terminate this Agreement at any time, with or without cause, immediately upon notice to you. 
+MemberMouse may also discontinue the Service at any time, in which case this Agreement shall terminate 
+automatically without notice. You may terminate this Agreement by ceasing use of the Software and Service, 
+cancelling any account you may have with us to use the Service (if any), and deleting all copies of the 
+Software in your possession or control. In the event of the termination of this Agreement for any reason: (a) 
+the license granted to you in this Agreement will terminate; (b) you must immediately cease all use of the 
+Software and Service and destroy or erase all copies of the Software in your possession or control; and (c) all 
+sections of this Agreement except Sections 1 and 2 will survive any such termination.
+
+10. Nondisclosure.
+You shall not disclose to any person or entity any information about the Software, the Services, the Feedback or 
+other results of your evaluation of the Software or any other confidential information of MemberMouse that becomes 
+known to you. Your obligation to maintain the confidentiality of such information shall not apply to information 
+that (a) was known to you before receiving such information, or (b) is received by you from a third party who 
+was legally entitled to make an unrestricted disclosure.
+
+11. General.
+(a) Severability. If any provision of this Agreement is held by a court of competent jurisdiction to be invalid, 
+illegal, or unenforceable, the remainder of this Agreement will remain in full force and effect. (b) Assignment. 
+You may not assign this Agreement or any of its rights under this Agreement without the prior written consent of 
+MemberMouse, and any attempted assignment without such consent shall be void. Subject to the foregoing restriction,
+this Agreement will be fully binding upon, inure to the benefit of, and be enforceable by you, us, and each of 
+your and our respective successors and assigns. (c) Entire Agreement. This Agreement, along with the applicable 
+Terms of Sale, sets forth our entire agreement with respect to your 
+evaluation and use of the Software.

@@ -1,0 +1,3838 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: MemberMouse Platform\n"
+"POT-Creation-Date: 2021-01-05 17:54-0500\n"
+"PO-Revision-Date: 2021-01-05 17:39-0500\n"
+"Last-Translator: \n"
+"Language-Team: MemberMouse <support@membermouse.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: index.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _mmt;__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: api/classes\n"
+"X-Poedit-SearchPath-2: api/controllers\n"
+"X-Poedit-SearchPath-3: api/include\n"
+"X-Poedit-SearchPath-4: api\n"
+"X-Poedit-SearchPath-5: api/lib\n"
+"X-Poedit-SearchPath-6: async\n"
+"X-Poedit-SearchPath-7: bootstrap\n"
+"X-Poedit-SearchPath-8: com/membermouse/affiliate\n"
+"X-Poedit-SearchPath-9: com/membermouse/engine\n"
+"X-Poedit-SearchPath-10: com/membermouse/entity\n"
+"X-Poedit-SearchPath-11: com/membermouse/esp\n"
+"X-Poedit-SearchPath-12: com/membermouse/esp/util\n"
+"X-Poedit-SearchPath-13: com/membermouse/esp/aweber\n"
+"X-Poedit-SearchPath-14: com/membermouse/extensions\n"
+"X-Poedit-SearchPath-15: com/membermouse/forms\n"
+"X-Poedit-SearchPath-16: com/membermouse/import\n"
+"X-Poedit-SearchPath-17: com/membermouse/orderrequest\n"
+"X-Poedit-SearchPath-18: com/membermouse/orderrequest\n"
+"X-Poedit-SearchPath-19: com/membermouse/payment\n"
+"X-Poedit-SearchPath-20: com/membermouse/payment/templates\n"
+"X-Poedit-SearchPath-21: com/membermouse/reporting\n"
+"X-Poedit-SearchPath-22: com/membermouse/reporting/components\n"
+"X-Poedit-SearchPath-23: com/membermouse/scheduler\n"
+"X-Poedit-SearchPath-24: com/membermouse/service\n"
+"X-Poedit-SearchPath-25: com/membermouse/shipping\n"
+"X-Poedit-SearchPath-26: com/membermouse/smarttags\n"
+"X-Poedit-SearchPath-27: com/membermouse/util\n"
+"X-Poedit-SearchPath-28: com/membermouse/view\n"
+"X-Poedit-SearchPath-29: com/membermouse/widgets\n"
+"X-Poedit-SearchPath-30: data\n"
+"X-Poedit-SearchPath-31: endpoints\n"
+"X-Poedit-SearchPath-32: hooks\n"
+"X-Poedit-SearchPath-33: includes\n"
+"X-Poedit-SearchPath-34: modules\n"
+"X-Poedit-SearchPath-35: queue\n"
+"X-Poedit-SearchPath-36: scheduler\n"
+"X-Poedit-SearchPath-37: templates\n"
+"X-Poedit-SearchPath-38: templates/default_templates\n"
+"X-Poedit-SearchPath-39: templates/metabox\n"
+"X-Poedit-SearchPath-40: templates/payment\n"
+"X-Poedit-SearchPath-41: templates/reporting\n"
+"X-Poedit-SearchPath-42: templates/reporting/components\n"
+"X-Poedit-SearchPath-43: templates/reporting/form\n"
+"X-Poedit-SearchPath-44: templates/smarttags\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: com/membermouse/engine/class.cronengine.php:233
+msgid "Every 30 mins"
+msgstr ""
+
+#: com/membermouse/engine/class.cronengine.php:237
+msgid "Every 5 minutes"
+msgstr ""
+
+#: com/membermouse/entity/class.corepagetype.php:66
+msgid "Member Home"
+msgstr ""
+
+#: com/membermouse/entity/class.corepagetype.php:69
+msgid "Save the Sale"
+msgstr ""
+
+#: com/membermouse/entity/class.corepagetype.php:72
+msgid "Error"
+msgstr ""
+
+#: com/membermouse/entity/class.corepagetype.php:75
+#: modules/core_page_css_settings.php:102 modules/login_webform.php:39
+msgid "Forgot Password"
+msgstr ""
+
+#: com/membermouse/entity/class.corepagetype.php:78
+#: modules/core_page_css_settings.php:108
+msgid "Reset Password"
+msgstr ""
+
+#: com/membermouse/entity/class.corepagetype.php:81
+msgid "Checkout"
+msgstr ""
+
+#: com/membermouse/entity/class.corepagetype.php:84
+msgid "Redeem Gift"
+msgstr ""
+
+#: com/membermouse/entity/class.corepagetype.php:87
+msgid "Confirmation"
+msgstr ""
+
+#: com/membermouse/entity/class.corepagetype.php:90
+msgid "Free Confirmation"
+msgstr ""
+
+#: com/membermouse/entity/class.corepagetype.php:93
+#: modules/core_page_css_settings.php:90
+msgid "My Account"
+msgstr ""
+
+#: com/membermouse/entity/class.corepagetype.php:96
+#: modules/core_page_css_settings.php:96 modules/login_webform.php:31
+msgid "Login"
+msgstr ""
+
+#: com/membermouse/entity/class.corepagetype.php:99
+msgid "Logout"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:312 index.php:552
+msgid "MemberMouse"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:316 modules/mmdashboard.php:143
+msgid "Manage Members"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:321 modules/mmdashboard.php:144
+msgid "Browse Transactions"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:326 modules/mmdashboard.php:146
+msgid "Product Settings"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:331
+msgid "Checkout Settings"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:336
+msgid "Payment Settings"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:341
+msgid "Email Settings"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:346
+msgid "Affiliate Settings"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:351
+msgid "Developer Tools"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:356
+msgid "Webforms"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:361
+msgid "Logs"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:366
+msgid "General Settings"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:372 modules/mmdashboard.php:145
+msgid "Reporting Suite"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:376
+msgid "Member Count"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:377
+msgid "Membership Sales"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:378
+msgid "Product Sales"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:379
+msgid "Customer Value"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:380
+msgid "Quick Average"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:381
+msgid "Compare Levels"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:382
+msgid "Payment Service"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:383
+msgid "Channel Sales"
+msgstr ""
+
+#: com/membermouse/entity/class.employee.php:387
+msgid "Advanced Reports"
+msgstr ""
+
+#: com/membermouse/entity/class.user.php:3124
+msgid "Only valid members can be forgotten"
+msgstr ""
+
+#: com/membermouse/entity/class.user.php:3133
+msgid ""
+"An error was encountered when attempting to cancel the user's membership"
+msgstr ""
+
+#: com/membermouse/entity/class.user.php:3147
+#, php-format
+msgid ""
+"An error was encountered when attempting to revoke access to bundle id %s"
+msgstr ""
+
+#: com/membermouse/entity/class.user.php:3157
+msgid "removed"
+msgstr ""
+
+#: com/membermouse/entity/class.user.php:3166
+#: com/membermouse/entity/class.user.php:3170
+#: modules/forget_member_settings.php:73 modules/merge_member.dialog.php:700
+#: modules/merge_member.dialog.php:801 modules/view.php:109
+#: modules/view.php:236
+msgid "Custom Fields"
+msgstr ""
+
+#: com/membermouse/entity/class.user.php:3180
+#: com/membermouse/entity/class.user.php:3184
+#: modules/forget_member_settings.php:68 modules/view.php:102
+#: modules/view.php:388
+msgid "Activity Log"
+msgstr ""
+
+#: com/membermouse/entity/class.user.php:3194
+msgid "order information"
+msgstr ""
+
+#: com/membermouse/entity/class.user.php:3221
+msgid "order country"
+msgstr ""
+
+#: com/membermouse/entity/class.user.php:3244
+msgid "stored address information"
+msgstr ""
+
+#: com/membermouse/entity/class.user.php:3263
+msgid "stored address country"
+msgstr ""
+
+#: com/membermouse/entity/class.user.php:3270
+msgid "user account information"
+msgstr ""
+
+#: com/membermouse/entity/class.user.php:3301
+msgid "The following operations succeeded"
+msgstr ""
+
+#: com/membermouse/entity/class.user.php:3303
+msgid "The following operations failed"
+msgstr ""
+
+#: com/membermouse/esp/class.mailchimpemailserviceprovider.php:185
+msgid "Never"
+msgstr ""
+
+#: com/membermouse/esp/class.mailchimpemailserviceprovider.php:186
+msgid "First List Only"
+msgstr ""
+
+#: com/membermouse/esp/class.mailchimpemailserviceprovider.php:187
+msgid "Before Every List Move"
+msgstr ""
+
+#: com/membermouse/forms/class.1clickpurchaseform.php:422
+#: com/membermouse/forms/class.checkoutform.php:1397
+#: com/membermouse/forms/class.checkoutform.php:1422
+#: com/membermouse/forms/class.checkoutform.php:1478
+msgid "Please select your state"
+msgstr ""
+
+#: com/membermouse/forms/class.customform.php:60
+msgid "Error saving data"
+msgstr ""
+
+#: com/membermouse/forms/class.customform.php:80
+msgid "Data saved successfully"
+msgstr ""
+
+#: com/membermouse/forms/class.customform.php:85
+msgid "Error saving data: you must be logged in"
+msgstr ""
+
+#: com/membermouse/service/class.authorizenetcimservice.php:1097
+#: com/membermouse/service/class.authorizenetservice.php:1754
+msgid "An improper response was received from Authorize.net, please try again"
+msgstr ""
+
+#: com/membermouse/service/class.braintreeservice.php:167
+msgid "An improper response was received from Braintree, please try again"
+msgstr ""
+
+#: com/membermouse/service/class.braintreeservice.php:172
+#: com/membermouse/service/class.stripeservice.php:1397
+msgid "Improper gateway configuration."
+msgstr ""
+
+#: com/membermouse/service/class.stripeservice.php:1377
+#: com/membermouse/service/class.stripeservice.php:1385
+msgid "An improper response was received from Stripe, please try again"
+msgstr ""
+
+#: com/membermouse/util/class.mergeaccountutils.php:110
+#: com/membermouse/util/class.mergeaccountutils.php:196
+msgid "No active billing"
+msgstr ""
+
+#: com/membermouse/util/class.mergeaccountutils.php:429
+msgid ""
+"Unable to transfer gifts. Error retrieving order items associated with the "
+"primary user"
+msgstr ""
+
+#: com/membermouse/util/class.mergeaccountutils.php:454
+msgid "Unable to transfer gifts purchased by the secondary member."
+msgstr ""
+
+#: com/membermouse/util/class.mergeaccountutils.php:492
+msgid "Unable to transfer coupons used by the secondary member."
+msgstr ""
+
+#: com/membermouse/util/class.mergeaccountutils.php:570
+msgid "Error transfering subscriptions. Invalid query."
+msgstr ""
+
+#: com/membermouse/util/class.mergeaccountutils.php:593
+msgid "Unable to cancel subscriptions for user. Error retrieving order items."
+msgstr ""
+
+#: com/membermouse/util/class.mergeaccountutils.php:621
+msgid "Unable to cancel subscriptions for user. Error updating orders."
+msgstr ""
+
+#: com/membermouse/view/class.couponview.php:195
+msgid "Start Date must be before End Date"
+msgstr ""
+
+#: com/membermouse/view/class.gifthistoryview.php:105
+msgid "Not redeemed"
+msgstr ""
+
+#: com/membermouse/view/class.gifthistoryview.php:138
+#, php-format
+msgid "Redeemed by %s on %s"
+msgstr ""
+
+#: com/membermouse/view/class.gifthistoryview.php:143
+msgid "Redeemed by an invalid member"
+msgstr ""
+
+#: com/membermouse/view/class.gifthistoryview.php:153
+msgid "show gift link"
+msgstr ""
+
+#: com/membermouse/view/class.giftview.php:111
+msgid ""
+"Unable to store gift search options. Couldn't find current admin user ID."
+msgstr ""
+
+#: com/membermouse/view/class.managetransactionsview.php:279
+#: modules/activity_log.datagrid.php:44
+#: modules/duplicate_subscriptions.datagrid.php:24 modules/safe_mode.php:92
+#: modules/version_history.php:28
+msgid "Date"
+msgstr ""
+
+#: com/membermouse/view/class.managetransactionsview.php:280
+#: modules/coupon_log.datagrid.php:77 modules/manage_transactions.form.php:33
+#: modules/myaccount_orderhistory.datagrid.php:11
+msgid "Order #"
+msgstr ""
+
+#: com/membermouse/view/class.managetransactionsview.php:281
+#: modules/myaccount_orderhistory.datagrid.php:14
+msgid "Amount"
+msgstr ""
+
+#: com/membermouse/view/class.managetransactionsview.php:282
+#: modules/api.dialog.php:10 modules/api.php:19 modules/bundles.dialog.php:64
+#: modules/commission_profiles.dialog.php:28 modules/commission_profiles.php:86
+#: modules/coupons.dialog.php:32 modules/coupons.php:144
+#: modules/coupons.php:157 modules/custom_field.dialog.php:51
+#: modules/custom_field.php:57 modules/duplicate_subscriptions.datagrid.php:20
+#: modules/members.datagrid.php:31 modules/membership_levels.dialog.php:39
+#: modules/products.php:140 modules/shipping.dialog.php:20
+#: modules/shipping.php:19
+msgid "Name"
+msgstr ""
+
+#: com/membermouse/view/class.managetransactionsview.php:283
+#: modules/duplicate_subscriptions.datagrid.php:21
+#: modules/employees.dialog.php:51 modules/employees.php:172
+#: modules/free_member_webform.php:149 modules/manage_transactions.form.php:45
+#: modules/members.datagrid.php:32 modules/members.dialog.php:43
+#: modules/members.form.php:65 modules/merge_member.dialog.php:439
+msgid "Email"
+msgstr ""
+
+#: com/membermouse/view/class.managetransactionsview.php:284
+msgid "Affiliate"
+msgstr ""
+
+#: com/membermouse/view/class.managetransactionsview.php:285
+msgid "Sub-Affiliate"
+msgstr ""
+
+#: com/membermouse/view/class.managetransactionsview.php:286
+#: modules/commission_profiles.dialog.php:33 modules/coupons.php:146
+#: modules/coupons.php:159 modules/details_gift_history.php:39
+#: modules/myaccount_orderhistory.datagrid.php:13
+msgid "Description"
+msgstr ""
+
+#: com/membermouse/view/class.managetransactionsview.php:287
+#: modules/manage_transactions.form.php:111
+msgid "Service Provider"
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:382
+msgid "Error updating subscription billing details. Invalid Payment Token."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:435
+msgid "Billing details updated successfully"
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:442
+msgid "Error updating subscription billing details. Order item ID are required."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:682
+msgid "Error showing merge accounts dialog, user ID required."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:704
+#, php-format
+msgid "Unable to find users with name, email or username name matching '%s'"
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:709
+#, php-format
+msgid ""
+"Error searching for users with name, email or username name matching '%s'"
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:731
+msgid ""
+"Error retrieving data for members involved in the merge. Missing secondary "
+"member ID."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:759
+#, php-format
+msgid "Unable to merge accounts. Primary member ID '%s' is invalid."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:765
+msgid "Unable to merge accounts. Primary member is required."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:774
+#, php-format
+msgid "Unable to merge accounts. Secondary member ID '%s' is invalid."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:780
+msgid "Unable to merge accounts. Seconrdary member is required."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:870
+msgid ""
+"Unable to merge accounts. There was an error updating the account "
+"information on the current account."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:949
+msgid ""
+"Unable to merge accounts. There was an error removing bundles from the "
+"secondary member account."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:957
+msgid ""
+"Unable to merge accounts. There was an error cancelling the secondary member "
+"subscriptions."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:965
+msgid ""
+"Unable to merge accounts. There was an error cancelling the secondary member "
+"account."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:973
+msgid ""
+"Unable to merge accounts. There was an error deleting the secondary member."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:993
+msgid "Unable to merge accounts."
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:998
+msgid "Member accounts merged successfully"
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:1098
+msgid "Member ID is required"
+msgstr ""
+
+#: com/membermouse/view/class.memberdetailsview.php:1105
+#, php-format
+msgid "Invalid Member ID %s"
+msgstr ""
+
+#: com/membermouse/view/class.paymentutilsview.php:404
+msgid "You don't have permission to place an order for another user"
+msgstr ""
+
+#: com/membermouse/view/class.paymentutilsview.php:414
+msgid "There was an error placing your order; Please try again"
+msgstr ""
+
+#: com/membermouse/view/class.repaircorepagesview.php:114
+msgid "post id"
+msgstr ""
+
+#: com/membermouse/view/class.repaircorepagesview.php:115
+msgid "core page id"
+msgstr ""
+
+#: com/membermouse/view/class.resetpasswordformview.php:59
+msgid "Passwords must match, please try again..."
+msgstr ""
+
+#: com/membermouse/view/class.resetpasswordformview.php:74
+msgid ""
+"Password has successfully been reset, you may now login with your new "
+"password"
+msgstr ""
+
+#: com/membermouse/view/class.smarttaglibraryview.php:228
+msgid "Add an Image"
+msgstr ""
+
+#: com/membermouse/view/class.smarttaglibraryview.php:233
+msgid "Add Video"
+msgstr ""
+
+#: com/membermouse/view/class.smarttaglibraryview.php:238
+msgid "Add Audio"
+msgstr ""
+
+#: com/membermouse/widgets/class.dripcontentwidget.php:127
+msgid "Widget Title"
+msgstr ""
+
+#: com/membermouse/widgets/class.dripcontentwidget.php:139
+msgid "Number of items to show:"
+msgstr ""
+
+#: com/membermouse/widgets/class.dripcontentwidget.php:145
+msgid "Display items as links"
+msgstr ""
+
+#: com/membermouse/widgets/class.dripcontentwidget.php:150
+msgid "Include Posts"
+msgstr ""
+
+#: com/membermouse/widgets/class.dripcontentwidget.php:173
+msgid "Include Pages"
+msgstr ""
+
+#: com/membermouse/widgets/class.dripcontentwidget.php:178
+msgid "Include Custom Post Types"
+msgstr ""
+
+#: com/membermouse/widgets/class.dripcontentwidget.php:198
+msgid "Show date next to content title"
+msgstr ""
+
+#: com/membermouse/widgets/class.dripcontentwidget.php:202
+msgid "Text to display (use <code>"
+msgstr ""
+
+#: com/membermouse/widgets/class.dripcontentwidget.php:213
+msgid ""
+"<a href=\"http://php.net/manual/en/function.date.php\" target=\"_blank"
+"\"><em>click here for format options</em></a>"
+msgstr ""
+
+#: hooks/class.posthooks.php:15 hooks/class.posthooks.php:105
+msgid "Core Page Type"
+msgstr ""
+
+#: hooks/class.posthooks.php:16 hooks/class.posthooks.php:108
+#: modules/drip_content_schedule.php:265 modules/view.php:76
+msgid "Access Rights"
+msgstr ""
+
+#: hooks/class.userhooks.php:795
+msgid "Password must be at least 8 characters long, please try again..."
+msgstr ""
+
+#: index.php:710
+msgid "No data was returned"
+msgstr ""
+
+#: index.php:864 index.php:890
+msgid "MemberMouse Missing Components"
+msgstr ""
+
+#: index.php:865
+msgid ""
+"hash_hmac PHP function and sha256 algorithm are not available on your "
+"server. Contact your hosting provide to address this"
+msgstr ""
+
+#: index.php:866 index.php:892 modules/payment_confirmation_settings.php:43
+#: modules/preview_bar_settings.php:34
+msgid "Learn More"
+msgstr ""
+
+#: index.php:891
+msgid ""
+"The sha256 algorithm is not available on your server. Contact your hosting "
+"provide to address this"
+msgstr ""
+
+#: index.php:1094 index.php:1095 index.php:1107
+msgid "MemberMouse Options"
+msgstr ""
+
+#: modules/account_sharing_prevention.php:40
+msgid "Account Sharing Protection"
+msgstr ""
+
+#: modules/account_sharing_prevention.php:44
+msgid "Enable account sharing protection"
+msgstr ""
+
+#: modules/account_sharing_prevention.php:49
+msgid "Max IP Addresses Allowed in 24-Hour Period"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:35 modules/bundles.php:99
+#: modules/custom_field.dialog.php:69 modules/custom_field.php:58
+#: modules/membership_levels.php:143
+#: modules/myaccount_orderhistory.datagrid.php:15
+msgid "Type"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:39 modules/coupon_log.datagrid.php:76
+msgid "Member"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:42 modules/safe_mode.php:94
+msgid "Details"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:43 modules/activity_log.datagrid.php:229
+msgid "IP Address"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:139 modules/activity_log.datagrid.php:225
+#: modules/manage_transactions.form.php:103
+msgid "Affiliate ID"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:143
+msgid "Sub-affiliate ID"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:218
+msgid "Commission Request Data"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:227
+msgid "Order Number"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:228
+msgid "Order Total"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:234 modules/coupon_log.datagrid.php:78
+#: modules/coupon_log.php:80 modules/coupons.dialog.php:38
+#: modules/coupons.php:145 modules/coupons.php:158
+msgid "Coupon Code"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:242
+msgid "Request Sent to"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:244
+#, php-format
+msgid ""
+"This is the exact request that was sent to %s. Note that this is a request "
+"only which means that a commission will not necessarily be recorded in %s. "
+"Once the request is received, %s will determine if a commission should be "
+"recorded based on the information provided. To know definitively which "
+"commissions are being recorded log into %s. "
+msgstr ""
+
+#: modules/activity_log.datagrid.php:258
+msgid "Affiliate Account Creation Request Details"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:263
+#, php-format
+msgid "This is the request that was sent to %s to create an affiliate account"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:321
+msgid "Unknown Bundle"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:601 modules/activity_log.php:89
+#: modules/coupon_log.php:63 modules/manage_transactions.form.php:26
+#: modules/push_notifications.dialog.php:327
+msgid "To"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:603
+msgid "Cc"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:605 modules/activity_log.php:82
+#: modules/coupon_log.php:56 modules/manage_transactions.form.php:19
+#: modules/membership_levels.dialog.php:216
+#: modules/push_notifications.dialog.php:285
+#: modules/push_notifications.dialog.php:335
+msgid "From"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:606 modules/email_templates.php:49
+#: modules/membership_levels.dialog.php:227
+#: modules/push_notifications.dialog.php:347
+msgid "Subject"
+msgstr ""
+
+#: modules/activity_log.datagrid.php:645
+msgid "No activity found."
+msgstr ""
+
+#: modules/activity_log.php:102
+msgid "Event Type"
+msgstr ""
+
+#: modules/activity_log.php:109 modules/coupon_log.php:76
+#: modules/manage_transactions.form.php:49 modules/members.form.php:53
+msgid "Member ID"
+msgstr ""
+
+#: modules/activity_log.php:120
+msgid "Show Events"
+msgstr ""
+
+#: modules/activity_log.php:121 modules/manage_transactions.form.php:121
+#: modules/members.form.php:142
+msgid "Reset Form"
+msgstr ""
+
+#: modules/activity_log_settings.php:40
+msgid "Activity Log Settings"
+msgstr ""
+
+#: modules/activity_log_settings.php:40
+#: modules/allow_logged_out_purchases.php:29
+#: modules/checkout_processing_message.php:24
+#: modules/content_protection_settings.php:38
+#: modules/core_page_css_settings.php:76
+#: modules/duplicate_subscription_settings.php:29
+#: modules/forget_member_settings.php:40 modules/jquery_ui_settings.php:32
+#: modules/limit_login_attempts.php:32 modules/login_token_settings.php:36
+#: modules/purchase_link_options.php:51 modules/smarttag-version.php:19
+#: modules/wordpress_content_settings.php:39
+#: modules/wordpress_login_settings.php:50
+#: modules/wordpress_login_settings.php:58
+#: modules/wordpress_user_settings.php:53
+#: modules/wordpress_user_settings.php:61 modules/wp_menu_settings.php:31
+#: modules/wp_menu_settings.php:37
+msgid "Learn more"
+msgstr ""
+
+#: modules/activity_log_settings.php:44
+msgid "Enable activity log cleanup"
+msgstr ""
+
+#: modules/activity_log_settings.php:49
+#, php-format
+msgid "Delete activity log entries older than %s days"
+msgstr ""
+
+#: modules/affiliate_integration.php:20 modules/email_integration.php:20
+msgid "Select Provider"
+msgstr ""
+
+#: modules/affiliate_integration.php:40 modules/affiliate_tracking.php:158
+#: modules/cancellation_method.php:36 modules/captcha.php:286
+#: modules/checkout_other_settings.php:11 modules/countries.php:58
+#: modules/email_templates.php:79
+msgid "Save Settings"
+msgstr ""
+
+#: modules/affiliate_tracking.php:81
+#, php-format
+msgid ""
+"Affiliate IDs and Sub-affiliate IDs are passed to your site via parameters "
+"appended to the end of the URL (read this article to %slearn more about "
+"creating affiliate links%s). Enter the parameter keywords below that you "
+"want to useto pass affiliate and sub-affiliate IDs to your site"
+msgstr ""
+
+#: modules/affiliate_tracking.php:107
+msgid "Affiliate Keyword"
+msgstr ""
+
+#: modules/affiliate_tracking.php:115
+msgid "Affiliate Keyword Aliases"
+msgstr ""
+
+#: modules/affiliate_tracking.php:122 modules/affiliate_tracking.php:144
+msgid "separate multiple aliases with commas"
+msgstr ""
+
+#: modules/affiliate_tracking.php:129
+msgid "Sub-Affiliate Keyword"
+msgstr ""
+
+#: modules/affiliate_tracking.php:137
+msgid "Sub-Affiliate Keyword Aliases"
+msgstr ""
+
+#: modules/affiliate_tracking.php:151
+msgid "Lifespan"
+msgstr ""
+
+#: modules/affiliate_tracking.php:154
+msgid "days"
+msgstr ""
+
+#: modules/affiliate_tracking.php:170 modules/cancellation_method.php:41
+#: modules/captcha.php:293 modules/checkout_other_settings.php:18
+#: modules/countries.php:64 modules/email_templates.php:87
+#: modules/other_settings.php:29
+msgid "Settings saved successfully"
+msgstr ""
+
+#: modules/allow_logged_out_purchases.php:29
+msgid "Allow Logged Out Purchases"
+msgstr ""
+
+#: modules/allow_logged_out_purchases.php:32
+msgid ""
+"Checking the checkbox below indicates that when a logged out user attempts "
+"to make a purchase using an email address and valid password associated with "
+"an existing account that the purchase should be associated with the existing "
+"account. If the option below is unchecked, an error will be displayed to the "
+"user indicating that an account already exists with that email address and "
+"they'll need to log in to make a purchase associated with that email address"
+msgstr ""
+
+#: modules/allow_logged_out_purchases.php:38
+msgid "Allow existing members to make a purchase when they're logged out"
+msgstr ""
+
+#: modules/api.dialog.php:18 modules/api.php:22 modules/bundles.php:102
+#: modules/details_gift_history.php:40 modules/members.datagrid.php:83
+#: modules/membership_levels.php:147 modules/products.php:145
+#: modules/push_notifications.php:21
+msgid "Status"
+msgstr ""
+
+#: modules/api.dialog.php:22 modules/bundles.dialog.php:72
+#: modules/membership_levels.dialog.php:47
+#: modules/push_notifications.dialog.php:98
+msgid "Active"
+msgstr ""
+
+#: modules/api.dialog.php:23 modules/bundles.dialog.php:73
+#: modules/membership_levels.dialog.php:48
+#: modules/push_notifications.dialog.php:99
+msgid "Inactive"
+msgstr ""
+
+#: modules/api.dialog.php:30
+msgid "API Key"
+msgstr ""
+
+#: modules/api.dialog.php:33 modules/api.dialog.php:41
+msgid "Generate"
+msgstr ""
+
+#: modules/api.dialog.php:38
+msgid "API Password"
+msgstr ""
+
+#: modules/api.dialog.php:50
+msgid "Save API Credentials"
+msgstr ""
+
+#: modules/api.dialog.php:51 modules/bundles.dialog.php:246
+#: modules/commission_profiles.dialog.php:122 modules/coupons.dialog.php:126
+#: modules/custom_field.dialog.php:114 modules/custom_field.dialog.php:116
+#: modules/drip_content_schedule.dialog.php:89
+#: modules/email_integration.dialog.php:102 modules/employees.dialog.php:118
+#: modules/members.dialog.php:60 modules/membership_levels.dialog.php:314
+#: modules/merge_member.dialog.php:386 modules/merge_member.dialog.php:693
+#: modules/merge_member.dialog.php:716 modules/merge_member.dialog.php:776
+#: modules/merge_member.dialog.php:848
+#: modules/payment_confirmation.dialog.php:36
+#: modules/push_notifications.dialog.php:391 modules/shipping.dialog.php:33
+msgid "Cancel"
+msgstr ""
+
+#: modules/api.php:20
+msgid "Key"
+msgstr ""
+
+#: modules/api.php:21 modules/employees.dialog.php:56
+#: modules/free_member_webform.php:161 modules/login_webform.php:25
+#: modules/members.dialog.php:51 modules/merge_member.dialog.php:469
+msgid "Password"
+msgstr ""
+
+#: modules/api.php:23 modules/bundles.php:103
+#: modules/commission_profiles.php:90 modules/coupons.php:150
+#: modules/coupons.php:164 modules/custom_field.php:61
+#: modules/duplicate_subscriptions.datagrid.php:25
+#: modules/email_integration.php:163 modules/members.datagrid.php:84
+#: modules/membership_levels.php:148 modules/products.php:146
+#: modules/shipping.php:21
+msgid "Actions"
+msgstr ""
+
+#: modules/api.php:50
+msgid "No API credentials found."
+msgstr ""
+
+#: modules/api.php:56
+msgid "API URLs"
+msgstr ""
+
+#: modules/api.php:59
+msgid "Standard URL"
+msgstr ""
+
+#: modules/api.php:65
+msgid "Secure URL"
+msgstr ""
+
+#: modules/api.php:73
+msgid "Create API Credentials"
+msgstr ""
+
+#: modules/api.php:80 modules/push_notifications.php:315
+msgid "This feature is not available on your current plan."
+msgstr ""
+
+#: modules/api.php:80 modules/push_notifications.php:315
+#, php-format
+msgid "To get access, %supgrade your plan now%s."
+msgstr ""
+
+#: modules/bundles.dialog.php:56
+msgid ""
+"This bundle is being used by members so some properties have been locked to "
+"avoid accidental editing. "
+msgstr ""
+
+#: modules/bundles.dialog.php:57
+#, php-format
+msgid ""
+"Some locked properties can be edited, %s click here to unlock them %s. Note "
+msgstr ""
+
+#: modules/bundles.dialog.php:58
+msgid ""
+"that any changes made to locked properties will be applied to all members "
+"who currently have this bundle."
+msgstr ""
+
+#: modules/bundles.dialog.php:90
+msgid "Bundle Type"
+msgstr ""
+
+#: modules/bundles.dialog.php:93 modules/coupons.dialog.php:50
+#: modules/membership_levels.dialog.php:82
+msgid "Free"
+msgstr ""
+
+#: modules/bundles.dialog.php:94 modules/membership_levels.dialog.php:83
+msgid "Paid"
+msgstr ""
+
+#: modules/bundles.dialog.php:109
+msgid ""
+"Paid bundles can have multiple products associated with them which allows "
+"you to offer different pricing for the same bundle Select one or more "
+"products below to associate with this bundle."
+msgstr ""
+
+#: modules/bundles.dialog.php:119 modules/membership_levels.dialog.php:112
+msgid "Select Multiple Products"
+msgstr ""
+
+#: modules/bundles.dialog.php:125 modules/membership_levels.dialog.php:163
+msgid "No products available"
+msgstr ""
+
+#: modules/bundles.dialog.php:126
+msgid ""
+"Each product can only be associated with one membership level or bundle so "
+"once a product has been associated with an access type, it's no longer "
+"available for assignment"
+msgstr ""
+
+#: modules/bundles.dialog.php:126
+#, php-format
+msgid ""
+"You must %s create a new product %s in order to associate it with this bundle"
+msgstr ""
+
+#: modules/bundles.dialog.php:139
+msgid ""
+"If this bundle is the first thing a customer buys, the default membership "
+"level specified here will be applied to their account. If an existing member "
+"purchases this bundle, their membership level will remain unchanged. If you "
+"select 'use system default', the default system membership level will be "
+"used as defined on the Membership Levels screen. Only free membership levels "
+"can be used as the default membership level."
+msgstr ""
+
+#: modules/bundles.dialog.php:163
+msgid ""
+"Short names are passed to your email provider allowing you to segment your "
+"list based on which bundles a particular member has access to. You can name "
+"the short names anything you want. The best practice is to name it based on "
+"your bundle display name so that when you're looking to segment your list on "
+"your email provider you can readily associate the short names with the "
+"bundle."
+msgstr ""
+
+#: modules/bundles.dialog.php:166
+msgid "Short Name is Unique"
+msgstr ""
+
+#: modules/bundles.dialog.php:177
+msgid ""
+"Please Note: If you have your product set up to be a recurring subscription, "
+"there is not a need to set your bundle to expire. With a recurring "
+"subscription, if a payment is missed, MemberMouse will handle canceling the "
+"bundle automatically."
+msgstr ""
+
+#: modules/bundles.dialog.php:178 modules/membership_levels.dialog.php:181
+msgid "Expiry Settings"
+msgstr ""
+
+#: modules/bundles.dialog.php:188 modules/membership_levels.dialog.php:191
+msgid "Days"
+msgstr ""
+
+#: modules/bundles.dialog.php:189 modules/membership_levels.dialog.php:192
+msgid "Weeks"
+msgstr ""
+
+#: modules/bundles.dialog.php:190 modules/membership_levels.dialog.php:193
+msgid "Months"
+msgstr ""
+
+#: modules/bundles.dialog.php:204 modules/membership_levels.dialog.php:288
+msgid "Protected Categories"
+msgstr ""
+
+#: modules/bundles.dialog.php:204
+msgid ""
+"Select the WordPress categories that should be automatically protected by "
+"this bundle."
+msgstr ""
+
+#: modules/bundles.dialog.php:211 modules/membership_levels.dialog.php:295
+msgid "Select Multiple Categories"
+msgstr ""
+
+#: modules/bundles.dialog.php:245
+msgid "Save Bundle"
+msgstr ""
+
+#: modules/bundles.php:35
+msgid "Paid Bundle"
+msgstr ""
+
+#: modules/bundles.php:36 modules/manage_transactions.form.php:69
+#: modules/membership_levels.dialog.php:104 modules/merge_member.dialog.php:762
+#: modules/mmdashboard.php:202 modules/view.php:145
+msgid "Products"
+msgstr ""
+
+#: modules/bundles.php:37 modules/membership_levels.php:53
+#: modules/membership_levels.php:59
+msgid "Get purchase links"
+msgstr ""
+
+#: modules/bundles.php:41
+msgid "Free Bundle"
+msgstr ""
+
+#: modules/bundles.php:53 modules/membership_levels.php:69
+msgid "No Subscribers"
+msgstr ""
+
+#: modules/bundles.php:61
+msgid "Edit Bundle"
+msgstr ""
+
+#: modules/bundles.php:97 modules/coupons.php:143 modules/coupons.php:156
+#: modules/membership_levels.php:141 modules/products.php:139
+msgid "ID"
+msgstr ""
+
+#: modules/bundles.php:98 modules/membership_levels.php:142
+msgid "Name / Subscribers"
+msgstr ""
+
+#: modules/bundles.php:101 modules/membership_levels.php:146
+#: modules/products.php:144
+msgid "Purchase Links"
+msgstr ""
+
+#: modules/bundles.php:112
+msgid "No bundles"
+msgstr ""
+
+#: modules/bundles.php:124
+msgid "Create Bundle"
+msgstr ""
+
+#: modules/bundles.php:129 modules/datagrid.controls.php:22
+#: modules/membership_levels.php:171 modules/products.php:170
+msgid "Show"
+msgstr ""
+
+#: modules/bundles.php:129
+msgid "hidden bundles"
+msgstr ""
+
+#: modules/bundles.php:140
+msgid "This feature is not available on your current plan"
+msgstr ""
+
+#: modules/bundles.php:140
+#, php-format
+msgid "To get access, %s upgrade your plan now %s"
+msgstr ""
+
+#: modules/cancellation_method.php:18
+msgid ""
+"MemberMouse supports two different cancellation methods: a hard cancel and "
+"pause. With a hard cancel, the member won't be able to log in at all. With a "
+"pause, the member will be able to log in and access all the protected "
+"content they had access to up until the time their account was paused. With "
+"the paused status, their drip content schedule won't progress so they won't "
+"get access to any additional content unless their account is reactivated."
+msgstr ""
+
+#: modules/cancellation_method.php:20
+msgid "There are 3 ways a member's account can be canceled"
+msgstr ""
+
+#: modules/cancellation_method.php:23
+msgid ""
+"By the member themselves through the <code>[MM_Member_Link]</code> SmartTag"
+msgstr ""
+
+#: modules/cancellation_method.php:24
+#, php-format
+msgid ""
+"By an administrator through the Member Details &gt; Manage Access Rights "
+"page by clicking %sCancel Membership%s or %sPause Membership%s"
+msgstr ""
+
+#: modules/cancellation_method.php:25
+msgid ""
+"By MemberMouse, when responding to an event that occurs in your payment "
+"service (i.e. stop recurring, void or refund)"
+msgstr ""
+
+#: modules/cancellation_method.php:28
+msgid ""
+"It's the third case that you need to tell MemberMouse which method to use."
+msgstr ""
+
+#: modules/cancellation_method.php:30
+msgid "Which cancellation method do you want to use?"
+msgstr ""
+
+#: modules/cancellation_method.php:32
+msgid "Hard Cancel"
+msgstr ""
+
+#: modules/cancellation_method.php:34
+msgid "Pause"
+msgstr ""
+
+#: modules/captcha.php:17
+msgid "reCAPTCHA log cleanup interval must be a number greater than 0."
+msgstr ""
+
+#: modules/captcha.php:26
+msgid "reCAPTCHA score threshold must be a number between 0 and 1."
+msgstr ""
+
+#: modules/captcha.php:35
+msgid "reCAPTCHA action name can only contain letters, numbers and slashes."
+msgstr ""
+
+#: modules/captcha.php:110
+msgid "Create a Free Account"
+msgstr ""
+
+#: modules/captcha.php:111
+msgid "Google reCAPTCHA Admin"
+msgstr ""
+
+#: modules/captcha.php:116
+msgid "Enable reCAPTCHA on All Checkout Forms"
+msgstr ""
+
+#: modules/captcha.php:121
+msgid "reCAPTCHA v3"
+msgstr ""
+
+#: modules/captcha.php:128
+msgid "reCAPTCHA v2"
+msgstr ""
+
+#: modules/captcha.php:134
+msgid "Site Key"
+msgstr ""
+
+#: modules/captcha.php:142
+msgid "Secret Key"
+msgstr ""
+
+#: modules/captcha.php:156
+msgid "View reCAPTCHA Log"
+msgstr ""
+
+#: modules/captcha.php:161
+msgid "reCAPTCHA Log Cleanup"
+msgstr ""
+
+#: modules/captcha.php:163
+#, php-format
+msgid "Delete reCAPTCHA log entries older than %s days"
+msgstr ""
+
+#: modules/captcha.php:168
+msgid "Score Threshold"
+msgstr ""
+
+#: modules/captcha.php:200
+msgid "Block requests when score is less than "
+msgstr ""
+
+#: modules/captcha.php:208
+msgid "Action Name for Segmentation"
+msgstr ""
+
+#: modules/captcha.php:219
+msgid ""
+"Use the following action name for all requests coming from MemberMouse "
+"checkout forms:"
+msgstr ""
+
+#: modules/captcha.php:226
+msgid "Error Message"
+msgstr ""
+
+#: modules/captcha.php:229
+msgid "Display the following message when reCAPTCHA check fails:"
+msgstr ""
+
+#: modules/captcha.php:235
+msgid "reCAPTCHA Badge Visibility"
+msgstr ""
+
+#: modules/captcha.php:238
+msgid "Hide the reCAPTCHA badge"
+msgstr ""
+
+#: modules/captcha.php:273
+msgid "Edit Default Checkout Page"
+msgstr ""
+
+#: modules/checkout_processing_message.php:24
+msgid "Checkout Processing Message"
+msgstr ""
+
+#: modules/checkout_processing_message.php:27
+msgid "Paid Message"
+msgstr ""
+
+#: modules/checkout_processing_message.php:35
+msgid "Free Message"
+msgstr ""
+
+#: modules/checkout_processing_message.php:53
+msgid "Preview"
+msgstr ""
+
+#: modules/checkout_processing_message.php:54
+msgid "save settings before previewing changes"
+msgstr ""
+
+#: modules/commission_profiles.dialog.php:46
+msgid "Commission Options"
+msgstr ""
+
+#: modules/commission_profiles.dialog.php:48
+msgid "Enable commission on initial payment"
+msgstr ""
+
+#: modules/commission_profiles.dialog.php:51
+msgid "Enable Rebill Commissions"
+msgstr ""
+
+#: modules/commission_profiles.dialog.php:63
+msgid "Use same commission as initial payment"
+msgstr ""
+
+#: modules/commission_profiles.dialog.php:69
+msgid "Use the following commission on rebills"
+msgstr ""
+
+#: modules/commission_profiles.dialog.php:74
+msgid "Flat Rate"
+msgstr ""
+
+#: modules/commission_profiles.dialog.php:82
+msgid "Limit rebill commissions"
+msgstr ""
+
+#: modules/commission_profiles.dialog.php:87
+msgid "Limit to"
+msgstr ""
+
+#: modules/commission_profiles.dialog.php:89
+msgid "rebill payments"
+msgstr ""
+
+#: modules/commission_profiles.dialog.php:103
+msgid "Refund Options"
+msgstr ""
+
+#: modules/commission_profiles.dialog.php:107
+msgid "Cancel commission when customer is refunded"
+msgstr ""
+
+#: modules/commission_profiles.dialog.php:121
+msgid "Save Commission Profile"
+msgstr ""
+
+#: modules/commission_profiles.php:87
+msgid "Initial Commission"
+msgstr ""
+
+#: modules/commission_profiles.php:88
+msgid "Rebill Commission"
+msgstr ""
+
+#: modules/commission_profiles.php:89
+msgid "Cancel Commissions"
+msgstr ""
+
+#: modules/commission_profiles.php:100
+msgid "No commission profiles"
+msgstr ""
+
+#: modules/commission_profiles.php:106
+msgid "Create Commission Profile"
+msgstr ""
+
+#: modules/content_protection_settings.php:34
+msgid "Content Protection Settings"
+msgstr ""
+
+#: modules/content_protection_settings.php:38
+msgid ""
+"Allow members with overdue memberships or bundles to access protected content"
+msgstr ""
+
+#: modules/content_protection_settings.php:42
+#, php-format
+msgid ""
+"Content that is dripped to members becomes available at 12 AM. Based on the "
+"setting below this will happen at 12 AM server time or 12 AM local time. "
+"Local time is based on the current WordPress timezone setting of %s. You can "
+"change this setting on %sWordPress Settings > General > Timezone%s.%sWould "
+"you like content to be dripped at 12 AM server time or local time?"
+msgstr ""
+
+#: modules/content_protection_settings.php:46
+msgid "Use server time where it's currently"
+msgstr ""
+
+#: modules/content_protection_settings.php:50
+msgid "Use local time where it's currently"
+msgstr ""
+
+#: modules/core_page_css_settings.php:76
+msgid "Core Page CSS Settings"
+msgstr ""
+
+#: modules/core_page_css_settings.php:79
+msgid "Use MemberMouse CSS on the following core pages"
+msgstr ""
+
+#: modules/core_page_css_settings.php:84
+#, php-format
+msgid "Checkout %s Redeem Gift"
+msgstr ""
+
+#: modules/countries.php:41
+msgid "Select the countries customers can make purchases from below"
+msgstr ""
+
+#: modules/countries.php:48
+msgid "Select Multiple Countries"
+msgstr ""
+
+#: modules/countries.php:53
+msgid "Select the default country to display to customers"
+msgstr ""
+
+#: modules/coupon_log.datagrid.php:20
+msgid "Entry"
+msgstr ""
+
+#: modules/coupon_log.datagrid.php:79
+msgid "Date Used"
+msgstr ""
+
+#: modules/coupon_log.datagrid.php:88
+msgid "No entries found."
+msgstr ""
+
+#: modules/coupons.dialog.php:48 modules/coupons.dialog.php:49
+msgid "Off"
+msgstr ""
+
+#: modules/coupons.dialog.php:60
+msgid "Subscription Options"
+msgstr ""
+
+#: modules/coupons.dialog.php:63
+msgid "Apply discount to the first charge only"
+msgstr ""
+
+#: modules/coupons.dialog.php:64
+msgid "Apply discount to all charges"
+msgstr ""
+
+#: modules/coupons.dialog.php:74
+msgid "Restrictions"
+msgstr ""
+
+#: modules/coupons.dialog.php:78
+msgid "Start Date"
+msgstr ""
+
+#: modules/coupons.dialog.php:85
+msgid "End Date"
+msgstr ""
+
+#: modules/coupons.dialog.php:92
+msgid "Limit Quantity"
+msgstr ""
+
+#: modules/coupons.dialog.php:98
+msgid "Valid Products"
+msgstr ""
+
+#: modules/coupons.dialog.php:125
+msgid "Save Coupon"
+msgstr ""
+
+#: modules/coupons.php:147 modules/coupons.php:160
+msgid "Used"
+msgstr ""
+
+#: modules/coupons.php:148 modules/coupons.php:161
+msgid "Valid Dates"
+msgstr ""
+
+#: modules/coupons.php:149 modules/coupons.php:162
+msgid "Product Restrictions"
+msgstr ""
+
+#: modules/coupons.php:163
+msgid "Archived"
+msgstr ""
+
+#: modules/coupons.php:174
+msgid "No coupons"
+msgstr ""
+
+#: modules/coupons.php:185
+msgid "Create Coupon"
+msgstr ""
+
+#: modules/coupons.php:188
+msgid "View Coupon Log"
+msgstr ""
+
+#: modules/coupons.php:197
+msgid "Show archived coupons"
+msgstr ""
+
+#: modules/coupons.php:198
+msgid "Show expired coupons"
+msgstr ""
+
+#: modules/custom_field.dialog.php:62
+msgid "Show on My Account Page"
+msgstr ""
+
+#: modules/custom_field.dialog.php:80
+msgid "Options"
+msgstr ""
+
+#: modules/custom_field.dialog.php:111
+msgid "Save Custom Field"
+msgstr ""
+
+#: modules/custom_field.dialog.php:125
+msgid "Unable to create custom field"
+msgstr ""
+
+#: modules/custom_field.php:43
+msgid "Show Form SmartTag"
+msgstr ""
+
+#: modules/custom_field.php:59
+msgid "My Account Page"
+msgstr ""
+
+#: modules/custom_field.php:60
+msgid "Form SmartTag"
+msgstr ""
+
+#: modules/custom_field.php:76
+msgid "Create Custom Field"
+msgstr ""
+
+#: modules/datagrid.controls.php:12 modules/drip_content_schedule.dialog.php:66
+msgid "Page"
+msgstr ""
+
+#: modules/datagrid.controls.php:16
+msgid "of"
+msgstr ""
+
+#: modules/datagrid.controls.php:18
+msgid "pages"
+msgstr ""
+
+#: modules/datagrid.controls.php:26
+msgid "per page"
+msgstr ""
+
+#: modules/datagrid.controls.php:30
+msgid "found"
+msgstr ""
+
+#: modules/default_checkout_item.php:50
+msgid ""
+"Select the membership level or product MemberMouse should use if a customer "
+"visits the checkout page without specifying a specific item to purchase"
+msgstr ""
+
+#: modules/default_checkout_item.php:55 modules/free_member_webform.php:139
+#: modules/members.datagrid.php:34 modules/members.dialog.php:27
+#: modules/merge_member.dialog.php:736
+msgid "Membership Level"
+msgstr ""
+
+#: modules/default_checkout_item.php:62
+#: modules/duplicate_subscriptions.datagrid.php:23
+msgid "Product"
+msgstr ""
+
+#: modules/default_currency.php:71
+msgid ""
+"Setting the currency indicates which currency customers will pay in and also "
+"determines how all product and coupon prices are formatted across the site. "
+"If you're changing the currency and you've already defined product and "
+"coupon prices, you'll need to go through each product or coupon and update "
+"the prices to the new currency. MemberMouse does NOT perform automatic "
+"currency conversion"
+msgstr ""
+
+#: modules/default_currency.php:84
+msgid "Append the currency code after the amount"
+msgstr ""
+
+#: modules/default_currency.php:89
+msgid "Sample format"
+msgstr ""
+
+#: modules/default_currency.php:91
+msgid "incorrect format"
+msgstr ""
+
+#: modules/default_currency.php:95
+msgid ""
+"We do our best to ensure that every currency uses the most accepted format. "
+"If you find that your currency isn't formatted in the most accepted way, "
+"please let us know and we'll update it"
+msgstr ""
+
+#: modules/default_currency.php:99
+#, php-format
+msgid ""
+"Just %s send us an email %s and let us know the %s name of your currency %s "
+"and how your currency should be formatted by sending us a sample %s "
+"formatted number %s"
+msgstr ""
+
+#: modules/default_currency.php:103
+msgid "Make sure the sample formatted number demonstrates the following"
+msgstr ""
+
+#: modules/default_currency.php:107
+msgid "The currency symbol to use"
+msgstr ""
+
+#: modules/default_currency.php:108
+msgid "Whether the currency symbol is at the beginning or the end"
+msgstr ""
+
+#: modules/default_currency.php:109
+msgid "The punctuation mark to use for the thousands separator"
+msgstr ""
+
+#: modules/default_currency.php:110
+msgid "The punctuation mark to use for the decimal point"
+msgstr ""
+
+#: modules/details_access_rights.appliedbundles.php:163
+msgid "No bundles applied"
+msgstr ""
+
+#: modules/details_general.php:230
+msgid "Merge accounts"
+msgstr ""
+
+#: modules/details_general.php:233
+msgid "Login as this member"
+msgstr ""
+
+#: modules/details_general.php:237
+msgid "Resend welcome email to member"
+msgstr ""
+
+#: modules/details_general.php:241
+msgid "Forget this member"
+msgstr ""
+
+#: modules/details_gift_history.php:38 modules/gifts.php:91
+msgid "Date Purchased"
+msgstr ""
+
+#: modules/details_gift_history.php:41 modules/gifts.php:96
+msgid "Gift Link"
+msgstr ""
+
+#: modules/details_gift_history.php:51
+msgid "No gifts purchased."
+msgstr ""
+
+#: modules/details_gift_history.php:77
+msgid "You do not have permission to manage this member."
+msgstr ""
+
+#: modules/details_gift_history.php:82
+msgid "Invalid Member ID."
+msgstr ""
+
+#: modules/drip_content_schedule.dialog.php:7
+#, php-format
+msgid "members get access to %s"
+msgstr ""
+
+#: modules/drip_content_schedule.dialog.php:12
+msgid "on day"
+msgstr ""
+
+#: modules/drip_content_schedule.dialog.php:21
+msgid "Revoke access"
+msgstr ""
+
+#: modules/drip_content_schedule.dialog.php:45
+#, php-format
+msgid "Grant %s access to"
+msgstr ""
+
+#: modules/drip_content_schedule.dialog.php:52
+msgid "Post"
+msgstr ""
+
+#: modules/drip_content_schedule.dialog.php:88
+#: modules/drip_content_schedule.php:280
+msgid "Grant Access"
+msgstr ""
+
+#: modules/drip_content_schedule.dialog.php:93
+msgid "No dialog found"
+msgstr ""
+
+#: modules/drip_content_schedule.php:201
+msgid "View the drip content schedule for the following"
+msgstr ""
+
+#: modules/drip_content_schedule.php:214
+msgid "Copy an existing drip content schedule"
+msgstr ""
+
+#: modules/drip_content_schedule.php:220
+msgid "copy"
+msgstr ""
+
+#: modules/drip_content_schedule.php:230
+msgid "Overwrite existing schedule"
+msgstr ""
+
+#: modules/drip_content_schedule.php:244
+msgid "There is currently no content protected by the selected access rights"
+msgstr ""
+
+#: modules/drip_content_schedule.php:261
+msgid "Expand All"
+msgstr ""
+
+#: modules/drip_content_schedule.php:262
+msgid "Collapse All"
+msgstr ""
+
+#: modules/drip_content_schedule.php:269
+msgid "Day"
+msgstr ""
+
+#: modules/drip_content_schedule.php:270
+msgid "Content"
+msgstr ""
+
+#: modules/drip_content_schedule.php:342
+msgid "and"
+msgstr ""
+
+#: modules/drip_content_schedule.php:342
+msgid "more"
+msgstr ""
+
+#: modules/drip_content_schedule.php:503
+#, php-format
+msgid ""
+"This feature is not available on your current plan. To get access, %s "
+"upgrade your plan now %s."
+msgstr ""
+
+#: modules/duplicate_subscription_settings.php:29
+msgid "Duplicate Subscription Settings"
+msgstr ""
+
+#: modules/duplicate_subscription_settings.php:32
+msgid ""
+"Checking the check box below indicates that when a member attempts to "
+"purchase a subscription that they already have active, MemberMouse will "
+"allow the purchase to go through and create a duplicate subscription. If the "
+"option below is unchecked, an error will be displayed to the member "
+"indicating that they have already purchased that subscription and it's still "
+"active"
+msgstr ""
+
+#: modules/duplicate_subscription_settings.php:38
+msgid "Allow members to have more than one of the same subscription active"
+msgstr ""
+
+#: modules/duplicate_subscriptions.datagrid.php:22
+msgid "Order#"
+msgstr ""
+
+#: modules/duplicate_subscriptions.datagrid.php:69
+msgid "No duplicate subscriptions found."
+msgstr ""
+
+#: modules/email_integration.dialog.php:27
+msgid "This email service provider has no lists that can be subscribed to"
+msgstr ""
+
+#: modules/email_integration.dialog.php:81 modules/email_integration.php:160
+msgid "Bundle"
+msgstr ""
+
+#: modules/email_integration.dialog.php:86
+msgid ""
+"This is the mailing list that you want members added to when the bundle "
+"selected above is active on a member&apos;s account. If you have a Canceled "
+"List defined as well, members will be removed from this list when the bundle "
+"becomes active."
+msgstr ""
+
+#: modules/email_integration.dialog.php:87
+msgid ""
+"This is the mailing list that you want members added to when the bundle "
+"selected above is canceled or paused on a member&apos;s account.  If you "
+"have an Active List defined as well, members will be removed from this list "
+"when the bundle becomes canceled or paused."
+msgstr ""
+
+#: modules/email_integration.dialog.php:89 modules/email_integration.php:161
+msgid "Active List"
+msgstr ""
+
+#: modules/email_integration.dialog.php:93 modules/email_integration.php:162
+msgid "Canceled List"
+msgstr ""
+
+#: modules/email_integration.dialog.php:101
+msgid "Save Bundle Mapping"
+msgstr ""
+
+#: modules/email_integration.dialog.php:106
+msgid "All bundles have been mapped."
+msgstr ""
+
+#: modules/email_integration.php:177
+msgid "Create Bundle Mapping"
+msgstr ""
+
+#: modules/email_templates.php:34
+msgid ""
+"This template requires the following SmartTag:\\n[MM_CorePage_Link type="
+"\\'resetpassword\\']\\n\\nYou\\'ll need to include this SmartTag somewhere "
+"in the template before the template can be saved."
+msgstr ""
+
+#: modules/email_templates.php:46
+msgid "Forgot Password Email"
+msgstr ""
+
+#: modules/email_templates.php:54 modules/membership_levels.dialog.php:232
+#: modules/push_notifications.dialog.php:352
+msgid "Body"
+msgstr ""
+
+#: modules/email_templates.php:56 modules/membership_levels.dialog.php:234
+#: modules/push_notifications.dialog.php:301
+#: modules/push_notifications.dialog.php:357
+msgid "Only the following SmartTags can be used here"
+msgstr ""
+
+#: modules/email_templates.php:57 modules/email_templates.php:58
+#: modules/email_templates.php:59 modules/membership_levels.dialog.php:235
+#: modules/membership_levels.dialog.php:236
+#: modules/membership_levels.dialog.php:237
+#: modules/push_notifications.dialog.php:358
+#: modules/push_notifications.dialog.php:359
+#: modules/push_notifications.dialog.php:360
+msgid "you must provide an ID"
+msgstr ""
+
+#: modules/email_templates.php:68 modules/membership_levels.dialog.php:246
+#: modules/push_notifications.dialog.php:316
+#: modules/push_notifications.dialog.php:372
+msgid "Note: Only certain SmartTags can be used here"
+msgstr ""
+
+#: modules/email_templates.php:70
+msgid "The following SmartTag is required"
+msgstr ""
+
+#: modules/employees.dialog.php:23
+msgid ""
+"Employee accounts are used to grant access to additional members of your "
+"team. Once the account has been created, the employee can login with the "
+"email address and password associated with the account."
+msgstr ""
+
+#: modules/employees.dialog.php:28 modules/employees.php:174
+msgid "Role"
+msgstr ""
+
+#: modules/employees.dialog.php:35
+#, php-format
+msgid ""
+"Employees with the %sAdministrator%s role have the same permissions as a "
+"standard WordPress administrator and have access to all MemberMouse "
+"configuration modules, member management pages and the reporting suite."
+msgstr ""
+
+#: modules/employees.dialog.php:36
+#, php-format
+msgid ""
+"Employees with the %sSupport%s role will only be able to access the "
+"MemberMouse member management pages."
+msgstr ""
+
+#: modules/employees.dialog.php:38
+#, php-format
+msgid ""
+"Employees with the %sSales%s role will only be able to access the "
+"MemberMouse member management pages."
+msgstr ""
+
+#: modules/employees.dialog.php:40
+#, php-format
+msgid ""
+"Employees with the %sProduct Manager%s role will only be able to access the "
+"MemberMouse product settings and member management pages.."
+msgstr ""
+
+#: modules/employees.dialog.php:42
+#, php-format
+msgid ""
+"Employees with the %sAnalyst%s role will only be able to access the "
+"MemberMouse reporting suite.."
+msgstr ""
+
+#: modules/employees.dialog.php:47 modules/employees.php:170
+msgid "Display Name"
+msgstr ""
+
+#: modules/employees.dialog.php:61 modules/employees.php:171
+msgid "Real Name"
+msgstr ""
+
+#: modules/employees.dialog.php:68 modules/employees.php:173
+#: modules/free_member_webform.php:179 modules/members.datagrid.php:33
+#: modules/members.dialog.php:47 modules/merge_member.dialog.php:485
+msgid "Phone"
+msgstr ""
+
+#: modules/employees.dialog.php:72
+msgid "Additional Permissions"
+msgstr ""
+
+#: modules/employees.dialog.php:74
+msgid "Allow this employee to export data"
+msgstr ""
+
+#: modules/employees.dialog.php:91
+msgid "Access Restrictions"
+msgstr ""
+
+#: modules/employees.dialog.php:96
+msgid "Allowed Membership Levels"
+msgstr ""
+
+#: modules/employees.dialog.php:102
+msgid "Select Multiple Membership Levels"
+msgstr ""
+
+#: modules/employees.dialog.php:117
+msgid "Save Employee"
+msgstr ""
+
+#: modules/employees.php:57
+msgid "The following invalid accounts were detected and have been deleted"
+msgstr ""
+
+#: modules/employees.php:189
+msgid "Create Employee"
+msgstr ""
+
+#: modules/forget_member_settings.php:40
+msgid "Forget Member Settings"
+msgstr ""
+
+#: modules/forget_member_settings.php:44
+msgid "Anonymize the following information when forgetting a member"
+msgstr ""
+
+#: modules/forget_member_settings.php:53
+msgid "Email Address"
+msgstr ""
+
+#: modules/forget_member_settings.php:58
+#, php-format
+msgid ""
+"First Name, Last Name, Billing %s shipping address information (except "
+"country)"
+msgstr ""
+
+#: modules/forget_member_settings.php:63
+#, php-format
+msgid "Billing %s shipping country"
+msgstr ""
+
+#: modules/forget_member_settings.php:82
+#, php-format
+msgid ""
+"Billing %s shipping address information stored with previous orders (except "
+"country)"
+msgstr ""
+
+#: modules/forget_member_settings.php:87
+#, php-format
+msgid "Billing %s shipping country stored with previous orders"
+msgstr ""
+
+#: modules/free_member_webform.php:124
+#, php-format
+msgid ""
+"On this page you can build a webform that can be included on any site. It "
+"allows prospects to sign up for a free membership on your site. To create "
+"the form, just select the free membership level you want prospects to sign "
+"up for, then check off the fields that you want to include in the form and "
+"click %sGenerate HTML%s."
+msgstr ""
+
+#: modules/free_member_webform.php:126
+msgid ""
+"The HTML for your webform will show up in a text box to the right. Just copy "
+"and paste this code to your site."
+msgstr ""
+
+#: modules/free_member_webform.php:155 modules/login_webform.php:21
+#: modules/merge_member.dialog.php:454
+msgid "Username"
+msgstr ""
+
+#: modules/free_member_webform.php:167 modules/manage_transactions.form.php:37
+#: modules/members.dialog.php:35 modules/members.form.php:57
+#: modules/merge_member.dialog.php:409
+msgid "First Name"
+msgstr ""
+
+#: modules/free_member_webform.php:173 modules/manage_transactions.form.php:41
+#: modules/members.dialog.php:39 modules/members.form.php:61
+#: modules/merge_member.dialog.php:424
+msgid "Last Name"
+msgstr ""
+
+#: modules/free_member_webform.php:213
+msgid "Generate HTML"
+msgstr ""
+
+#: modules/gifts.php:15
+msgid "gift"
+msgstr ""
+
+#: modules/gifts.php:61
+msgid "Gift pending redemption"
+msgstr ""
+
+#: modules/gifts.php:70
+msgid "Gift redeemed"
+msgstr ""
+
+#: modules/gifts.php:92
+msgid "Purchased By"
+msgstr ""
+
+#: modules/gifts.php:93
+msgid "Product Gifted"
+msgstr ""
+
+#: modules/gifts.php:94
+msgid "Redeemed By"
+msgstr ""
+
+#: modules/gifts.php:95
+msgid "Date Redeemed"
+msgstr ""
+
+#: modules/gifts.php:107
+msgid "Show All Gifts"
+msgstr ""
+
+#: modules/gifts.php:108
+msgid "Show Redeemed Gifts Only"
+msgstr ""
+
+#: modules/gifts.php:109
+msgid "Show Pending Gifts Only"
+msgstr ""
+
+#: modules/gifts.php:114
+msgid "No gifts"
+msgstr ""
+
+#: modules/homepage_redirect.php:24
+msgid "Member Homepage Settings"
+msgstr ""
+
+#: modules/homepage_redirect.php:26
+msgid "When members login"
+msgstr ""
+
+#: modules/homepage_redirect.php:29
+msgid "Redirect to a homepage specific to their membership level"
+msgstr ""
+
+#: modules/homepage_redirect.php:32
+msgid "When members are logged in and click to go to the site's homepage"
+msgstr ""
+
+#: modules/homepage_redirect.php:34
+msgid "Send them to the homepage associated with their membership level"
+msgstr ""
+
+#: modules/homepage_redirect.php:36
+#, php-format
+msgid ""
+"Send them to the default homepage associated with the WordPress site as "
+"defined %shere%s"
+msgstr ""
+
+#: modules/homepage_redirect.php:40
+#, php-format
+msgid ""
+"Redirect to the default homepage associated with the WordPress site as "
+"defined %shere%s"
+msgstr ""
+
+#: modules/import_wizard.php:38
+msgid "IMPORT RUNNING... PLEASE DO NOT REFRESH THIS PAGE"
+msgstr ""
+
+#: modules/import_wizard.php:57
+msgid "Step 1: Download Import Template"
+msgstr ""
+
+#: modules/import_wizard.php:60
+msgid "Download Import Template"
+msgstr ""
+
+#: modules/import_wizard.php:61
+msgid "Lookup IDs"
+msgstr ""
+
+#: modules/import_wizard.php:62
+msgid "ISO Country Codes"
+msgstr ""
+
+#: modules/import_wizard.php:66
+msgid "Member Status IDs:"
+msgstr ""
+
+#: modules/import_wizard.php:93
+msgid "Step 2: Upload Import File"
+msgstr ""
+
+#: modules/import_wizard.php:100
+msgid "From Computer"
+msgstr ""
+
+#: modules/import_wizard.php:106
+msgid "Clear"
+msgstr ""
+
+#: modules/import_wizard.php:125
+msgid "From URL"
+msgstr ""
+
+#: modules/import_wizard.php:137
+msgid "Step 3: Configure Import Settings"
+msgstr ""
+
+#: modules/import_wizard.php:141
+msgid "Import members as"
+msgstr ""
+
+#: modules/import_wizard.php:150 modules/membership_levels.dialog.php:210
+msgid "Send welcome email to new members"
+msgstr ""
+
+#: modules/import_wizard.php:155
+msgid "Step 4: Import Members"
+msgstr ""
+
+#: modules/import_wizard.php:161 modules/members.php:54
+msgid "Import Members"
+msgstr ""
+
+#: modules/jquery_ui_settings.php:32
+msgid "jQuery UI Options"
+msgstr ""
+
+#: modules/jquery_ui_settings.php:36
+msgid "Use MemberMouse jQuery UI on the front-end"
+msgstr ""
+
+#: modules/limit_login_attempts.php:20
+msgid "Limit Login Attempts"
+msgstr ""
+
+#: modules/limit_login_attempts.php:23
+#, php-format
+msgid ""
+"MemberMouse integrates with a popular plugin for %slimiting login attempts%s "
+"written by %sJohan Eenfeldt%s."
+msgstr ""
+
+#: modules/limit_login_attempts.php:27
+msgid "Plugin activated"
+msgstr ""
+
+#: modules/limit_login_attempts.php:31
+msgid "Install Plugin"
+msgstr ""
+
+#: modules/login_token_settings.php:13
+msgid "Login token lifespan must be greater than 0."
+msgstr ""
+
+#: modules/login_token_settings.php:36
+msgid "Login Token Settings"
+msgstr ""
+
+#: modules/login_token_settings.php:39
+#, php-format
+msgid "Login tokens are valid for %s days"
+msgstr ""
+
+#: modules/login_webform.php:13
+msgid ""
+"Below is a login webform that can be included anywhere which allows your "
+"members to login from any location."
+msgstr ""
+
+#: modules/login_webform.php:14
+msgid "Just copy and paste the HTML code below"
+msgstr ""
+
+#: modules/login_webform.php:33
+msgid "Remember me"
+msgstr ""
+
+#: modules/manage_transactions.datagrid.php:29
+msgid "Initial Payment or One-Time Payment"
+msgstr ""
+
+#: modules/manage_transactions.datagrid.php:32
+msgid "Recurring Payment"
+msgstr ""
+
+#: modules/manage_transactions.datagrid.php:35
+msgid "Refund"
+msgstr ""
+
+#: modules/manage_transactions.datagrid.php:82
+msgid "No transactions found"
+msgstr ""
+
+#: modules/manage_transactions.form.php:59
+msgid "Transaction Types"
+msgstr ""
+
+#: modules/manage_transactions.form.php:62
+msgid "Initial Payments"
+msgstr ""
+
+#: modules/manage_transactions.form.php:63
+msgid "Recurring Payments"
+msgstr ""
+
+#: modules/manage_transactions.form.php:64
+msgid "Refunds"
+msgstr ""
+
+#: modules/manage_transactions.form.php:89 modules/view.php:214
+msgid "Coupons"
+msgstr ""
+
+#: modules/manage_transactions.form.php:96
+msgid ""
+"Free coupons are not included in this list because there is no transaction "
+"associated with them. To see them,"
+msgstr ""
+
+#: modules/manage_transactions.form.php:96
+msgid "use the coupon log"
+msgstr ""
+
+#: modules/manage_transactions.form.php:107
+msgid "Sub-Affiliate ID"
+msgstr ""
+
+#: modules/manage_transactions.form.php:120
+msgid "Search"
+msgstr ""
+
+#: modules/manage_transactions.php:40 modules/manage_transactions.php:41
+#: modules/members.php:49 modules/members.php:50
+msgid "Advanced Search"
+msgstr ""
+
+#: modules/members.datagrid.php:35 modules/members.form.php:83
+#: modules/merge_member.dialog.php:756 modules/mmdashboard.php:210
+#: modules/view.php:208
+msgid "Bundles"
+msgstr ""
+
+#: modules/members.datagrid.php:74
+msgid "Registered"
+msgstr ""
+
+#: modules/members.datagrid.php:78
+msgid "Status Changed"
+msgstr ""
+
+#: modules/members.datagrid.php:82
+msgid "Engagement"
+msgstr ""
+
+#: modules/members.datagrid.php:413
+msgid "No members found."
+msgstr ""
+
+#: modules/members.dialog.php:59 modules/members.php:52
+msgid "Create Member"
+msgstr ""
+
+#: modules/members.form.php:33
+msgid "Registration Date"
+msgstr ""
+
+#: modules/members.form.php:75 modules/mmdashboard.php:206 modules/view.php:202
+msgid "Membership Levels"
+msgstr ""
+
+#: modules/members.form.php:97
+msgid "Membership Status"
+msgstr ""
+
+#: modules/members.form.php:107
+msgid "Custom Field 1"
+msgstr ""
+
+#: modules/members.form.php:119
+msgid "Custom Field 2"
+msgstr ""
+
+#: modules/members.form.php:133
+msgid "Notes"
+msgstr ""
+
+#: modules/members.form.php:141
+msgid "Show Members"
+msgstr ""
+
+#: modules/members.php:62 modules/members.php:67
+msgid "Export Members"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:44
+msgid ""
+"New members cannot sign up for an inactive membership level. If there are "
+"currently members on this membership level, changing this to inactive will "
+"have no effect on them."
+msgstr ""
+
+#: modules/membership_levels.dialog.php:62
+msgid ""
+"Specify the WordPress role you want to assign to members with this "
+"membership level. Their WordPress role will be set to the role you specify "
+"when they first join or when their membership level is changed to this one. "
+"If you don't want MemberMouse to set or change the member's WordPress role "
+"then select the '&mdash; Don't set or change role &mdash;' option."
+msgstr ""
+
+#: modules/membership_levels.dialog.php:64
+msgid "WordPress Role"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:79
+msgid "Membership Type"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:91
+msgid ""
+"Enter a description below for this membership level. It will be displayed in "
+"checkout forms when the [MM_Form_Data name='productDescription'] SmartTag is "
+"used."
+msgstr ""
+
+#: modules/membership_levels.dialog.php:104
+msgid ""
+"Paid membership levels can have multiple products associated with them which "
+"allows you to offer different pricing for the same membership. Select one or "
+"more products below to associate with this membership level."
+msgstr ""
+
+#: modules/membership_levels.dialog.php:119
+msgid "Default Product"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:119
+msgid ""
+"Customers can purchase any of the products above to sign up for this "
+"membership level. It's also possible for customers to sign up for the "
+"membership directly in which case they'll end up purchasing the default "
+"product. You can specify the default product below."
+msgstr ""
+
+#: modules/membership_levels.dialog.php:141
+#: modules/membership_levels.dialog.php:150
+#: modules/membership_levels.dialog.php:157
+msgid "Select a product"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:164
+msgid ""
+"Each product can only be associated with one membership level or bundle so "
+"once a product\n"
+"\t\t\t\t\thas been associated with an access type, it's no longer available "
+"for assignment"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:165
+msgid "You must"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:166
+msgid "create a new product"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:167
+msgid "in order to associate it with this membership level"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:180
+msgid ""
+"Please Note: If you have your product set up to be a recurring subscription, "
+"there is not a need to set your membership level to expire. With a recurring "
+"subscription, if a payment is missed, MemberMouse will handle canceling the "
+"membership automatically. If you have a recurring subscription product and a "
+"membership level that is set to expire, you could create a scenario where a "
+"member continues to get billed, but they can no longer login to their "
+"account to cancel the subscription because of the expiry settings."
+msgstr ""
+
+#: modules/membership_levels.dialog.php:184
+msgid "Membership Level Expires"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:189
+msgid "Expires After"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:207
+msgid "Welcome Email"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:223
+msgid "add employees"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:266
+msgid ""
+"Select the bundles that members with this membership level should "
+"automatically get access to."
+msgstr ""
+
+#: modules/membership_levels.dialog.php:273
+msgid "Select Multiple Bundles"
+msgstr ""
+
+#: modules/membership_levels.dialog.php:288
+msgid ""
+"Select the WordPress categories that should be automatically protected by "
+"this membership level."
+msgstr ""
+
+#: modules/membership_levels.dialog.php:313
+msgid "Save Membership Level"
+msgstr ""
+
+#: modules/membership_levels.php:52
+msgid "Paid Membership Level"
+msgstr ""
+
+#: modules/membership_levels.php:57
+msgid "Free Membership Level"
+msgstr ""
+
+#: modules/membership_levels.php:99
+msgid "Edit Membership Level"
+msgstr ""
+
+#: modules/membership_levels.php:167
+msgid "Create Membership Level"
+msgstr ""
+
+#: modules/membership_levels.php:171
+msgid "hidden membership levels"
+msgstr ""
+
+#: modules/merge_member.dialog.php:212
+msgid "Please choose a member to merge first"
+msgstr ""
+
+#: modules/merge_member.dialog.php:378
+msgid "Step 1: Select Member to Merge"
+msgstr ""
+
+#: modules/merge_member.dialog.php:379
+msgid "Select the member to merge with this account."
+msgstr ""
+
+#: modules/merge_member.dialog.php:385
+msgid "Continue"
+msgstr ""
+
+#: modules/merge_member.dialog.php:387
+msgid "Start Over"
+msgstr ""
+
+#: modules/merge_member.dialog.php:391
+msgid "Step 2: Merge Options"
+msgstr ""
+
+#: modules/merge_member.dialog.php:392
+msgid ""
+"Below you'll find all the data, access rights, subscriptions, etc. presented "
+"in two columns with the current account on left\n"
+"\t\tand the secondary account on the right. Select the radio button or "
+"checkbox next to any item you'd like to transfer from the secondary\n"
+"\t\taccount to the current account."
+msgstr ""
+
+#: modules/merge_member.dialog.php:397 modules/merge_member.dialog.php:795
+#: modules/view.php:70
+msgid "General"
+msgstr ""
+
+#: modules/merge_member.dialog.php:402
+msgid "Account Information"
+msgstr ""
+
+#: modules/merge_member.dialog.php:403 modules/merge_member.dialog.php:706
+#: modules/merge_member.dialog.php:729
+msgid "Current Account"
+msgstr ""
+
+#: modules/merge_member.dialog.php:404 modules/merge_member.dialog.php:707
+#: modules/merge_member.dialog.php:730
+msgid "Secondary Account"
+msgstr ""
+
+#: modules/merge_member.dialog.php:501 modules/push_notifications.dialog.php:54
+msgid "Billing Address"
+msgstr ""
+
+#: modules/merge_member.dialog.php:505 modules/merge_member.dialog.php:600
+msgid "Address 1"
+msgstr ""
+
+#: modules/merge_member.dialog.php:520 modules/merge_member.dialog.php:615
+msgid "Address 2"
+msgstr ""
+
+#: modules/merge_member.dialog.php:535 modules/merge_member.dialog.php:630
+msgid "City"
+msgstr ""
+
+#: modules/merge_member.dialog.php:550 modules/merge_member.dialog.php:645
+msgid "State"
+msgstr ""
+
+#: modules/merge_member.dialog.php:565 modules/merge_member.dialog.php:660
+msgid "Postal Code"
+msgstr ""
+
+#: modules/merge_member.dialog.php:580 modules/merge_member.dialog.php:675
+msgid "Country"
+msgstr ""
+
+#: modules/merge_member.dialog.php:596 modules/push_notifications.dialog.php:59
+msgid "Shipping Address"
+msgstr ""
+
+#: modules/merge_member.dialog.php:691 modules/merge_member.dialog.php:714
+msgid "Next"
+msgstr ""
+
+#: modules/merge_member.dialog.php:692 modules/merge_member.dialog.php:715
+#: modules/merge_member.dialog.php:775 modules/merge_member.dialog.php:847
+msgid "Back"
+msgstr ""
+
+#: modules/merge_member.dialog.php:723 modules/merge_member.dialog.php:807
+msgid "Access Rights, Subscriptions &amp; Payment Info"
+msgstr ""
+
+#: modules/merge_member.dialog.php:737
+msgid ""
+"Select the membership level you want applied to the current account. Any "
+"active subscriptions on the membership not selected will be cancelled."
+msgstr ""
+
+#: modules/merge_member.dialog.php:757
+msgid ""
+"Select the bundles that you would like to transfer to the current account. "
+"Any active subscriptions on bundles that aren't transferred will be "
+"cancelled."
+msgstr ""
+
+#: modules/merge_member.dialog.php:763
+msgid ""
+"These products are not associated with a membership level or bundle. Select "
+"the products that you would like to transfer to the current account. Any "
+"active subscriptions on products that aren't transferred will be cancelled."
+msgstr ""
+
+#: modules/merge_member.dialog.php:768
+msgid "Credit Card on File"
+msgstr ""
+
+#: modules/merge_member.dialog.php:769
+msgid ""
+"Select the credit card that should be billed on all future payments. The "
+"credit card not chosen will be deleted."
+msgstr ""
+
+#: modules/merge_member.dialog.php:774
+msgid "Preview Merged Account"
+msgstr ""
+
+#: modules/merge_member.dialog.php:786
+msgid "Step 3: Preview &amp; Confirm Merge"
+msgstr ""
+
+#: modules/merge_member.dialog.php:787
+msgid ""
+"Below is a preview of the changes that will be made to the current account "
+"if the merge is confirmed."
+msgstr ""
+
+#: modules/merge_member.dialog.php:791
+#, php-format
+msgid "Rows %shighlighted in blue%s indicate changes to the current account."
+msgstr ""
+
+#: modules/merge_member.dialog.php:795 modules/merge_member.dialog.php:801
+#: modules/merge_member.dialog.php:807
+msgid "edit"
+msgstr ""
+
+#: modules/merge_member.dialog.php:833
+msgid "If you proceed with merging these accounts"
+msgstr ""
+
+#: modules/merge_member.dialog.php:835
+msgid "The secondary account will be deleted."
+msgstr ""
+
+#: modules/merge_member.dialog.php:836
+msgid ""
+"Any subscriptions not associated with the choices listed above will be "
+"cancelled."
+msgstr ""
+
+#: modules/merge_member.dialog.php:841
+#, php-format
+msgid ""
+"Cancellation requests will be sent to %s for subscriptions managed by them. "
+"We cannot guarantee these subscriptions will be cancelled. Following the "
+"merge, log into %s to confirm."
+msgstr ""
+
+#: modules/merge_member.dialog.php:846
+msgid "Merge Accounts"
+msgstr ""
+
+#: modules/mmdashboard.php:153
+msgid "Membership Snapshot"
+msgstr ""
+
+#: modules/mmdashboard.php:156
+msgid "Free Members Today"
+msgstr ""
+
+#: modules/mmdashboard.php:160
+msgid "Total Free Members"
+msgstr ""
+
+#: modules/mmdashboard.php:164
+msgid "Paid Members Today"
+msgstr ""
+
+#: modules/mmdashboard.php:168
+msgid "Total Paid Members"
+msgstr ""
+
+#: modules/mmdashboard.php:176
+msgid "Bundle Snapshot"
+msgstr ""
+
+#: modules/mmdashboard.php:179
+msgid "Free Bundles Today"
+msgstr ""
+
+#: modules/mmdashboard.php:183
+msgid "Total Free Bundles"
+msgstr ""
+
+#: modules/mmdashboard.php:187
+msgid "Paid Bundles Today"
+msgstr ""
+
+#: modules/mmdashboard.php:191
+msgid "Total Paid Bundles"
+msgstr ""
+
+#: modules/mmdashboard.php:199
+msgid "Product Snapshot"
+msgstr ""
+
+#: modules/mmdashboard.php:221
+msgid "Retention Snapshot"
+msgstr ""
+
+#: modules/mmdashboard.php:224
+msgid "Canceled Free Memberships"
+msgstr ""
+
+#: modules/mmdashboard.php:228
+msgid "Canceled Paid Memberships"
+msgstr ""
+
+#: modules/mmdashboard.php:232
+msgid "Canceled Free Bundles"
+msgstr ""
+
+#: modules/mmdashboard.php:236
+msgid "Canceled Paid Bundles"
+msgstr ""
+
+#: modules/mmdashboard.php:262
+msgid "Training Videos"
+msgstr ""
+
+#: modules/mmdashboard.php:274
+msgid "Support Center"
+msgstr ""
+
+#: modules/mmdashboard.php:280
+msgid "Knowledge Base"
+msgstr ""
+
+#: modules/mmdashboard.php:281
+msgid "Getting Started Guides"
+msgstr ""
+
+#: modules/mmdashboard.php:282
+msgid "Best Practices"
+msgstr ""
+
+#: modules/mmdashboard.php:285
+msgid "Contact Support"
+msgstr ""
+
+#: modules/mmdashboard.php:292
+msgid "Profit Alerts"
+msgstr ""
+
+#: modules/mmdashboard.php:298
+msgid "Learn more about the"
+msgstr ""
+
+#: modules/mmdashboard.php:298
+msgid "Advanced Reporting Suite"
+msgstr ""
+
+#: modules/mmdashboard.php:300
+msgid "Earn 25% recurring commission with our"
+msgstr ""
+
+#: modules/mmdashboard.php:300
+msgid "Affiliate Program"
+msgstr ""
+
+#: modules/mmdashboard.php:302
+msgid "News"
+msgstr ""
+
+#: modules/mmdashboard.php:356
+msgid "Subscription Entrepreneur Podcast"
+msgstr ""
+
+#: modules/mmdashboard.php:410
+msgid "MemberMouse Version"
+msgstr ""
+
+#: modules/myaccount_orderhistory.datagrid.php:12
+msgid "Order Date"
+msgstr ""
+
+#: modules/payment_confirmation.dialog.php:27
+#, php-format
+msgid "Invalid product ID %s"
+msgstr ""
+
+#: modules/payment_confirmation.dialog.php:34
+msgid "Confirm"
+msgstr ""
+
+#: modules/payment_confirmation.dialog.php:35
+msgid "Use Different Card"
+msgstr ""
+
+#: modules/payment_confirmation_settings.php:43
+msgid "1-Click Purchase Confirmation Settings"
+msgstr ""
+
+#: modules/payment_confirmation_settings.php:46
+msgid ""
+"Set the width and height for the 1-click purchase confirmation dialog below"
+msgstr ""
+
+#: modules/payment_confirmation_settings.php:48
+msgid "Width"
+msgstr ""
+
+#: modules/payment_confirmation_settings.php:49
+msgid "Height"
+msgstr ""
+
+#: modules/payment_methods.php:35
+msgid "This payment service does not support the configured currency. "
+msgstr ""
+
+#: modules/payment_methods.php:36
+msgid "To change the configured currency click "
+msgstr ""
+
+#: modules/payment_methods.php:37
+msgid "here"
+msgstr ""
+
+#: modules/payment_methods.php:49
+msgid ""
+"With MemberMouse you can configure two types of payment methods: onsite and "
+"offsite. Onsite payment methods allow you to collect credit card information "
+"right from your site which means that customers can complete the entire "
+"checkout process without leaving your site. Authorize.net and Stripe are "
+"examples of onsite payment methods."
+msgstr ""
+
+#: modules/payment_methods.php:53
+msgid ""
+"With offsite payment methods, MemberMouse sends the customer to a secure 3rd "
+"party website to complete their purchase. Following the successful "
+"completion of their order on the 3rd party site, MemberMouse will be "
+"notified and the appropriate account-related actions taken. PayPal and "
+"ClickBank are examples of offsite payment methods."
+msgstr ""
+
+#: modules/payment_methods.php:57
+msgid ""
+"You can have multiple payment methods active at the same time which is "
+"valuable because it gives your customers multiple ways to pay. For example, "
+"by using Authorize.net and PayPal, customers can either pay you by credit "
+"card on your site or by checking out with PayPal. Only one onsite payment "
+"method can be configured at a time and you can activate as many offsite "
+"payment methods as you want."
+msgstr ""
+
+#: modules/payment_methods.php:59
+msgid "IMPORTANT"
+msgstr ""
+
+#: modules/payment_methods.php:59
+msgid ""
+"Once you've configured your payment settings, click the button below to run "
+"a diagnostic on your site to discover if there's any security settings on "
+"your server that will interfer with payment processing."
+msgstr ""
+
+#: modules/payment_methods.php:61
+msgid "Run Diagnostic"
+msgstr ""
+
+#: modules/payment_methods.php:71
+msgid "Activate the MemberMouse"
+msgstr ""
+
+#: modules/payment_methods.php:84
+msgid "Onsite Payment Method"
+msgstr ""
+
+#: modules/payment_methods.php:95
+msgid ""
+"Currently the test payment service is enabled and configured to always be "
+"used as the onsite payment method. While the test payment service is "
+"configured this way the onsite payment method activated in this section will "
+"not be used."
+msgstr ""
+
+#: modules/payment_methods.php:102
+#, php-format
+msgid ""
+"When collecting sensitive data on your site you need to ensure that you have "
+"an SSL certificate configured for your domain and that you're using HTTPS on "
+"pages that collect sensitive data (i.e. checkout pages). Read this article "
+"for %ssteps you can take to secure your site%s."
+msgstr ""
+
+#: modules/payment_methods.php:132
+msgid "None"
+msgstr ""
+
+#: modules/payment_methods.php:170
+msgid "Save Payment Methods"
+msgstr ""
+
+#: modules/php_interface.php:23
+msgid ""
+"MemberMouse provides you with a wide range of SmartTags you can use to "
+"create a dynamic experience for your members. There are SmartTags that "
+"display the current member's name, email address and other information, ones "
+"you can use to allow member's to manage their subscriptions, ones you can "
+"use to change content based on the current member's access rights and a lot "
+"more."
+msgstr ""
+
+#: modules/php_interface.php:25
+msgid ""
+"This is all very helpful when you're working within WordPress' content "
+"authoring environment, but what if you want to be able to do all of this "
+"within a custom PHP script?"
+msgstr ""
+
+#: modules/php_interface.php:27
+msgid "This is where the PHP Interface comes in."
+msgstr ""
+
+#: modules/php_interface.php:29
+msgid "View Documentation"
+msgstr ""
+
+#: modules/preview_bar_settings.php:34
+msgid "Preview Settings Bar Options"
+msgstr ""
+
+#: modules/preview_bar_settings.php:38
+msgid "Show Preview Settings Bar"
+msgstr ""
+
+#: modules/products.php:141
+msgid "Billing Description"
+msgstr ""
+
+#: modules/products.php:142
+msgid "Attributes"
+msgstr ""
+
+#: modules/products.php:143
+msgid "Associated Access"
+msgstr ""
+
+#: modules/products.php:166
+msgid "Create Product"
+msgstr ""
+
+#: modules/products.php:170
+msgid "hidden products"
+msgstr ""
+
+#: modules/proration_settings.php:32
+msgid ""
+"Checking the checkbox below will enable proration when an existing member "
+"upgrades/downgrades their membership. If there's an unused balance on the "
+"member's current subsription at the time they switch, this will be applied a "
+"credit to the first charge on the new subscription. In order for a proration "
+"to be applied the following must be true"
+msgstr ""
+
+#: modules/proration_settings.php:33
+msgid ""
+"The member must have an active subscription associated with their current "
+"membership"
+msgstr ""
+
+#: modules/proration_settings.php:34
+msgid ""
+"The member must be switching to another membership that has a subscription "
+"associated with it"
+msgstr ""
+
+#: modules/proration_settings.php:35
+msgid ""
+"The charge to be prorated must be billed immediately at the time of "
+"upgrading/downgrading (i.e. the new membership cannot have a free trail)"
+msgstr ""
+
+#: modules/proration_settings.php:42
+msgid "Enable proration on membership upgrade/downgrade"
+msgstr ""
+
+#: modules/purchase_link_options.php:51
+msgid "Purchase Link Options"
+msgstr ""
+
+#: modules/purchase_link_options.php:54
+#, php-format
+msgid ""
+"In MemberMouse there are two purchase link styles that can be used: "
+"%sReference Links%s and %sExplicit Links%s"
+msgstr ""
+
+#: modules/purchase_link_options.php:54
+msgid "Select the style you want to use below"
+msgstr ""
+
+#: modules/purchase_link_options.php:57
+msgid "Reference Links"
+msgstr ""
+
+#: modules/purchase_link_options.php:57 modules/purchase_link_options.php:68
+#: modules/smarttag-version.php:23
+msgid "recommended"
+msgstr ""
+
+#: modules/purchase_link_options.php:60
+msgid ""
+"This style involves passing a 6-digit alphanumeric key that represents "
+"either a product or a membership level as follows"
+msgstr ""
+
+#: modules/purchase_link_options.php:68
+msgid "Increase security by disabling support for explicit links"
+msgstr ""
+
+#: modules/purchase_link_options.php:81
+msgid ""
+"This style involves passing the ID of a product or membership level to the "
+"checkout page as follows"
+msgstr ""
+
+#: modules/push_notification_settings.php:21
+msgid "Push Notification Dispatch Settings"
+msgstr ""
+
+#: modules/push_notification_settings.php:25
+msgid "Enable asynchronous dispatching of push notifications"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:25
+msgid "New Member Signup ([MM_Member_Data name='email'])"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:27
+msgid "Congratulations! A new member has just signed up."
+msgstr ""
+
+#: modules/push_notifications.dialog.php:28
+msgid "Here are their details"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:44
+msgid "Thank you for your purchase!"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:46
+msgid "Here are your order details"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:64
+msgid "Your order will be shipped via [MM_Order_Data name='shippingMethod']"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:65
+msgid ""
+"If you have any questions concerning your order, feel free to contact us at "
+"[MM_Employee_Data name='email']."
+msgstr ""
+
+#: modules/push_notifications.dialog.php:72
+msgid "Your Account Is Past Due"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:77
+msgid "Your recent payment was declined."
+msgstr ""
+
+#: modules/push_notifications.dialog.php:79
+msgid "Please update your billing information to reactivate your account."
+msgstr ""
+
+#: modules/push_notifications.dialog.php:80
+msgid "To update your credit card details, please click the link below"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:84
+msgid "Thank you for your prompt attention to this matter."
+msgstr ""
+
+#: modules/push_notifications.dialog.php:104
+msgid "When the following event occurs"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:114
+msgid "When the product is"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:116
+msgid "Any Product"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:132
+#: modules/push_notifications.dialog.php:150
+msgid "When membership level is"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:134
+#: modules/push_notifications.dialog.php:152
+msgid "Any Membership Level"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:183
+#: modules/push_notifications.dialog.php:201
+msgid "When bundle is"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:185
+#: modules/push_notifications.dialog.php:203 modules/push_notifications.php:249
+#: modules/push_notifications.php:279
+msgid "Any Bundle"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:217
+msgid "When bundle status is"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:219 modules/push_notifications.php:266
+#: modules/push_notifications.php:279
+msgid "Any Status"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:234
+msgid "Perform the following action"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:243
+msgid "Enter the URL of your custom script below"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:247
+msgid ""
+"When the event selected above occurs, MemberMouse will call the script "
+"passing an event type and any relevant data."
+msgstr ""
+
+#: modules/push_notifications.dialog.php:248
+msgid ""
+"Download the sample scripts below to see how to respond to different events "
+"and access the data passed."
+msgstr ""
+
+#: modules/push_notifications.dialog.php:253
+msgid "Member Notification Script"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:257
+msgid "Bundle Notification Script"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:262
+msgid "Payment Notification Script"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:266
+msgid "Affiliate Notification Script"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:271
+msgid "Product Purchased Notification Script"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:280
+msgid "Mailbox"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:293
+msgid ""
+"MemberMouse will automatically send all data related to this event to "
+"Zapier. If you'd like to append additional information to the data already "
+"being sent, enter it in the field below."
+msgstr ""
+
+#: modules/push_notifications.dialog.php:298
+msgid "Additional Information"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:311
+#: modules/push_notifications.dialog.php:312
+#: modules/push_notifications.dialog.php:367
+#: modules/push_notifications.dialog.php:368
+msgid "only with payment and affiliate events"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:342
+msgid "CC"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:354
+msgid "Insert template"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:354
+msgid "Member Added"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:354
+msgid "Order Receipt"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:355
+msgid "Account Overdue Notice"
+msgstr ""
+
+#: modules/push_notifications.dialog.php:390
+msgid "Save Push Notification"
+msgstr ""
+
+#: modules/push_notifications.php:19
+msgid "Event"
+msgstr ""
+
+#: modules/push_notifications.php:20 modules/safe_mode.php:93
+msgid "Action"
+msgstr ""
+
+#: modules/push_notifications.php:34
+msgid "Send Test Notification"
+msgstr ""
+
+#: modules/push_notifications.php:38
+msgid "Activate this push notification in order to send a test"
+msgstr ""
+
+#: modules/push_notifications.php:300
+msgid "No push notifications configured."
+msgstr ""
+
+#: modules/repair_core_pages.php:18
+msgid "The following Core Page definitons are missing from the database:"
+msgstr ""
+
+#: modules/repair_core_pages.php:32
+msgid "The following Core Pages are missing or unassigned: "
+msgstr ""
+
+#: modules/repair_core_pages.php:47
+msgid ""
+"The following Core Pages are in the trash, which will cause MemberMouse to "
+"function incorrectly: "
+msgstr ""
+
+#: modules/repair_core_pages.php:60 modules/view.php:537
+msgid "Repair Core Pages"
+msgstr ""
+
+#: modules/repair_core_pages.php:64
+msgid "No problems have been detected"
+msgstr ""
+
+#: modules/repair_core_pages.php:68
+msgid "The following problems have been detected"
+msgstr ""
+
+#: modules/repair_core_pages.php:86
+msgid "Repair Core Page Problems"
+msgstr ""
+
+#: modules/repair_install.php:16
+msgid ""
+"Error locating the cache directory. Please create the com/membermouse/cache "
+"directory inside the MemberMouse plugin directory and rerun the repair"
+msgstr ""
+
+#: modules/repair_install.php:183
+msgid ""
+"1. Unable to automatically repair the cache permissions. Please manually "
+"change the permissions on the following directory and all files contained "
+"within to 777 using an FTP/SSH client. "
+msgstr ""
+
+#: modules/repair_install.php:184 modules/repair_membermouse.php:19
+msgid "Cache directory location"
+msgstr ""
+
+#: modules/repair_install.php:186
+msgid "1. Cache directory permissions modified successfully"
+msgstr ""
+
+#: modules/repair_install.php:189
+msgid "2. Refreshing cache"
+msgstr ""
+
+#: modules/repair_install.php:190 modules/repair_install.php:205
+#: modules/repair_install.php:229 modules/repair_install.php:235
+#: modules/repair_install.php:241
+msgid "Please wait"
+msgstr ""
+
+#: modules/repair_install.php:201
+msgid "Cache refreshed successfully"
+msgstr ""
+
+#: modules/repair_install.php:202
+msgid "3. Repairing database indexes"
+msgstr ""
+
+#: modules/repair_install.php:227
+msgid "4. Detecting and restoring damaged access links"
+msgstr ""
+
+#: modules/repair_install.php:233
+msgid "5. Detecting and restoring missing pending-overdue subscription links"
+msgstr ""
+
+#: modules/repair_install.php:239
+msgid "6. Performing maintenance on reporting data"
+msgstr ""
+
+#: modules/repair_install.php:243
+msgid "DONE"
+msgstr ""
+
+#: modules/repair_membermouse.php:11
+msgid "Repair MemberMouse"
+msgstr ""
+
+#: modules/repair_membermouse.php:18
+msgid ""
+"In order to access repair options, please make the MemberMouse cache "
+"directory writeable"
+msgstr ""
+
+#: modules/repair_membermouse.php:22
+msgid ""
+"The repair option will restore all MemberMouse files to their default state. "
+"This process only affects the files related to the MemberMouse application; "
+"No membership or order data will be affected. "
+msgstr ""
+
+#: modules/repair_membermouse.php:24
+msgid "This process may take several minutes, click the button below to begin."
+msgstr ""
+
+#: modules/repair_membermouse.php:25
+msgid "Begin Repair"
+msgstr ""
+
+#: modules/repair_membermouse.php:30
+msgid "Step One - Retrieving source archive from MemberMouse"
+msgstr ""
+
+#: modules/repair_membermouse.php:31
+msgid "Step Two - Replacing files"
+msgstr ""
+
+#: modules/reports/sales_by_membership_report.php:32
+#: modules/reports/sales_by_payment_service_report.php:33
+#: modules/reports/sales_by_product_report.php:33
+msgid "Both Initial Sales and Rebills"
+msgstr ""
+
+#: modules/reports/sales_by_membership_report.php:33
+#: modules/reports/sales_by_payment_service_report.php:34
+#: modules/reports/sales_by_product_report.php:34
+msgid "Initial Sales Only"
+msgstr ""
+
+#: modules/reports/sales_by_membership_report.php:34
+#: modules/reports/sales_by_payment_service_report.php:35
+#: modules/reports/sales_by_product_report.php:35
+msgid "Rebills Only"
+msgstr ""
+
+#: modules/safe_mode.php:17
+msgid ""
+"3rd party software is commonly installed and run alongside the MemberMouse "
+"plugin within the WordPress environment. This can include themes, plugins "
+"and custom code. Sometimes even themes and plugins that are functioning as "
+"intended can interfer with MemberMouse so removing these external factors is "
+"an essential first step in diagnosing the source of a problem."
+msgstr ""
+
+#: modules/safe_mode.php:19
+#, php-format
+msgid ""
+"Our customer success team is here to help answer any questions you have in "
+"regards to using the MemberMouse software. If a 3rd party theme or plugin is "
+"causing an issue, you should contact the author of the 3rd party software "
+"for support or discontinue using the offending software. For more "
+"information, please read our %ssupport policy%s."
+msgstr ""
+
+#: modules/safe_mode.php:23
+#, php-format
+msgid ""
+"Enabling %sSafe Mode%s creates a \"clean\" environment by deactivating all "
+"plugins and switching to the default WordPress theme (if available). When "
+"you disable <em>Safe Mode</em> MemberMouse will restore the plugins and "
+"theme that were originally activated."
+msgstr ""
+
+#: modules/safe_mode.php:25
+#, php-format
+msgid ""
+"Read this article if you'd prefer to %sdeactivate your plugins and theme "
+"manually%s."
+msgstr ""
+
+#: modules/safe_mode.php:31
+msgid "Disable Safe Mode"
+msgstr ""
+
+#: modules/safe_mode.php:37
+msgid "Enable Safe Mode"
+msgstr ""
+
+#: modules/safe_mode.php:47
+msgid "Active Plugins"
+msgstr ""
+
+#: modules/safe_mode.php:54
+msgid "Active Theme"
+msgstr ""
+
+#: modules/safe_mode.php:64
+msgid "Saved Plugins"
+msgstr ""
+
+#: modules/safe_mode.php:89
+msgid "Safe Mode Log"
+msgstr ""
+
+#: modules/safe_mode.php:89
+msgid "clear log"
+msgstr ""
+
+#: modules/shipping.dialog.php:24 modules/shipping.php:20
+msgid "Rate"
+msgstr ""
+
+#: modules/shipping.dialog.php:32
+msgid "Save Shipping Method"
+msgstr ""
+
+#: modules/shipping.php:54
+msgid "Create Shipping Method"
+msgstr ""
+
+#: modules/smarttag-version.php:19
+msgid "SmartTag Version"
+msgstr ""
+
+#: modules/smarttag-version.php:23 modules/smarttag-version.php:26
+msgid "SmartTags"
+msgstr ""
+
+#: modules/test_data.php:172
+msgid ""
+"By filling out the test data below you're instructing MemberMouse to "
+"prepopulate checkout forms with the data entered. This can be very helpful "
+"when you're doing testing as it means you don't have to manually type in "
+"data for each test."
+msgstr ""
+
+#: modules/test_data.php:176
+msgid "Use Test Data"
+msgstr ""
+
+#: modules/version_history.php:27
+msgid "Version"
+msgstr ""
+
+#: modules/view.php:57
+msgid "Back to member details"
+msgstr ""
+
+#: modules/view.php:82
+msgid "Subscriptions"
+msgstr ""
+
+#: modules/view.php:88
+msgid "Transactions"
+msgstr ""
+
+#: modules/view.php:95
+msgid "Gifts"
+msgstr ""
+
+#: modules/view.php:121
+msgid "Manage User-Defined Pages"
+msgstr ""
+
+#: modules/view.php:157
+msgid "Sticky.io Mappings"
+msgstr ""
+
+#: modules/view.php:162 modules/view.php:187
+msgid "Product Mappings"
+msgstr ""
+
+#: modules/view.php:168 modules/view.php:193
+msgid "Shipping Method Mappings"
+msgstr ""
+
+#: modules/view.php:182
+msgid "Lime Light Mappings"
+msgstr ""
+
+#: modules/view.php:220
+msgid "Drip Content Schedule"
+msgstr ""
+
+#: modules/view.php:242
+msgid "Countries"
+msgstr ""
+
+#: modules/view.php:248
+msgid "Shipping Methods"
+msgstr ""
+
+#: modules/view.php:254
+msgid "reCAPTCHA"
+msgstr ""
+
+#: modules/view.php:260 modules/view.php:523
+msgid "Other Settings"
+msgstr ""
+
+#: modules/view.php:276
+msgid "Payment Methods"
+msgstr ""
+
+#: modules/view.php:282
+msgid "Test Data"
+msgstr ""
+
+#: modules/view.php:288
+msgid "Cancellation Method"
+msgstr ""
+
+#: modules/view.php:304
+msgid "Email Integration"
+msgstr ""
+
+#: modules/view.php:310
+msgid "Email Templates"
+msgstr ""
+
+#: modules/view.php:326
+msgid "Affiliate Integration"
+msgstr ""
+
+#: modules/view.php:332
+msgid "Commission Profiles"
+msgstr ""
+
+#: modules/view.php:338
+msgid "Tracking Settings"
+msgstr ""
+
+#: modules/view.php:354
+msgid "Push Notifications"
+msgstr ""
+
+#: modules/view.php:360
+msgid "API Credentials"
+msgstr ""
+
+#: modules/view.php:366
+msgid "WordPress Hooks/Filters"
+msgstr ""
+
+#: modules/view.php:372
+msgid "PHP Interface"
+msgstr ""
+
+#: modules/view.php:395
+msgid "Coupon Log"
+msgstr ""
+
+#: modules/view.php:403
+msgid "Gifts Log"
+msgstr ""
+
+#: modules/view.php:415
+msgid "reCAPTCHA Log"
+msgstr ""
+
+#: modules/view.php:429
+msgid "PayPal IPN Log"
+msgstr ""
+
+#: modules/view.php:442
+msgid "ClickBank IPN Log"
+msgstr ""
+
+#: modules/view.php:457
+msgid "Lime Light IPN Log"
+msgstr ""
+
+#: modules/view.php:465
+msgid "Sticky.io IPN Log"
+msgstr ""
+
+#: modules/view.php:482
+msgid "Free Member Webform"
+msgstr ""
+
+#: modules/view.php:488
+msgid "Login Webform"
+msgstr ""
+
+#: modules/view.php:505
+msgid "Employees"
+msgstr ""
+
+#: modules/view.php:511
+msgid "Extensions"
+msgstr ""
+
+#: modules/view.php:517
+msgid "Safe Mode"
+msgstr ""
+
+#: modules/view.php:529
+msgid "Duplicate Subscriptions"
+msgstr ""
+
+#: modules/view.php:533
+msgid "Manage Install"
+msgstr ""
+
+#: modules/view.php:535
+msgid "Version History"
+msgstr ""
+
+#: modules/view.php:536
+msgid "Repair Install"
+msgstr ""
+
+#: modules/view.php:539
+msgid "Diagnostic Log"
+msgstr ""
+
+#: modules/view.php:542
+msgid "Repair MemberMouse (dev)"
+msgstr ""
+
+#: modules/wordpress_content_settings.php:32
+msgid "WordPress Content Options"
+msgstr ""
+
+#: modules/wordpress_content_settings.php:36
+msgid ""
+"Disable WordPress auto-paragraph functionality on MemberMouse core pages"
+msgstr ""
+
+#: modules/wordpress_hooks.php:11
+msgid "WordPress Hooks/Filters Overview"
+msgstr ""
+
+#: modules/wordpress_hooks.php:13
+msgid ""
+"Hooks and filters are provided by WordPress to allow your plugin to 'hook "
+"into' the rest of WordPress; that is, to call functions in your plugin at "
+"specific times, and thereby set your code in motion. MemberMouse defines its "
+"own set of hooks and filters that you can utilize to 'hook into' MemberMouse "
+"so you can call functions in your code when specific events occur in "
+"MemberMouse."
+msgstr ""
+
+#: modules/wordpress_hooks.php:16
+msgid "View Hooks Documentation"
+msgstr ""
+
+#: modules/wordpress_hooks.php:17
+msgid "View Filters Documentation"
+msgstr ""
+
+#: modules/wordpress_login_settings.php:43
+msgid "WordPress Login Settings"
+msgstr ""
+
+#: modules/wordpress_login_settings.php:47
+msgid "Use the MemberMouse Login Page as the Default"
+msgstr ""
+
+#: modules/wordpress_login_settings.php:55
+msgid "Use the MemberMouse Reset Password Page as the Default"
+msgstr ""
+
+#: modules/wordpress_user_settings.php:50
+msgid "Hide the admin bar for new members"
+msgstr ""
+
+#: modules/wordpress_user_settings.php:58
+msgid "Allow members to change their username"
+msgstr ""
+
+#: modules/wp_menu_settings.php:29
+msgid "Hide Protected Menu Items"
+msgstr ""
+
+#: modules/wp_menu_settings.php:35
+msgid "Show Login/Logout Link"
+msgstr ""
+
+#: queue/class.background.php:320
+msgid "Every minute"
+msgstr ""
+
+#: resources/js/admin/mm-upload.js:39
+msgid "Error: "
+msgstr ""
+
+#: resources/js/admin/mm-upload.js:50 resources/js/common/mm-common-core.js:50
+#: resources/js/common/mm-main.js:131
+#, javascript-format
+msgid "Session expired. You will be redirected to \"%s\" page."
+msgstr ""
+
+#: resources/js/admin/mm-upload.js:67
+msgid "Ajax upload error: "
+msgstr ""
+
+#: resources/js/amcharts/amcharts/plugins/dataloader/dataloader.js:188
+msgid "Error loading the file"
+msgstr ""
+
+#: resources/js/amcharts/amcharts/plugins/dataloader/dataloader.js:209
+msgid "Error parsing JSON file"
+msgstr ""
+
+#: resources/js/amcharts/amcharts/plugins/dataloader/dataloader.js:225
+msgid "Error parsing CSV file"
+msgstr ""
+
+#: resources/js/amcharts/amcharts/plugins/dataloader/dataloader.js:237
+msgid "Unsupported data format"
+msgstr ""
+
+#: resources/js/amcharts/amcharts/plugins/dataloader/dataloader.js:314
+msgid "Error loading file"
+msgstr ""
+
+#: resources/js/amcharts/amcharts/plugins/dataloader/dataloader.js:376
+msgid "Loading data..."
+msgstr ""
+
+#: resources/js/common/mm-common-core.js:71 resources/js/common/mm-main.js:304
+msgid "Incorrect response data :"
+msgstr ""
+
+#: resources/js/common/mm-common-core.js:72 resources/js/common/mm-main.js:310
+msgid "[AJAX ERROR] "
+msgstr ""
+
+#: templates/payment/authorizenetcim_config.html.php:80
+#: templates/payment/braintree_config.html.php:74
+#: templates/payment/stripe_config.html.php:95
+msgid "Highest PCI Compliance"
+msgstr ""
+
+#: templates/payment/authorizenetcim_config.html.php:80
+#: templates/payment/stripe_config.html.php:100
+msgid "Not SCA-Ready"
+msgstr ""
+
+#: templates/payment/braintree_config.html.php:74
+#: templates/payment/stripe_config.html.php:95
+msgid "SCA-Ready"
+msgstr ""
+
+#: templates/payment/stripe_config.html.php:100
+msgid "Lower PCI Compliance"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "MemberMouse Platform"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "http://membermouse.com"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"MemberMouse is an enterprise-level membership platform that allows you to "
+"quickly and easily manage a membership site or subscription business. "
+"MemberMouse is designed to deliver digital content, automate customer self-"
+"service and provide you with advanced marketing tools to maximize the "
+"profitability of your continuity business."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "MemberMouse, LLC"
+msgstr ""

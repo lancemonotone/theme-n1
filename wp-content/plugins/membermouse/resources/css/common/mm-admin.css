@@ -1,0 +1,50 @@
+/*** MM Dashboard/Reporting styles ***/
+
+/* Table of Contents
+========================================================================================================== */
+/*
+01: jQuery UI
+/*
+
+/* 01: Global
+========================================================================================================== */
+
+/* ----- jQuery UI ----- */
+.ui-widget-overlay {
+	background: rgba(0, 0, 0, .5) !important;
+	opacity: 1.0 !important;
+}
+.ui-dialog.ui-widget {
+	max-width: 100% !important;
+	padding: 0;
+	font-family: 'Nunito Sans', sans-serif;;
+	border: none;
+	border-radius: 0;
+	box-shadow: 0 0 0 10px rgba(255, 255, 255, .1);
+}
+.ui-dialog.ui-widget .ui-widget-header {
+	padding: 10px;
+	background: #f5f5f5;
+	color: #1a1b21;
+	font-family: 'Nunito Sans', sans-serif;
+	font-size: 1.2em;
+	font-weight: 700;
+	border: none;
+	border-radius: 0;
+}
+.ui-dialog.ui-widget .ui-widget-header .ui-dialog-title {
+	overflow: inherit;
+}
+.ui-dialog.ui-widget .ui-widget-header .ui-dialog-titlebar-close {
+	right: 10px;
+	outline: none;
+}
+.ui-dialog.ui-widget .ui-widget-header .ui-dialog-titlebar-close:hover {
+	color: #fff;
+}
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+	font-family: 'Nunito Sans', sans-serif;
+}

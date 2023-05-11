@@ -1,0 +1,90 @@
+[01-Nov-2021 00:11:51 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code:57
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(111): MM_MailChimpEmailServiceProvider->translateResponse(Object(WP_Error))
+#1 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(412): MM_MailChimpEmailServiceProvider->callApi('/lists/b822eb7b...', 'DELETE')
+#2 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(139): MM_MailChimpEmailServiceProvider->removeMemberFromList('cqk2@georgetown...', 'b822eb7b82')
+#3 /home/customer/www/nplusonemag.com/public_html/wp-includes/class-wp-hook.php(303): MM_EmailServiceProviderController->memberStatusChangeHandler(Array)
+#4 /home/customer/www/nplusonemag.com/public_html/wp-includes in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code on line 57
+[27-Dec-2021 08:24:11 UTC] ERROR PostmanWpMail: Exception code=0 message=smtp.gmail.com has timed out
+[27-Dec-2021 08:24:11 UTC] PostmanSlackNotify: A valid URL was not provided.
+[27-Dec-2021 08:24:11 UTC] PostmanSlackNotify: 
+[13-Jan-2022 04:18:06 UTC] ERROR PostmanWpMail: Exception code=0 message=smtp.gmail.com has timed out
+[13-Jan-2022 04:18:06 UTC] PostmanSlackNotify: A valid URL was not provided.
+[13-Jan-2022 04:18:06 UTC] PostmanSlackNotify: 
+[14-Jan-2022 00:23:22 UTC] ERROR PostmanWpMail: Exception code=0 message=smtp.gmail.com has timed out
+[14-Jan-2022 00:23:22 UTC] PostmanSlackNotify: A valid URL was not provided.
+[14-Jan-2022 00:23:22 UTC] PostmanSlackNotify: 
+[06-Jun-2022 04:15:46 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "Taralgoodwin@gmail.con"
+[06-Jun-2022 04:15:47 UTC] PostmanSlackNotify: A valid URL was not provided.
+[06-Jun-2022 04:15:47 UTC] PostmanSlackNotify: 
+[13-Jun-2022 08:22:00 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "Taralgoodwin@gmail.con"
+[13-Jun-2022 08:22:00 UTC] PostmanSlackNotify: A valid URL was not provided.
+[13-Jun-2022 08:22:00 UTC] PostmanSlackNotify: 
+[11-Jul-2022 00:07:02 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "Rasp3010@gmail.con"
+[11-Jul-2022 00:07:02 UTC] PostmanSlackNotify: A valid URL was not provided.
+[11-Jul-2022 00:07:02 UTC] PostmanSlackNotify: 
+[12-Jul-2022 20:16:31 UTC] ERROR PostmanWpMail: Exception code=0 message=smtp.gmail.com has timed out
+[12-Jul-2022 20:16:33 UTC] PostmanSlackNotify: A valid URL was not provided.
+[12-Jul-2022 20:16:33 UTC] PostmanSlackNotify: 
+[17-Jul-2022 08:02:32 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "Jhcarter.co@gmail.con"
+[17-Jul-2022 08:02:32 UTC] PostmanSlackNotify: A valid URL was not provided.
+[17-Jul-2022 08:02:32 UTC] PostmanSlackNotify: 
+[18-Jul-2022 04:23:34 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "Rasp3010@gmail.con"
+[18-Jul-2022 04:23:34 UTC] PostmanSlackNotify: A valid URL was not provided.
+[18-Jul-2022 04:23:34 UTC] PostmanSlackNotify: 
+[24-Jul-2022 12:16:59 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "Jhcarter.co@gmail.con"
+[24-Jul-2022 12:16:59 UTC] PostmanSlackNotify: A valid URL was not provided.
+[24-Jul-2022 12:16:59 UTC] PostmanSlackNotify: 
+[24-Jul-2022 12:17:00 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "Jhcarter.co@gmail.con"
+[24-Jul-2022 12:17:00 UTC] PostmanSlackNotify: A valid URL was not provided.
+[24-Jul-2022 12:17:00 UTC] PostmanSlackNotify: 
+[03-Aug-2022 20:27:00 UTC] ERROR PostmanWpMail: Exception code=0 message=smtp.gmail.com has timed out
+[03-Aug-2022 20:27:00 UTC] PostmanSlackNotify: A valid URL was not provided.
+[03-Aug-2022 20:27:00 UTC] PostmanSlackNotify: 
+[25-Aug-2022 20:23:49 UTC] ERROR PostmanWpMail: Exception code=0 message=smtp.gmail.com has timed out
+[25-Aug-2022 20:23:49 UTC] PostmanSlackNotify: A valid URL was not provided.
+[25-Aug-2022 20:23:49 UTC] PostmanSlackNotify: 
+[11-Sep-2022 00:12:11 UTC] PHP Fatal error:  Uncaught Error: Object of class stdClass could not be converted to string in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/post-smtp/Postman/Postman-Auth/PostmanAbstractAuthenticationManager.php:89
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/post-smtp/Postman/Postman-Auth/PostmanAbstractAuthenticationManager.php(160): PostmanAbstractAuthenticationManager->processResponse('{\n  "error": {\n...')
+#1 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/post-smtp/Postman/PostmanWpMail.php(376): PostmanAbstractAuthenticationManager->refreshToken()
+#2 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/post-smtp/Postman/PostmanWpMail.php(229): PostmanWpMail->ensureAuthtokenIsUpdated(Object(PostmanSmtpModuleTransport), Object(PostmanOptions), Object(PostmanOAuthToken))
+#3 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/post-smtp/Postman/PostmanWpMail.php(60): PostmanWpMail->sendMessage(Object(PostmanMessage), Objec in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/post-smtp/Postman/Postman-Auth/PostmanAbstractAuthenticationManager.php on line 89
+[16-Sep-2022 16:14:57 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "c.maxwellyoung@gmail.con"
+[16-Sep-2022 16:14:57 UTC] PostmanSlackNotify: A valid URL was not provided.
+[16-Sep-2022 16:14:57 UTC] PostmanSlackNotify: 
+[23-Sep-2022 20:20:26 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "c.maxwellyoung@gmail.con"
+[23-Sep-2022 20:20:26 UTC] PostmanSlackNotify: A valid URL was not provided.
+[23-Sep-2022 20:20:26 UTC] PostmanSlackNotify: 
+[11-Oct-2022 08:16:52 UTC] PHP Warning:  DOMDocument::loadXML(): Empty string supplied as input in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/lib/braintree/Braintree/Xml/Parser.php on line 25
+[11-Oct-2022 08:16:52 UTC] PHP Fatal error:  Uncaught Error: Call to a member function hasChildNodes() on null in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/lib/braintree/Braintree/Xml/Parser.php:115
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/lib/braintree/Braintree/Xml/Parser.php(30): Braintree\Xml\Parser::_nodeToValue(NULL)
+#1 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/lib/braintree/Braintree/Xml.php(26): Braintree\Xml\Parser::arrayFromXml('')
+#2 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/lib/braintree/Braintree/Http.php(48): Braintree\Xml::buildArrayFromXml('')
+#3 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/lib/braintree/Braintree/TransactionGateway.php(532): Braintree\Http->post('/merchants/h58k...', Array)
+#4 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/lib/braintree/Braintree/TransactionGateway.php(48): Braintree\TransactionGate in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/lib/braintree/Braintree/Xml/Parser.php on line 115
+[30-Nov-2022 04:17:23 UTC] ERROR PostmanWpMail: Exception code=421 message=4.3.0 Temporary System Problem.  Try again later (10). e12-20020a0566380ccc00b00375217ea9b6sm227778jak.45 - gsmtp
+[30-Nov-2022 04:17:23 UTC] PostmanSlackNotify: A valid URL was not provided.
+[30-Nov-2022 04:17:23 UTC] PostmanSlackNotify: 
+[30-Nov-2022 04:18:02 UTC] ERROR PostmanWpMail: Exception code=421 message=4.3.0 Temporary System Problem.  Try again later (10). s5-20020a056602168500b006bbfb3856d6sm177837iow.5 - gsmtp
+[30-Nov-2022 04:18:02 UTC] PostmanSlackNotify: A valid URL was not provided.
+[30-Nov-2022 04:18:02 UTC] PostmanSlackNotify: 
+[16-Dec-2022 12:07:59 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "tyre77@gmail.clm"
+[16-Dec-2022 12:07:59 UTC] PostmanSlackNotify: A valid URL was not provided.
+[16-Dec-2022 12:07:59 UTC] PostmanSlackNotify: 
+[23-Dec-2022 12:28:43 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "tyre77@gmail.clm"
+[23-Dec-2022 12:28:43 UTC] PostmanSlackNotify: A valid URL was not provided.
+[23-Dec-2022 12:28:43 UTC] PostmanSlackNotify: 
+[02-Mar-2023 16:35:57 UTC] ERROR PostmanWpMail: Exception code=421 message=4.3.0 Temporary System Problem.  Try again later (10). p14-20020a02b88e000000b003f1929b34fbsm1369085jam.106 - gsmtp
+[02-Mar-2023 16:35:57 UTC] PostmanSlackNotify: A valid URL was not provided.
+[02-Mar-2023 16:35:57 UTC] PostmanSlackNotify: 
+[02-Mar-2023 16:36:02 UTC] ERROR PostmanWpMail: Exception code=0 message=smtp.gmail.com has timed out
+[02-Mar-2023 16:36:02 UTC] PostmanSlackNotify: A valid URL was not provided.
+[02-Mar-2023 16:36:02 UTC] PostmanSlackNotify: 
+[21-Apr-2023 04:06:30 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "benjamin.r.good.@gmail.com"
+[21-Apr-2023 04:06:30 UTC] PostmanSlackNotify: A valid URL was not provided.
+[21-Apr-2023 04:06:30 UTC] PostmanSlackNotify: 
+[28-Apr-2023 08:23:39 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "benjamin.r.good.@gmail.com"
+[28-Apr-2023 08:23:39 UTC] PostmanSlackNotify: A valid URL was not provided.
+[28-Apr-2023 08:23:39 UTC] PostmanSlackNotify: 

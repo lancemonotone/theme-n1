@@ -1,0 +1,8 @@
+[26-Jun-2022 23:37:22 UTC] PHP Fatal error:  Uncaught Error: Class 'WP_Error' not found in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/json-rest-api-n1-issue-gallery/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/json-rest-api-n1-issue-gallery/index.php on line 34
+[26-Jun-2022 23:37:22 UTC] PHP Fatal error:  Uncaught Error: Class 'WP_Error' not found in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/json-rest-api-n1-issue-gallery/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/json-rest-api-n1-issue-gallery/index.php on line 34

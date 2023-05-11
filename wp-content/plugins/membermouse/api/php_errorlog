@@ -1,0 +1,171 @@
+[16-Sep-2021 14:58:17 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "c.maxwellyoung@gmail.con"
+[16-Sep-2021 14:58:17 UTC] PostmanSlackNotify: A valid URL was not provided.
+[16-Sep-2021 14:58:17 UTC] PostmanSlackNotify: 
+[16-Sep-2021 14:58:19 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "c.maxwellyoung@gmail.con"
+[16-Sep-2021 14:58:19 UTC] PostmanSlackNotify: A valid URL was not provided.
+[16-Sep-2021 14:58:19 UTC] PostmanSlackNotify: 
+[29-Oct-2021 13:28:08 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code:57
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(130): MM_MailChimpEmailServiceProvider->translateResponse(Object(WP_Error))
+#1 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(151): MM_MailChimpEmailServiceProvider->callApi('/lists?count=10...')
+#2 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(436): MM_MailChimpEmailServiceProvider->getLists()
+#3 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(90): MM_MailChimpEmailServiceProvider->changeMembershipLevel('THISISCATHYCHEN...', '1')
+#4 /home/customer/www/nplusonemag.com/public_html/wp-includes/c in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code on line 57
+[07-Nov-2021 01:43:44 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (830597, 'yim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 01:45:51 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (830613, 'aim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 02:52:08 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (830641, 'aim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 02:52:08 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (830645, 'yim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 15:42:29 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (830851, 'aim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 15:45:58 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (830867, 'aim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 15:45:59 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (830869, 'yim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 16:55:03 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (831020, 'nickname', 'Alba5913@outlook.com') made by MM_OrderRequest->__construct, MM_DefaultOrderRequest->processRequest, MM_User->commitData, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 16:55:03 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (831020, 'first_name', 'abigail') made by MM_OrderRequest->__construct, MM_DefaultOrderRequest->processRequest, MM_User->commitData, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 16:55:03 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (831020, 'last_name', 'castillo') made by MM_OrderRequest->__construct, MM_DefaultOrderRequest->processRequest, MM_User->commitData, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 17:00:18 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (831030, 'aim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 18:50:32 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (831535, 'aim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 19:36:29 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (831591, 'aim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 19:36:30 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (831595, 'yim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 19:44:32 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (831679, 'yim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[07-Nov-2021 19:52:59 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (831769, 'yim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[08-Nov-2021 05:38:12 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (831886, 'aim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[08-Nov-2021 07:02:45 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (832073, 'yim', '') made by MM_DefaultOrderRequest->submitRequest, MM_DefaultOrderRequest->continueSubmittingRequest, MM_User->commitData, wp_update_user, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[08-Nov-2021 18:58:26 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (832144, 'nickname', 'Abel739@outlook.com') made by MM_OrderRequest->__construct, MM_DefaultOrderRequest->processRequest, MM_User->commitData, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[08-Nov-2021 20:45:46 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (832197, 'nickname', 'Casio7611@outlook.com') made by MM_OrderRequest->__construct, MM_DefaultOrderRequest->processRequest, MM_User->commitData, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[08-Nov-2021 20:45:46 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (832197, 'first_name', 'theodore') made by MM_OrderRequest->__construct, MM_DefaultOrderRequest->processRequest, MM_User->commitData, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[08-Nov-2021 20:45:46 UTC] WordPress database error Deadlock found when trying to get lock; try restarting transaction for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (832197, 'last_name', 'reid') made by MM_OrderRequest->__construct, MM_DefaultOrderRequest->processRequest, MM_User->commitData, wp_insert_user, update_user_meta, update_metadata, add_metadata
+[14-Jan-2022 22:03:30 UTC] ERROR PostmanWpMail: Exception code=0 message=smtp.gmail.com has timed out
+[14-Jan-2022 22:03:30 UTC] PostmanSlackNotify: A valid URL was not provided.
+[14-Jan-2022 22:03:30 UTC] PostmanSlackNotify: 
+[16-Jan-2022 13:05:36 UTC] ERROR PostmanWpMail: Exception code=421 message=4.3.0 Temporary System Problem.  Try again later (10). h23sm7191448ila.81 - gsmtp
+[16-Jan-2022 13:05:37 UTC] PostmanSlackNotify: A valid URL was not provided.
+[16-Jan-2022 13:05:37 UTC] PostmanSlackNotify: 
+[16-Jan-2022 13:05:47 UTC] ERROR PostmanWpMail: Exception code=421 message=4.3.0 Temporary System Problem.  Try again later (10). l9sm7600687ilh.55 - gsmtp
+[16-Jan-2022 13:05:47 UTC] PostmanSlackNotify: A valid URL was not provided.
+[16-Jan-2022 13:05:47 UTC] PostmanSlackNotify: 
+[22-Apr-2022 16:51:06 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code:57
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(106): MM_MailChimpEmailServiceProvider->translateResponse(Object(WP_Error))
+#1 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(642): MM_MailChimpEmailServiceProvider->callApi('/lists/b822eb7b...', 'POST', '{"tag":"FULLACC...')
+#2 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(304): MM_MailChimpEmailServiceProvider->addRequiredMergeVars('b822eb7b82', true)
+#3 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(41): MM_MailChimpEmailServiceProvider->addMemberToList('honorjones@gmai...', 'b822eb7b82')
+ in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code on line 57
+[27-Apr-2022 22:12:26 UTC] ERROR PostmanWpMail: Exception code=451 message=4.3.0 Mail server temporarily rejected message. c5-20020a92cf05000000b002cc2ed4621csm10153130ilo.15 - gsmtp
+[27-Apr-2022 22:12:26 UTC] PostmanSlackNotify: A valid URL was not provided.
+[27-Apr-2022 22:12:26 UTC] PostmanSlackNotify: 
+[18-May-2022 00:17:58 UTC] ERROR PostmanWpMail: Exception code=0 message=smtp.gmail.com has timed out
+[18-May-2022 00:17:58 UTC] PostmanSlackNotify: A valid URL was not provided.
+[18-May-2022 00:17:58 UTC] PostmanSlackNotify: 
+[28-May-2022 19:24:43 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code:57
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(106): MM_MailChimpEmailServiceProvider->translateResponse(Object(WP_Error))
+#1 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(320): MM_MailChimpEmailServiceProvider->callApi('/lists/b822eb7b...', 'POST', '{"email_address...')
+#2 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(41): MM_MailChimpEmailServiceProvider->addMemberToList('mcroeber@gmail....', 'b822eb7b82')
+#3 /home/customer/www/nplusonemag.com/public_html/wp-includes/class-wp-hook.php(307): MM_EmailServiceProviderController->memberAddedHandler(Array)
+#4 /home/customer/www/nplusonemag.com/public_html/wp-i in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code on line 57
+[29-May-2022 15:07:34 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code:57
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(106): MM_MailChimpEmailServiceProvider->translateResponse(Object(WP_Error))
+#1 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(320): MM_MailChimpEmailServiceProvider->callApi('/lists/b822eb7b...', 'POST', '{"email_address...')
+#2 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(41): MM_MailChimpEmailServiceProvider->addMemberToList('NancyAndrsn@aol...', 'b822eb7b82')
+#3 /home/customer/www/nplusonemag.com/public_html/wp-includes/class-wp-hook.php(307): MM_EmailServiceProviderController->memberAddedHandler(Array)
+#4 /home/customer/www/nplusonemag.com/public_html/wp-i in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code on line 57
+[15-Jun-2022 07:48:37 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code:57
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(130): MM_MailChimpEmailServiceProvider->translateResponse(Object(WP_Error))
+#1 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(151): MM_MailChimpEmailServiceProvider->callApi('/lists?count=10...')
+#2 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(436): MM_MailChimpEmailServiceProvider->getLists()
+#3 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(90): MM_MailChimpEmailServiceProvider->changeMembershipLevel('tcausey@windstr...', '1')
+#4 /home/customer/www/nplusonemag.com/public_html/wp-includes/c in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code on line 57
+[10-Jul-2022 08:22:16 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code:57
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(111): MM_MailChimpEmailServiceProvider->translateResponse(Object(WP_Error))
+#1 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(412): MM_MailChimpEmailServiceProvider->callApi('/lists/b822eb7b...', 'DELETE')
+#2 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(447): MM_MailChimpEmailServiceProvider->removeMemberFromList('Howard@walkerbu...', 'b822eb7b82')
+#3 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(90): MM_MailChimpEmailServiceProvider->changeMembershipLevel('Howard@walkerbu...', '1')
+#4 /hom in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code on line 57
+[29-Jul-2022 02:32:14 UTC] PHP Warning:  preg_match() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 645
+[29-Jul-2022 02:32:56 UTC] PHP Warning:  explode() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 413
+[29-Jul-2022 02:32:56 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 414
+[29-Jul-2022 02:35:41 UTC] PHP Warning:  preg_match() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 645
+[29-Jul-2022 02:42:47 UTC] PHP Warning:  explode() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 413
+[29-Jul-2022 02:42:47 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 414
+[29-Jul-2022 03:05:25 UTC] PHP Warning:  preg_match() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 645
+[29-Jul-2022 03:14:15 UTC] PHP Warning:  explode() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 413
+[29-Jul-2022 03:14:15 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 414
+[29-Jul-2022 03:49:37 UTC] PHP Warning:  preg_match() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 645
+[29-Jul-2022 03:50:19 UTC] PHP Warning:  explode() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 413
+[29-Jul-2022 03:50:19 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 414
+[29-Jul-2022 04:05:34 UTC] PHP Warning:  preg_match() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 645
+[29-Jul-2022 04:06:16 UTC] PHP Warning:  explode() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 413
+[29-Jul-2022 04:06:16 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 414
+[29-Jul-2022 04:19:50 UTC] PHP Warning:  preg_match() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 645
+[29-Jul-2022 04:20:29 UTC] PHP Warning:  explode() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 413
+[29-Jul-2022 04:20:29 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 414
+[29-Jul-2022 04:36:29 UTC] PHP Warning:  preg_match() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 645
+[29-Jul-2022 04:37:02 UTC] PHP Warning:  explode() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 413
+[29-Jul-2022 04:37:02 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 414
+[29-Jul-2022 04:44:16 UTC] PHP Warning:  preg_match() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 645
+[29-Jul-2022 04:45:24 UTC] PHP Warning:  explode() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 413
+[29-Jul-2022 04:45:24 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 414
+[29-Jul-2022 05:08:12 UTC] PHP Warning:  preg_match() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 645
+[29-Jul-2022 05:10:08 UTC] PHP Warning:  explode() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 413
+[29-Jul-2022 05:10:08 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 414
+[29-Jul-2022 05:29:35 UTC] PHP Warning:  preg_match() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 645
+[29-Jul-2022 05:30:48 UTC] PHP Warning:  explode() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 413
+[29-Jul-2022 05:30:48 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 414
+[29-Jul-2022 06:00:58 UTC] PHP Warning:  preg_match() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 645
+[29-Jul-2022 06:01:39 UTC] PHP Warning:  explode() expects parameter 2 to be string, array given in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 413
+[29-Jul-2022 06:01:39 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/bootstrap/class.utils.php on line 414
+[14-Sep-2022 01:37:13 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "Jackhoratio@gmail.comm"
+[14-Sep-2022 01:37:13 UTC] PostmanSlackNotify: A valid URL was not provided.
+[14-Sep-2022 01:37:13 UTC] PostmanSlackNotify: 
+[14-Sep-2022 01:37:13 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "Jackhoratio@gmail.comm"
+[14-Sep-2022 01:37:13 UTC] PostmanSlackNotify: A valid URL was not provided.
+[14-Sep-2022 01:37:13 UTC] PostmanSlackNotify: 
+[24-Sep-2022 00:32:17 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "hlebovics5@gmail.comJustice1789"
+[24-Sep-2022 00:32:17 UTC] PostmanSlackNotify: A valid URL was not provided.
+[24-Sep-2022 00:32:17 UTC] PostmanSlackNotify: 
+[24-Sep-2022 00:32:17 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "hlebovics5@gmail.comJustice1789"
+[24-Sep-2022 00:32:17 UTC] PostmanSlackNotify: A valid URL was not provided.
+[24-Sep-2022 00:32:17 UTC] PostmanSlackNotify: 
+[08-Oct-2022 13:36:38 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "ljbdlg@yahoo.vom"
+[08-Oct-2022 13:36:38 UTC] PostmanSlackNotify: A valid URL was not provided.
+[08-Oct-2022 13:36:38 UTC] PostmanSlackNotify: 
+[08-Oct-2022 13:36:38 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "ljbdlg@yahoo.vom"
+[08-Oct-2022 13:36:39 UTC] PostmanSlackNotify: A valid URL was not provided.
+[08-Oct-2022 13:36:39 UTC] PostmanSlackNotify: 
+[27-Oct-2022 05:15:30 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code:57
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(106): MM_MailChimpEmailServiceProvider->translateResponse(Object(WP_Error))
+#1 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(320): MM_MailChimpEmailServiceProvider->callApi('/lists/b822eb7b...', 'POST', '{"email_address...')
+#2 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(41): MM_MailChimpEmailServiceProvider->addMemberToList('Thedreamact@gma...', 'b822eb7b82')
+#3 /home/customer/www/nplusonemag.com/public_html/wp-includes/class-wp-hook.php(307): MM_EmailServiceProviderController->memberAddedHandler(Array)
+#4 /home/customer/www/nplusonemag.com/public_html/wp-i in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code on line 57
+[08-Feb-2023 21:35:21 UTC] ERROR PostmanWpMail: Exception code=0 message=smtp.gmail.com has timed out
+[08-Feb-2023 21:35:21 UTC] PostmanSlackNotify: A valid URL was not provided.
+[08-Feb-2023 21:35:21 UTC] PostmanSlackNotify: 
+[08-Feb-2023 21:36:58 UTC] ERROR PostmanWpMail: Exception code=0 message=smtp.gmail.com has timed out
+[08-Feb-2023 21:36:58 UTC] PostmanSlackNotify: A valid URL was not provided.
+[08-Feb-2023 21:36:58 UTC] PostmanSlackNotify: 
+[10-Mar-2023 14:21:32 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "Paulajeanpell@gmail.con"
+[10-Mar-2023 14:21:32 UTC] PostmanSlackNotify: A valid URL was not provided.
+[10-Mar-2023 14:21:32 UTC] PostmanSlackNotify: 
+[10-Mar-2023 14:21:32 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "Paulajeanpell@gmail.con"
+[10-Mar-2023 14:21:32 UTC] PostmanSlackNotify: A valid URL was not provided.
+[10-Mar-2023 14:21:32 UTC] PostmanSlackNotify: 
+[17-Apr-2023 16:21:12 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code:57
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(130): MM_MailChimpEmailServiceProvider->translateResponse(Object(WP_Error))
+#1 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(151): MM_MailChimpEmailServiceProvider->callApi('/lists?count=10...')
+#2 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(436): MM_MailChimpEmailServiceProvider->getLists()
+#3 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code(90): MM_MailChimpEmailServiceProvider->changeMembershipLevel('laurin.liu@gmai...', '32')
+#4 /home/customer/www/nplusonemag.com/public_html/wp-includes/ in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/init.php(208) : eval()'d code on line 57
+[03-May-2023 20:52:57 UTC] ERROR PostmanWpMail: Exception code=0 message=smtp.gmail.com has timed out
+[03-May-2023 20:52:57 UTC] PostmanSlackNotify: A valid URL was not provided.
+[03-May-2023 20:52:57 UTC] PostmanSlackNotify: 
+[04-May-2023 21:35:37 UTC] ERROR PostmanWpMail: Exception code=421 message=4.3.0 Temporary System Problem.  Try again later (10). b26-20020a05663801ba00b0041627abe120sm112801jaq.160 - gsmtp
+[04-May-2023 21:35:37 UTC] PostmanSlackNotify: A valid URL was not provided.
+[04-May-2023 21:35:37 UTC] PostmanSlackNotify: 
+[04-May-2023 21:35:47 UTC] ERROR PostmanWpMail: Exception code=421 message=4.3.0 Temporary System Problem.  Try again later (10). c5-20020a92dc85000000b003230fd0b2eesm25744iln.61 - gsmtp
+[04-May-2023 21:35:47 UTC] PostmanSlackNotify: A valid URL was not provided.
+[04-May-2023 21:35:47 UTC] PostmanSlackNotify: 

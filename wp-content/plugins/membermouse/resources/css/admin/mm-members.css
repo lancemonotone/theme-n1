@@ -1,0 +1,85 @@
+.mbtDialog{ 
+    width:600px;
+    margin:80px auto;
+    border:5px solid #e5e5e5; 
+    border-radius:10px;
+    padding:10px 10px 50px 10px;
+    position:relative;
+    display:inline-block;
+}
+.mbtDialog img{
+    margin:10px;
+}
+.mbtDialog h1{
+    font:bold 36px/1.4 Arial, Helvetica, sans-serif;
+    color:#1B4875;
+}
+.mbtDialog p{
+    font:bold 16px Arial, Helvetica, sans-serif;
+    color:#1B4875;
+}
+.mbtBox {
+    display:inline-block;
+    color:#1B4875;
+    padding-bottom: 25px;
+}
+.mbtMale {
+    padding-right:25px;
+    margin-right:125px;
+}
+
+.mbtFile {
+    padding-left:25px;
+    margin-left:125px;
+}
+
+#mbtArrowAnim {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mbtArrow {
+    width: 30px;
+    height: 30px;
+    border: 40px solid;
+    border-color: #1B4875 transparent transparent #1B4875;
+    transform: rotate(-225deg);
+}
+
+.mbtArrowSliding {
+    position: absolute;
+    -webkit-animation: slide 4s linear infinite;
+    animation: slide 4s linear infinite;
+    top: 135px;
+}
+
+.mbtDelay1 {
+	opacity:0;
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+}
+.mbtDelay2 {
+	opacity:0;
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s;
+}
+.mbtDelay3 {
+	opacity:0;
+    -webkit-animation-delay: 3s;
+    animation-delay: 3s;
+}
+
+
+@-webkit-keyframes slide {
+    0% { opacity:0; transform: translateX(-160px); }
+    20% { opacity:1; transform: translateX(-90px); }
+    80% { opacity:1; transform: translateX(90px); }
+    100% { opacity:0; transform: translateX(160px); }
+}
+@keyframes slide {
+    0% { opacity:0; transform: translateX(-160px); }
+    20% { opacity:1; transform: translateX(-90px); }
+    80% { opacity:1; transform: translateX(90px); }
+    100% { opacity:0; transform: translateX(160px); }
+}
