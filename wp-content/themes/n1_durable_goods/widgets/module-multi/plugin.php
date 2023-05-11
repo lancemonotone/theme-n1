@@ -601,17 +601,16 @@ class Module_Multi extends WP_Widget {
 	 */
 	function get_tag_args() {
 		global $post;
-		if ( empty( $post ) ) {
-			$post->ID = 0;
-		}
+
+        $id = !empty($post) ? $post->ID : 0;
 
 		$tags = array();
-		foreach ( wp_get_post_terms( $post->ID, 'post_tag' ) as $temp ) {
+		foreach ( wp_get_post_terms( $id, 'post_tag' ) as $temp ) {
 			array_push( $tags, $temp->term_id );
 		}
 
 		return array(
-			'post__not_in' => array( $post->ID ),
+			'post__not_in' => array( $id ),
 			'tax_query'    => array(
 				array(
 					'taxonomy' => 'post_tag',
@@ -628,14 +627,13 @@ class Module_Multi extends WP_Widget {
 	 */
 	function get_issue_args() {
 		global $post;
-		if ( empty( $post ) ) {
-			$post->ID = 0;
-		}
+
+		$id = !empty($post) ? $post->ID : 0;
 
 		$context_issue = N1_Magazine::Instance()->get_context_issue();
 
 		return array(
-			'post__not_in' => array( $post->ID ),
+			'post__not_in' => array( $id ),
 			'tax_query'    => array(
 				array(
 					'taxonomy' => 'issue',
@@ -653,17 +651,16 @@ class Module_Multi extends WP_Widget {
 	 */
 	function get_author_args() {
 		global $post;
-		if ( empty( $post ) ) {
-			$post->ID = 0;
-		}
+
+		$id = !empty($post) ? $post->ID : 0;
 
 		$at = array();
-		foreach ( wp_get_post_terms( $post->ID, 'authors' ) as $temp ) {
+		foreach ( wp_get_post_terms( $id, 'authors' ) as $temp ) {
 			array_push( $at, $temp->term_id );
 		}
 
 		return array(
-			'post__not_in' => array( $post->ID ),
+			'post__not_in' => array( $id ),
 			'tax_query'    => array(
 				array(
 					'taxonomy' => 'authors',
@@ -682,9 +679,8 @@ class Module_Multi extends WP_Widget {
 	 */
 	function get_scroll_args() {
 		global $post;
-		if ( empty( $post ) ) {
-			$post->ID = 0;
-		}
+
+		$id = !empty($post) ? $post->ID : 0;
 
 		$st = array();
 		foreach ( get_terms( 'online-only' ) as $temp ) {
@@ -692,7 +688,7 @@ class Module_Multi extends WP_Widget {
 		}
 
 		return array(
-			'post__not_in' => array( $post->ID ),
+			'post__not_in' => array( $id ),
 			'tax_query'    => array(
 				array(
 					'taxonomy' => 'online-only',
