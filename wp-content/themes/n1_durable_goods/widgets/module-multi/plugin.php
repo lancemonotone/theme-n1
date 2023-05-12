@@ -223,18 +223,6 @@ class Module_Multi extends WP_Widget {
 	 * @return array WP_Post
 	 */
 	function get_multi_posts( $flavor = 'online-only', $number = - 1, $ad_after = 0, $order = 'DESC', $orderby = 'date', $newsletter_after = 0, $social_after = 0, $taxonomy = NULL, $term = NULL, $meta_key = NULL ) {
-		// $flavor = $_REQUEST['flavor'] ? $_REQUEST['flavor'] : $flavor;
-		// $taxonomy = $_REQUEST['taxonomy'] ? $_REQUEST['taxonomy'] : $taxonomy;
-		// $term = $_REQUEST['term'] ? $_REQUEST['term'] : $term;
-		// $number = $_REQUEST['number'] ? intval($_REQUEST['number']) : intval($number);
-		// $ad_after = $_REQUEST['ad_after'] ? intval($_REQUEST['ad_after']) : intval($ad_after);
-		// $newsletter_after = $_REQUEST['newsletter_after'] ? intval($_REQUEST['newsletter_after']) : intval($newsletter_after);
-		// $social_after = $_REQUEST['social_after'] ? intval($_REQUEST['social_after']) : intval($social_after);
-		// $order = $_REQUEST['order'] ? $_REQUEST['order'] : $order;
-		// $orderby = $_REQUEST['orderby'] ? $_REQUEST['orderby'] : $orderby;
-		// $paged = $_REQUEST['paged'];
-		// $meta_key = $_REQUEST['meta_key'] ? $_REQUEST['meta_key'] : $meta_key;
-
 		$flavor           = isset( $_REQUEST['flavor'] ) ? $_REQUEST['flavor'] : $flavor;
 		$taxonomy         = isset( $_REQUEST['taxonomy'] ) ? $_REQUEST['taxonomy'] : $taxonomy;
 		$term             = isset( $_REQUEST['term'] ) ? $_REQUEST['term'] : $term;

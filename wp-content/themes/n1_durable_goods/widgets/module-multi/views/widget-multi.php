@@ -1,18 +1,4 @@
 <?php
-// $title 				= strip_tags($instance['title']);
-// $subtitle 			= strip_tags($instance['subtitle']);
-// $flavor 			= strip_tags($instance['flavor']);
-// $taxonomy	 		= $instance['taxonomy'] ? strip_tags($instance['taxonomy']) : null;
-// $term		 		= $instance['term'] ? strip_tags($instance['term']) : null;
-// $number 			= intval(strip_tags($instance['number']));
-// $ad_after 			= intval(strip_tags($instance['ad_after']));
-// $newsletter_after 	= intval(strip_tags($instance['newsletter_after']));
-// $social_after 		= intval(strip_tags($instance['social_after']));
-// $order 				= strip_tags($instance['order']);
-// $orderby 			= strip_tags($instance['orderby']);
-// $meta_key			= strip_tags($instance['meta_key']);
-// $infinite 			= bool_from_yn(strip_tags($instance['infinite']));
-
 $title = isset($instance['title']) ? strip_tags($instance['title']) : '';
 $subtitle = isset($instance['subtitle']) ? strip_tags($instance['subtitle']) : '';
 $flavor = isset($instance['flavor']) ? strip_tags($instance['flavor']) : '';
