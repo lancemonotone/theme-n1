@@ -6,16 +6,14 @@
 <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Ads: 698595700 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-698595700"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3NRFPFK8X6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    function gtag() {dataLayer.push( arguments );}
-
-    gtag( 'js', new Date() );
-
-    gtag( 'config', 'AW-698595700' );
+  gtag('config', 'G-3NRFPFK8X6');
   </script>
   <script type="text/javascript">
     /* Load Typekit ansynchronously. http://www.tomjn.com/153/typekit-besbswy/ and http://blog.typekit.com/2011/05/25/loading-typekit-fonts-asynchronously/ */
