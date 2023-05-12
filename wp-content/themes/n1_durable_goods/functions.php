@@ -33,7 +33,7 @@ class N1 {
 		$this->version = "1.2";
 		//error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_WARNING);
 		// error reporting errors only
-		error_reporting( E_NOTICE | E_WARNING | E_ERROR | E_PARSE );
+		//error_reporting( E_NOTICE | E_WARNING | E_ERROR | E_PARSE );
 		// add_action( 'send_headers', array( &$this, 'send_headers' ) );
 		add_action( 'after_setup_theme', array( &$this, 'setup_widgets' ) );
 		add_action( 'after_setup_theme', array( &$this, 'setup_plugins' ) );
