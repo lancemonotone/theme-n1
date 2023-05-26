@@ -5,14 +5,15 @@ if ( N1_Magazine::Instance()->is_paywalled() ) {
 
 $current_page        = get_queried_object();
 $is_scroll           = is_a( $current_page, 'WP_Post' );
+$is_term             = is_a( $current_page, 'WP_Term' );
 $archive_name        = $is_scroll ? $current_page->post_title : ( isset( $authors ) ? N1_Magazine::Instance()->format_author_name( $current_page->name ) : $current_page->name );
 $archive_class       = $is_scroll ? 'online-only' : 'archive';
 $archive_description = $is_scroll ? get_field( 'options_online-only_landing_page_dek', 'options' ) : $current_page->description;
 if ( $current_page->taxonomy == 'authors' ) {
 	$archive_description = _( 'All articles by this author' );
 }
-$taxonomy = $is_scroll ? $pagename : ( $taxonomy ? $taxonomy : $current_page->taxonomy );
-$term     = $term ? $term : $current_page->slug;
+$taxonomy = $is_scroll ? $pagename : ( ! empty( $taxonomy ) ? $taxonomy : ( $is_term ? $current_page->taxonomy : '' ) );
+$term     = ! empty( $term ) ? $term : ( $is_term ? $current_page->slug : '' );
 
 ?>
 <div id="main"

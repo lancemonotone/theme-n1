@@ -152,8 +152,8 @@ class N1_Magazine {
 	 * @return mixed array(slug, name) or false
 	 */
 	function set_context_issue( $slug = NULL ) {
+		global $wp_query;
 		if ( ! $slug && ! empty( $wp_query->query_vars['issue'] ) ) {
-			global $wp_query;
 			$slug = $wp_query->query_vars['issue'] ? $wp_query->query_vars['issue'] : $this->current_issue->post_name;
 		}
 		// get issue name by taxonomy slug
@@ -167,7 +167,7 @@ class N1_Magazine {
 	 *
 	 */
 	function set_current_issue() {
-		$this->current_issue = reset( $this->issues );
+		$this->current_issue = current( $this->issues );
 	}
 
 	/**
@@ -655,8 +655,8 @@ class N1_Magazine {
 			$query   .= " JOIN {$wpdb->postmeta} pm ON (p.ID = pm.post_id)";
 			$query   .= " WHERE pm.meta_key = 'event_date'";
 			$orderby = " ORDER BY STR_TO_DATE(pm.meta_value, '%Y%m%d') ASC";
-		} else { // The Magazine doesn't care about catetories
-			$query   .= " AND tr2.term_taxonomy_id = $section->term_taxonomy_id";
+		} else { // The Magazine doesn't care about categories
+			$query   .= ! empty( $section ) ? " AND tr2.term_taxonomy_id = {$section->term_taxonomy_id}" : '';
 			$orderby = " ORDER BY p.post_date ASC;";
 		}
 
