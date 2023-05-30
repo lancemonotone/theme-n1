@@ -9,6 +9,14 @@ use SG_Security\Activity_Log\Activity_Log;
  * Activity Log Weekly Emails class
  */
 class Activity_Log_Weekly_Emails extends Activity_Log_Helper {
+
+	/**
+	 * Weekly report email.
+	 *
+	 * @var Email_Service
+	 */
+	public $weekly_report_email;
+
 	/**
 	 * The constructor.
 	 *

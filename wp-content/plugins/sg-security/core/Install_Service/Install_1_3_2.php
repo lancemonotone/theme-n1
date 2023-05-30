@@ -21,6 +21,13 @@ class Install_1_3_2 extends Install {
 	protected static $version = '1.3.2';
 
 	/**
+	 * 2FA class instance.
+	 *
+	 * @var SG_2fa
+	 */
+	public $sg_2fa;
+
+	/**
 	 * Constructs a new instance.
 	 *
 	 * @since 1.3.2

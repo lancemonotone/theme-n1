@@ -67,6 +67,7 @@ class Login_Service {
 			array(
 				'sgs_error' => true,
 				'response'  => 403,
+				'blocked_login' => true,
 			)
 		);
 	}

@@ -3,8 +3,31 @@ if ( ! headers_sent() ) {
 	status_header( $args['response'] );
 	nocache_headers();
 }
+
+if( ! empty( $args['blocked_login'] ) ) {
+    $login_title = sprintf( __( '%1$s &lsaquo; %2$s &#8212; WordPress' ), 'Log In', get_bloginfo( 'name', 'display' ) );
+
+    /**
+     * Filters the title tag content for login page.
+     *
+     * @since 4.9.0
+     *
+     * @param string $login_title The page title, with extra context added.
+     * @param string $title       The original page title.
+     */
+    $login_title = apply_filters( 'login_title', $login_title, $title );
+
+    ?><!DOCTYPE html>
+    <html <?php language_attributes(); ?>>
+    <head>
+        <meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
+        <title><?php echo $login_title; ?></title>
+        <?php
+
+    wp_enqueue_style( 'login' );
+}
 ?>
-  
+
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700" rel="stylesheet">
 </head>
 

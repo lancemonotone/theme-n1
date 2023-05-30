@@ -10,6 +10,33 @@ use SiteGround_Helper\Helper_Service;
  * Loader functions and main initialization class.
  */
 class Loader {
+	/**
+	 * Local variables
+	 *
+	 * @var mixed
+	 */
+	public $settings_page;
+	public $settings;
+	public $helper_service;
+	public $i18n_service;
+	public $admin;
+	public $helper;
+	public $usernames_service;
+	public $feed_service;
+	public $wp_version_service;
+	public $editors_service;
+	public $password_service;
+	public $sg_2fa;
+	public $login_service;
+	public $activity_log;
+	public $rest;
+	public $block_service;
+	public $install_service;
+	public $cli;
+	public $custom_login_url;
+	public $headers_service;
+	public $readme_service;
+	public $config;
 
 	/**
 	 * Dependencies.
@@ -198,8 +225,8 @@ class Loader {
 		add_action( 'upgrader_process_complete', array( $this->install_service, 'install' ) );
 
 		// Force the installation process if it is not completed.
-		if ( false === get_option( 'sgs_install_1_3_7', false ) ) {
-			add_action( 'init', array( $this->install_service, 'install') );
+		if ( false === get_option( 'sgs_install_1_4_4', false ) ) {
+			add_action( 'init', array( $this->install_service, 'install' ) );
 		}
 	}
 
@@ -377,7 +404,7 @@ class Loader {
 	 * @since 1.0.0
 	 */
 	public function add_login_service_hooks() {
-		add_action( 'login_head', array( $this->login_service, 'restrict_login_to_ips' ), PHP_INT_MAX - 1 );
+		add_action( 'login_init', array( $this->login_service, 'restrict_login_to_ips' ), PHP_INT_MIN );
 
 		// Bail if optimization is disabled.
 		if ( 0 === intval( get_option( 'sg_security_login_attempts', 0 ) ) ) {
@@ -401,8 +428,11 @@ class Loader {
 		// Fires only for Multisite. Add log, visitors table if network active.
 		add_action( 'wp_insert_site', array( $this->activity_log, 'create_subsite_log_tables' ) );
 
-		// Disable activity log and weekly reports email.
-		if ( 1 === intval( get_option( 'sg_security_disable_activity_log', 0 ) ) ) {
+		// Disable activity log and weekly reports email if activity log is disabled or a staging site.
+		if (
+			1 === intval( get_option( 'sg_security_disable_activity_log', 0 ) ) ||
+			( defined( 'WP_ENVIRONMENT_TYPE' ) && WP_ENVIRONMENT_TYPE === 'staging' )
+		) {
 			$this->activity_log->weekly_emails->weekly_report_email->unschedule_event();
 			return;
 		}

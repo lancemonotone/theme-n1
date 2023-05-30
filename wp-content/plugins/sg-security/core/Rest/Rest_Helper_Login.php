@@ -15,6 +15,17 @@ use SG_Security\Encryption_Service\Encryption_Service;
 class Rest_Helper_Login extends Rest_Helper {
 
 	/**
+	 * Local variables
+	 *
+	 * @var mixed
+	 */
+	public $rest_helper_options;
+	public $sg_2fa;
+	public $login_service;
+	public $usernames_service;
+	public $encryption;
+
+	/**
 	 * The constructor.
 	 */
 	public function __construct() {

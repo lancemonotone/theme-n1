@@ -1,178 +1,121 @@
-=== AdRotate Banner Manager - AdSense Ads & more ===
+=== AdRotate ===
 Contributors: adegans
-Donate link: https://ajdg.solutions/go/donate/
-Tags: ads, advertising, banners, ad rotator, ad manager, adsense, ads.txt, ad rotations, affiliate, amazon, banner, google ad manager
-Requires at least: 4.9
-Requires PHP: 5.7.4
-Tested up to: 6.2
-Stable tag: 5.12.1
-License: GPLv3
-
-Advertising is easy with AdRotate Banner Manager. Manage, Schedule, Rotate and Track your ADs you make yourself or get from Amazon, Adsense, affiliates and many more.
+Donate link: http://meandmymac.net/donate/
+Tags: ads, banner, commercial, admin, plugin, random, rotator, ad, advertising, advertisement, block, blocks, advertiser, publisher, adsense, geo, geolocation, chitika, clickbank, broadstreet, export, import, freegeoip, geoplugin, maxmind, referrer, email, menu, statistics, stats
+Requires at least: 3.7
+Tested up to: 3.9
+Stable tag: 3.9.9
+ 
+The very best way of putting ads on your website. As many as you want... Make making money easy!
 
 == Description ==
 
-Manage all your ads with **AdRotate Banner Manager**!
-Place Adsense Ads, Media.net Ads. Amazon Associate tags, banners you create yourself and any other kind of advert on your WordPress and ClassicPress website. AdRotate Banner Manager and AdRotate Pro are trusted by over 50,000 website owners!
+Get the most intuitive ad manager and start making money with your website.
+Add and manage the ads from the dashboard and show a random banner, or multiple, on your site. 
+Easy management from the dashboard allows you to quickly oversee, add and edit banner code or renew/delete and add new ads.
+Preview banners when editing them.
+AdRotate supports unlimited groups for banners allowing you to tie certain banners to different areas of the website.
+On top of that with GeoLocation you can tie adverts to certain areas of the world.
+Receive a periodic email when banners are (about to) expire(d) informing you to take action.
 
-Are you looking for the easiest way to manage and run your AD Campaigns?
-Here are a few things **AdRotate Banner Manager** can do for you:
+AdRotate is also available as a premium plugin. Offering more features and faster support! 
+Get more AdRotate! [Get AdRotate Pro today](http://www.adrotateplugin.com/adrotate-pro/)!
 
-* Works with every advert including; Amazon ads, affiliate networks, Google AdSense, Google Ad Manager, DoubleClick, DFP or media.net ads
-* No limit on how many ADs you make
-* Blocks for the WordPress block editor
-* Advanced error checking for adverts you create yourself
-* Error checking for groups of adverts
-* Track clicks and impressions for many adverts
-* Advert previews when editing them
-* Get quick and personal support through my support forums
-* **AdRotate Banner Manager** has been in constant development since 2008
-* No excessive nagging to upgrade to AdRotate Pro
+**Important links**
 
-= AD management with AdRotate Banner Manager =
+* [Details](http://www.adrotateplugin.com) - Lots of Additional plugin information
+* [Manuals & Support](http://www.adrotateplugin.com/support/) - Setup instructions and support
+* [AdRotate Store](http://www.adrotateplugin.com/shop/) - Buy AdRotate Pro or hire me to install or troubleshoot AdRotate
 
-* Create and display unlimited ad units
-* Automatic AD rotation per page load of every few seconds
-* Plan ahead and schedule your ADs
-* Place adverts on your website with blocks, widgets, shortcodes or PHP snippets
-* Inject ADs into posts and pages without coding in a few clicks
-* Create your own adverts with basic HTML with the advert generator
-* Place banners and ADs from many AD and affiliate networks such as Google AdSense, Google Ad Manager, Amazon, BuySellAds, DoubleClick, DFP, media.net and many more
-* Place affiliate banners from websites like Amazon affiliates, Booking.com, Agoda, Tradedoubler and many more
-* Create Groups of adverts to show one or many ADs in one location
-* Configure Groups of adverts to show in a grid
-* Upload banner images through the WordPress media manager or the AdRotate Asset Dashboard
-* And much much more...
+Get more AdRotate! [Get AdRotate Pro today](http://www.adrotateplugin.com/adrotate-pro/)!
 
-= Showing your adverts anywhere on your WordPress website =
+**Some Features**
 
-* Use shortcodes to place ADs manually in post and page content, widgets, blocks, page builders (such as Elementor and WP Bakery) and anywhere shortcodes are supported
-* Auto-inject ADs into Post and Pages via Post Injection
-* Widgets and blocks for ADs and groups
-* Use PHP snippets to place ADs directly in your theme files
+* Super easy management of ads and groups of ads
+* Automated Javascript cycles of ads with Dynamic Groups
+* Have your advertisers add/edit/manage their own ads
+* Geo location for adverts
+* Works with Google Ads and most other referrer/ad servers
+* Get push notifications right on your iOS or Android device about adverts
+* Get email notifications when your ads need you
+* Perfectly suited for any size of advertisement, including 125x125, 468x60, 729x90, 160x600 and much more
+* Simple to use stats so you can follow which ad is working the best, worst
+* Daily and monthly stats
+* Couple ads to users so that user can follow his personalized stats
+* Advertisers can easily contact you from their dashboard
+* Track how many times a banner is clicked and show it's Cick-Through-Ratio
+* Put random, or selected, banners in pages or posts
+* Preview banners on edit
+* Advanced time schedules and restrictions
+* CSV Exports of statistics
+* Multiple groups per banner location
+* Unlimited widgets
+* Adblocks (blocks of banners)
+* Auto disable ads after X views / clicks / period of time
+* Warns you on the dashboard when ads are about to expire
+* Use shortcodes, widgets or PHP to put ads on your site
 
-= More features in AdRotate Pro =
-
-**AdRotate Professional** is the premium version of **AdRotate Banner Manager** offering even more features and functionality such as:
-
-* Set up filters to show or hide ads on device types like tablets and phones
-* Optionally hide hide banners for logged-in visitors
-* Live previews for adverts
-* Post injection for WooCommerce, Classic Commerce and bbPress
-* Geo Targeting for every advert using my FREE Geo Targeting service or select paid services such as MacMind GeoIP and Cloudflare
-* Add multiple schedules to adverts for even more control
-* Track adverts through Matomo Analytics
-* Track adverts via Google Analytics 4 using Tag Manager or their Global Tag
-* Enable advanced filters for showing adverts based on how busy your website is with a schedule
-* Decide what days of the week and between which hours adverts should show up with schedules
-* Keep using the plugin after the license expires - Or get a new license at a big discount
-* Manage your ads.txt file
-* Hide your adverts from ad blockers
-* Manage your header code snippets from networks such as Google Ad Manager and Google Auto adverts
-* Upload HTML5 adverts as a zip-file for easy setup
-* Option to either track clicks or impressions, or both
-* Ticket support right from your dashboard
-
-Learn all about [AdRotate Banner Manager](https://ajdg.solutions/product/adrotate-banner-manager/) and [AdRotate Pro](https://ajdg.solutions/product/adrotate-pro-single/) on my website!
-
-= Translations =
-
-* English (default)
-* German
-* Spanish
-* French
-* Dutch
-* Italian
-* Other translations available are provided by the community
+NOTE: Certain features are exclusive to AdRotate PRO. Learn more about what AdRotate Pro will do for you in the [features list](http://www.adrotateplugin.com/features/).
 
 == Installation ==
 
-Installing AdRotate is super easy. Just search for "AdRotate" or "AdRotate Arnan" in your plugin dashboard and click on the "Install" button.
-Once activated, a new menu called "AdRotate" appears in the WordPress navigation.
-From this menu you'll handle everything in **AdRotate Banner Manager**.
+Find out how AdRotate works, more options and various ways to implement your ads.
 
-For more detailed instructions check out the [installation steps](https://ajdg.solutions/support/adrotate-manuals/installing-adrotate-on-your-website/?mtm_campaign=adrotate&mtm_kwd=readme) on the AdRotate website.
-
-== Changelog ==
-
-For the full changelog check out the [development page](https://ajdg.solutions/support/adrotate-development/?mtm_campaign=adrotate&mtm_kwd=readme).
-
-= AdRotate 5.12.1 =
-* [i18n] All translations updated
-* [fix] Several spelling errors
-
-= AdRotate 5.12 =
-* [change] Dashboard updates
-* [tweak] All but the first ads are set to display:none; for dynamic groups
-* [new] Automated trigger after updates to finish the update
-* [removed] wp_cache_set() for stats
-
-= AdRotate 5.11 =
-* [new] Error indicators in Manage Groups
-* [fix] Offset notice for some post injection combinations
-* [change] Updated Google Tag Manager references for GA4
-* [change] Updated Google Global Tag to depreciated
-
-Be a Pro and get [AdRotate Professional](https://ajdg.solutions/product-category/adrotate-pro/?mtm_campaign=adrotate&mtm_kwd=readme)!
-
-== Upgrade Notice ==
-
-Enjoy this update with the latest tweaks and improvements for AdRotate for WordPress!
+* [Manual Installation](http://www.adrotateplugin.com/support/knowledgebase/installing-adrotate-on-your-website/)
+* [Upgrade AdRotate Free to Pro](http://www.adrotateplugin.com/support/knowledgebase/upgrade-adrotate-to-adrotate-pro/)
+* [Manuals & Support](http://www.adrotateplugin.com/support/)
+* [AdRotate Store](http://www.adrotateplugin.com/shop/)
 
 == Frequently Asked Questions ==
 
-= How do I use AdRotate? =
-Take a look at the [user guides](https://ajdg.solutions/support/adrotate-manuals/?mtm_campaign=adrotate&mtm_kwd=readme).
-You can also post your questions on the [forum](https://ajdg.solutions/forums/forum/adrotate-for-wordpress/).
+= I'm getting errors about duplicate entries in the stats or the tracker table! =
+**Answer:** This means your database is full and needs to be "upgraded". More on the how and why in [this article](href="http://www.adrotateplugin.com/support/knowledgebase/duplicate-entry-errors/)!
 
-= I need help with this plugin =
-The best place to ask your question is on my [support forum](https://ajdg.solutions/forums/forum/adrotate-for-wordpress/?mtm_campaign=adrotate&mtm_kwd=readme).
+There is a [knowledge base](http://www.adrotateplugin.com/support/knowledgebase/) with every feature explained.
+If that's not enough you can post on the [forum](http://www.adrotateplugin.com/support/forums/) and ask your question there!
 
-= Does AdRotate offer click tracking? =
-Yes, AdRotate counts clicks and impressions.
+== Changelog ==
 
-= Can I use my ads or tags from Google AdSense? =
-Yes, usually you can use their code as-is.
-Most ads work without special tricks or tweaks.
+= 3.9.9 FREE =
+* AdRotate 3.7.x no longer supported for upgrades
+* [fix] Permissions resetting to invalid roles when re-activating AdRotate
+* [fix] Multisite option 'stuck' on de-activating the plugin
+* [fix] Timezone not reset when calculating day and week on non GMT timezones
+* [tweak] Improved menus for AdRotate
+* [tweak] Improved compatibility for multisite
 
-= Does AdRotate support HTML5 ads? =
-Yes!
+NOTE: Certain features are exclusive to AdRotate PRO. If you need these features please consider upgrading to [AdRotate PRO](http://www.adrotateplugin.com/features/).
 
-= This is cool, do you have more plugins? =
-Yep, check out my website [AJdG Solutions](https://ajdg.solutions/?mtm_campaign=adrotate&mtm_kwd=readme)
+= 3.9.9 PRO =
+* AdRotate 3.7.x no longer supported for upgrades
+* [new] Cross site ads when network activated (Network & Developer)
+* [new] Push notifications to mobile devices
+* [new] Email notifications redone
+* [fix] Permissions resetting to invalid roles when re-activating AdRotate
+* [fix] Enabling/disabling geo location now works as intended
+* [fix] Upgrade routine for subsites in multisites
+* [fix] Wp-cron not set up for some users
+* [fix] Schedule permissions not removed when de-activating AdRotate
+* [fix] Unset variables when saving ads when not selecting schedules
+* [fix] Save redirect not always correct for network activated setups
+* [tweak] Improved menus for AdRotate
+* [tweak] Improved compatibility for multisite
 
-= Why do some dashboard notifications look so ugly =
-If a dashboard notification misses its layout or looks out of shape try clearing your browser cache.
-Some ad blockers block parts of the AdRotate dashboard, check out this page to make an exception for your website in adblockers - [Whitelist your site](https://ajdg.solutions/support/adrotate-manuals/configure-adblockers-for-your-own-website/?mtm_campaign=adrotate&mtm_kwd=readme).
+The full changelog can be found on the [AdRotate website](http://www.adrotateplugin.com/development/).
+Get more AdRotate! [Get AdRotate Pro today](http://www.adrotateplugin.com/adrotate-pro/)!
 
-= Is AdRotate compatible with Yoast SEO or other SEO plugins? =
-Yes, Yoast SEO, All-in-One SEO pack and all other SEO plugins work fine with AdRotate.
+== Upgrade Notice ==
 
-= Is Jetpack compatible with AdRotate? =
-Yes.
+= 3.9.9 =
+* AdRotate 3.7.x no longer supported for upgrades
+* [fix] Permissions resetting to invalid roles when re-activating AdRotate
+* [fix] Multisite option 'stuck' on de-activating the plugin
+* [fix] Timezone not reset when calculating day and week on non GMT timezones
+* [tweak] Improved menus for AdRotate
+* [tweak] Improved compatibility for multisite
 
-= Does AdRotate work alongside caching plugins? =
-AdRotate works best with Borlabs Cache and W3 Total Cache.
-Personally I prefer Borlabs Cache.
-Other plugins such as WP Super Cache, WP Rocket or WP Fastest Cache may work, but are untested.
-
-= Does AdRotate work with WooCommerce? =
-Yes!
-
-= Does AdRotate work with bbPress? =
-Yes!
-
-= Does AdRotate work with ClassicPress? =
-Yes!
+NOTE: Certain features are exclusive to AdRotate PRO. If you need these features please consider upgrading to [AdRotate PRO](http://www.adrotateplugin.com/features/).
 
 == Screenshots ==
 
-1. The AdRotate menu
-2. Managing ads and general overview in AdRotate
-3. Error checking for ads in AdRotate
-4. Easily create and edit your advert campaigns with AdRotate
-5. Schedule you advert to the minute with AdRotate
-6. Manage groups, which can act as locations or slots on your website via AdRotate
-7. Create groups to easily place multiple ads in one spot on your site with AdRotate
-8. Customize your group and select ads from the group settings with AdRotate
-9. Set up groups to do exactly what you want with AdRotate
+Visit [adrotateplugin.com](http://www.adrotateplugin.com/)

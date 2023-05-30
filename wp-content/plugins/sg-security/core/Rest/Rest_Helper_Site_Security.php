@@ -15,6 +15,16 @@ use SG_Security\Options_Service\Options_Service;
 class Rest_Helper_Site_Security extends Rest_Helper {
 
 	/**
+	 * Local variables
+	 *
+	 * @var mixed
+	 */
+	public $readme_service;
+	public $rest_helper_options;
+	public $directory_service;
+	public $xmlrpc_service;
+
+	/**
 	 * The constructor.
 	 */
 	public function __construct() {

@@ -9,6 +9,8 @@ use SG_Security\Install_Service\Install_1_2_1;
 use SG_Security\Install_Service\Install_1_3_2;
 use SG_Security\Install_Service\Install_1_3_6;
 use SG_Security\Install_Service\Install_1_3_7;
+use SG_Security\Install_Service\Install_1_4_2;
+use SG_Security\Install_Service\Install_1_4_4;
 
 /**
  * Define the Install interface.
@@ -16,6 +18,13 @@ use SG_Security\Install_Service\Install_1_3_7;
  * @since  1.0.1
  */
 class Install_Service {
+
+	/**
+	 * Installs
+	 *
+	 * @var array
+	 */
+	public $installs;
 
 	/**
 	 * The constructor.
@@ -32,6 +41,8 @@ class Install_Service {
 			new Install_1_3_2(),
 			new Install_1_3_6(),
 			new Install_1_3_7(),
+			new Install_1_4_2(),
+			new Install_1_4_4(),
 		);
 	}
 

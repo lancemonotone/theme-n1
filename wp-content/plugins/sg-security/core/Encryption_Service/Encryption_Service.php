@@ -8,6 +8,13 @@ use SiteGround_Helper\Helper_Service;
  */
 class Encryption_Service {
 	/**
+	 * Encryption key file name.
+	 *
+	 * @var string
+	 */
+	public $encryption_key_file;
+
+	/**
 	 * Encryption/Decryption cipher.
 	 *
 	 * @var string

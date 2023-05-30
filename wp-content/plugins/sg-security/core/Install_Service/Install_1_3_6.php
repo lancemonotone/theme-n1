@@ -22,6 +22,14 @@ class Install_1_3_6 extends Install {
 	protected static $version = '1.3.6';
 
 	/**
+	 * Local variables
+	 *
+	 * @var mixed
+	 */
+	public $sg2fa;
+	public $encryption;
+
+	/**
 	 * Constructs a new instance.
 	 *
 	 * @since 1.3.6
@@ -42,16 +50,13 @@ class Install_1_3_6 extends Install {
 			// Disable the 2FA and show admin notice.
 			$this->sg2fa->disable_2fa_show_notice();
 			// Update install service option.
-			return update_option( 'sgs_install_1_3_6', 1 );
+			return true;
 		}
 
 		// Encrypt all users secret codes.
 		$this->encrypt_all_users_secrets();
 		// Delete all stored QR codes.
 		$this->delete_all_qr_codes();
-
-		// Update install service option.
-		update_option( 'sgs_install_1_3_6', 1 );
 	}
 
 	/**

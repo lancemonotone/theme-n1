@@ -178,7 +178,7 @@ class Block_Service {
 				'SELECT `ip` FROM `' . $wpdb->sgs_visitors . '`
 					WHERE `id` = %s
 					AND `user_id` = 0
-				;',
+					LIMIT 1;',
 				$id
 			)
 		);
@@ -205,7 +205,7 @@ class Block_Service {
 			$wpdb->prepare(
 				'SELECT `user_id` FROM `' . $wpdb->sgs_visitors . '`
 					WHERE `id` = %s
-				;',
+					LIMIT 1;',
 				$id
 			)
 		);
@@ -232,7 +232,7 @@ class Block_Service {
 			$wpdb->prepare(
 				'SELECT `block` FROM `' . $wpdb->sgs_visitors . '`
 					WHERE `id` = %s
-				;',
+					LIMIT 1;',
 				$id
 			)
 		);

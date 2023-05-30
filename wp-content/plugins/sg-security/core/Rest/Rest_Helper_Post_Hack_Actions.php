@@ -12,6 +12,15 @@ use \WP_Session_Tokens;
 class Rest_Helper_Post_Hack_Actions extends Rest_Helper {
 
 	/**
+	 * Local variables
+	 *
+	 * @var mixed
+	 */
+	public $salt_shaker;
+	public $plugins_service;
+	public $password_service;
+
+	/**
 	 * The constructor.
 	 */
 	public function __construct() {

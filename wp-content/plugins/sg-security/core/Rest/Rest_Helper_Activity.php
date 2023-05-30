@@ -20,6 +20,16 @@ class Rest_Helper_Activity extends Rest_Helper {
 	public $number_of_entries = 30;
 
 	/**
+	 * Local variables
+	 *
+	 * @var mixed
+	 */
+	public $block_service;
+	public $weekly_emails;
+	public $activity_log;
+	public $rest_helper_options;
+
+	/**
 	 * The constructor.
 	 */
 	public function __construct() {
@@ -138,6 +148,7 @@ class Rest_Helper_Activity extends Rest_Helper {
 						'placeholder'   => 'Select or start typing',
 						'options'       => array_values( $visitor_types ),
 						'selectedValue' => ! empty( $filters['type'] ) ? $filters['type'] : null,
+						'value'         => ! empty( $filters['type'] ) ? $filters['type'] : null,
 					),
 				),
 			),
@@ -154,6 +165,7 @@ class Rest_Helper_Activity extends Rest_Helper {
 						'placeholder'   => 'Select or start typing',
 						'options'       => array_values( $codes ),
 						'selectedValue' => ! empty( $filters['code'] ) ? $filters['code'] : null,
+						'value'         => ! empty( $filters['code'] ) ? $filters['code'] : null,
 					),
 				),
 			),
@@ -169,6 +181,7 @@ class Rest_Helper_Activity extends Rest_Helper {
 						'searchable'    => true,
 						'options'       => array_values( $ips ),
 						'selectedValue' => ! empty( $filters['ip'] ) ? $filters['ip'] : null,
+						'value'         => ! empty( $filters['ip'] ) ? $filters['ip'] : null,
 					),
 				),
 			),
@@ -519,7 +532,7 @@ class Rest_Helper_Activity extends Rest_Helper {
 		}
 
 		if ( ! empty( $paged ) ) {
-			$offset .= ' OFFSET ' .  intval( ( esc_sql( $paged ) * $this->number_of_entries ) - $this->number_of_entries );
+			$offset .= ' OFFSET ' . intval( ( esc_sql( $paged ) * $this->number_of_entries ) - $this->number_of_entries );
 		}
 
 		return $select . $where . $order . $limit . $offset . ';';

@@ -15,6 +15,17 @@ use SiteGround_Helper\Helper_Service;
 class Sg_2fa {
 
 	use User_Roles_Trait;
+
+	/**
+	 * Local variables
+	 *
+	 * @var mixed
+	 */
+	public $encryption_key_file;
+	public $google_authenticator;
+	public $recovery;
+	public $encryption;
+
 	/**
 	 * The singleton instance.
 	 *
@@ -685,7 +696,7 @@ class Sg_2fa {
 		delete_user_meta( $user_id, 'sgs_2fa_login_nonce' );
 
 		// Delete the nonce cookie.
-		setcookie( 'sgs_2fa_login_nonce', null, -1, SITECOOKIEPATH, COOKIE_DOMAIN ); // phpcs:ignore
+		setcookie( 'sgs_2fa_login_nonce', '', -1, SITECOOKIEPATH, COOKIE_DOMAIN ); // phpcs:ignore
 
 		// Set 30 days 2FA auth cookie.
 		if ( isset( $_POST['do_not_challenge'] ) ) { // phpcs:ignore
@@ -701,7 +712,7 @@ class Sg_2fa {
 		update_user_meta( $user_id, 'sg_security_2fa_configured', 1 ); // phpcs:ignore
 
 		// Invalidate 2FA cookie.
-		setcookie( 'sg_security_2fa_dnc_cookie', null, -1 ); // phpcs:ignore
+		setcookie( 'sg_security_2fa_dnc_cookie', '', -1 ); // phpcs:ignore
 	}
 
 	/**

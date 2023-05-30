@@ -169,3 +169,12 @@ Stack trace:
 [04-May-2023 21:35:47 UTC] ERROR PostmanWpMail: Exception code=421 message=4.3.0 Temporary System Problem.  Try again later (10). c5-20020a92dc85000000b003230fd0b2eesm25744iln.61 - gsmtp
 [04-May-2023 21:35:47 UTC] PostmanSlackNotify: A valid URL was not provided.
 [04-May-2023 21:35:47 UTC] PostmanSlackNotify: 
+[17-May-2023 00:38:59 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "chrisman.james@gmail.comp"
+[17-May-2023 00:38:59 UTC] PostmanSlackNotify: A valid URL was not provided.
+[17-May-2023 00:38:59 UTC] PostmanSlackNotify: 
+[17-May-2023 00:38:59 UTC] ERROR PostmanWpMail: Exception code=0 message=Invalid "To" e-mail address "chrisman.james@gmail.comp"
+[17-May-2023 00:38:59 UTC] PostmanSlackNotify: A valid URL was not provided.
+[17-May-2023 00:38:59 UTC] PostmanSlackNotify: 
+[24-May-2023 20:10:39 UTC] ERROR PostmanWpMail: Exception code=0 message=smtp.gmail.com has timed out
+[24-May-2023 20:10:39 UTC] PostmanSlackNotify: A valid URL was not provided.
+[24-May-2023 20:10:39 UTC] PostmanSlackNotify: 

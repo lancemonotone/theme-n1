@@ -9,6 +9,18 @@ class Rest {
 	const REST_NAMESPACE = 'sg-security/v1';
 
 	/**
+	 * Local variables
+	 *
+	 * @var mixed
+	 */
+	public $options_helper;
+	public $post_hack_helper;
+	public $site_security_helper;
+	public $login_helper;
+	public $dashboard_helper;
+	public $activity_helper;
+
+	/**
 	 * The constructor.
 	 */
 	public function __construct() {

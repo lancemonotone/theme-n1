@@ -1108,3 +1108,43 @@ Stack trace:
 #0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/index.php(17): require_once()
 #1 {main}
   thrown in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php on line 44
+[11-May-2023 09:08:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function plugins_url() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php:44
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/index.php(17): require_once()
+#1 {main}
+  thrown in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php on line 44
+[12-May-2023 00:06:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function plugins_url() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php:44
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/index.php(17): require_once()
+#1 {main}
+  thrown in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php on line 44
+[12-May-2023 01:23:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function plugins_url() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php:44
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/index.php(17): require_once()
+#1 {main}
+  thrown in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php on line 44
+[12-May-2023 17:27:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function plugins_url() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php:44
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/index.php(17): require_once()
+#1 {main}
+  thrown in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php on line 44
+[13-May-2023 17:26:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function plugins_url() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php:44
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/index.php(17): require_once()
+#1 {main}
+  thrown in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php on line 44
+[15-May-2023 04:16:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function plugins_url() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php:44
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/index.php(17): require_once()
+#1 {main}
+  thrown in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php on line 44
+[15-May-2023 04:16:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function plugins_url() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php:44
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/index.php(17): require_once()
+#1 {main}
+  thrown in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php on line 44
+[15-May-2023 04:16:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function plugins_url() in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php:44
+Stack trace:
+#0 /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/index.php(17): require_once()
+#1 {main}
+  thrown in /home/customer/www/nplusonemag.com/public_html/wp-content/plugins/membermouse/includes/mm-constants.php on line 44

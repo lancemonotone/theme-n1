@@ -1,18 +1,30 @@
-=== SiteGround Security ===
+=== All-inclusive Security Solution by SiteGround ===
 Contributors: Hristo Sg, siteground, sstoqnov, stoyangeorgiev, elenachavdarova, ignatggeorgiev
 Tags: security, firewall, malware scanner, web application firewall, two factor authentication, block hackers, country blocking, clean hacked site, blocklist, waf, login security
 Requires at least: 4.7
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 1.4.1
+Stable tag: 1.4.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-SiteGround Security is the all-in-one security solution for your WordPress website.
+Cover all WordPress weak spots with just one plugin! Easily limit login attempts, enable 2FA, switch XSS vulnerability protection on, disable XML-RPC, RSS & Atom feeds, and more!
 
 == Description ==
 
-With the carefully selected and easy to configure functions the [SiteGround Security](https://www.siteground.com/wordpress-plugins/siteground-security) plugin provides everything you need to secure your website and prevent a number of threats such as brute-force attacks, compromised login, data leaks, and more.
+This all-inclusive security plugin, made by SiteGround web hosting company, gives you easy control over your website security. It’s packed with features that allow you in 1 click to enable or disable WordPress settings and prevent a number of threats such as brute-forcing, compromised login, code vulnerability attacks, data theft and leaks, and more.
+
+* Hides your WordPress Version out of the box
+* Enables advanced XSS Vulnerability Protection
+* Disables XML-RPC protocol to prevent many vulnerabilities and attacks
+* 1-click setting to Disable RSS and ATOM Feeds
+* Option to Lock and Protect System Folders by default
+* Disables “Admin” Username
+* Disables Themes & Plugins Editor
+* Option to enable Two-Factor Authentication
+* Limit Login Attempts setting
+
+On top, [SiteGround Security](https://www.siteground.com/wordpress-plugins/siteground-security) experts have curated a list of “Recommended Vulnerabilities Protection Settings”, which are featured on the plugin’s dashboard for your convenience. Prioritise those and you’re good to go!
 
 == Login Settings ==
 
@@ -27,7 +39,7 @@ You can revert to the default login type by using the following snippet.
 `
 add_action( 'init', 'remove_custom_login_url' );
 function remove_custom_login_url() {
-	update_option( 'sg_security_login_type', 'default' );
+    update_option( 'sg_security_login_type', 'default' );
 }
 `
 
@@ -40,7 +52,7 @@ If you lock yourself out of your admin panel, you can add the following option t
 `
 add_action( 'init', 'remove_login_access_data' );
 function remove_login_access_data() {
-	update_option( 'sg_login_access', array() );
+    update_option( 'sg_login_access', array() );
 }
 `
 
@@ -58,7 +70,7 @@ function add_user_roles_to_2fa( $roles ) {
 }
 `
 
-You can change the location of 2FA encryption key file using SGS_ENCRYPTION_KEY_FILE_PATH constant defined in wp-config.php file. Make sure to use full path to the file. Example:
+You can change the location of the 2FA encryption key file using SGS_ENCRYPTION_KEY_FILE_PATH constant defined in wp-config.php file. Make sure to use the full path to the file. Example:
 
 `
 // Custom path to SG Security Encryption key file.
@@ -66,7 +78,7 @@ define ( 'SGS_ENCRYPTION_KEY_FILE_PATH', '/home/fullpathtofile/sgs_encrypt_key.p
 `
 
 = Disable Common Usernames =
-Using common usernames like 'admin' is a security threat that often results in unauthorised access. By enabling this option we will disable the creation of common usernames and if you already have one ore more users with a weak username, we'll ask you to provide new one(s).
+Using common usernames like 'admin' is a security threat that often results in unauthorised access. By enabling this option we will disable the creation of common usernames and if you already have one more users with a weak username, we'll ask you to provide new one(s).
 
 = Limit Login Attempts =
 With Limit Login Attempts you can specify the number of times users can try to log in with incorrect credentials. If they reach a specific limit, the IP they are attempting to log from will be blocked for an hour. If they continue with unsuccessful attempts, they will be restricted for 24 hours and 7 days after that.
@@ -77,7 +89,7 @@ If you lock yourself out of your admin panel, you can add the following option t
 `
 add_action( 'init', 'remove_unsuccessfull_attempts_block' );
 function remove_unsuccessfull_attempts_block() {
-	update_option( 'sg_security_unsuccessful_login', array() );
+    update_option( 'sg_security_unsuccessful_login', array() );
 }
 `
 
@@ -165,6 +177,12 @@ function deactivate_activity_log() {
 }
 `
 
+In case you have disabled the native WordPress Cron Job, and using UNIX cron setup instead, you can add the following rule to your website wp-config.php file in order to have the logs cleared on time:
+
+`
+define( 'SG_UNIX_CRON', true );
+`
+
 == Post-Hack Actions ==
 
 = Reinstall All Free Plugins =
@@ -222,6 +240,30 @@ In version 1.0.2 we've added full WP-CLI support for all plugin options and func
 1. Go to Plugins -> Installed Plugins and click the 'Activate' link under the WordPress SiteGround Security listing
 
 == Changelog ==
+
+= Version 1.4.5 =
+Release Date: May 4th, 2023
+
+* Improved log cleanup
+
+= Version 1.4.4 =
+Release Date: May 3rd, 2023
+
+* Improved Visitors DB table indexing
+* Block service restored
+
+= Version 1.4.3 =
+Release Date: Apr 27th, 2023
+
+* Block service temporally disabled
+
+= Version 1.4.2 =
+Release Date: Apr 27th, 2023
+
+* Improved Activity Log process and filters
+* Improved restricted login response code
+* Improved PHP 8.2 compatibility
+* Alternative constant added for non-standard cron job usage
 
 = Version 1.4.1 =
 Release Date: Feb 23rd, 2023
@@ -422,3 +464,4 @@ Release Date: July 27th, 2021
 
 = Version 0.1 =
 * Initial release.
+

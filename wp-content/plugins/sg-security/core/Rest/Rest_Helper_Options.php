@@ -13,6 +13,16 @@ use SG_Security\Usernames_Service\Usernames_Service;
 class Rest_Helper_Options extends Rest_Helper {
 
 	/**
+	 * Local variables
+	 *
+	 * @var mixed
+	 */
+	public $options_service;
+	public $sg_2fa;
+	public $login_service;
+	public $usernames_service;
+
+	/**
 	 * The constructor.
 	 */
 	public function __construct() {
