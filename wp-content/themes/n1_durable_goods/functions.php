@@ -30,7 +30,7 @@ class N1 {
 	 *
 	 */
 	private function __construct() {
-		$this->version = "1.2";
+		$this->version = "1.3";
 		//error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_WARNING);
 		// error reporting errors only
 		//error_reporting( E_NOTICE | E_WARNING | E_ERROR | E_PARSE );

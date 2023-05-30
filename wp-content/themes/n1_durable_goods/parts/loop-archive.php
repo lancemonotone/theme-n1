@@ -1,8 +1,8 @@
-<?php
-if ( N1_Magazine::Instance()->is_paywalled() ) {
+<?php if ( N1_Magazine::Instance()->is_paywalled() && function_exists( 'adrotate_group' ) ) {
 	echo adrotate_group( 3 );
-}
+}?>
 
+<?php
 $current_page        = get_queried_object();
 $is_scroll           = is_a( $current_page, 'WP_Post' );
 $is_term             = is_a( $current_page, 'WP_Term' );

@@ -1,10 +1,8 @@
 <?php dynamic_sidebar( 'sidebar-hero' ); ?>
 
-<?php 
-	if(N1_Magazine::Instance()->is_paywalled()){
-		echo adrotate_group(3);	
-	}
-?>
+<?php if ( N1_Magazine::Instance()->is_paywalled() && function_exists( 'adrotate_group' ) ) {
+	echo adrotate_group( 3 );
+} ?>
 
 <div id="main" class="main main-home cf">
 	<section id="content" class="main-home content">

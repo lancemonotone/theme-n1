@@ -14,7 +14,7 @@
   gtag('js', new Date());
 
   gtag('config', 'G-3NRFPFK8X6');
-  </script>
+</script>
   <script type="text/javascript">
     /* Load Typekit ansynchronously. http://www.tomjn.com/153/typekit-besbswy/ and http://blog.typekit.com/2011/05/25/loading-typekit-fonts-asynchronously/ */
 	 (function(){var b={kitId:"oqd3oiw",scriptTimeout:3000};var f=document.getElementsByTagName("html")[0];f.className+=" wf-loading";var c=setTimeout(function(){f.className=f.className.replace(/(\s|^)wf-loading(\s|$)/g," ");f.className+=" wf-inactive"},b.scriptTimeout);var g=false;var a=document.createElement("script");a.src="//use.typekit.net/"+b.kitId+".js";a.type="text/javascript";a.async="true";a.onload=a.onreadystatechange=function(){var d=this.readyState;if(g||d&&d!="complete"&&d!="loaded"){return}g=true;clearTimeout(c);try{Typekit.load(b)}catch(h){}};var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)})();
@@ -79,7 +79,7 @@
 
     gtag( 'config', 'UA-152018343-2' );
   </script>
-<meta name="facebook-domain-verification" content="ku6hcqhqvzemw704rsv5mt4sog908v" />
+<meta name="facebook-domain-verification" content="ku6hcqhqvzemw704rsv5mt4sog908v" />	
 </head>
 <?php if (!empty($post)){
     $post_slug = $post->post_name;

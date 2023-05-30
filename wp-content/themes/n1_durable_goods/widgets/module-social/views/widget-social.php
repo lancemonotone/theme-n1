@@ -1,4 +1,4 @@
-<?php
+<?php 
 // $url = urlencode(get_permalink($post_id));
 $tw_href = 'https://twitter.com/nplusonemag';
 $fb_href = 'https://www.facebook.com/nplusonemag';

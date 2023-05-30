@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: Multi Module
-Description: Show n latest articles in reverse chronological order, newest first. 
-Can be displayed with image, without image, or as pullquote. More By this Author, 
-More from Issue [N], Related Content, Featured Article, and Online Only widgets 
-all use the same or very similar data output (i.e., title, image (if any), author, 
+Description: Show n latest articles in reverse chronological order, newest first.
+Can be displayed with image, without image, or as pullquote. More By this Author,
+More from Issue [N], Related Content, Featured Article, and Online Only widgets
+all use the same or very similar data output (i.e., title, image (if any), author,
 issue, category, pullquote) and front-end visual display styles.
 
 
@@ -320,7 +320,7 @@ class Module_Multi extends WP_Widget {
         $post_counter = 0;
         foreach ($the_posts as $the_p) {
             if ($post_counter === $ad_after) {
-                if (N1_Magazine::Instance()->is_paywalled()) {
+                if (N1_Magazine::Instance()->is_paywalled() && function_exists('adrotate_group')) {
                     echo adrotate_group(1);
                 }
             }

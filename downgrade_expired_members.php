@@ -15,7 +15,7 @@ require_once("wp-content/plugins/membermouse/includes/init.php");
 // http://support.membermouse.com/support/solutions/articles/9000020340-api-credentials-overview
 
 // Your API URL
-$apiUrl = "https://www.nplusonemag.com/wp-content/plugins/membermouse/api/request.php";
+//$apiUrl = "https://www.nplusonemag.com/wp-content/plugins/membermouse/api/request.php";
 
 // Your API key
 $apiKey = "uTG496m";
@@ -48,11 +48,11 @@ $inputParams .= "membership_level_id={$freeMembershipLevelId}&";
 $apiCallUrl = "{$apiUrl}?q=/updateMember";
 $ch = curl_init($apiCallUrl);
 
-curl_setopt($ch, CURLOPT_POST, 1); 
-curl_setopt($ch, CURLOPT_POSTFIELDS, $inputParams); 
-curl_setopt($ch, CURLOPT_HEADER, 0); 
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-$result = curl_exec($ch); 
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $inputParams);
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$result = curl_exec($ch);
 curl_close($ch);
 
 echo "<pre>".print_r($result, true)."</pre>";

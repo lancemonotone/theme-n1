@@ -1,13 +1,12 @@
-<?php 
-	if(N1_Magazine::Instance()->is_paywalled()){
-		echo adrotate_group(3);	
-	}
-?>
+<?php if ( N1_Magazine::Instance()->is_paywalled() && function_exists( 'adrotate_group' ) ) {
+	echo adrotate_group( 3 );
+} ?>
+
 <div id="main" class="main-magazine-home main magazine-home wrapper cf">
 	<div id="magazine-archive" class="als-container">
 		<div class="list_carousel responsive">
 			<div id="issue-slider">
-				<?php 
+				<?php
 				$issues = N1_Magazine::Instance()->issues;
 				foreach ($issues as $issue){
 					$issue_art = get_field('issue_art', $issue->ID);?>
@@ -30,7 +29,7 @@
 			<a id="prev3" class="als-prev prev" href="#"><img title="previous" alt="prev" src="<?php echo get_stylesheet_directory_uri()?>/img/l-black.png"></a>
 		</div>
 	</div> <!-- als-container end -->
-	
+
 	<section class="main magazine-home content" id="content">
 		<?php get_template_part( 'sidebars/sidebar', 'landing_magazine' ); ?>
 	</section><!-- /#content -->

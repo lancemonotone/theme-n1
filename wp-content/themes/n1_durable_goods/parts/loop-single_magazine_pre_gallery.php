@@ -1,12 +1,11 @@
-<?php 
-	if(N1_Magazine::Instance()->is_paywalled()){
-		echo adrotate_group(3);	
-	}
-?>
+<?php if ( N1_Magazine::Instance()->is_paywalled() && function_exists( 'adrotate_group' ) ) {
+	echo adrotate_group( 3 );
+} ?>
+
 <div id="main" class="main issue wrapper cf">
 <div class="main issue content">
 	<?php get_template_part( 'sidebars/sidebar', 'single_magazine' ); ?>
-<?php while ( have_posts() ) { the_post(); 
+<?php while ( have_posts() ) { the_post();
 	$cat = reset(wp_get_post_terms($post->ID, 'category'));
 	$issue_obj = N1_Magazine::get_issue_by_slug($issue);
 ?>
@@ -20,11 +19,11 @@
 				<p class="post-dek issue-content-post-header-dek"><?php echo $article_subhead?></p>
 				<?php }?>
 			</div><!-- .post-header -->
-			
+
 			<div class="post-meta issue-content-post-meta">
 				<section class="post-meta-pubinfo issue-content-post-meta-pubinfo">
 					<p class="post-meta-entry issue-content-post-meta-pubinfo-entry">
-						<span class="category post-meta-hed runin"><?php _e('Published in')?></span> 
+						<span class="category post-meta-hed runin"><?php _e('Published in')?></span>
 						<a href="<?php echo N1_Magazine::Instance()->get_context_issue_url()?>" title="<?php echo $issue_obj->post_title?>">
 							<?php echo $issue_obj->post_title?>: <?php echo get_field('issue_name', $issue_obj->ID)?>
 						</a>
@@ -34,13 +33,13 @@
 						<?php echo get_field('issue_date', $issue_obj->ID)?>
 					</p>
 				</section> <!-- .post-meta-pubinfo -->
-			
+
 				<?php N1_Magazine::Instance()->print_post_tags($post->ID, true);?>
-				<?php N1_Magazine::Instance()->print_social($post->ID);?>									
-				
+				<?php N1_Magazine::Instance()->print_social($post->ID);?>
+
 			</div><!-- .post-meta -->
-			
-			<?php 
+
+			<?php
 			$img_id = get_post_thumbnail_id( $post->ID );
 			$img_meta = wp_prepare_attachment_for_js($img_id);
 			$img = wp_get_attachment_image_src( $img_id, 'content-full' );
@@ -60,23 +59,23 @@
 					<?php echo wpautop(html_entity_decode($article_headnote))?>
 				</div>
 			<?php } ?>
-			
+
 			<div class="post-body issue-content-post-body">
-				<?php 
+				<?php
 				if(N1_Magazine::Instance()->is_paywalled($post->ID)){
 					$the_content = apply_filters('the_content', get_field('article_long_excerpt', $post->ID));
 					echo Utility::insert_advertisement($the_content, 2, 2);
-					
+
 				} else { // no paywall...show complete article.
-					
+
 						$the_content = '<div class="post-wrapper">' . apply_filters('the_content', get_the_content()) . '</div>';
-					
+
 						/*if($appendix = get_field('article_appendix', $post->ID)){
-		
+
 							$app = '<div class="appendix">'. $appendix .'</div>';
-						
+
 						}*/
-						
+
 						echo $the_content/*.$app*/;
 					} ?>
 				<?php if($article_appendix = get_field('article_appendix', $post->ID)){?>
@@ -87,11 +86,11 @@
 			</div><!-- .post-body -->
 		</article><!-- #post -->
 		<?php if(N1_Magazine::Instance()->is_paywalled($post->ID)){?>
-			
+
 			<div class="roadblock">
 				<!-- subscribe -->
 				<section class="subscribe roadblock">
-					<h3 class="subscribe roadblock"><?php _e('Unlock sixteen years of n+1.')?></h3> 
+					<h3 class="subscribe roadblock"><?php _e('Unlock sixteen years of n+1.')?></h3>
 					<p class="subscribe roadblock subhed"><?php _e('It only takes 5 minutes to subscribe.')?></p>
 					<p class="subscribe roadblock subscribe prompt"><?php echo get_field('options_subscribe_prompt','options')?></p>
 					<div class="module subscribe prompt wrapper">
@@ -105,28 +104,28 @@
 								<label for="username" class="subscribe roadblock username">Email</label>
 								<input class="subscribe roadblock text username form-text" type="text" id="log" name="log" placeholder="email">
 							</fieldset>
-							
+
 							<fieldset class="subscribe roadblock password">
 								<label for="password" class="subscribe roadblock password">Password</label>
 								<input class="form-text subscribe roadblock text password" type="password" id="pwd" name="pwd" placeholder="password">
 							</fieldset>
-							
+
 							<fieldset class="form-actions subscribe roadblock submit">
 								<input type="submit" value="<?php _e('Sign In')?>" class="subscribe roadblock submit button">
 							</fieldset>
-						</form>	
-						<a href="<?php echo home_url()?>/forgot-password/"><?php _e('Forgot Password')?></a>	
+						</form>
+						<a href="<?php echo home_url()?>/forgot-password/"><?php _e('Forgot Password')?></a>
 					</div>
 					<?php } ?>
-				</section>					
-					
+				</section>
+
 			</div><!-- .roadblock -->
-		
+
 		<?php } ?>
 		<?php //issue navigation
 		$prev_link = N1_Magazine::same_edition_and_section_adjacent_post_link ( '%link', '%title', true, false );
 		$next_link = N1_Magazine::same_edition_and_section_adjacent_post_link ( '%link', '%title', false, false );
-		
+
 		if( $prev_link || $next_link ){?>
 
 			<nav class="prev-next">
@@ -135,7 +134,7 @@
 					<?php if( $next_link ){?><li class="next"><?php echo $next_link; ?></li><?php }?>
 				</ul>
 			</nav>
-			<?php  
+			<?php
 
 			echo $after_widget;
 		} // end if?>
@@ -143,6 +142,6 @@
 <?php } ?>
 	<?php // right sidebar content (currently blank) ?>
 	<section class="sidebar"></section>
-	</div><!-- /.main.content -->	
+	</div><!-- /.main.content -->
 </div><!-- /#main -->
 <?php get_template_part( 'sidebars/sidebar', 'single_magazine_bottom' ); ?>

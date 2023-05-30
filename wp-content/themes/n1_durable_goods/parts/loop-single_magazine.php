@@ -1,8 +1,7 @@
-<?php
-if ( N1_Magazine::Instance()->is_paywalled() ) {
+<?php if ( N1_Magazine::Instance()->is_paywalled() && function_exists( 'adrotate_group' ) ) {
 	echo adrotate_group( 3 );
-}
-?>
+} ?>
+
 <div id="main" class="main issue wrapper cf">
     <div class="main issue content">
 		<?php get_template_part( 'sidebars/sidebar', 'single_magazine' ); ?>
@@ -93,7 +92,7 @@ if ( N1_Magazine::Instance()->is_paywalled() ) {
 						} else { // no paywall...show complete article.
 							$the_content = get_the_content();
 
-							// Is this check necessary? Should we bypass shortcodes for everyone who passes the paywall test?
+                            // Is this check necessary? Should we bypass shortcodes for everyone who passes the paywall test?
 							if ( N1_Magazine::Instance()->is_institution() ) {
 								$regex       = '/' . get_shortcode_regex( [
 										'MM_Access_Decision access=\'true\'',
