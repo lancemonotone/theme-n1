@@ -69,7 +69,7 @@ class N1 {
 	function setup_scripts_styles() {
 		// scripts
 		wp_enqueue_script( 'classie', get_stylesheet_directory_uri() . '/js/classie.js', array(), $this->version, TRUE );
-		wp_enqueue_script( 'fastclick', get_stylesheet_directory_uri() . '/js/fastclick.js', array(), $this->version, TRUE );
+		// wp_enqueue_script( 'fastclick', get_stylesheet_directory_uri() . '/js/fastclick.js', array(), $this->version, TRUE );
 		wp_enqueue_script( 'menus', get_stylesheet_directory_uri() . '/js/menus.js', array( 'classie' ), $this->version, TRUE );
 		wp_enqueue_script( 'caroufredsel', get_stylesheet_directory_uri() . '/js/caroufredsel/jquery.carouFredSel-6.2.1-packed.js', array(), $this->version, TRUE );
 		wp_enqueue_script( 'main', get_stylesheet_directory_uri() . '/js/main.js', array( 'caroufredsel' ), $this->version, TRUE );
