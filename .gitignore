@@ -47,3 +47,5 @@ wp-config.php
 # uncomment the next line
 #/wp-content/themes
 /plugins_BAK/
+/Default.html
+/robots.txt
