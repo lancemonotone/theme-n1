@@ -1,0 +1,12 @@
+@import "../../scss/mixins/themes";
+
+.two-column-content {
+  @include themes;
+
+  .inner {
+    @media screen and (min-width: 1030px) {
+      column-count: 2;
+      column-gap: rem(80);
+    }
+  }
+}

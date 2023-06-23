@@ -1,0 +1,143 @@
+@import '../../scss/mixins/themes';
+
+.content-w-form {
+  @include themes;
+
+  .frame {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+
+    @media screen and (min-width: 1030px) {
+      grid-template-columns: 1fr 1fr;
+      column-gap: rem(50);
+    }
+
+    .col {
+      .wysiwyg {
+        margin-right: auto;
+        margin-left: auto;
+        padding: 0;
+        text-align: inherit;
+      }
+
+      @media screen and (min-width: 1030px) {
+        .rw-form-box {
+          margin-block-end: 65px;
+
+          h3 {
+            font-size: rem(20);
+            line-height: rem(24);
+            font-weight: 700;
+            text-transform: uppercase;
+            padding-block-end: rem(20);
+          }
+        }
+      }
+
+      .callout-grid {
+        .inner {
+          padding: 0;
+        }
+
+        .callout-container {
+          padding-inline: 25px;
+          grid-template-columns: repeat(auto-fit, minmax(rem(140), 1fr));
+
+          .callout {
+            padding: rem(32) rem(16);
+            background-color: $accent;
+
+            h4 {
+              font-family: $header-font;
+              font-size: rem(20);
+              // letter spacing is 5% of font size
+              letter-spacing: rem(1);
+              font-weight: 700;
+              line-height: rem(24);
+              text-transform: uppercase;
+              color: $white;
+              padding-block-end: rem(23);
+            }
+
+            p {
+              font-size: rem(12);
+              line-height: rem(14);
+              text-align: center;
+              color: $white;
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+  &.top {
+    --header-offset: 250px;
+
+    // negative margin to offset the height of the header
+    margin-block-start: calc(var(--header-offset) * -1);
+    position: relative;
+    z-index: 10;
+
+    .frame {
+      row-gap: 0;
+    }
+
+    @media screen and (min-width: 1030px) {
+      & > .inner {
+        padding-block-start: 0;
+      }
+    }
+
+    .col {
+      .page-breadcrumbs {
+        padding: 0;
+        //@media screen and (min-width: 1030px) {
+        //  padding-block-end: 0;
+        //}
+
+        .inner {
+          padding: 0;
+        }
+      }
+
+      .button.free-consult {
+        background-color: $accent;
+        padding: rem(20) rem(48);
+        color: $white;
+        position: absolute;
+        transform: translateX(50%);
+        right: 50%;
+        white-space: nowrap;
+        top: 175px;
+        outline: none;
+        margin: 0;
+      }
+
+      &:first-child {
+        // total fudge to get the content to line up with the header
+        padding-top: clamp(calc(var(--header-offset) - 30px), 10vw, var(--header-offset))
+      }
+
+      &:last-child {
+        display: none;
+      }
+
+      @media screen and (min-width: 1030px) {
+        &:last-child {
+          display: block;
+          margin-block-start: rem(43);
+        }
+
+        .wysiwyg {
+          display: block;
+          padding: 0;
+          padding-block-start: rem(30);
+          text-align: inherit;
+        }
+      }
+    }
+  }
+}

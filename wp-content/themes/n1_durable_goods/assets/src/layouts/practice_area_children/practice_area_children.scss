@@ -1,0 +1,13 @@
+@import "../../scss/mixins/themes";
+
+.practice-area-children {
+  @include themes;
+
+  .full-width-content {
+    padding-block-end: clamp(0.25rem, 2vw, 1.375rem);
+  }
+
+  .one-column {
+    column-count: 1 !important;
+  }
+}

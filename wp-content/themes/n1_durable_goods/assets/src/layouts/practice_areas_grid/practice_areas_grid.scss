@@ -1,0 +1,121 @@
+@import "../../scss/mixins/themes";
+
+.practice-areas-grid {
+  @include themes;
+
+  & > .inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-heading {
+    color: $accent;
+    padding-inline: rem(20);
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+    @media screen and (min-width: 600px) {
+      grid-template-columns: repeat(auto-fill, minmax(33.3%, 1fr));
+      gap: 0;
+      background-color: $black;
+    }
+
+    @media screen and (min-width: 1030px) {
+      grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
+    }
+
+    * {
+      transition: all var(--transition);
+      z-index: 1;
+    }
+  }
+
+  .practice-area {
+    overflow: hidden;
+
+    .bg-image {
+      height: 100%;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-block-end: rem(8);
+      aspect-ratio: 1/1;
+      z-index: -1;
+      //filter: brightness(1) saturate(0.5);
+    }
+
+    .title {
+      color: $black;
+      font-size: clamp(rem(14), 1vw, rem(18));
+      letter-spacing: unset;
+      font-family: Open Sans, sans-serif;
+      font-weight: 400;
+      line-height: 1.2;
+      padding: 0;
+      overflow: hidden;
+      text-rendering: optimizeLegibility;
+      text-overflow: ellipsis;
+      text-align: center;
+    }
+
+    .blurb {
+      color: $white;
+      font-size: rem(14);
+      line-height: 1.5;
+      text-align: center;
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @media screen and (min-width: 600px) {
+      display: grid;
+      grid-template-rows: 100% 0;
+      aspect-ratio: 4/3;
+      align-items: center;
+      position: relative;
+      grid-template-columns: 80%;
+      place-content: center;
+
+      .bg-image {
+        position: absolute;
+        margin: 0;
+      }
+
+      .title {
+        color: $white;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: 4px;
+        text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7);
+      }
+
+      &:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+        grid-template-rows: 20% 40%;
+        z-index: 10;
+        row-gap: 0.5rem;
+
+        .bg-image {
+          filter: brightness(.3) saturate(0.5) blur(2px);
+        }
+
+        .title {
+          text-shadow: unset;
+        }
+
+        .blurb {
+          opacity: 1;
+          height: auto;
+          width: auto;
+        }
+      }
+    }
+  }
+}

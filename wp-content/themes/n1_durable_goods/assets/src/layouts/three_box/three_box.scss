@@ -1,0 +1,30 @@
+@import "../../scss/mixins/themes";
+
+.three-box-container {
+  @include themes;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  @media screen and (min-width: 1030px) {
+    grid-template-columns: repeat(3, minmax(33.33%, 1fr));
+  }
+
+  .three-box {
+    @include themes;
+
+    display: grid;
+    grid-template-rows: min(40px, 20%) auto min(40px, 14%);
+    padding-inline: rem(58);
+
+    .button.arrow {
+      filter: brightness(0) invert(1);
+      align-self: end;
+    }
+
+    @media screen and (min-width: 1030px) {
+      &:last-child {
+        margin-block-end: clamp(rem(36), 4vw, rem(54));
+      }
+    }
+  }
+}

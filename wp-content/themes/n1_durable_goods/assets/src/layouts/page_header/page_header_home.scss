@@ -1,0 +1,109 @@
+@mixin page_header_home {
+
+  &.page-type-home {
+    --hero-height: 484px;
+    --frame-hero-height: 380px;
+    --inner-image-size: 380px;
+    --inner-image-position: bottom center;
+    --hero-text-top: 50px;
+    --hero-text-bottom: 200px;
+    --hero-text-width: 100%;
+
+    @media screen and (min-width: 1030px) {
+      --hero-height: 640px;
+      --frame-hero-height: 640px;
+      --inner-image-size: 520px;
+      --inner-image-position: left bottom;
+      --hero-text-top: 0;
+      --hero-text-bottom: 300px;
+        --hero-text-width: 75%;
+    }
+
+    .hero {
+      position: relative;
+      height: var(--hero-height);
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: cover;
+
+      .inner-image {
+        background-repeat: no-repeat;
+        background-size: var(--inner-image-size);
+        background-position: var(--inner-image-position);
+        height: var(--hero-height);
+      }
+    }
+
+    .layout-home {
+      margin-block-start: calc(-1 * var(--hero-height));
+      padding-block-end: var(--padding-block-end);
+
+      .frame-hero {
+        height: auto;
+        grid-template-rows: var(--frame-hero-height) auto;
+        @media screen and (min-width: 1030px) {
+          align-items: end;
+        }
+
+        .hero-text {
+          margin-block-start: var(--hero-text-top);
+          margin-block-end: var(--hero-text-bottom);
+
+          max-width: var(--hero-text-width);
+          margin-inline: auto;
+
+          * {
+            text-align: center;
+            color: $white;
+            text-shadow: 1px 1px 40px rgba(0, 0, 0, 0.9);
+          }
+
+                    .header-hero {
+            font-size: clamp(rem(30), 6vw, rem(40));
+            font-weight: 700;
+            text-shadow: 0 0 10px #00000080;
+          }
+
+          .phone-number {
+            font-size: rem(24);
+            font-weight: 400;
+            margin-block-end: rem(10);
+            padding: rem(10) rem(20);
+            border-radius: rem(10);
+            border: 1px solid $white;
+            display: grid;
+            grid-template-columns: auto auto;
+            align-items: center;
+            width: fit-content;
+            margin-inline: auto;
+
+            .icon-phone {
+              height: rem(25);
+              width: rem(25);
+              margin-inline-end: rem(10);
+              fill: $white;
+              //flip horizontally
+              transform: scaleX(-1);
+            }
+          }
+        }
+
+        @media screen and (min-width: 1030px) {
+          .rw-form-box {
+            margin-block-end: rem(30);
+          }
+        }
+      }
+
+      .page-title {
+        max-width: var(--max-width-content);
+      }
+
+      .frame-content {
+
+      }
+    }
+  }
+
+
+}

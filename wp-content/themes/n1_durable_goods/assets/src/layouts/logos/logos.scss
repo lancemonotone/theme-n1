@@ -1,0 +1,86 @@
+@import "../../scss/mixins/themes";
+
+.logos {
+  @include themes;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $white;
+    border-radius: 2%;
+    margin-inline: rem(10);
+    filter: grayscale(100%);
+
+    img {
+      max-width: 150px;
+    }
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .glider::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .glider {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .glider-track {
+    //gap: rem(40);
+  }
+
+  .glider-dots {
+    .glider-dot {
+      opacity: .3;
+      background-color: $black;
+      margin-block-start: clamp(rem(20), 3vw, rem(30));
+
+      &.active {
+        opacity: 1;
+        background-color: $white;
+
+        &:only-child {
+          display: none;
+        }
+      }
+    }
+  }
+
+  // Not used
+  .glider-prev,
+  .glider-next {
+    display: grid;
+    place-content: center;
+
+    &:after {
+      content: " ";
+      width: 0;
+      height: 0;
+      border-style: inset;
+      border-width: 0 7.5px 15px 7.5px;
+      border-color: transparent transparent $white transparent;
+      transform: rotate(90deg);
+      display: inline-block;
+      transition: all .3s;
+    }
+
+    &.disabled {
+      display: none;
+
+      &:after {
+        border-color: transparent transparent $white transparent;
+      }
+    }
+
+  }
+
+  .glider-prev {
+    &:after {
+      transform: rotate(-90deg);
+    }
+  }
+}
+

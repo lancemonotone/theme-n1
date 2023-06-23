@@ -1,0 +1,50 @@
+@import "../../scss/mixins/themes";
+
+.split-content {
+  @include themes;
+
+  .frame {
+
+    .wysiwyg {
+      padding-block-end: 0;
+    }
+
+    .image {
+      height: 100%;
+      width: 100%;
+
+      & ~ .wysiwyg {
+        padding-block: clamp(rem(36), 4vw, rem(90));
+      }
+    }
+  }
+
+  &.split_image {
+    padding-block: 0 !important;
+
+    &:not(:last-child) {
+      margin-block-end: clamp(rem(36), 4vw, rem(54));
+    }
+
+    .inner {
+      max-width: 1920px;
+    }
+
+    .frame {
+
+      .wysiwyg {
+        padding-block: clamp(rem(36), 4vw, rem(90));
+      }
+
+      .image {
+        display: none;
+        height: 100%;
+        width: 100%;
+
+        @media screen and (min-width: 1030px) {
+          display: block;
+        }
+      }
+    }
+  }
+}

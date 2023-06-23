@@ -1,0 +1,56 @@
+:root {
+  --max-width-content: 1104px;
+  --inner-padding: 0;
+  --transition: 0.1s cubic-bezier(1, -0.02, 1, 1);
+  --padding-block-end: clamp(2.25rem, 4vw, 3.375rem);
+
+  @media screen and (min-width: 1030px) {
+    --inner-padding: 20px;
+  }
+}
+
+body {
+  background-color: $grey;
+}
+
+.inner {
+  position: relative;
+  margin-inline: auto;
+  padding-inline: var(--inner-padding);
+  max-width: var(--max-width-content);
+
+  .inner {
+    padding-inline: 0;
+  }
+}
+
+.frame {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 2rem;
+
+  &:after {
+    content: unset;
+  }
+
+  @media screen and (min-width: 1030px) {
+    grid-template-columns: 1fr 1fr;
+    column-gap: rem(50);
+    row-gap: 0;
+
+    .wysiwyg {
+      max-width: 570px;
+    }
+
+    & > div {
+      &:first-child {
+        justify-self: end;
+      }
+
+      &:last-child {
+        justify-self: start;
+      }
+    }
+  }
+
+}

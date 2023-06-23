@@ -1,0 +1,39 @@
+@import "mixins/buttons";
+
+.button {
+  @include button;
+
+  &.arrow {
+    color: $black;
+    width: fit-content;
+    display: grid;
+    grid-template-columns: rem(24) auto;
+    align-items: center;
+    justify-self: start;
+    margin-block-start: rem(16);
+    margin-inline: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      width: rem(16);
+      height: rem(16);
+      margin-inline-end: rem(8);
+      justify-self: end;
+      transition: margin-inline-end var(--transition);
+      background: url("../images/arr.svg") no-repeat center center;
+    }
+
+    &:hover {
+      background-color: transparent;
+      color: $black;
+
+      &:before {
+        margin-inline-end: 0;
+      }
+    }
+  }
+}

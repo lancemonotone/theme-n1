@@ -1,0 +1,99 @@
+@mixin themes {
+  padding-block-end: var(--padding-block-end);
+
+  // Briefly hide the content to prevent FOUC
+  opacity: 0;
+  animation-name: fade-in;
+  animation-duration: .1s;
+  animation-delay: .5s;
+  animation-timing-function: cubic-bezier(1, -.02, 1, 1);
+  animation-fill-mode: forwards;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  &.has-light-gray-background-color {
+    @include background-style($grey, true);
+  }
+
+  &.has-white-background-color {
+    @include background-style($white, true);
+  }
+
+  &.has-primary-dark-background-color {
+    @include background-style($primary-dark);
+  }
+
+  &.has-primary-medium-background-color {
+    @include background-style($primary-medium);
+  }
+
+  &.has-primary-light-background-color {
+    @include background-style($primary-light);
+  }
+
+  //&.has-dark-blue-background-color {
+  //  @include background-style($dark-blue);
+  //
+  //  .header-sm {
+  //    color: $bright-blue !important;
+  //  }
+  //}
+
+  &.has-accent-background-color {
+    @include background-style($accent, true);
+  }
+}
+
+@mixin background-style($color, $background-only: false) {
+  padding-block: clamp(rem(36), 4vw, rem(54));
+
+  .layout.page &:not(:last-child) {
+    margin-block-end: clamp(rem(36), 4vw, rem(54));
+  }
+
+  @if $background-only {
+    background-color: $color;
+  } @else {
+    background-color: $color;
+
+    * {
+      color: $white !important;
+
+      .button:not(.arrow),
+      .red-button {
+        outline-color: $white !important;
+
+        &:hover {
+          background-color: $white !important;
+          color: $color !important;
+        }
+      }
+
+      a:not([class]) {
+        border-block-end: 1px solid #FFFFFF50;
+
+        &:hover {
+          border-block-end: none;
+        }
+      }
+
+      a.button,
+      a.red-button {
+        border: none;
+      }
+
+      .glider-dots *,
+      .glider-nav *,
+      .button.arrow:before {
+        filter: brightness(0) invert(1);
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+@import "../../scss/mixins/themes";
+
+.cta {
+  @include themes;
+
+  &,
+  &[class~="has-background"] {
+    padding-block: 0 !important;
+  }
+
+  .background-image-container {
+    max-width: 1880px;
+    margin: 0 auto;
+    padding-block: clamp(rem(36), 6vw, rem(100));
+  }
+
+  .inner {
+    display: grid;
+    place-content: center;
+
+    & > * {
+      text-align: center;
+    }
+
+    .section-heading {
+      //padding-block-end: rem(10);
+      margin-inline: auto;
+    }
+
+    .content {
+      //font-size: rem(12);
+      display: none;
+
+      @media screen and (min-width: 1030px) {
+        display: block;
+      }
+    }
+  }
+
+}

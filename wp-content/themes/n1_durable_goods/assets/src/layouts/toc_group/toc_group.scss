@@ -1,0 +1,14 @@
+@import "../../scss/mixins/accordion";
+@import "../../scss/mixins/themes";
+@import "../../scss/mixins/toc";
+
+.toc-group {
+  @include themes;
+
+    background-color: $grey;
+    padding-block-start: clamp(2.25rem, 4vw, 3.375rem);
+    //padding-block-end: 0;
+    margin-block-end: clamp(2.25rem, 4vw, 3.375rem);
+
+  @include toc;
+}

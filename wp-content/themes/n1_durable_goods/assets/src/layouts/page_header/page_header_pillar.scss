@@ -1,0 +1,127 @@
+@mixin page_header_pillar {
+
+  &.page-type-pillar {
+    --hero-height: 263px;
+    --inner-image-size: 380px;
+    --inner-image-position: bottom center;
+
+    @media screen and (min-width: 1030px) {
+      --hero-height: 408px;
+      --inner-image-size: 620px;
+      --inner-image-position: 0 170px;
+    }
+
+    .hero {
+      position: relative;
+      height: var(--hero-height);
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: cover;
+
+      .inner-image {
+        background-repeat: no-repeat;
+        background-size: var(--inner-image-size);
+        background-position: var(--inner-image-position);
+        height: var(--hero-height);
+      }
+    }
+
+    .page-title {
+      padding-block-start: rem(30);
+    }
+
+    .page-breadcrumbs {
+      padding-inline: 0;
+      padding-block-end: 0;
+
+      .inner {
+        padding: 0;
+      }
+    }
+
+    & > .layout {
+      @include themes;
+      --header-offset: 210px;
+
+      @media screen and (max-width: 1030px) {
+        --header-offset: 0;
+
+        //padding-block-end: 0;
+
+        & > .inner {
+          padding-block-start: 0;
+        }
+      }
+
+      // negative margin to offset the height of the header
+      margin-block-start: calc(var(--header-offset) * -1);
+      position: relative;
+      z-index: 10;
+
+      .col {
+        &:first-child {
+          // total fudge to get the content to line up with the header
+          padding-top: var(--header-offset);
+        }
+
+        &:last-child {
+          .callout-grid {
+            display: none;
+          }
+        }
+
+        @media screen and (min-width: 1030px) {
+          &:last-child {
+            display: block;
+            margin-block-start: rem(43);
+
+            .callout-grid {
+              display: grid;
+            }
+          }
+        }
+      }
+
+      .callout-grid {
+        @include themes;
+
+        padding-block: clamp(2.25rem, 4vw, 3.375rem);
+
+        .inner {
+          padding: 0;
+        }
+
+        .callout-container {
+          padding-inline: 25px;
+          grid-template-columns: repeat(auto-fit, minmax(rem(130), 1fr));
+
+          .callout {
+            padding: rem(32) rem(16);
+            background-color: $accent;
+
+            .callout-heading {
+              font-family: $header-font;
+              font-size: rem(20);
+              // letter spacing is 5% of font size
+              letter-spacing: rem(1);
+              font-weight: 700;
+              line-height: rem(24);
+              text-transform: uppercase;
+              color: $white;
+              padding-block-end: rem(23);
+            }
+
+            .callout-content p {
+              font-size: rem(12);
+              line-height: rem(14);
+              text-align: center;
+              color: $white;
+            }
+
+          }
+        }
+      }
+    }
+
+  }
+}

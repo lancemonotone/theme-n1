@@ -1,0 +1,12 @@
+@import '../../scss/mixins/themes';
+@import 'page_header_home';
+@import 'page_header_pillar';
+
+.page-header {
+  all: unset;
+
+  @include page_header_pillar;
+
+  @include page_header_home;
+
+}
