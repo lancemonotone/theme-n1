@@ -46,14 +46,14 @@ $active_provider_token = $provider_entity->getToken();
 <script type='text/javascript'>
 <?php if($active_provider_token!="default"){ ?>
 	jQuery(document).ready(function() {
-	jQuery("#provider_token").removeAttr("disabled"); //resolve a potential issue with initial state 
+	jQuery("#provider_token").prop('disabled',false); //resolve a potential issue with initial state 
 	mmjs.showAdditionalOptionsDialog(jQuery('#provider-config-form :input').serializeArray());
 	});
 <?php }else{ ?>
 
 jQuery(document).ready(function() {
 	jQuery("#mm-affiliate-provider-additional-options").hide();
-	jQuery("#provider_token").removeAttr("disabled");
+	jQuery("#provider_token").prop('disabled',false);
 });
 
 <?php }?>

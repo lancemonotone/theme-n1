@@ -6,6 +6,47 @@
  */
 
 $view = new MM_MembersView();
+$view->setupEnhancedDatagrid();
+
+//translations
+$mmehdts = $view->getDefaultGridTranslations();
+
+//images
+$mmehdgi = $view->getDefaultGridImages("member");
+$mmehdgi += ['active_status'               => MM_Status::getImage(MM_Status::$ACTIVE),
+             'canceled_status'             => MM_Status::getImage(MM_Status::$CANCELED),
+             'locked_status'               => MM_Status::getImage(MM_Status::$LOCKED),
+             'paused_status'               => MM_Status::getImage(MM_Status::$PAUSED),
+             'overdue_status'              => MM_Status::getImage(MM_Status::$OVERDUE),
+             'error_status'                => MM_Status::getImage(MM_Status::$ERROR),
+             'expired_status'              => MM_Status::getImage(MM_Status::$EXPIRED),
+             'pending_activation_status'   => MM_Status::getImage(MM_Status::$PENDING_ACTIVATION),
+             'pending_cancellation_status' => MM_Status::getImage(MM_Status::$PENDING_CANCELLATION),
+             'bundle'                      => MM_Utils::getAccessIcon(MM_OrderItemAccess::$ACCESS_TYPE_BUNDLE),
+             'last-login-date'             => MM_Utils::getIcon('calendar-o', 'purple', '1.2em', '2px', _mmt("Last logged in ")."[lldplaceholder]", "margin-right:8px;"),
+             'never-logged-in'             => MM_Utils::getIcon('calendar-o', 'purple', '1.2em', '2px', _mmt("Member hasn't logged in yet"), "margin-right:8px;"),
+             'login-count'                 => MM_Utils::getIcon('key', 'yellow', '1.2em', '2px', _mmt("Logged in")." [lcplaceholder] "._mmt("times")),
+             'pages-accessed'              => MM_Utils::getIcon('file-o', 'turq', '1.2em', '2px', _mmt("Accessed")." [paplaceholder] "._mmt("pages"))
+];
+
+//get the initial data from the view, get a unique id for the grid
+$initialQuery = null;
+if (isset($_GET["membershipId"]) || isset($_GET["bundleId"]))
+{
+    $queryMeta = (object)["query"=>(object)["conditions"=>[]]];
+    if (isset($_GET["membershipId"]))
+    {
+        $queryMeta->query->conditions[] = (object)["name"=>"mud.membership_level_id", "value"=>htmlspecialchars($_GET["membershipId"], ENT_NOQUOTES, "UTF-8") , "rel"=>"eq"];
+    }
+    
+    if (isset($_GET["bundleId"]))
+    {
+        $queryMeta->query->bundles = [htmlspecialchars($_GET["bundleId"], ENT_NOQUOTES, "UTF-8")];
+    }
+    $initialQuery["queryMeta"] = json_encode($queryMeta);
+}
+$dataset = json_encode($view->search($initialQuery));
+$gridId = uniqid(); 
 
 $showSearch = false;
 
@@ -13,8 +54,7 @@ $showSearch = false;
 global $current_user;
 
 $showCsvExportButton = false;
-//$useLegacyExport = MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_ENABLE_LEGACY_EXPORT,false);
-$useLegacyExport = true;
+$useLegacyExport = MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_ENABLE_LEGACY_EXPORT,false); 
 
 if (isset($current_user) && isset($current_user->ID))
 {
@@ -81,50 +121,43 @@ if (!$useLegacyExport)
 	</div>
 	
 	<div id='mm_members_csv'></div>
-	<div id="mm-grid-container" style="width:98%">
-		<?php echo $view->generateDataGrid($_POST); ?>
+	
+	<div id="gridHolder" data-grid-id="<?php echo $gridId; ?>" style="width:98%">
+	<!-- Container for datagrid -->
 	</div>
+	
+	<?php if ($dataset != null) { ?>
+	<script type="application/json" id="<?php echo "members-{$gridId}-data"; ?>">
+	<?php echo $dataset; ?>
+	</script>
+	<?php } ?>
 </div>
+
 
 <?php 
 if (!$useLegacyExport)
 {
-?>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
+?>  
 <div class="mbtDialog" id="export_status_dialog" style='display:none'>
-
-    <h1>Member Export</h1>
-
-    <div class="mbtBox mbtMale">
-        <i class="fas fa-male fa-10x"></i>
-    </div>
-
-    <div class="mbtBox">
-        <div class="mbtBox" id="mbtArrowAnim">
-            <div class="mbtArrowSliding">
-                <div class="mbtArrow"></div>
-            </div> 
-            <div class="mbtArrowSliding mbtDelay1">
-                <div class="mbtArrow"></div>
-            </div>
-
-            <div class="mbtArrowSliding mbtDelay2">
-                <div class="mbtArrow"></div>
-            </div>
-
-            <div class="mbtArrowSliding mbtDelay3">
-                <div class="mbtArrow"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="mbtBox mbtFile">
-        <i class="fas fa-file-alt fa-10x"></i>
-    </div>
-
-    <p>MemberMouse is exporting members ... </p>
-    <p><input type='button' name='cancel' value="Cancel" onclick="mmjs.cancelExport(); " /></p>
-
+    <h3><i class="fa fa-download" style="top:1px;"></i>  Export Members</h3>
+    <p>Your members are being exported. Please wait ... </p>
+    <div>
+    	<label for="exportProgress">Export progress:</label>
+		<progress id="exportProgress" value="32" max="100">0</progress>
+		<div id="exportProgressText"></div>
+	</div> 	
+    <p><input type='button' name='cancel' value="Cancel" onclick="mmjs.cancelExport();" class="mm-ui-button" /></p>
 </div>
 <?php } ?>
+
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    let mmehdgi = <?php echo json_encode($mmehdgi); ?>; //set up images
+    let mmehdts = <?php echo json_encode($mmehdts); ?>; //set up translations
+    mmjs.memberDetailsLink = "<?php echo MM_ModuleUtils::getUrl(MM_MODULE_MANAGE_MEMBERS, MM_MODULE_MEMBER_DETAILS_GENERAL)."&user_id="; ?>";
+    mmjs.bundlesLink = "<?php echo MM_ModuleUtils::getUrl(MM_MODULE_PRODUCT_SETTINGS, MM_MODULE_BUNDLES)."&autoload="; ?>";
+    mmjs.renderGrid(mmehdgi,mmehdts);
+    mmjs.bindEventListeners();
+});
+</script>

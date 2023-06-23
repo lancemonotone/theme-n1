@@ -40,7 +40,7 @@ foreach($data as $key => $item)
    	$actions = MM_Utils::getEditIcon("Edit Shipping Method Mapping", '', $editActionUrl);
    	$actions .= MM_Utils::getDeleteIcon("Delete Shipping Method Mapping", 'margin-left:5px;', $deleteActionUrl);
    
-    // Lime Light Shipping Method
+    // Sticky.io Shipping Method
     $llShippingMethod = "{$item->stickyio_shipping_method_name} [{$item->stickyio_shipping_method_id}]";
     $llShippingMethod .= '<a href="javascript:mmjs.getStickyioShippingDescription(\''.$item->stickyio_shipping_method_id.'\');" style="margin-left: 5px; cursor:pointer;" title="View Sticky.io Shipping Method Info">'.MM_Utils::getIcon("info-circle", "blue", "1.3em", "2px;").'</a>';
     
@@ -55,7 +55,7 @@ foreach($data as $key => $item)
 
 $headers = array
 (
-	'stickyio_shipping_method_name'	=> array('content' => '<a onclick="mmjs.sort(\'stickyio_shipping_method_name\');" href="#">Lime Light Shipping Method</a>'),
+	'stickyio_shipping_method_name'	=> array('content' => '<a onclick="mmjs.sort(\'stickyio_shipping_method_name\');" href="#">Sticky.io Shipping Method</a>'),
 	'membermouse_shipping_method_id'	=> array('content' => 'MemberMouse Shipping Method'),
 	'actions'							=> array('content' => 'Actions', 'attr'=>'style="width:50px;"')
 );

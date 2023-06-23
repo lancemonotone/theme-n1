@@ -31,7 +31,7 @@ var MM_SubscriptionViewJS = MM_Core.extend({
 	{
 		mmjs.closeDialog();
 		alert(response.message);
-		document.location.href = document.location.href;
+		document.location.href = document.location.href.replace(/#/, '');
 	},
 	
 	cancelSubscriptionAndAccess: function(orderItemId){

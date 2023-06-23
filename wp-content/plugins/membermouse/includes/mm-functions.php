@@ -94,16 +94,7 @@ function _mmmd()
 {
 	global $wpdb;
 	
-	switch (true)
-	{
-		case (is_object ( $wpdb->dbh ) && get_class ( $wpdb->dbh ) == "mysqli") :
-			return MM_MYSQLI_DRIVER;
-			break;
-		case (is_resource ( $wpdb->dbh ) && get_resource_type ( $wpdb->dbh ) == "mysql link") :
-		default :
-			return MM_MYSQL_DRIVER;
-			break;
-	}
+	return MM_MYSQLI_DRIVER;
 }
 
 
@@ -124,17 +115,7 @@ function _mmmq($sql, $use_mysqli_use_result = false)
 {
 	global $wpdb;
 	
-	$result = null;
-	
-	switch (_mmmd())
-	{
-		case MM_MYSQL_DRIVER :
-			$result = @mysql_query($sql,$wpdb->dbh);
-			break;
-		case MM_MYSQLI_DRIVER :
-			$result = @mysqli_query ($wpdb->dbh, $sql, (($use_mysqli_use_result) ? MYSQLI_USE_RESULT : MYSQLI_STORE_RESULT));
-			break;
-	}
+	$result = @mysqli_query ($wpdb->dbh, $sql, (($use_mysqli_use_result) ? MYSQLI_USE_RESULT : MYSQLI_STORE_RESULT));
 	return $result;
 }
 

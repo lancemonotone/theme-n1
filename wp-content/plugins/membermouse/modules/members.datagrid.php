@@ -229,10 +229,6 @@ foreach($data as $key=>$item)
 		}
 		
 		$bundles = implode(", ", $bundles);
-		if (!is_array($bundleExpirations))
-		{
-			error_log("Offending content = ".print_r($bundleExpirations,true));
-		}
 		$bundleExpirations = implode(",", $bundleExpirations); 
 	}
 	else
@@ -317,7 +313,7 @@ foreach($data as $key=>$item)
     $row[] = array('content' => $status);
     $row[] = array('content' => $actions);
     
-	$datagridRows[] = $row;
+    $datagridRows[$user->getId()] = $row;
 		
 	// build CSV row
 	if($doGenerateCsv)

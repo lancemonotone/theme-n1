@@ -1,6 +1,6 @@
 <?php
 /**
- * 
+ *
  * MemberMouse(TM) (http://www.membermouse.com)
  * (c) MemberMouse, LLC. All rights reserved.
  */
@@ -15,11 +15,11 @@ function isLocalInstall($specificServer="localhost")
 		}
 	}
 
-	return false;
+	return true;
 }
 
-define("MM_PREFIX", "mm_");   
-define("MM_LANGUAGE_DOMAIN", "membermouse"); 
+define("MM_PREFIX", "mm_");
+define("MM_LANGUAGE_DOMAIN", "membermouse");
 
 $centralServer = "https://hub.membermouse.com/index.php?q=/";
 $centralServerUrl = "https://hub.membermouse.com";
@@ -32,9 +32,9 @@ $reservedGetParams = array(
 	'name'=>1,
 );
 
-define("MM_CENTRAL_SERVER_URL", $centralServerUrl);
-define("MM_PRETTY_CENTRAL_SERVER_URL", $centralServerPrettyUrl);
-define("MM_CENTRAL_SERVER", $centralServer);
+if (!defined("MM_CENTRAL_SERVER_URL")) { define("MM_CENTRAL_SERVER_URL", $centralServerUrl); }
+if (!defined("MM_PRETTY_CENTRAL_SERVER_URL")) { define("MM_PRETTY_CENTRAL_SERVER_URL", $centralServerPrettyUrl); }
+if (!defined("MM_CENTRAL_SERVER")) { define("MM_CENTRAL_SERVER", $centralServer); }
 define("MM_PLUGIN_ABSPATH", dirname(dirname(__FILE__)));
 
 $pluginDirArray = explode(DIRECTORY_SEPARATOR, dirname(dirname(__FILE__)));
@@ -47,9 +47,9 @@ define("MM_IMAGES_URL", MM_RESOURCES_URL."images/");
 define("MM_NO_DATA", "&mdash;");
 define("MM_GET_KEY", "345346539284890489234");
 
-/** 
- * jQuery UI theme MemberMouse uses. Might want to think about 
- * making this an option at some point in the future 
+/**
+ * jQuery UI theme MemberMouse uses. Might want to think about
+ * making this an option at some point in the future
  **/
 define("MM_JQUERY_UI_THEME", "smoothness");
 
@@ -75,7 +75,7 @@ define("MM_MYSQL_DRIVER", "mysql");
 define("MM_MYSQLI_DRIVER", "mysqli");
 
 /** DATABASE TABLE NAMES **/
-define("MM_TABLE_QUEUE", MM_PREFIX."queue");
+define("MM_TABLE_QUEUE_TASKS", MM_PREFIX."queue_tasks");
 define("MM_TABLE_SESSIONS", MM_PREFIX."sessions");
 define("MM_TABLE_COUPONS", MM_PREFIX."coupons");
 define("MM_TABLE_USER_DEFINED_PAGES", MM_PREFIX."user_defined_pages");
@@ -131,7 +131,7 @@ define("MM_TABLE_SOCIAL_LOGIN_LINKED_PROFILES", MM_PREFIX."social_login_linked_p
 define("MM_TABLE_SCHEDULED_EVENTS", MM_PREFIX."scheduled_events");
 define("MM_TABLE_SCHEDULED_PAYMENTS", MM_PREFIX."scheduled_payments");
 define("MM_TABLE_QUEUED_SCHEDULED_EVENTS", MM_PREFIX."queued_scheduled_events");
-define("MM_SCHEDULING_SERVER_URL", "{$centralServerUrl}/scheduler.php");
+if (!defined("MM_SCHEDULING_SERVER_URL")) { define("MM_SCHEDULING_SERVER_URL", "{$centralServerUrl}/scheduler.php"); }
 
 /** PAYMENT SERVICE TABLES **/
 define("MM_TABLE_CARD_ON_FILE", MM_PREFIX."card_on_file");
@@ -170,7 +170,7 @@ define("MM_TABLE_BRAINTREE_CUSTOMER_LINKS", MM_PREFIX."braintree_customer_links"
 define("MM_TABLE_BRAINTREE_CHARGES", MM_PREFIX."braintree_charges");
 define("MM_TABLE_AUTHNET_CIM_CUSTOMER_LINKS", MM_PREFIX."authorizenet_cim_customer_links");
 define("MM_TABLE_AUTHNET_CIM_CHARGES", MM_PREFIX."authorizenet_cim_charges");
-define("MM_TABLE_LIMELIGHT_PRODUCTS", MM_PREFIX."limelight_products");  
+define("MM_TABLE_LIMELIGHT_PRODUCTS", MM_PREFIX."limelight_products");
 define("MM_TABLE_LIMELIGHT_SHIPPING_METHODS", MM_PREFIX."limelight_shipping_methods");
 define("MM_TABLE_LIMELIGHT_SUBSCRIPTION_LINKS", MM_PREFIX."limelight_subscription_links");
 define("MM_TABLE_LIMELIGHT_CHARGES", MM_PREFIX."limelight_charges");
@@ -236,6 +236,7 @@ define("MM_MODULE_IMPORT_WIZARD", "import_wizard");
 define("MM_MODULE_USER_DEFINED_PAGES", "user_defined_pages");
 define("MM_MODULE_MEMBER_DETAILS", "member_details");
 define("MM_MODULE_MEMBER_DETAILS_GENERAL", "details_general");
+define("MM_MODULE_COURSES", "courses");
 define("MM_MODULE_MEMBER_DETAILS_CUSTOM_FIELDS", "details_custom_fields");
 define("MM_MODULE_MEMBER_DETAILS_ACCESS_RIGHTS", "details_access_rights");
 define("MM_MODULE_MEMBER_DETAILS_USER_DEFINED", "details_user_defined");
@@ -270,13 +271,13 @@ define("MM_MODULE_PHP_INTERFACE", "php_interface");
 define("MM_MODULE_DUPLICATE_SUBSCRIPTION_TOOL", "duplicate_subscriptions");
 define("MM_MODULE_EXTENSIONS", "extensions");
 
-define("MM_MODULE_STICKYIO_PRODUCTS", "stickyio_products");  
+define("MM_MODULE_STICKYIO_PRODUCTS", "stickyio_products");
 define("MM_MODULE_STICKYIO_SHIPPING_METHODS", "stickyio_shipping_methods");
 
 define("MM_MODULE_LIMELIGHT_PRODUCTS", "limelight_products");
 define("MM_MODULE_LIMELIGHTV2_PRODUCTS", "limelightv2_products");
 define("MM_MODULE_LIMELIGHT_SHIPPING_METHODS", "limelight_shipping_methods");
-define("MM_MODULE_LIMELIGHTV2_SHIPPING_METHODS", "limelightv2_shipping_methods"); 
+define("MM_MODULE_LIMELIGHTV2_SHIPPING_METHODS", "limelightv2_shipping_methods");
 
 //reporting
 define("MM_MODULE_REPORTING", "reporting");
@@ -292,4 +293,17 @@ define("MM_MODULE_SALES_BY_MEMBERSHIP_REPORT", "sales_by_membership_report");
 define("MM_MODULE_AFFILIATE_REPORT", "affiliate_report");
 
 define("MM_EXPORT_FILE_MEMBERS_IMPORT_TEMPLATE", "import_members_template");
+
+// stripe connect & auth service
+define("MM_MODULE_ACCOUNT_LOGIN", "membermouse_account_login");
+if(!defined('MM_AUTH_SERVICE_DOMAIN')) {
+  define('MM_AUTH_SERVICE_DOMAIN', 'auth.caseproof.com');
+}
+define('MM_AUTH_SERVICE_URL', 'https://' . MM_AUTH_SERVICE_DOMAIN);
+
+if(!defined('MM_STRIPE_SERVICE_DOMAIN')) {
+  define('MM_STRIPE_SERVICE_DOMAIN', 'stripe.membermouse.com');
+}
+define('MM_STRIPE_SERVICE_URL', 'https://' . MM_STRIPE_SERVICE_DOMAIN);
+define('MMOUSE_SCRIPT_URL',site_url('/index.php?plugin=mmouse'));
 ?>

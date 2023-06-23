@@ -14,8 +14,11 @@ var MM_MemberDetailsViewJS = MM_Core.extend({
 			var form_obj = new MM_Form('mm-form-container');
 		    var values = form_obj.getFields();
 		     
-		    this.page = values.page;
-		    this.mm_module = values.module;
+		    let urlParams = this.getURLQueryParams(window.location.search);
+		    let currentModule = ('module' in urlParams) ? urlParams.module : "";
+		    let currentPage = ('page' in urlParams) ? urlParams.page : "";
+		    this.mm_module = currentModule;
+		    this.page = currentPage;
 		    
 		    values.mm_action = "updateMember";
 		    

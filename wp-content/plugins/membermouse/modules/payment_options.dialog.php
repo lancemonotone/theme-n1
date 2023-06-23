@@ -136,21 +136,32 @@ function goToCheckoutPage(checkoutUrl)
 <div style="margin-bottom:10px;">
 <span class="mm-section-header">Charge for <?php echo $accessName; ?></span>
 </div>
-
-<div style="margin-bottom:10px;">
-	<select id="mm-product-selector" onchange="pymtutils_js.getPaymentOptionsList();">
-	<option value='0'>Select a product to purchase</option>
-	<?php
-		foreach($products as $productId=>$productName) 
+<?php
+    $filteredProducts = array();
+    
+	foreach($products as $productId=>$productName) 
+	{
+		$product = new MM_Product($productId);
+		if($product->isValid() && $product->isHidden() == false)
 		{
-			$product = new MM_Product($productId);
-			if($product->isValid())
-			{
-				echo "<option value='{$product->getId()}'>{$product->getName()}</option>";
-			}
+			array_push($filteredProducts, $product);
 		}
-	?>
-	</select>
+	}
+?>
+<div style="margin-bottom:10px;">
+	<?php if(count($filteredProducts) > 0) { ?>
+    	<select id="mm-product-selector" onchange="pymtutils_js.getPaymentOptionsList();">
+    	<option value='0'>Select a product to purchase</option>
+    	<?php
+    	    foreach($filteredProducts as $product) 
+    		{
+    			echo "<option value='{$product->getId()}'>{$product->getName()}</option>";
+    		}
+    	?>
+    	</select>
+	<?php } else { 
+	    echo "<i>"._mmt("No available products. Hidden products are not available for purchase.")."</i>";
+	} ?>
 </div>
 
 <input id="mm-user-id" type="hidden" value="<?php echo $user->getId(); ?>" />

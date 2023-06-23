@@ -68,11 +68,6 @@ foreach($data as $key=>$item)
 	// IP Address
 	$ipAddress = MM_NO_DATA;
 	
-	if(!empty($item->ip))
-	{
-		$ipAddress = "<span style='font-family:courier;'><a href='http://www.infosniper.net/index.php?ip_address={$item->ip}' target='_blank'>".$item->ip."</a></span>";
-	}
-	
 	if(!empty($item->event_type))
 	{
 		switch($item->event_type)
@@ -271,8 +266,13 @@ foreach($data as $key=>$item)
 				
 				break;
 				
-			case MM_ActivityLog::$EVENT_TYPE_LOGIN:
+			case MM_ActivityLog::$EVENT_TYPE_LOGIN: 
+
 				$details = "Member logged in from <span style='font-family:courier;'>{$ipAddress}</span>";
+				if(!empty($item->ip))
+				{ 
+					$details = "Member logged in from <span style='font-family:courier;'>".MM_Utils::generateIPLinks($item->ip,",")."</span>";
+				} 
 				$eventType = MM_Utils::getIcon('key', 'yellow', '1.3em', '2px', "Login");
 				break;
 				
@@ -617,6 +617,39 @@ foreach($data as $key=>$item)
 					}
 				}
 				break;
+
+			case MM_ActivityLog::$EVENT_TYPE_COURSES:
+				if(!is_null($params) && !empty($params[MM_ActivityLog::$PARAM_COURSES_EVENT]))
+				{
+					$eventType = MM_Utils::getIcon('graduation-cap', 'blue', '1.3em', '2px', 'Initial Payment Received');
+
+					$url = '';
+					if(isset($params['title'], $params['url'])){
+						$url = sprintf('<span style="font-family:courier;"><a href="%s" target="_blank">%s</a></span>', esc_url($params['url']), esc_attr($params['title']));
+					}
+
+					switch($params[MM_ActivityLog::$PARAM_COURSES_EVENT])
+					{
+						case MM_Event::$QUIZ_ATTEMPT_COMPLETED:
+							$quiz_id = $params['quiz_id'] ?? 0; 
+							$quiz_attempts = sprintf('<span style="font-family:courier;"><a href="%s" target="_blank">%s</a></span>', esc_url(add_query_arg(['id' => $quiz_id], admin_url('admin.php?page=mmcs-quiz-attempts'))), _mmt('View Attempts'));
+							
+							$details = sprintf('Member completed %s Quiz. %s', $url, $quiz_attempts);
+							break;
+						case MM_Event::$LESSON_COMPLETED:
+							$details = sprintf('Member completed %s Lesson', $url);
+							break;
+						case MM_Event::$COURSE_COMPLETED:
+							$details = sprintf('Member completed %s Course', $url);
+							break;
+						case MM_Event::$LESSON_STARTED:
+							$details = sprintf('Member started %s Lesson', $url);
+							break;
+						case MM_Event::$COURSE_STARTED:
+							$details = sprintf('Member started Course &mdash; %s', $url);
+							break;
+					}
+				}
 		}
 	}
 	
@@ -626,10 +659,9 @@ foreach($data as $key=>$item)
 	if(!$isMemberDetailsArea)
 	{
 		$row[] = array('content' => $memberLink);
-	}
-	
+	} 
 	$row[] = array('content' => $details);
-	$row[] = array('content' => $ipAddress);
+	$row[] = array('content' => "<span style='font-family:courier;'>".MM_Utils::generateIPLinks($item->ip)."</span>");
 	$row[] = array('content' => MM_Utils::dateToLocal($item->date_added));
 	
 	$rows[] = $row;

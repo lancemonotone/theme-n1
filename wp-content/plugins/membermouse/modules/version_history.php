@@ -10,8 +10,6 @@ if(isset($_POST["clear-upgrade-notice"]) && $_POST["clear-upgrade-notice"] == "1
 	MM_OptionUtils::setOption(MM_OptionUtils::$OPTION_KEY_UPGRADE_NOTICE, "");
 }
 
-$versions = array();
-
 $view = new MM_ManageInstallView();
 $dataGrid = new MM_DataGrid($_REQUEST, "id", "desc", 10);
 $dataGrid->showPagingControls = false;

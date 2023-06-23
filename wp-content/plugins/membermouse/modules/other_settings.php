@@ -16,7 +16,7 @@ require_once("jquery_ui_settings.php");
 require_once("core_page_css_settings.php");
 require_once("activity_log_settings.php");
 require_once("forget_member_settings.php");
-//require_once("push_notification_settings.php"); //temporarily disabled pending 2.4.1 queue inclusion
+require_once("push_notification_settings.php"); //temporarily disabled pending 2.4.1 queue inclusion
 ?>
 <input type='submit' value='Save Settings' class="mm-ui-button blue" />
 </form>

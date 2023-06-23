@@ -15,6 +15,10 @@ var MM_CheckoutView = MM_Core.extend({
 	
 	tokenSuccessfullyExchanged: false,
 	
+	isAlreadySubmitting: false,
+
+    totalPrice: 0.00,
+	
 	/*
 	 * This leverages feedback from the  
 	 * applyCouponCallback event handler.  If any other 
@@ -88,6 +92,20 @@ var MM_CheckoutView = MM_Core.extend({
         }
     },
     checkout: function(doSubmit, ignoreFields) {
+		
+		document.charset = 'UTF-8';
+    	if (isFree) 
+    	{ 
+            jQuery.blockUI({ message: MemberMouseGlobal.checkoutProcessingFreeMessage });
+        } 
+    	else 
+    	{
+            jQuery.blockUI({ message: MemberMouseGlobal.checkoutProcessingPaidMessage });
+        }
+        jQuery(".blockMsg").addClass(MemberMouseGlobal.checkoutProcessingMessageCSS);
+		
+		mmjs.isAlreadySubmitting = true;
+		
         var standard_fields = new Array();
         var standard_fields_label = new Array();
         var standard_fields_paid_only = new Array();
@@ -267,6 +285,8 @@ var MM_CheckoutView = MM_Core.extend({
                 */
                 if(jQuery("#mm_is_shippable").val() == "1" && standard_fields[i].match(/^mm_field_shipping_(.*)/) && !crntValue) {
 						doSubmit = false;
+				  jQuery.unblockUI();
+				  mmjs.isAlreadySubmitting = false;
                   alert('Please enter your ' + standard_fields_label[i]);
                   jQuery("#" + standard_fields[i]).focus();
                   return;
@@ -274,6 +294,8 @@ var MM_CheckoutView = MM_Core.extend({
                 
                 if ((crntValue == '') || (crntValue == ' ') || (crntField.val().length == 0) || (crntField.val() == null) || (crntField.val() == '')) {
                 	doSubmit = false;
+                  jQuery.unblockUI();
+                  mmjs.isAlreadySubmitting = false;
                   if (standard_fields[i] == "mm_field_email_confirm") {
                     alert('Please confirm your email address');
                   } else {
@@ -291,6 +313,8 @@ var MM_CheckoutView = MM_Core.extend({
                   confirmEmailValue = mmjs.ltrim(confirmEmailField.val());
                   if (emailFieldValue != confirmEmailValue) {
 						  doSubmit = false;
+					jQuery.unblockUI();
+					mmjs.isAlreadySubmitting = false;
                     alert('The confirmation email must match your email address');
                     jQuery("#" + standard_fields[i]).focus();
                     return;
@@ -347,6 +371,8 @@ var MM_CheckoutView = MM_Core.extend({
                     	var selectedValue = radioObj.val(); 
                     	if ((selectedValue == null) || (selectedValue == undefined) || (selectedValue == '') || (selectedValue == ' ') || (selectedValue.length == 0) || (selectedValue == '')) {
                     		 doSubmit = false; 
+                    		 jQuery.unblockUI();
+                    		 mmjs.isAlreadySubmitting = false;
     		                 alert('This field is required'); 
     		                 jQuery("#" + customFields[i].name).focus();
     		                 return;
@@ -355,6 +381,8 @@ var MM_CheckoutView = MM_Core.extend({
                 }else {
                     if ((crntValue == '') || (crntValue == ' ') || (customFields[i].value.length == 0) || (customFields[i].value == null) || (customFields[i].value == '')) {
 							   doSubmit = false;
+						jQuery.unblockUI();
+						mmjs.isAlreadySubmitting = false;
                         if (jQuery("#" + customFields[i].name + "_label").length > 0) {
                             alert('Please enter your ' + jQuery("#" + customFields[i].name + "_label").val());
                         } else {
@@ -370,6 +398,8 @@ var MM_CheckoutView = MM_Core.extend({
         if (ccReq && jQuery('#mm_field_cc_number').length > 0) {
             if (jQuery('#mm_field_cc_number').val().length < 13) {
 					 doSubmit = false;
+				jQuery.unblockUI();
+				mmjs.isAlreadySubmitting = false;
                 alert('Invalid credit card number');
                 return;
             }
@@ -413,19 +443,8 @@ var MM_CheckoutView = MM_Core.extend({
 			
             var d = new Date();
             jQuery('#hasFormSubmitted').val(d.toUTCString());
-            document.charset = 'UTF-8';
-        	if (isFree) 
-        	{ 
-                jQuery.blockUI({ message: MemberMouseGlobal.checkoutProcessingFreeMessage });
-            } 
-        	else 
-        	{
-                jQuery.blockUI({ message: MemberMouseGlobal.checkoutProcessingPaidMessage });
-            }
-            jQuery(".blockMsg").addClass(MemberMouseGlobal.checkoutProcessingMessageCSS);
-                
             
-            // Safari fix?
+			// Safari fix?
             var isSafari = navigator.userAgent.indexOf("Safari") > -1;
             if(isSafari)
             { 
@@ -741,6 +760,7 @@ var MM_CheckoutView = MM_Core.extend({
         }
         if (jQuery("#mm_label_total_price").length > 0) {
             jQuery("#mm_label_total_price").html(mmjs.formatMoney(totalPrice));
+            mmjs.totalPrice = totalPrice;
         }
     },
     couponCheck: function(evt) {
@@ -865,6 +885,30 @@ var MM_CheckoutView = MM_Core.extend({
         }); 
         return true;
     },
+
+	processSubmitEvent: function(event)
+	{
+		if (mmjs.isAlreadySubmitting)
+		{
+			if (event.type != "keydown" || (event.type === "keydown" && event.key === "Enter"))
+			{
+				event.preventDefault();
+				event.stopPropagation();
+			}
+		}
+	},
+
+	addEnterKeyListener: function()
+	{
+		document.addEventListener("keydown", this.processSubmitEvent);
+		document.querySelector("#mm_checkout_form").addEventListener("submit", this.processSubmitEvent);
+	},
+
+	removeEnterKeyListener: function()
+	{
+		document.removeEventListener("keydown", this.processSubmitEvent);
+		document.querySelector("#mm_checkout_form").removeEventListener("submit", this.processSubmitEvent);
+	},
 
     hasSubmitDependancy: function()
     {
@@ -1006,6 +1050,11 @@ var MM_CheckoutView = MM_Core.extend({
 });
 var mmjs = new MM_CheckoutView("MM_CheckoutView", "Checkout");
 jQuery(document).ready(function() {
+    let isMyAccount = ((typeof myaccount_js !== 'undefined') && (myaccount_js instanceof MM_MyAccountView));
+    if (!isMyAccount)
+    {
+        mmjs.addEnterKeyListener();
+    }
     jQuery.blockUI.defaults.css = {};
     var field = 'mm-checkout-preview';
     var url = window.location.href;

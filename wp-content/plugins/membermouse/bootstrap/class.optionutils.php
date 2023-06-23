@@ -26,6 +26,7 @@ class MM_OptionUtils
 	public static $OPTION_KEY_HIDE_PROTECTED_MENU_ITEMS = "mm-option-hide-protected-menu-items";
 	public static $OPTION_KEY_USE_MM_LOGIN_PAGE = "mm-option-use-mm-login-page";
 	public static $OPTION_KEY_USE_MM_RESET_PASSWORD_PAGE = "mm-option-use-mm-reset-password-page";
+	public static $OPTION_KEY_USE_WP_NONCE_VALIDATION = "mm-option-use-mm-nonce-validation";
 	public static $OPTION_KEY_AFFILIATE = "mm-option-affiliate";
 	public static $OPTION_KEY_AFFILIATE_ALIAS = "mm-option-affiliate-alias";
 	public static $OPTION_KEY_SUB_AFFILIATE = "mm-option-sub-affiliate";
@@ -103,6 +104,9 @@ class MM_OptionUtils
 	
 	public static $OPTION_KEY_ENABLE_LEGACY_EXPORT             = "mm-option-enable-legacy-export";
 	
+	public static $OPTION_KEY_LIMELIGHT_USE_REBILL_PRODUCT = "mm-option-limelight-use-rebill-product";
+	public static $OPTION_KEY_STICKYIO_USE_REBILL_PRODUCT = "mm-option-stickyio-use-rebill-product";
+	
 	public static $DEFAULT_ACCT_SECURITY_ENABLED = "1";
 	public static $DEFAULT_ACCT_SECURITY_MAX_IPS = "5";
 	public static $DEFAULT_ACTIVITY_LOG_CLEANUP_ENABLED = "1";
@@ -129,13 +133,13 @@ class MM_OptionUtils
 	public static $DEFAULT_LOGIN_TOKEN_LIFESPAN = "15";
 	public static $DEFAULT_PURCHASE_CONFIRMATION_DIALOG_WIDTH = "450";
 	public static $DEFAULT_PURCHASE_CONFIRMATION_DIALOG_HEIGHT = "200";
-	public static $DEFAULT_SHOW_PREVIEW_BAR = "1";
+	public static $DEFAULT_SHOW_PREVIEW_BAR = "0";
 	public static $DEFAULT_HIDE_ADMIN_BAR = "1";
 	public static $DEFAULT_ENABLE_WP_AUTOP = "1";
 	public static $DEFAULT_ENABLE_USERNAME_CHANGE = "0";
 	public static $DEFAULT_CHECKOUT_ITEM_TYPE = "membership_level";
 	public static $DEFAULT_CHECKOUT_ITEM_ID = "-1";
-	public static $DEFAULT_COUNTRY_SELECTIONS = array("US"=>"US");
+	public static $DEFAULT_COUNTRY_ISO = "US";
 	public static $DEFAULT_ENABLE_MEMBERSHIP_PRORATION = "1";
 	public static $DEFAULT_ALLOW_LOGGED_OUT_PURCHASES = "1";
 	public static $DEFAULT_ALLOW_DUPLICATE_SUBSCRIPTIONS = "0";
@@ -146,6 +150,8 @@ class MM_OptionUtils
 	public static $DEFAULT_USE_MM_CSS = "1";
 	public static $DEFAULT_ALLOW_OVERDUE_ACCESS = "0";
 	public static $DEFAULT_DRIP_CONTENT_TIME_SETTING = "local";
+	public static $DEFAULT_LIMELIGHT_USE_REBILL_PRODUCT = "1";
+	public static $DEFAULT_STICKYIO_USE_REBILL_PRODUCT = "1";
 	public static $DEFAULT_FORGOT_PASSWORD_SUBJECT = "Reset your password";
 	public static $DEFAULT_FORGOT_PASSWORD_BODY = "Hi [MM_Member_Data name='firstName'],
 
@@ -169,6 +175,11 @@ To update your credit card details, please click the link below:
 [MM_CorePage_Link type='myaccount' autoLogin='true']
 	
 Thank you for your prompt attention to this matter.";
+
+	public static $OPTION_KEY_AUTH_ACCOUNT_EMAIL      = "mm_authenticator_account_email";
+	public static $OPTION_KEY_AUTH_ACCOUNT_SECRET     = "mm_authenticator_secret_token";
+	public static $OPTION_KEY_AUTH_ACCOUNT_SITE_UUID  = "mm_authenticator_site_uuid";
+	public static $OPTION_KEY_AUTH_ACCOUNT_USER_UUID  = "mm_authenticator_user_uuid";
 	
 	
 	public static function setDefaultValue($optionName, $defaultValue)

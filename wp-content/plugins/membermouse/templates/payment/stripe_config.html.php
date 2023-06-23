@@ -48,10 +48,55 @@ function stripeJSChangeHandler()
 	}
 }
 
+function stripeConnectClickHandler()
+{
+
+	jQuery('.mm-stripe-connect-new').on('click', function(e) {
+		e.preventDefault();
+
+		var stripe_connect_button = jQuery(this);
+
+		var form_data = jQuery('#mm-payment-settings-form').serialize();
+
+    var href = stripe_connect_button.data('url');
+    var nonce = stripe_connect_button.data('nonce');
+
+    jQuery.ajax({
+				type: "POST",
+			    url: MemberMouseGlobal.ajaxurl,
+			    data: {
+			    	'form_data' : form_data,
+			    	'action' : 'mm_stripe_connect_save_settings',
+			    	'security' : nonce
+			    },
+			    dataType: 'json',
+			    cache: false
+			}).done(function(response) {
+				window.location = href;
+			}).fail(function(result) {
+				console.log("AJAX call to server to mm_stripe_connect_save_settings failed.");
+			});
+
+     return false;
+
+	});
+}
+
+function stripeDisconnectClickHandler() {
+	jQuery('body').on('click', '.mm_stripe_disconnect_button', function(e) {
+    var proceed = confirm( jQuery(this).data('disconnect-msg') );
+    if ( false === proceed ) {
+      e.preventDefault();
+    }
+  });
+}
+
 jQuery(function() {
 	stripeTestModeChangeHandler();
 	stripeJSChangeHandler();
 	stripeElementsChangeHandler();
+	stripeConnectClickHandler();
+	stripeDisconnectClickHandler();
 });
 
 function showStripeTestCardNumbers()
@@ -77,6 +122,27 @@ function showStripeTestCardNumbers()
 	alert(str);
 }
 </script>
+
+<style>
+.mm-payment-option-prompt {
+  background: rgba(139, 139, 150, 0.1);
+  box-shadow: 0 0 1px #bbb;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  color: #0a2540;
+  width: 600px;
+  text-align: center;
+  font-size: 15px;
+}
+.mm-payment-option-prompt.connected .stripe-btn {
+  border-radius: 7px;
+  background: #00528c;
+  color: white;
+  font-weight: bold;
+  padding: 0px 10px;
+}
+</style>
 
 <div style="padding:10px;">
 <img src='https://membermouse.com/assets/plugin_images/logos/stripe.png' />
@@ -119,7 +185,55 @@ function showStripeTestCardNumbers()
 	</div>
 </div>
 
+<?php
+$style_keys = '';
+$show_keys = false;
+if ( ! isset( $_GET['display-keys'] ) && ! isset( $_COOKIE['mm_stripe_display_keys'] ) && ! defined( 'MM_DISABLE_STRIPE_CONNECT' ) ) {
+  $style_keys = ' display:none;';
+} else {
+  $show_keys = true;
+}
+
+$account_email = MM_OptionUtils::getOption( MM_OptionUtils::$OPTION_KEY_AUTH_ACCOUNT_EMAIL );
+$secret = MM_OptionUtils::getOption( MM_OptionUtils::$OPTION_KEY_AUTH_ACCOUNT_SECRET );
+$site_uuid = MM_OptionUtils::getOption( MM_OptionUtils::$OPTION_KEY_AUTH_ACCOUNT_SITE_UUID );
+$service_account_name = MM_OptionUtils::getOption( 'mm_stripe_service_account_name' );
+$id = MM_StripeConnect::get_method_id();
+
+// If we're authenticated then let's present a stripe url otherwise an authenticator url
+if( $account_email && $secret && $site_uuid ) {
+  $stripe_connect_url = MM_StripeConnect::get_stripe_connect_url();
+}
+else {
+  $stripe_connect_url = MM_AuthenticatorService::get_auth_connect_url( true, MM_StripeConnect::get_method_id() );
+}
+?>
+<?php if ( 'connected' === MM_StripeConnect::stripe_connect_status() ) : ?>
 <div style="margin-bottom:10px;">
+  <?php
+    $refresh_url = add_query_arg( array( 'action' => 'mm_stripe_connect_refresh', 'method-id' => MM_StripeConnect::get_method_id(), '_wpnonce' => wp_create_nonce('stripe-refresh') ), admin_url('admin-ajax.php') );
+    $disconnect_url = add_query_arg( array( 'action' => 'mm_stripe_connect_disconnect', 'method-id' => $id, '_wpnonce' => wp_create_nonce('stripe-disconnect') ), admin_url('admin-ajax.php') );
+    $disconnect_confirm_msg = __( 'Disconnecting from this Stripe Account will block webhooks from being processed, and prevent MemberMouse payments associated with it from working.', 'membermouse' );
+  ?>
+  <div id="stripe-connected-actions" class="mm-payment-option-prompt connected">
+    <?php if ( empty( $service_account_name ) ): ?>
+      <?php _e( 'Connected to Stripe', 'membermouse' ); ?>
+    <?php else: ?>
+      <?php printf( __( 'Connected to: %1$s %2$s %3$s', 'membermouse' ), '<strong>', $service_account_name, '</strong>' ); ?>
+    <?php endif; ?>
+    &nbsp;
+    <span style="<?php echo $style_keys; ?>">
+    <a href="<?php echo $refresh_url; ?>"
+       class="stripe-btn  mm_stripe_refresh_button button-secondary"><?php _e( 'Refresh Stripe Credentials', 'membermouse' ); ?></a></span>
+    <a href="<?php echo $disconnect_url; ?>" class=" stripe-btn  mm_stripe_disconnect_button button-secondary"
+       data-disconnect-msg="<?php echo $disconnect_confirm_msg; ?>">
+      <?php _e( 'Disconnect', 'membermouse' ); ?>
+    </a>
+  </div>
+</div>
+<?php endif; ?>
+
+<div style="margin-bottom:10px;<?php echo $style_keys; ?>">
 	<span class="stripe-test" id="stripe-test-api-key-label">Test Secret Key</span>
 	
 	<p class="stripe-test" style="margin-left:10px; font-family:courier; font-size:11px;">
@@ -146,5 +260,34 @@ function showStripeTestCardNumbers()
 		</p>
 	</div>
 </div>
+
+<?php 
+if ( 'disconnected' === MM_StripeConnect::stripe_connect_status() ) : ?>
+<div class="mm-payment-option-prompt">
+  <h4><strong><?php _e( 'Re-Connect to Stripe', 'membermouse' ); ?></strong></h4>
+  <p><?php _e( 'This Payment Method has been disconnected so it may stop working for new and recurring payments at any time. To prevent this, re-connect your Stripe account by clicking the "Connect with Stripe" button below.', 'membermouse' ); ?></p>
+  <p>
+    <a href="#" 
+				data-url="<?php echo $stripe_connect_url; ?>" 
+				data-id="<?php echo $id; ?>" 
+				data-nonce="<?php echo wp_create_nonce( "new-stripe-connect" ); ?>" 
+				class="mm-stripe-connect-new">
+	        <img src="<?php echo MM_Utils::getImageUrl('stripe-connect'); ?>" width="200" alt="<?php esc_attr_e( '"Connect with Stripe" button', 'membermouse' ); ?>">
+      </a>
+  </p>
+</div>
+<?php elseif ( 'connected' !== MM_StripeConnect::stripe_connect_status() ) : ?>
+<div style="margin-bottom:10px;">
+		<p style="margin-left:10px;">
+			<a href="#" 
+				data-url="<?php echo $stripe_connect_url; ?>" 
+				data-id="<?php echo $id; ?>" 
+				data-nonce="<?php echo wp_create_nonce( "new-stripe-connect" ); ?>" 
+				class="mm-stripe-connect-new">
+	        <img src="<?php echo MM_Utils::getImageUrl('stripe-connect'); ?>" width="200" alt="<?php esc_attr_e( '"Connect with Stripe" button', 'membermouse' ); ?>">
+	      </a>
+		</p>
+</div>
+<?php endif; ?>
 
 </div>

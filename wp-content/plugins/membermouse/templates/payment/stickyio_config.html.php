@@ -1,19 +1,19 @@
 <script type="text/javascript">
 function stickyIoDisableButtons()
 { 
-    $("#stickyio_configure_products").attr("class","mm-ui-button disabled");
-    $("#stickyio_configure_products").attr("disabled","disabled");
-    $("#stickyio_configure_shipping_methods").attr("class","mm-ui-button disabled");
-    $("#stickyio_configure_shipping_methods").attr("disabled","disabled");
-    $(".mm-stickyio-info").show();
+    jQuery("#stickyio_configure_products").attr("class","mm-ui-button disabled");
+    jQuery("#stickyio_configure_products").attr("disabled","disabled");
+    jQuery("#stickyio_configure_shipping_methods").attr("class","mm-ui-button disabled");
+    jQuery("#stickyio_configure_shipping_methods").attr("disabled","disabled");
+    jQuery(".mm-stickyio-info").show();
 }
 function stickyIoEnableButtons()
 { 
-    $("#stickyio_configure_products").attr("class","mm-ui-button");
-    $("#stickyio_configure_products").removeAttr("disabled");
-    $("#stickyio_configure_shipping_methods").attr("class","mm-ui-button");
-    $("#stickyio_configure_shipping_methods").removeAttr("disabled");
-    $(".mm-stickyio-info").hide();
+    jQuery("#stickyio_configure_products").attr("class","mm-ui-button");
+    jQuery("#stickyio_configure_products").removeAttr("disabled");
+    jQuery("#stickyio_configure_shipping_methods").attr("class","mm-ui-button");
+    jQuery("#stickyio_configure_shipping_methods").removeAttr("disabled");
+    jQuery(".mm-stickyio-info").hide();
 }
 function stickyioCallback(data)
 { 
@@ -76,14 +76,14 @@ jQuery(function($){
 	validateStickyioConfigButtons();
 
 	//dynamically modify button state based on field contents
-	$(".stickyio_required_for_product_config").keyup(validateStickyioConfigButtons);
+	jQuery(".stickyio_required_for_product_config").keyup(validateStickyioConfigButtons);
 
-	$("#stickyio_configure_products").click(function(e) {
+	jQuery("#stickyio_configure_products").click(function(e) {
 		e.preventDefault();
 		window.location.href = "<?php echo MM_ModuleUtils::getUrl(MM_MODULE_PRODUCT_SETTINGS, MM_MODULE_STICKYIO_PRODUCTS); ?>";
 	});
 
-	$("#stickyio_configure_shipping_methods").click(function(e) {
+	jQuery("#stickyio_configure_shipping_methods").click(function(e) {
 		e.preventDefault();
 		window.location.href = "<?php echo MM_ModuleUtils::getUrl(MM_MODULE_PRODUCT_SETTINGS, MM_MODULE_STICKYIO_SHIPPING_METHODS); ?>";
 	});
@@ -167,7 +167,17 @@ jQuery(function($){
     	
     	<p style="margin-left:10px;">
     		<select name="payment_service[stickyio][default_shipping_id]"  id="stickyio_default_shipping_id" onchange="doSaveDefaultShippingMethod();">
-    			<?php echo $p->getDefaultShippingMethodsSelect(); ?>
+    			<?php    
+    			     $shippingResponse = $p->getDefaultShippingMethodsSelect(); 
+    			     if (MM_Response::isError($shippingResponse))
+    			     {
+    			         echo "<option value=0>{$shippingResponse->message}</option>\n";
+    			     }
+    			     else 
+    			     {
+    			         echo $shippingResponse;
+    			     }
+    			?>
     		</select>
     	</p>
     	

@@ -3,7 +3,12 @@
  * MemberMouse(TM) (http://www.membermouse.com)
  * (c) MemberMouse, LLC. All rights reserved.
  */
-var MM_ProductViewJS = MM_Core.extend({
+var MM_ProductViewJS = MM_EnhancedDatagridView.extend({
+	
+	membershipLevelLink: false,
+	bundleLink: false,
+	bulkActionKey: "product",
+	
 	enableLimitPayments: function()
 	{
 		if(jQuery("#mm-limit_payments").is(":checked"))
@@ -55,7 +60,7 @@ var MM_ProductViewJS = MM_Core.extend({
 		else
 		{
 			// refresh page
-			document.location.href = document.location.href;
+			document.location.href = document.location.href.replace(/#/, '');
 		}
 	},
 	  
@@ -342,7 +347,180 @@ var MM_ProductViewJS = MM_Core.extend({
 	removeFieldOption: function(id)
 	{
 		jQuery("#"+id).remove();
-	}
+	},
+	
+	
+	renderAttributes: function(value,dataCell,dataObj, grid)
+	{
+		let icons = "";
+		let clearImage = grid.getImage('clear');
+		
+		icons += ((+dataObj.has_trial == 1) ? grid.getImage('trial') : clearImage); //trial or not
+		if (+dataObj.rebill_period > 0) //current test for recurring
+		{
+			icons += ((+dataObj.do_limit_payments) ? grid.getImage('payment-plan') : grid.getImage('subscription')); //payment plan or subscription
+		}
+		else
+		{
+			icons += clearImage;
+		}
+		icons += ((+dataObj.is_shippable == 1) ? grid.getImage('shippable') : clearImage);
+		icons += ((dataObj.sku.trim() != "") ? grid.getImage('sku').replace("[SKU PLACEHOLDER]",`SKU [${dataObj.sku}]`) : clearImage);
+		dataCell.innerHTML = icons;
+	},
+	
+	renderAccess: function(value,dataCell,dataObj,grid)
+	{
+		let hasAccess = false;
+		let frag = document.createDocumentFragment();
+		
+		if ((mmjs.membershipLevelLink) && (dataObj.membership_levels) && (Array.isArray(dataObj.membership_levels)) && (dataObj.membership_levels.length > 0))
+		{
+			hasAccess = true;
+			let first = true;
+			dataObj.membership_levels.forEach( (membership_level) => {
+				first = (first === true) ? false : frag.appendChild(document.createTextNode(", "));
+				let mlIconSpan = document.createElement("span");
+				mlIconSpan.style.marginRight = "5px";
+				mlIconSpan.innerHTML = grid.getImage("membership");
+				frag.appendChild(mlIconSpan);
+				let mlLink = document.createElement("a");
+				mlLink.href = `${mmjs.membershipLevelLink}${membership_level.id}`;
+				mlLink.title = `${membership_level.name} [ID:${membership_level.id}]`;
+				let mlLinkText = document.createTextNode(mmjs.abbrevString(membership_level.name,30));
+				mlLink.appendChild(mlLinkText);
+				frag.appendChild(mlLink);				
+			});
+		}
+		
+		//if ((mmjs.bundleLink) && (dataObj.bundle_id != null))
+		if ((mmjs.bundleLink) && (dataObj.bundles) && (Array.isArray(dataObj.bundles)) && (dataObj.bundles.length > 0))
+		{
+			hasAccess = true;
+			let first = true;
+			dataObj.bundles.forEach( (bundle) => {
+				first = (first === true) ? false : frag.appendChild(document.createTextNode(", "));
+				let bundleIconSpan = document.createElement("span");
+				bundleIconSpan.style.marginRight = "5px";
+				bundleIconSpan.innerHTML = grid.getImage("bundle");
+				frag.appendChild(bundleIconSpan);
+				let bundleLink = document.createElement("a");
+				bundleLink.href = `${mmjs.bundleLink}${bundle.id}`;
+				bundleLink.title = `${bundle.name} [ID:${bundle.id}]`;
+				let bundleLinkText = document.createTextNode(mmjs.abbrevString(bundle.name,30));
+				bundleLink.appendChild(bundleLinkText);
+				frag.appendChild(bundleLink);				
+			});
+		}
+		
+		if (hasAccess)
+		{
+			dataCell.appendChild(frag);
+		}
+		else
+		{
+			dataCell.innerHTML = "&mdash;";
+		}
+	},
+	
+	
+	renderPurchaseLinks: function(value,dataCell,dataObj,grid)
+	{
+		let purchaseLink = document.createElement("a");
+		purchaseLink.title = grid.tr("Get purchase links");
+		purchaseLink.setAttribute("role","button");
+		purchaseLink.setAttribute("data-product-id",dataObj.id);
+		purchaseLink.setAttribute("data-product-name",mmjs.htmlentities(dataObj.name));
+		purchaseLink.className = "mm-ui-button mm-product-purchase-links";
+		purchaseLink.innerHTML = grid.getImage("purchase-link");
+		dataCell.appendChild(purchaseLink);
+	},
+	
+	
+	renderActions: function(value,dataCell,dataObj,grid)
+	{
+		let editAction = mmjs.createImageButton(grid.getImage("edit"),"mm-product-edit",{"data-product-id" : dataObj.id});
+		
+		let deleteAction = "";
+		if ((Number(dataObj.is_being_used) == 0) && (Number(dataObj.has_been_purchased) == 0))
+		{
+			deleteAction = mmjs.createImageButton(grid.getImage("delete"),"mm-product-delete",{"data-product-id" : dataObj.id});
+		}
+		else
+		{
+			deleteAction = document.createElement("span");
+			deleteAction.innerHTML = grid.getImage("cant-delete");
+		}
+		
+		let showHideAction = "";
+		if (Number(dataObj.is_hidden) != 1)
+		{
+			showHideAction = mmjs.createImageButton(grid.getImage("hide"),"mm-product-hide",
+												 {"data-product-id" : dataObj.id,
+												  "data-product-status" : dataObj.status});
+		}
+		else
+		{
+			showHideAction = mmjs.createImageButton(grid.getImage("unhide"),"mm-product-show",
+												 {"data-product-id" : dataObj.id,
+												  "data-product-status" : dataObj.status});
+		}
+		
+		let duplicateAction = mmjs.createImageButton(grid.getImage("duplicate"),"mm-product-duplicate",{"data-product-id" : dataObj.id});
+
+		dataCell.className = "mm-ehd-table-cell-nowrap";
+		dataCell.appendChild(editAction);
+		dataCell.appendChild(deleteAction);
+		dataCell.appendChild(showHideAction);
+		dataCell.appendChild(duplicateAction);
+	},
+	
+	
+	renderGrid: function(imageList,translationList)
+	{
+		jQuery(document).ready(function() {
+			let gridConfig = { "columns" : [ { "id": "id", "name":"ID", "sortable":true, "searchType":"numeric", "defaultSortType":"DESC" },
+											 { "id": "name", "name":"Name", "sortable":true, "searchType":"text", "defaultSearchField":true },
+											 { "id": "billing_description", "name":"Billing Description" },
+											 { "id": "attributes", "name":"Attributes", "render":mmjs.renderAttributes },
+											 { "id": "access", "name":"Associated Access", "render":mmjs.renderAccess },
+											 { "id": "purchase_links", "name":"Purchase Links", "render":mmjs.renderPurchaseLinks },
+											 { "id": "status", "name":"Status", "sortable":true, "render":mmjs.renderStatus },
+											 { "id": "actions", "name":"Actions", "render":mmjs.renderActions }
+											],
+							   "version"    : 3, //MUST increment this every time the column definitions change!
+							   "datasource" : mmjs.search.bind(mmjs) 
+				};
+			grid = new MM_EnhancedDatagridJS(document.getElementById("gridHolder"),"product",gridConfig);
+			if (imageList)
+			{
+				grid.setImageReferences(imageList);
+			}
+			if (translationList)
+			{
+				grid.setTranslationObject(translationList);
+			}
+			grid.bulkAdminFunction = mmjs.bulkopAdminister.bind(mmjs);
+			grid.render();
+			mmjs.setGrid(grid);
+		});
+	},
+	
+	
+	bindEventListeners: function()
+	{
+		mmjs.bindByClassName("#gridHolder","click",".mm-product-purchase-links",['productId','productName'],mmjs.showPurchaseLinks.bind(mmjs));
+		mmjs.bindByClassName("#gridHolder","click",".mm-product-edit",['productId'],(productId) => {
+			mmjs.edit.call(mmjs,'mm-products-dialog', productId);
+		});
+		mmjs.bindByClassName("#gridHolder","click",".mm-product-show",['productId','productArchived'],mmjs.showProduct.bind(mmjs));
+		mmjs.bindByClassName("#gridHolder","click",".mm-product-hide",['productId','productArchived'],mmjs.hideProduct.bind(mmjs));
+		mmjs.bindByClassName("#gridHolder","click",".mm-product-delete",['productId'],mmjs.remove.bind(mmjs));
+		mmjs.bindByClassName("#gridHolder","click",".mm-product-duplicate",['productId'],(productId) => {
+			mmjs.duplicate.call(mmjs,'mm-products-dialog',productId);
+		});
+	}	
+	
 });
 
 var mmjs = new MM_ProductViewJS("MM_ProductView", "Product");

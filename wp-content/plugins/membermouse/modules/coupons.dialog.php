@@ -1,7 +1,4 @@
 <?php
-$prod = new MM_Product();
-$selectedProds = array();
-
 $id = 0; 
 
 if(isset($p->id))
@@ -25,19 +22,31 @@ if(MM_Coupon::isBeingUsed($coupon->getId()))
 }
 
 $products = MM_HtmlUtils::createCheckboxGroup(MM_Product::getAll(), "mm_products", $prods);
+$nameModifier = $p->duplicate ? (_mmt("Copy of")." ") : "";
 ?>
 <div id="mm-coupons-container">
 	<table cellspacing="10">
 		<tr>
 			<td width="140"><?php echo _mmt("Name"); ?>*</td>
-			<td><input type='hidden' id='id' value='<?php echo $coupon->getId(); ?>' />
-				<input id="mm_coupon_name" type="text" value='<?php echo $coupon->getCouponName(); ?>' style='width:300px;' />
+			<td><input type='hidden' id='id' value='<?php echo $p->duplicate?"":$coupon->getId(); ?>' />
+				<input id="mm_coupon_name" type="text" value='<?php echo $nameModifier.htmlentities($coupon->getCouponName(), ENT_QUOTES, "UTF-8"); ?>' style='width:300px;' />
 			</td>
 		</tr>
 		<tr>
 			<td width="140"><?php echo _mmt("Coupon Code"); ?>*</td>
 			<td>
 				<input id="mm_coupon_code" <?php echo $editable; ?>  type="text" value='<?php echo strtoupper($coupon->getCouponCode()); ?>' />
+			</td>
+		</tr>
+		<tr>
+			<td>Status</td>
+			<td>
+				<div id="mm-status-container">
+					<input type="radio" name="status" value="active" onclick="mmjs.processForm()" <?php echo (($coupon->isInactive()==false)?"checked":""); ?>  /> <?php echo _mmt("Active"); ?>  &nbsp;
+					<input type="radio" name="status" value="inactive" onclick="mmjs.processForm()" <?php echo (($coupon->isInactive()==true)?"checked":""); ?>  /> <?php echo _mmt("Inactive"); ?>
+				</div>
+				
+				<input id="mm-status" type="hidden" />
 			</td>
 		</tr>
 		<tr>
@@ -117,9 +126,10 @@ $products = MM_HtmlUtils::createCheckboxGroup(MM_Product::getAll(), "mm_products
 				dateFormat: "mm/dd/yy"
 			});
 			mmjs.typeChangeHandler();
+			mmjs.processForm();
 		});
 	</script>
-	
+
 <div class="mm-dialog-footer-container">
 <div class="mm-dialog-button-container">
 <a href="javascript:mmjs.createCoupon();" class="mm-ui-button blue"><?php echo _mmt("Save Coupon"); ?></a>

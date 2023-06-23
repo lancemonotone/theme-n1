@@ -334,7 +334,7 @@ class MM_ClassLoader
 		$minInterval = time() - 86400; //(86400 secs = 1 day)
 		if ($canRecurse && class_exists("MM_MemberMouseService") && (empty($lastAuth) || ($lastAuth <= $minInterval)))
 		{			
-			MM_OptionUtils::setOption(MM_OptionUtils::$OPTION_KEY_LAST_CODE_REFRESH, time());
+		    MM_OptionUtils::setOption(MM_OptionUtils::$OPTION_KEY_LAST_CODE_REFRESH, time());
 			$authSuccess = MM_MemberMouseService::authorize();
 			if ($authSuccess)
 			{

@@ -7,7 +7,7 @@
 
 
 /* BEGIN WP-LOAD PATH */
-$wpload_path = '/home/customer/www/nplusonemag.com/public_html//wp-load.php';
+$wpload_path = 'C:\Users\Monotone MSI\Local Sites\nplusonemag\app\public//wp-load.php';
 /* END WP-LOAD PATH */
 
 if (empty($wpload_path) || (!include_once($wpload_path))) 

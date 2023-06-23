@@ -37,7 +37,8 @@ public function info(){
 	  	global $json_api;
 
    		return array(
-				"version" => JAU_VERSION				
+				"version" => JAU_VERSION,
+				"php" => PHP_VERSION				
 		   );	   
 
 	  }  
@@ -362,23 +363,27 @@ public function retrieve_password(){
 
 public function validate_auth_cookie() {
 
-		global $json_api;
+    global $json_api;
 
-		if (!$json_api->query->cookie) {
 
-			$json_api->error("You must include a 'cookie' authentication cookie. Use the `create_auth_cookie` method.");
+    if ( !$json_api->query->cookie ) {
 
-		}		
+      $json_api->error( "You must include a 'cookie' authentication cookie. Use the `generate_auth_cookie` method." );
 
-    	$valid = wp_validate_auth_cookie($json_api->query->cookie, 'logged_in') ? true : false;
+    }
+	  
+	 $user_id =  wp_validate_auth_cookie( $json_api->query->cookie, 'logged_in' );
 
-		return array(
+    $valid = $user_id ? true : false;
 
-			"valid" => $valid
+    return array(
 
-		);
+      "valid" => $valid,
+	  "user_id" =>$user_id
 
-	}
+    );
+
+  }	
 
 public function generate_auth_cookie() {
 		

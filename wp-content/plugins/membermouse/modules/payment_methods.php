@@ -41,7 +41,7 @@ $unsupportedCurrencyWarning = "<div style='background-color: #ff0000; color: #ff
   margin-bottom: 5px;
 }
 </style>
-<form method='post'>
+<form method='post' id="mm-payment-settings-form">
 <div class="mm-wrap" id="mm-form-container">
 	<div style='padding-left: 10px;'>
 	    <div style='width:650px'>
@@ -117,8 +117,21 @@ $unsupportedCurrencyWarning = "<div style='background-color: #ff0000; color: #ff
 				<tr>
 					<td colspan='2'>
 						<div id='payment_service_<?php echo $token; ?>' class='mm-payment-service-box' style='<?php echo ($service->isActive())?"":"display:none;"; ?> margin-left: 10px; border: 1px solid #eee; background-color: #eee'>
-							<?php if (!$service->isSupportedCurrency($currentCurrency)) { echo $unsupportedCurrencyWarning; } ?>
-							<?php echo $service->displayConfigOptions(); ?>
+							<?php if (!$service->isSupportedCurrency($currentCurrency)) 
+							      { 
+							          echo $unsupportedCurrencyWarning; 
+							      }
+							      
+							      try 
+							      {
+							         echo $service->displayConfigOptions(); 
+							      }
+							      catch (Error $e)
+							      {
+							         echo _mmt("There was an error display options for the payment service")." ".$service->getName();
+							         MM_DiagnosticLog::log(MM_DiagnosticLog::$PHP_ERROR,$e->getMessage());
+							      }
+							?>
 						</div>
 					</td>
 				</tr>

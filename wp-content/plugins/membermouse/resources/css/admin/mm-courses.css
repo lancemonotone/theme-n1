@@ -1,0 +1,315 @@
+.mm-sister-plugin {
+  width: 700px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.mm-sister-plugin-image {
+  text-align: center;
+  margin: 30px 0;
+}
+.mm-sister-plugin-image img {
+  width: 300px;
+  height: auto;
+  max-width: 100%;
+}
+.mm-sister-plugin-title {
+  text-align: center;
+  font-size: 25px;
+  line-height: 1.5;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.mm-sister-plugin-description {
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.5;
+  color: #777;
+  margin-bottom: 40px;
+}
+.mm-sister-plugin-info .mp-icon {
+  font-weight: bold;
+  margin-right: 5px;
+}
+.mm-sister-plugin-wp-mail-smtp .mm-sister-plugin-info .mp-icon {
+  color: #f18500;
+}
+.mm-sister-plugin-monsterinsights .mm-sister-plugin-info .mp-icon {
+  color: #53c1a5;
+}
+.mm-sister-plugin-info > div {
+  float: left;
+  width: 50%;
+  padding: 12px;
+  box-sizing: border-box;
+}
+.mm-sister-plugin-info-image div {
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 5px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+.mm-sister-plugin-info-image img {
+  display: block;
+  width: 100%;
+}
+.mm-sister-plugin-info-features ul {
+  margin: 0;
+}
+.mm-sister-plugin-info-features ul li {
+  font-size: 15px;
+  line-height: 1.4;
+  color: #777;
+  margin-bottom: 14px;
+}
+.mm-sister-plugin-info-features ul li:last-child {
+  margin-bottom: 0;
+}
+.mm-sister-plugin-info {
+  margin-bottom: 40px;
+}
+.mm-sister-plugin-step {
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  padding: 30px;
+  margin-bottom: 40px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  opacity: 0.5;
+}
+.mm-sister-plugin-step-current {
+  opacity: 1;
+}
+.mm-sister-plugin-step-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 110px;
+  background-color: #fafafa;
+  border-right: 1px solid #eee;
+}
+.mm-sister-plugin-step-number {
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  margin-top: -25px;
+  background-color: #ccc;
+  border-radius: 50%;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  font-size: 24px;
+  line-height: 1.14;
+  font-weight: bold;
+  color: #fff;
+}
+.mm-sister-plugin-step-detail {
+  margin-left: 110px;
+}
+.mm-sister-plugin-step-title {
+  font-size: 23px;
+  line-height: 1.5;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.mm-sister-plugin-step-description {
+  font-size: 15px;
+  line-height: 1.4;
+  color: #777;
+  margin-bottom: 20px;
+}
+.mm-sister-plugin-message {
+  background-color: #fff;
+  position: absolute;
+  text-align: center;
+  font-weight: 600;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 99;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.mm-sister-plugin-message.mm-sister-plugin-message-success {
+  color: #2a9b39;
+}
+.mm-sister-plugin-message.mm-sister-plugin-message-error {
+  color: red;
+}
+.mm-sister-plugin-step-pro {
+  color: #ccc;
+}
+.mm-action-notice {
+  display: none;
+}
+.mm-sister-plugin-step-no-number .mm-sister-plugin-step-detail {
+  margin-left: 0;
+  text-align: center;
+}
+.mp-courses-image img {
+  width: 400px;
+}
+body[data-mm-chosen-tab="courses"] p.submit {
+  display: none;
+}
+@media (max-width: 782px) {
+  .mm-sister-plugin-info > div {
+    float: none;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+.mm-sister-plugin-easy-affiliate
+  .mm-sister-plugin-info
+  > .mm-sister-plugin-info-image {
+  padding: 0;
+}
+.mm-sister-plugin-easy-affiliate
+  .mm-sister-plugin-info
+  > .mm-sister-plugin-info-features {
+  padding-left: 35px;
+}
+.mm-sister-plugin-easy-affiliate .mm-sister-plugin-info-image div {
+  background-color: transparent;
+  box-shadow: none;
+}
+.mm-sister-plugin-easy-affiliate .mm-sister-plugin-info-features ul li {
+  position: relative;
+  padding-left: 30px;
+}
+.mm-sister-plugin-easy-affiliate .mm-sister-plugin-info-features svg {
+  width: 19px;
+  height: auto;
+  position: absolute;
+  left: 0;
+  top: 4px;
+}
+.mm-sister-plugin-easy-affiliate .mm-sister-plugin-info-features svg path {
+  fill: #609d62;
+}
+
+.mm-clearfix:before,
+.mm-clearfix:after {
+  content: " ";
+  display: block;
+}
+
+.mm-clearfix:after {
+  clear: both;
+}
+
+.mp-icon-right-big:before {
+  content: "\f061";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  speak: never;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: 0.2em;
+  text-align: center;
+  /* opacity: .8; */
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: 0.2em;
+  /* font-size: 120%; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* text-shadow: 1px 1px 1px rgb(127 127 127 / 30%); */
+}
+
+.wp-core-ui .button-mm-hero {
+  background: #066cd2;
+  position: relative;
+  display: inline-block;
+  padding: 10px 25px 10px 35px;
+  border: 2px solid;
+  border-radius: 5px;
+  font-size: 15.6px;
+  font-weight: 700;
+}
+
+.wp-core-ui .button-mm-hero:hover {
+  background: #066cd2;
+  /* position: relative;
+  display: inline-block;
+  padding: 10px 25px 10px 35px; */
+  border: 2px solid;
+  border-radius: 5px;
+  /* font-size: 15.6px;
+  font-weight: 700; */
+}
+
+/* Form Slider */
+.mm-form label.switch{
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 16px;
+  margin-right: 1em;
+}
+
+.mm-form label.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.mm-form label.switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.mm-form label.switch .slider.round {
+  border-radius: 17px;
+}
+
+.mm-form label.switch .slider.round:before {
+  border-radius: 50%;
+}
+
+.mm-form label.switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.mm-form label.switch input:checked + .slider {
+  /* background-color: #06429E; */
+  border: 1px solid #06429E;
+}
+
+.mm-form label.switch input:checked + .slider:before {
+  -webkit-transform: translateX(19px);
+  -ms-transform: translateX(19px);
+  transform: translateX(19px);
+  background-color: #06429E;
+
+}

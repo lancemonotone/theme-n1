@@ -8,6 +8,102 @@
  // TODO move to corepageview and protectedcontentview 
  class MM_PostHooks
  {	
+	 /**
+	  * The method will save the access rights to a post.
+	  *
+	  * @param $postId is the id of the given page/post being edited. 
+	  */
+	public function saveAccessRightsFromBulkEdit($postId)
+	{
+		if(isset($_REQUEST["bulk_edit"]) && $_REQUEST["bulk_edit"] == "Update")
+		{
+			if(isset($_REQUEST["access_rights_removed"]))
+			{
+				if(is_array($_REQUEST["access_rights_removed"]))
+				{
+					foreach($_REQUEST["access_rights_removed"] as $access)
+					{
+						$accessInfo = explode("-", $access);
+						if(count($accessInfo)>=2)
+						{
+							$accessType = $accessInfo[0];
+							$accessId = $accessInfo[1];
+							
+							$pc = new MM_ProtectedContentEngine(); 
+							$pc->removeAccessRights($postId,$accessId,$accessType);
+						}
+					}
+
+				}
+			}
+			
+			if(isset($_REQUEST["access_rights_choice"]))
+			{  
+				if(isset($_REQUEST["mt_day_val"]) && isset($_REQUEST["access_rights_choice_val"]) && isset($_REQUEST["mm_member_types_opt_val"]))
+				{
+					if(is_array($_REQUEST["mt_day_val"]))
+					{
+						$pc = new MM_ProtectedContentEngine(); 
+						foreach($_REQUEST["mt_day_val"] as $index=>$day)
+						{
+							$day = $_REQUEST["mt_day_val"][$index];
+							$accessRightsChoice = $_REQUEST["access_rights_choice_val"][$index];
+							$optionSelected = $_REQUEST["mm_member_types_opt_val"][$index];
+
+							switch($accessRightsChoice)
+							{
+								case "mt":
+									$ret = $pc->setPostAccessRights($postId, "member_type", $optionSelected, $day);
+									if($ret === false)
+									{
+										$ret = $pc->updatePostAccessRights($postId, "member_type", $optionSelected, $day);
+									}
+									break;
+								case "at":
+									$ret = $pc->setPostAccessRights($postId, "access_tag", $optionSelected, $day);
+									if($ret === false)
+									{
+										$ret = $pc->updatePostAccessRights($postId, "access_tag", $optionSelected, $day); 
+									}
+									break; 
+							} 
+						}
+					}
+				}
+			}  
+		}
+	} 
+
+	/**
+	 * The method will display the dialog for access rights on bulk edit
+	*
+	* @param $column_name is the column name you are appending to.
+	* @param $post_type is the name of the post type slug 
+	*/
+	public function appendAccessRightsViewToEdit($column_name, $post_type )
+	{  
+		switch( $column_name )
+		{
+			case 'access_rights': 
+				$info=new stdClass();	
+				$info->access_type ="";
+				$info->access_id ="";
+				$info->day = "0";
+				$info->options = "";
+				$access_arr = array('mt'=>'Membership Level','at'=>'Bundle');
+				$info->access_rights_choice = "";
+				$info->hide_buttons = 1;
+		
+				foreach($access_arr as $value=>$txt)
+				{
+					$info->access_rights_choice.= "<option value='{$value}'>{$txt}</option>";
+				} 
+				echo MM_TEMPLATE::generate(MM_MODULES."/page.bulkedit.dialog.php", $info); 
+				break;
+		}
+			
+	}
+
  	public function pagesColumns($defaults)
  	{
  		$offset = 2; ///column offset
@@ -382,6 +478,34 @@
  	 */
  	public function publishPageHandler($ID, $post) 
  	{
+ 	    global $wpdb;
+ 	    
+ 	    $corePageInfo = MM_CorePage::getCorePageInfo($ID);
+		$isCheckoutCorePage = (($corePageInfo->core_page_type_id ?? false) == MM_CorePageType::$CHECKOUT);
+		$isRedeemGiftCorePage = (($corePageInfo->core_page_type_id ?? false) == MM_CorePageType::$REDEEM_GIFT);
+		$hasCustomCheckoutForm = preg_match("/\[\s*mm_form\s+[\]]*(type=['\"]checkout['\"])([^\]]*)]/i",$post->post_content);
+ 	    
+		if ($isCheckoutCorePage)
+ 	    {
+ 	        //custom checkout page, check to make sure a checkout form is still present
+ 	        if (!$hasCustomCheckoutForm && ($corePageInfo->ref_type == 'custom'))
+ 	        {
+ 	            //this page is flagged as a custom checkout page, but the form was removed, so remove the core page indicator
+ 	            $sql = $wpdb->prepare("DELETE FROM ".MM_TABLE_CORE_PAGES." WHERE page_id=%s and core_page_type_id=%s and ref_type='custom'",$ID,MM_CorePageType::$CHECKOUT);
+ 	            $wpdb->query($sql);
+ 	        }
+ 	    }
+ 	    else
+ 	    {
+ 	        //only run the next section if the page has a checkout form but is NOT marked as a custom checkout core page (but should be)
+ 	    	if ($hasCustomCheckoutForm && !$isRedeemGiftCorePage)
+ 	        {
+ 	            $wpdb->query($wpdb->prepare("DELETE FROM ".MM_TABLE_CORE_PAGES." WHERE page_id=%s and core_page_type_id=%s and ref_type='custom'",$ID,MM_CorePageType::$CHECKOUT)); //to avoid duplicate entries
+ 	            $wpdb->insert(MM_TABLE_CORE_PAGES,array("page_id"=>$ID, "core_page_type_id"=>MM_CorePageType::$CHECKOUT,"ref_type"=>'custom'));
+ 	        }
+ 	    }
+ 	    
+ 	    
  		//rebuild core page cache in case the permalink has changed
  		MM_CorePageEngine::createCorePageCache();
  	}

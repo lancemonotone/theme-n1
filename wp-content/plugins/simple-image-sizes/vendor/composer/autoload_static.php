@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite8db5e2fa0e66b36b184ae83c72d3132
+class ComposerStaticInit3a611a6ede095319b0e111987fd8830e
 {
     public static $prefixLengthsPsr4 = array (
         'R' => 
@@ -21,18 +21,19 @@ class ComposerStaticInite8db5e2fa0e66b36b184ae83c72d3132
     );
 
     public static $classMap = array (
-        'Rahe\\Simple_Image_Sizes\\Admin\\Main' => __DIR__ . '/../..' . '/classes/admin/Main.php',
-        'Rahe\\Simple_Image_Sizes\\Admin\\Media' => __DIR__ . '/../..' . '/classes/admin/Media.php',
-        'Rahe\\Simple_Image_Sizes\\Admin\\Post' => __DIR__ . '/../..' . '/classes/admin/Post.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Rahe\\Simple_Image_Sizes\\Admin\\Main' => __DIR__ . '/../..' . '/classes/Admin/Main.php',
+        'Rahe\\Simple_Image_Sizes\\Admin\\Media' => __DIR__ . '/../..' . '/classes/Admin/Media.php',
+        'Rahe\\Simple_Image_Sizes\\Admin\\Post' => __DIR__ . '/../..' . '/classes/Admin/Post.php',
         'Rahe\\Simple_Image_Sizes\\Main' => __DIR__ . '/../..' . '/classes/Main.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite8db5e2fa0e66b36b184ae83c72d3132::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite8db5e2fa0e66b36b184ae83c72d3132::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInite8db5e2fa0e66b36b184ae83c72d3132::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit3a611a6ede095319b0e111987fd8830e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit3a611a6ede095319b0e111987fd8830e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit3a611a6ede095319b0e111987fd8830e::$classMap;
 
         }, null, ClassLoader::class);
     }

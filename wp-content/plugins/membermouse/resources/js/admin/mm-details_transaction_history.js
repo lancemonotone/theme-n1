@@ -62,7 +62,7 @@ var MM_TransactionHistoryViewJS = MM_Core.extend({
 	{
 		mmjs.closeDialog();
 		alert(response.message);
-		document.location.href = document.location.href;
+		document.location.href = document.location.href.replace(/#/, '');
 	},
 	
 	resendAffiliateCommission: function(userId, orderId, orderNumber, orderItemId, transactionId, affiliateId)
@@ -91,7 +91,7 @@ var MM_TransactionHistoryViewJS = MM_Core.extend({
 	resendAffiliateCommissionCallback: function(response)
 	{
 		alert(response.message);
-		document.location.href = document.location.href;
+		document.location.href = document.location.href.replace(/#/, '');
 	},
 	
 	sort: function(columnName) 

@@ -127,6 +127,9 @@ MembermouseBatchTransfer.prototype.initializeBatchReceive = function(values)
 			commandPacket[eachvar] = this.postvars[eachvar];
 		}
 	}
+	
+	this.originalPayload = commandPacket["payload"];
+	
 	var instance = this;
 	jQuery.ajax({
 		  type: "POST",
@@ -204,7 +207,6 @@ MembermouseBatchTransfer.prototype.administerReceiveBatch = function(batchID, in
 			{
 				if(instance.cancelled)
 				{  
-					instance.callbackFunction(instance.STATUS_CANCELLED, "Cancelled");
 					return false;
 				}
 				
@@ -225,7 +227,10 @@ MembermouseBatchTransfer.prototype.administerReceiveBatch = function(batchID, in
 				else
 				{
 					//still more chunks left, even after promises are resolved, which means errors not resolved by retries.
-					instance.errorHandler("Unable to retrieve one or more pieces of the file");
+					if (!instance.cancelled)
+					{
+						instance.errorHandler("Unable to retrieve one or more pieces of the file");
+					}
 					return false;
 				}
 			});
@@ -255,7 +260,7 @@ MembermouseBatchTransfer.prototype.reassembleBatch = function(batchID)
 }
 
 
-MembermouseBatchTransfer.prototype.registerBatch = function(batchID)
+MembermouseBatchTransfer.prototype.registerBatch = async function(batchID)
 {
 	var instance = this;
 	
@@ -264,35 +269,24 @@ MembermouseBatchTransfer.prototype.registerBatch = function(batchID)
 	{
 		this.openDB();
 	}
-	var currentTimestamp = new Date().getTime(); //in milliseconds
+	let currentTimestamp = new Date().getTime(); //in milliseconds
 	
 	//delete old batches (more than 6hrs old)
-	var sixHoursAgo = currentTimestamp - (6 * 60 * 60 * 1000);
-	return instance.db.mm_batches.where('dateCreated').below(sixHoursAgo).modify(function(oldBatch,ref)
+	let sixHoursAgo = currentTimestamp - (6 * 60 * 60 * 1000);
+	let oldBatchIds = await instance.db.mm_batches.where('dateCreated').below(sixHoursAgo).primaryKeys();
+	
+	if (oldBatchIds && Array.isArray(oldBatchIds) && (oldBatchIds.length > 0))
 	{
-		instance.db.mm_batch_items.where('batchID').equals(oldBatch.batchID).delete().then(function() 
-		{
-			delete ref.oldBatch;
-		});
-	}).then(function() 
+		await this.db.mm_batches.bulkDelete(oldBatchIds);
+	}
+	
+	let existingBatchId = await instance.db.mm_batches.get(batchID);
+	if (existingBatchId == null) 
 	{
-		//check if the batch id we want to register already exists in the db. If it does, reuse it
-		return instance.db.mm_batches.get(batchID);
-	}).then(function(existingBatch) 
-	{
-		if (existingBatch == null) 
-		{
-			instance.db.mm_batches.put({batchID: batchID, dateCreated: currentTimestamp}).then(function()
-			{
-				//clear out any old orphaned entries
-				return instance.db.mm_batch_items.where('batchID').equals(batchID).delete(); 
-			});
-		}
-		else 
-		{	//clear out any old entries
-			return instance.db.mm_batch_items.where('batchID').equals(batchID).delete(); 
-		}
-	});
+		await instance.db.mm_batches.put({batchID: batchID, dateCreated: currentTimestamp});
+	}
+	//clear out any old orphaned entries from previous exports that might have the same batchID.
+	await instance.db.mm_batch_items.where('batchID').equals(batchID).delete(); 
 }
 
 
@@ -374,12 +368,12 @@ MembermouseBatchTransfer.prototype.retrieveLoop = function(commandPacket,threadN
 		{
 			commandPacket[eachvar] = this.postvars[eachvar];
 		}
-	}
+	} 
+	commandPacket["payload"] = jQuery.extend(commandPacket["payload"], this.originalPayload);  
 	
 	var instance = this; 
 	if(instance.cancelled)
 	{  
-		instance.callbackFunction(instance.STATUS_CANCELLED, "Cancelled");
 		return false;
 	}
 	return jQuery.ajax({
@@ -415,6 +409,7 @@ MembermouseBatchTransfer.prototype.retrieveLoop = function(commandPacket,threadN
 MembermouseBatchTransfer.prototype.cancel = function() 
 {  
 	this.cancelled = true;
+	this.callbackFunction(this.STATUS_CANCELLED, "Cancelled");
 }	
 
 MembermouseBatchTransfer.prototype.generateBatchID = function() 
@@ -648,12 +643,12 @@ MembermouseBatchTransfer.prototype.updatePreflightStatus = function(currentByte,
 
 
 /**
- * Override to provide custom error handling. By default, the error is just sent to the console
+ * Override to provide custom error handling. By default, the error is just sent to the console. It is assumed that "this" is bound to the current instance
  */
 MembermouseBatchTransfer.prototype.errorHandler = function(errMessage)
 {
 	console.log(errMessage);
-	instance.callbackFunction(instance.STATUS_FAILED, errMessage);
+	this.callbackFunction(this.STATUS_FAILED, errMessage);
 }
 
 

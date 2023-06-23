@@ -187,12 +187,13 @@ class MM_Session
 		
 		if (MM_Utils::isLoggedIn() || !self::probablyIsBot())
 		{
-			return strftime("%Y-%m-%d %H:%M:%S",strtotime(self::$MM_SESSION_TIMESTAMP) + self::$MM_SESSION_LIFESPAN);
+			$ts = strtotime(self::$MM_SESSION_TIMESTAMP) + self::$MM_SESSION_LIFESPAN;
 		}
 		else
 		{
-			return strftime("%Y-%m-%d %H:%M:%S",strtotime(self::$MM_SESSION_TIMESTAMP) + self::$MM_SESSION_UNVERIFIED_LIFESPAN);
+			$ts = strtotime(self::$MM_SESSION_TIMESTAMP) + self::$MM_SESSION_UNVERIFIED_LIFESPAN;
 		}
+		return date("Y-m-d H:i:s",$ts);
 	}
 
 	
@@ -238,7 +239,7 @@ class MM_Session
 		}
 		else 
 		{
-			$now = strftime("%Y-%m-%d %H:%M:%S");
+			$now = date("Y-m-d H:i:s",time());
 			$sql = "DELETE FROM `".MM_TABLE_SESSIONS."` WHERE expiration_date < '{$now}'";
 		}
 
@@ -263,7 +264,7 @@ class MM_Session
 	{
 		if (self::$MM_SESSION_TIMESTAMP == null)
 		{
-			self::$MM_SESSION_TIMESTAMP = strftime("%Y-%m-%d %H:%M:%S");
+			self::$MM_SESSION_TIMESTAMP = date("Y-m-d H:i:s",time());
 		}
 	}
 
@@ -306,17 +307,13 @@ class MM_Session
 		}
 		catch(Exception $e)
 		{
-			if ((double) phpversion() >= 7.0 && function_exists ( "random_bytes" ))
+			if (function_exists("random_bytes"))
 			{
-				$entropy = md5 ( random_bytes(64) );
-			}
-			elseif ((double) phpversion() >= 5.3 && function_exists ( "mcrypt_create_iv" ))
-			{
-				$entropy = md5 ( mcrypt_create_iv ( 64, MCRYPT_DEV_URANDOM ) );
+				$entropy = md5(random_bytes(64));
 			}
 			else
 			{
-				$entropy = md5 ( AUTH_KEY );
+				$entropy = md5(AUTH_KEY);
 			}
 		}
 

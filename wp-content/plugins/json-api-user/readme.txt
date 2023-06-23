@@ -3,9 +3,9 @@
 Donate link: http://www.parorrey.com/solutions/json-api-user-plus/
 Tags: json api, RESTful user registration, authentication, RESTful Facebook Login, RESTful User Meta and BuddyPress xProfile
 Contributors: parorrey
-Stable tag: 3.9.0
+Stable tag: 3.9.2
 Requires at least: 3.0.1
-Tested up to: 6.0.1
+Tested up to: 6.1.1
 Requires PHP: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -231,6 +231,12 @@ For additional endpoints, pro version JSON API User Plus plugin details check he
 
 
 == Changelog ==
+
+= 3.9.2 =
+* Fixed a bug for validate_auth_cookie endpoint and error message
+
+= 3.9.1 =
+* Updated for wordpress version 6.1.1
 
 = 3.9.0 =
 * Updated for wordpress version 6.0.1, bug fix for generate_auth_cookie endpoint

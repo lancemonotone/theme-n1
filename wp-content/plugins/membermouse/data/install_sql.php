@@ -57,7 +57,8 @@ $sql[] = "CREATE TABLE mm_membership_level_products (
 id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 membership_id INT(11) UNSIGNED NOT NULL,
 product_id INT(11) UNSIGNED NOT NULL,
-PRIMARY KEY  (id)
+PRIMARY KEY  (id),
+KEY mm_membership_level_products_product_id (product_id)
 ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
 
 $sql[]="CREATE TABLE mm_membership_level_categories (
@@ -67,7 +68,8 @@ membership_level_id INT(11) UNSIGNED NOT NULL
 
 $sql[]="CREATE TABLE mm_bundle_products (
 bundle_id INT(11) UNSIGNED NOT NULL,	
-product_id INT(11) UNSIGNED NOT NULL
+product_id INT(11) UNSIGNED NOT NULL,
+KEY mm_bundle_products_product_id (product_id)
 ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
 
 $sql[]="CREATE TABLE mm_bundle_categories (
@@ -422,6 +424,7 @@ end_date TIMESTAMP NULL DEFAULT NULL,
 recurring_billing_setting ENUM ('all','first') DEFAULT 'all',
 is_gift smallint(1) NOT NULL DEFAULT 0,
 is_archived smallint(1) NOT NULL DEFAULT 0,
+is_hidden smallint(1) NOT NULL DEFAULT 0,
 gift_user_id BIGINT(20) UNSIGNED NOT NULL,
 gift_order_item_id BIGINT(20) UNSIGNED NOT NULL,
 date_modified TIMESTAMP NULL DEFAULT NULL,
@@ -704,15 +707,6 @@ icon_type TINYINT(1) DEFAULT '1',
 PRIMARY KEY  (id)
 ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
  
-$sql[] = "CREATE TABLE mm_queue (
-    id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-    pipeline VARCHAR(191) NOT NULL,
-    data  LONGTEXT NOT NULL,
-status TINYINT(1) DEFAULT '0',
-    PRIMARY KEY  (id),
-    date_added TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    KEY mm_queue_pipeline_id (pipeline)
-    ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
 
 $sql[] = "CREATE TABLE mm_log_captcha (
 id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,

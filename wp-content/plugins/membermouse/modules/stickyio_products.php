@@ -65,9 +65,9 @@ foreach($data as $key => $item)
    	$llOffer = $item->stickyio_offer_name;
    	$llBillingModel = $item->stickyio_billing_model_name;
    	
-   	// Lime Light Product
+   	// Sticky.io Product
    	$llProduct = "{$item->stickyio_product_name} [{$item->stickyio_product_id}]";
-   	$llProduct .= '<a href="javascript:mmjs.getStickyioProductDescription(\''.$item->stickyio_product_id.'\');" style="margin-left: 5px; cursor:pointer;" title="View Lime Light Product Info">'.MM_Utils::getIcon("info-circle", "blue", "1.3em", "2px;").'</a>';
+   	$llProduct .= '<a href="javascript:mmjs.getStickyioProductDescription(\''.$item->stickyio_product_id.'\');" style="margin-left: 5px; cursor:pointer;" title="View Sticky.io Product Info">'.MM_Utils::getIcon("info-circle", "blue", "1.3em", "2px;").'</a>';
    	
    	$llProductNameAndID = "{$item->stickyio_campaign_name} [{$item->stickyio_campaign_id}]";
    	if(intval($item->stickyio_campaign_id)<=0)

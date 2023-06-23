@@ -1,17 +1,17 @@
 <?php
 /**
  * @package MemberMouse
- * @version 2.4.0
+ * @version 2.4.4
  *
  * Plugin Name: MemberMouse Platform
  * Plugin URI: http://membermouse.com
  * Description: MemberMouse is an enterprise-level membership platform that allows you to quickly and easily manage a membership site or subscription business. MemberMouse is designed to deliver digital content, automate customer self-service and provide you with advanced marketing tools to maximize the profitability of your continuity business.
  * Author: MemberMouse, LLC
- * Version: 2.4.0
+ * Version: 2.4.4
  * Author URI: http://membermouse.com
  * Text Domain: membermouse
  * Domain Path: /languages/
- * Copyright: 2009-2021 MemberMouse LLC. All rights reserved.
+ * Copyright: 2009-2023 MemberMouse LLC. All rights reserved.
  */
 
 require_once("includes/mm-constants.php");
@@ -30,7 +30,7 @@ if (class_exists("MM_DiagnosticLog") && MM_DiagnosticLog::isEnabled())
 	    } 
 	}
 	register_shutdown_function('membermouseDiagnosticCapture');
-	$previous = set_error_handler(function ($errno, $errstr, $errfile, $errline, $errcontext) use (&$previous) {
+	$previous = set_error_handler(function ($errno, $errstr, $errfile, $errline, $errcontext = []) use (&$previous) {
 	    MM_DiagnosticLog::logPHPErrors($errno, $errstr, $errfile, $errline, $errcontext);
 	    
 	    // If another error handler was defined, call it, otherwise use the default PHP error handler
@@ -48,10 +48,8 @@ if(!class_exists('MemberMouse',false))
 	{
  		private static $menus=""; 
 		private $option_name = 'membermouse-settings';
-		private $defaults = array('count'=>10, 'append'=>1);
-		private $metaname = '_associated_membermouse';
 		private $installerRan = false;
-		private static $pluginVersion = "2.4.0";
+		private static $pluginVersion = "2.4.4";
 
 		public function __construct() 
 		{
@@ -73,22 +71,95 @@ if(!class_exists('MemberMouse',false))
 					MM_MemberMouseService::validateLicense($license);
 				}
 				
-				if($license->isValid())
+				if($license->isValid() && (MM_MemberMouseService::hasPermission(MM_MemberMouseService::$FEATURE_PHP_INTERFACE)))
 				{
-					if(MM_MemberMouseService::hasPermission(MM_MemberMouseService::$FEATURE_PHP_INTERFACE))
-					{
-						require_once("includes/php_interface.php");
-					}
+					require_once("includes/php_interface.php");
 				}
 			}
 			
 			$this->addActions();
 			$this->addFilters();
+		}  
+
+
+		public function addAssignAccessHandler()
+		{
+			?>
+			<script type='text/javascript'> 
+				//// if Bulk-edit list of page/posts is clicked in, lets be sure
+				//// our remove access list is up-to-date.
+				jQuery('#bulk-edit fieldset').click(function (event) {  
+					accessrights_js.getAccessRightsForPosts();
+				});
+				
+
+				///// If the doaction option list for bulk edit selectes "Manage Access" 
+				///// lets be sure to modify the options for display in the UI to show that of the access options.
+				jQuery(document).ready(function() {  
+					jQuery( "#doaction" ).click(function( event ) { 
+						if(jQuery("#bulk-action-selector-top :selected").text() == "Manage Access")
+						{ 
+							event.preventDefault();  
+							var total = jQuery("body").find('input[name="post[]"]:checked').length;  
+
+							/// if >=1 post/page is selected lets show the dialog.
+							if(total>0)
+							{   
+								/// lets reuse the bulk-edit screen 
+								jQuery("#bulk-action-selector-top :selected").val("edit");
+
+								/// lets hide the irrelevant options 
+								jQuery(".inline-edit-categories").hide(); 
+								jQuery(".inline-edit-col-right").hide(); 
+
+								/// lets now show the bulk-edit screen
+								window.inlineEditPost.setBulk();   
+
+								/// lets fill it with access management options
+								accessrights_js.getAccessRightsForPosts(true); 
+							}
+						} 
+						else
+						{
+							//// if our custom bulk options are showing
+							if(jQuery("#mm-custom-bulk-id").length)
+							{
+								/// remove them as needed
+								jQuery("#mm-custom-bulk-id").remove();
+
+								/// now lets reset the existing options for the edit screen
+								if(jQuery("#bulk-action-selector-top :selected").val() == "edit")
+								{ 
+									jQuery(".inline-edit-categories").show(); 
+									jQuery(".inline-edit-col-right").show(); 
+								}
+							}
+						}
+					});  
+				});
+			</script>
+			<?php
+
 		}
 
 		public function addFilters() 
 		{
 			global $wpdb;
+			$post_hook = new MM_PostHooks(); 
+
+			///// add ability to handle new option by inline js
+            add_action("admin_footer", array($this, "addAssignAccessHandler"));
+
+			//// show new bulk edit option
+            $bulkActionsClosure = function($bulk_actions) {
+                $bulk_actions['assign-access'] = __('Manage Access', 'txtdomain');
+                return $bulk_actions;
+            };
+            add_filter('bulk_actions-edit-page', $bulkActionsClosure);  
+            add_filter('bulk_actions-edit-post', $bulkActionsClosure);  
+			
+			//// handle the update/save action from the bulk-edit inline dialog
+			add_action('save_post', array($post_hook, 'saveAccessRightsFromBulkEdit'),10,2);
 			
 			if (class_exists("MM_TagProcessor"))
 			{
@@ -144,11 +215,7 @@ if(!class_exists('MemberMouse',false))
 				add_filter('wp_footer', array($this,'addMMFooter'), 9);
 			}
 			
-// 			add_filter('mm_stripe_billing_statement_descriptor', function($descriptor, $order){ 
-// 				return "Your Order Description - ".array_pop($order->orderProducts)->description;
-// 			},1,2);
-			
-			$post_hook = new MM_PostHooks();
+            
 			add_filter('rest_prepare_post', array($post_hook, "doRestFilter"), 12, 3);
 			add_filter('rest_prepare_page', array($post_hook, "doRestFilter"), 12, 3);
 			add_filter('manage_posts_columns', array($post_hook,'postsColumns'), 5);
@@ -172,8 +239,12 @@ if(!class_exists('MemberMouse',false))
 			{
 			     add_filter(MM_Filters::$PASSWORD_STRENGTH_VALIDATOR,array('MM_UserHooks',"passwordStrengthValidator"),10,1);
 			}
-					
+
+			add_filter( 'submenu_file', 'MM_AuthUtils::highlight_account_menu_item' );
+			add_filter( 'mm_stripe_payment_method_title', 'MM_StripeConnect::payment_method_title' );
+    		add_filter( 'site_status_tests', 'MM_StripeConnect::add_site_health_test' );
 		}
+		
 		
 		public function addActions() 
 		{
@@ -202,7 +273,9 @@ if(!class_exists('MemberMouse',false))
 				});
 				
 				add_action('shutdown', array('MM_Session','sessionWrite'));
-				add_action('wp_logout', array($this, "reapSession"));
+				add_action('wp_logout', function() {
+				    MM_Session::sessionReap(MM_Session::getSessionId());
+				});
 					
 				add_action('init', array($user_hooks, "doAutoLogin"));
 				add_action('init', array($user_hooks, "doAutoLogout"));
@@ -368,10 +441,6 @@ if(!class_exists('MemberMouse',false))
 					add_action('init', array('MM_PaymentService', "performInitActions"), 9);
 				}
 				
-				// add_action( 'mm_queue_execute', array($this,'mm_queue_execute_callback') );
-				
-				add_action( 'plugins_loaded', array($this,'initBackground' ));
-				add_action( 'wp_ajax_queue_add', array($this,'prefix_ajax_queue_add') );
 				
 				//// capture any session changes to the override key 
 				if (class_exists("MM_PaymentServiceFactory"))
@@ -399,9 +468,18 @@ if(!class_exists('MemberMouse',false))
 						echo MM_Session::generateDelayedCreateJavascript();
 					}
 				}); 
-				
-				//async task manager hook
-				add_action('admin_post_mm_async_request', array("MM_AsyncTaskManager","handleAsyncRequest"));
+
+				add_action( 'admin_init', 'MM_AuthenticatorService::clear_connection_data' );
+			    add_action( 'init', 'MM_AuthenticatorService::process_connect' );
+			    add_action( 'init', 'MM_AuthenticatorService::process_disconnect' );
+    			add_action( 'init', 'MM_PaymentNotifiers::parse_standalone_request' );
+				add_action( 'admin_notices', 'MM_AuthenticatorService::mm_disconnect_notice' );
+				add_action( 'admin_notices', 'MM_StripeConnect::upgrade_notice' );
+
+    			add_action( 'wp_ajax_mm_stripe_connect_update_creds', 'MM_StripeConnect::process_update_creds'  );
+			    add_action( 'wp_ajax_mm_stripe_connect_refresh', 'MM_StripeConnect::process_refresh_tokens' );
+			    add_action( 'wp_ajax_mm_stripe_connect_disconnect', 'MM_StripeConnect::process_disconnect' );
+			    add_action( 'wp_ajax_mm_stripe_connect_save_settings', 'MM_StripeConnect::stripe_connect_save_settings' );
 			}
 		} 
 		
@@ -419,10 +497,9 @@ if(!class_exists('MemberMouse',false))
 		
 		public function addMMFooter($content)
 		{
-			echo "<div style='width: 100%; padding-top: 10px; text-align:right; height: 50px; font-size: 12px;'>
-	<a href=\"http://www.membermouse.com?ref=".urlencode(get_option("siteurl"))."&src=badge\">Membership Software</a> Provided by MemberMouse
-	&nbsp;&nbsp;
-</div>";
+			echo "<div style='width: 100%; padding-top: 10px; text-align:right; height: 50px; font-size: 12px;'>".
+	             "<a href=\"http://www.membermouse.com?ref=".urlencode(get_option("siteurl"))."&src=badge\">".
+	             "Membership Software</a> Provided by MemberMouse &nbsp;&nbsp;</div>";
 		}
 		
 		public function filterContent($content)
@@ -469,39 +546,72 @@ if(!class_exists('MemberMouse',false))
 			return "This content is for members only";
 		}
 		
-		public function reapSession()
+		
+		protected function removeFromUpdateList()
 		{
-			MM_Session::sessionReap(MM_Session::getSessionId());
+		    $current = get_site_transient('update_plugins');
+		    if(isset($current->response["membermouse/index.php"]))
+		    {
+		        unset($current->response["membermouse/index.php"]);
+		        set_site_transient('update_plugins', $current);
+		    }
 		}
+		
+		
+		protected function addToUpdateList($returnStructure=false)
+		{
+		    $crntMajorVersion = self::getPluginVersion();
+		    $upgradeVersion = MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_UPGRADE_NOTICE);
+		    if(!empty($upgradeVersion) && $crntMajorVersion != $upgradeVersion)
+		    {
+		        if($upgradeVersion !== false)
+		        {
+		            $current = get_site_transient( 'update_plugins' );
+		            if (!is_object($current))
+		            {
+		                return false;
+		            }
+		            if (!isset($current->response))
+		            {
+		                $current->response = ["membermouse/index.php" => new stdClass()];
+		            }
+		            if (!isset($current->response["membermouse/index.php"]))
+		            {
+		                $current->response["membermouse/index.php"] = new stdClass();
+		            }
+		            $current->response["membermouse/index.php"]->slug = "membermouse";
+		            $current->response["membermouse/index.php"]->package = MM_PRETTY_CENTRAL_SERVER_URL."/major-versions/".$upgradeVersion.".zip";
+		            $current->response["membermouse/index.php"]->new_version = $upgradeVersion;
+		            if ($returnStructure)
+		            {
+		                return $current->response["membermouse/index.php"];
+		            }
+		            else
+		            {
+		                 set_site_transient('update_plugins',$current);
+		                 return true;
+		            }
+		        }
+		    }
+		    return false;
+		}
+		
 		
 		public function updateVersion($a,$b,$c)
 		{
 			if ((double)phpversion() < 7.0)
 			{
-				$current = get_site_transient('update_plugins'); 
-				if(isset($current->response["membermouse/index.php"]))
-				{
-					unset($current->response["membermouse/index.php"]);
-					set_site_transient('update_plugins', $current);
-				}
+				$this->removeFromUpdateList();
 				return $a;
 			}
 
 			if ($b==plugin_basename(__FILE__))
 			{
-				$crntMajorVersion = self::getPluginVersion();
-				$upgradeVersion = MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_UPGRADE_NOTICE);
-				if(!empty($upgradeVersion) && $crntMajorVersion != $upgradeVersion)
-				{
-					$current = get_site_transient('update_plugins');
-					@$current->response["membermouse/index.php"]->slug = "membermouse";
-					@$current->response["membermouse/index.php"]->package = MM_CENTRAL_SERVER_URL."/major-versions/".$upgradeVersion.".zip";
-					@$current->response["membermouse/index.php"]->new_version = $upgradeVersion;
-					set_site_transient('update_plugins', $current);
-				} 
+				$this->addToUpdateList();
 			}
 			return $a;
 		}
+		
 		
 		public function checkVersion()
 		{
@@ -509,58 +619,34 @@ if(!class_exists('MemberMouse',false))
 			{ 
 				if(class_exists("MM_MemberMouseService", false))
 				{
-					$crntMajorVersion = self::getPluginVersion();
-					$upgradeVersion = MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_UPGRADE_NOTICE);
-					if(!empty($upgradeVersion) && $crntMajorVersion != $upgradeVersion)
-					{
-						if($upgradeVersion !== false)
-						{
-							$current = get_site_transient( 'update_plugins' );
-							@$current->response["membermouse/index.php"]->slug = "membermouse";
-							@$current->response["membermouse/index.php"]->package = MM_PRETTY_CENTRAL_SERVER_URL."/major-versions/".$upgradeVersion.".zip";
-							@$current->response["membermouse/index.php"]->new_version = $upgradeVersion;
-							set_site_transient('update_plugins',$current);
-						}
-					}
+					$this->addToUpdateList();
 				}
 			}
 			else
 			{  
-				$current = get_site_transient('update_plugins');
-				if(isset($current->response["membermouse/index.php"]))
-				{
-					unset($current->response["membermouse/index.php"]);
-					set_site_transient('update_plugins', $current);
-				}
+				$this->removeFromUpdateList();
 			}
 		}
+		
 
 		public function getUpgradeIfAvail()
 		{ 
 			if(class_exists("MM_MemberMouseService", false))
 			{
-				$crntMajorVersion = self::getPluginVersion();
-				$upgradeVersion = MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_UPGRADE_NOTICE); 
-				if(!empty($upgradeVersion) && $crntMajorVersion != $upgradeVersion)
+				$mm = $this->addToUpdateList(true);
+				if (is_object($mm))
 				{
-					if($upgradeVersion !== false)
-					{
-						$current = get_site_transient( 'update_plugins' );
-						$mm = @$current->response["membermouse/index.php"];
-						@$mm->slug = "membermouse";
-						@$mm->package = MM_PRETTY_CENTRAL_SERVER_URL."/major-versions/".$upgradeVersion.".zip";
-						@$mm->new_version = $upgradeVersion; 
-						return $mm;
-					}
+				    return $mm;
 				}
 			} 
 			return false;
 		}
+		
 
 		public function preSetSiteTransient( $transient ) 
 		{ 
 			$current = $this->getUpgradeIfAvail();
-			if ( $current !== false ) 
+			if (($current !== false) && is_object($current))
 			{ 
 				$transient->response['membermouse/index.php'] = $current;
 			} 
@@ -589,6 +675,7 @@ if(!class_exists('MemberMouse',false))
 			return $transient;
 		}
 		
+		
 		public function loadPreviewBar()
 		{
 			if(class_exists("MM_PreviewView"))
@@ -600,6 +687,7 @@ if(!class_exists('MemberMouse',false))
 			}
 		}
 		
+		
 		public function customizeAdminBar()
 		{
 			if(MM_Employee::isEmployee())
@@ -608,7 +696,7 @@ if(!class_exists('MemberMouse',false))
 				
 				$wp_admin_bar->add_menu( array(
 					'id'    => 'mm-menu',
-					'title' => '<img src="'.MM_Utils::getImageUrl('mm-logo-svg').'" style="width:22px; margin-bottom:2px;" />',
+					'title' => '<img src="'.MM_Utils::getImageUrl('mm-logo-svg').'" style="width:22px; margin-bottom:2px; vertical-align:middle;" />',
 					'href'  => MM_ModuleUtils::getUrl(MM_MODULE_DASHBOARD),
 					'meta'  => array('title' => __('MemberMouse')),
 				));
@@ -639,8 +727,7 @@ if(!class_exists('MemberMouse',false))
 					"title" => "Product Settings",
 					"href" => MM_ModuleUtils::getUrl(MM_MODULE_PRODUCT_SETTINGS),
 					"parent" => "mm-menu"
-				));
-				
+				));				
 				$wp_admin_bar->add_menu(array(
 					"id" => "mm-support-center",
 					"title" => "Support Center",
@@ -650,57 +737,79 @@ if(!class_exists('MemberMouse',false))
 				));
 			}
 			
-			if(!is_admin() && MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_SHOW_PREVIEW_BAR) == "1" && MM_Employee::isEmployee())
+			if(!is_admin() && MM_Preview::previewEnabled() && MM_Employee::isEmployee())
 			{
-			?>
-			<style>
-			#wpadminbar {
-				background: linear-gradient(to top, #373737 0px, #464646 0px) repeat scroll 0 0 #464646;
-				background-image: -webkit-linear-gradient(bottom,#373737 0,#464646 1px);
-				border-bottom: 1px #555555 solid;
-			}
-			
-			#wpadminbar .ab-top-secondary {
-				background: linear-gradient(to top, #373737 0px, #464646 0px) repeat scroll 0 0 #464646;
-				background-image: -webkit-linear-gradient(bottom,#373737 0,#464646 1px);
-				border-bottom: 1px #555555 solid;
-			}
-			
-			body {
-				margin-top: 34px;
-			}
-			</style>
-			<script type='text/javascript'>
-			jQuery(document).ready(function() {
-				mmPreviewJs.hideNonMemberItems();
-			});
-			</script>
-			<?php
+    			?>
+    			<style>
+    			#wpadminbar {
+    				background: linear-gradient(to top, #373737 0px, #464646 0px) repeat scroll 0 0 #464646;
+    				background-image: -webkit-linear-gradient(bottom,#373737 0,#464646 1px);
+    				border-bottom: 1px #555555 solid;
+    			}
+    			
+    			#wpadminbar .ab-top-secondary {
+    				background: linear-gradient(to top, #373737 0px, #464646 0px) repeat scroll 0 0 #464646;
+    				background-image: -webkit-linear-gradient(bottom,#373737 0,#464646 1px);
+    				border-bottom: 1px #555555 solid;
+    			}
+    			
+    			body {
+    				margin-bottom: 34px;
+    			}
+    			</style>
+    			<script type='text/javascript'>
+    			jQuery(document).ready(function() {
+    				mmPreviewJs.hideNonMemberItems();
+    			});
+    			</script>
+    			<?php
 			}
 		}
+		
 		
 		public function loadResources()
 		{
 			global $wp_scripts;
 			
+			$inMembermouseAdmin = MM_Utils::inMembermouseAdmin();
+
+			if(is_admin() && !$inMembermouseAdmin)
+			{
+			    $menuIconCSS = "#adminmenu #toplevel_page_mmdashboard .wp-menu-image img {padding: 9px 0 0 0px; width: 22px;}";
+			    wp_add_inline_style( 'admin-menu', $menuIconCSS );
+			}
+			
 			$customCssFiles = array();
-			$customCssFiles["main"] = 'resources/css/common/mm-main.css';
-			$customCssFiles["buttons"] = 'resources/css/common/mm-buttons.css';
+			
+			if(!is_admin() || $inMembermouseAdmin)
+			{
+			    $customCssFiles["main"] = 'resources/css/common/mm-main.css';
+			    $customCssFiles["buttons"] = 'resources/css/common/mm-buttons.css';
+			}
 			
 			$module = MM_ModuleUtils::getModule();
+			$submodule = MM_ModuleUtils::getSubModule();
+
+			if ($module == MM_MODULE_EXTENSIONS && $submodule === MM_Extension::$MM_COURSES_TOKEN)
+			{
+				$customCssFiles["courses"] = 'resources/css/admin/mm-courses.css';
+				wp_enqueue_style( 'wp-color-picker' );
+				wp_enqueue_media();
+			}
+
 			if ($module == MM_MODULE_REPORTING)
 			{
 				$customCssFiles["reporting"] = 'resources/css/admin/reporting/mm-reporting.css';
 			}
 			
-			if(is_admin())
+			if($inMembermouseAdmin)
 			{
 			    $customCssFiles["admin"] = 'resources/css/common/mm-admin.css';
 			}
 			
 			$useJQueryUI = MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_USE_JQUERY_UI);
 			
-			if ($useJQueryUI == "1" || is_admin())
+			if ((!is_admin() && $useJQueryUI == "1") || $inMembermouseAdmin)
 			{
 				if (function_exists("wp_scripts"))
 				{
@@ -727,17 +836,22 @@ if(!class_exists('MemberMouse',false))
 			if(file_exists(MM_PLUGIN_ABSPATH."/resources/css/admin/{$subfolder}mm-".$module.".css")) 
 			{
 				wp_enqueue_style('membermouse-'.$module, plugins_url("resources/css/admin/{$subfolder}mm-".$module.'.css', __FILE__), array());	
+			} 
+	 
+			if(!is_admin() || $inMembermouseAdmin)
+			{
+			    wp_enqueue_style('membermouse-font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', array());
 			}
-			
-			wp_enqueue_style('membermouse-font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', array());
 			
 			$this->loadJavascript($module);
 		}
 		
+		
 		public function loadJavascript($module="") 
 		{
-			$isAdminArea = is_admin();
-			
+			$inMembermouseAdmin = MM_Utils::inMembermouseAdmin();
+			$submodule = MM_ModuleUtils::getSubModule();
+
 			$url = MM_OptionUtils::getOption("siteurl");
 			$adminUrl = admin_url();
 			
@@ -759,9 +873,10 @@ if(!class_exists('MemberMouse',false))
 			//first include global script
 			$version = self::getPluginVersion(); //use plugin major version to control caching
 			wp_enqueue_script("membermouse-global", plugins_url("/resources/js/global.js",__FILE__), array('jquery'),$version);
-			$javascriptData = array("jsIsAdmin"=>$isAdminArea,
+			$javascriptData = array("jsIsAdmin"=>$inMembermouseAdmin,
 					  "adminUrl" =>$adminUrl,
 					  "globalurl"=>MM_PLUGIN_URL,
+			          "ajaxurl" => admin_url('admin-ajax.php'),
 					  "checkoutProcessingPaidMessage" => MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_CHECKOUT_PAID_MESSAGE),
 					  "checkoutProcessingFreeMessage" => MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_CHECKOUT_FREE_MESSAGE),
 					  "checkoutProcessingMessageCSS" => MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_CHECKOUT_MESSAGE_CSS)
@@ -808,7 +923,7 @@ if(!class_exists('MemberMouse',false))
 				
 			$wordPressjQueryUiHandles = array();
 				
-			if($useJQueryUI == "1" || is_admin())
+			if($useJQueryUI == "1" || $inMembermouseAdmin)
 			{
 				$wordPressjQueryUiHandles[] = 'jquery-ui-accordion';
         	 	$wordPressjQueryUiHandles[] = 'jquery-ui-button';
@@ -825,6 +940,16 @@ if(!class_exists('MemberMouse',false))
 				$wordPressjQueryUiHandles[] = 'jquery-ui-widget';
 			}
 			
+			if ($module == MM_MODULE_MEMBER_DETAILS_GENERAL)
+			{
+			    $wordPressjQueryUiHandles[] = 'jquery-ui-autocomplete';
+			}
+			
+			if ($module == MM_MODULE_EXTENSIONS && $submodule === MM_Extension::$MM_COURSES_TOKEN)
+			{
+				$wordPressjQueryUiHandles[] = 'wp-color-picker';
+			}
+
 			foreach($commonJsFiles as $file => $dependencies)
 			{
 				if(file_exists(MM_PLUGIN_ABSPATH."{$commonJSDir}{$file}"))
@@ -833,7 +958,7 @@ if(!class_exists('MemberMouse',false))
 				}
 			}
 			
-			if(!$isAdminArea)
+			if(!is_admin())
 			{
 				$userFiles = array(
 					'mm-preview.js',
@@ -849,13 +974,15 @@ if(!class_exists('MemberMouse',false))
 			}
 			else
 			{
-				// load UserVoice SDK
-				$jsFiles["//widget.uservoice.com/xCTpbo1WnzFyomHpkrBryQ.js"] = array();
 				$jsFiles[plugins_url("{$adminJSDir}mm-corepages.js", __FILE__)] = array();
 				$jsFiles[plugins_url("{$adminJSDir}mm-accessrights.js", __FILE__)] = array();
 				
 				if (!empty($module))
 				{
+				    
+				    $enhancedDatagridCandidates = [MM_MODULE_PRODUCTS,MM_MODULE_BUNDLES,MM_MODULE_COUPONS,MM_MODULE_MEMBERSHIP_LEVELS,MM_MODULE_MANAGE_TRANSACTIONS,MM_MODULE_BROWSE_MEMBERS];
+				    $useEnhancedDatagrid = false;
+				    
 					// load JavaScript classes dynamically based on the module
 					$moduleJSDir = $adminJSDir;
 					$jsFileName = $module;
@@ -865,10 +992,21 @@ if(!class_exists('MemberMouse',false))
 						$moduleJSDir.="/reports/";
 						$jsFileName = MM_ModuleUtils::getPage();
 					}
+					/**
+					 * <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+					 * <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+					 */
+					if (in_array($module,$enhancedDatagridCandidates))
+					{
+					    $useEnhancedDatagrid = true;
+					    $ehdViewDependencies = (file_exists(MM_PLUGIN_ABSPATH."{$commonJSDir}mm-core.js")) ? array("mm-core.js") : array("mm-common-core.js");
+					    $jsFiles[plugins_url("{$adminJSDir}mm-enhanceddatagridview.js", __FILE__)] = $ehdViewDependencies;
+					}
 					
 					if (file_exists(MM_PLUGIN_ABSPATH."{$moduleJSDir}mm-{$jsFileName}.js"))
 					{
-						$jsFiles[plugins_url("{$moduleJSDir}mm-{$jsFileName}.js", __FILE__)] = array();
+					    $scriptDependencies = $useEnhancedDatagrid ? array('mm-enhanceddatagridview.js') : array();
+					    $jsFiles[plugins_url("{$moduleJSDir}mm-{$jsFileName}.js", __FILE__)] = $scriptDependencies;
 					}
 				}
 			}
@@ -1258,25 +1396,8 @@ if(!class_exists('MemberMouse',false))
 		{
 			return self::$pluginVersion;
 		}
-
-
-		public function initBackground() { 
-			$q = null;
-		    if(class_exists("MM_QueueProcess", true)) 
-		    { 
-                // $q = new MM_QueueProcess(MM_QueueProcess::MM_QUEUE_MAIN);
-		    }
-		} 
+		
  
-		function prefix_ajax_queue_add() 
-		{
-			$data = $_POST['data']; 
-			$q = new MM_QueueProcess();
-			$q->push( $data ); 
-			$q->execute();
-			echo "success"; //return something
-			wp_die();
-		}
 	}
 	//Allow javascript pseudo-protocol
 	add_filter('kses_allowed_protocols', 'MemberMouse::allowJavascriptProtocol');

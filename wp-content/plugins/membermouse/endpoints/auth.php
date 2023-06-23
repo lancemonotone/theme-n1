@@ -188,6 +188,7 @@ function processSignup($request,MM_AbstractSocialLoginExtension $provider)
 	}
 	
 	$socialSignupRequest = new MM_SocialLoginRequest($memberInfo);
+	$socialSignupRequest->processRequest();
 	$response = $socialSignupRequest->submitRequest();
 	if (MM_Response::isSuccess($response))
 	{

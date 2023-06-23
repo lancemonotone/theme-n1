@@ -10,6 +10,17 @@ class PostmanSendTestEmailController {
 	// logging
 	private $logger;
 	private $options;
+	private $allowed_tags = array( 
+		'input'			=>	array(
+			'type'			=>	array(),
+			'id'			=>	array(),
+			'name'			=>	array(),
+			'value'			=>	array(),
+			'class'			=>	array(),
+			'placeholder'	=>	array(),
+			'size'			=>	array(),
+		)
+	);
 
 	// Holds the values to be used in the fields callbacks
 	private $rootPluginFilenameAndPath;
@@ -65,7 +76,7 @@ class PostmanSendTestEmailController {
 	 * Get the settings option array and print one of its values
 	 */
 	public function test_email_callback() {
-		printf( 
+		return sprintf( 
 			'<input type="text" id="%s" name="postman_test_options[test_email]" value="%s" class="ps-input required email" size="40"/>', 
 			esc_attr( self::RECIPIENT_EMAIL_FIELD_NAME ), 
 			esc_attr( wp_get_current_user()->user_email ) 
@@ -99,7 +110,7 @@ class PostmanSendTestEmailController {
 	 */
 	public function addEmailTestSubmenu() {
 		$page = add_submenu_page( 
-			null, 
+			'', 
 			sprintf( '%s', esc_html__( 'Postman SMTP Setup', 'post-smtp' ) ), 
 				esc_html__( 'Postman SMTP', 'post-smtp' ), 
 				Postman::MANAGE_POSTMAN_CAPABILITY_NAME, PostmanSendTestEmailController::EMAIL_TEST_SLUG, array(
@@ -165,7 +176,7 @@ class PostmanSendTestEmailController {
 			) 
 		);
 		printf( '<label for="postman_test_options[test_email]">%s</label>', esc_attr_x( 'Recipient Email Address', 'Configuration Input Field', 'post-smtp' ) );
-		print wp_kses_post( $this->test_email_callback() );
+		print wp_kses( $this->test_email_callback(), $this->allowed_tags );
 		print '</fieldset>';
 
 		// Step 2
@@ -178,6 +189,23 @@ class PostmanSendTestEmailController {
 		print '<section>';
 		printf( '<p><label>%s</label></p>', esc_html__( 'Status', 'post-smtp' ) );
 		print '<textarea id="postman_test_message_error_message" class="ps-textarea" readonly="readonly" cols="65" rows="4"></textarea>';
+		
+		$transport = PostmanOptions::getInstance()->getTransportType();
+
+		if( 
+			version_compare( '8.0.0', phpversion(), '<=' ) 
+			&&
+			( $transport == 'smtp' || $transport == 'default' )
+		) {
+
+			echo '
+			<div class="ps-broken-mail-notice">
+				<span class="dashicons dashicons-info"></span>'.esc_html__( 'Is your email\'s Header or Body broken? ', 'post-smtp' ).'<a href="https://postmansmtp.com/fix-for-broken-emails/" target="_blank">'.esc_html__( 'Learn how to fix', 'post-smtp' ).'</a>.
+			</div>
+			';
+
+		}  
+
 		print '</section>';
 		print '</fieldset>';
 

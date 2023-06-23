@@ -6,27 +6,16 @@
  */
 	$bundle = new MM_Bundle($p->id);
 	
-	if(!$bundle->isFree() && $bundle->getAssociatedProducts() > 0 && !$bundle->hasSubscribers()) 
-	{
-		$productsDisabled = "";
-	}
-	else 
-	{
-		$productsDisabled = "disabled='disabled'";
+	$subTypeDisabled = "";	
+
+	if (!$p->duplicate && $bundle->hasSubscribers()) 
+    {
+    	$subTypeDisabled = "disabled='disabled'";	
 	}
 	
-	if($bundle->hasSubscribers()) 
-	{
-		$subTypeDisabled = "disabled='disabled'";
-	} 
-	else 
-	{
-		$subTypeDisabled = "";	
-	} 
-
 	$provider = MM_EmailServiceProviderFactory::getActiveProvider();
 	$provider_token = strtolower($provider->getToken());
-	
+	$nameModifier = $p->duplicate ? (_mmt("Copy of")." ") : "";
 ?>
 <script>
 function unlockBundle()
@@ -50,7 +39,7 @@ function unlockBundle()
 
 <div id="mm-form-container">
 	<?php 
-	if($bundle->hasSubscribers())
+	if($bundle->hasSubscribers() && !$p->duplicate)
 	{
 		echo "<p class='noticeMessage'>";
 		echo _mmt("This bundle is being used by members so some properties have been locked to avoid accidental editing. ");
@@ -62,7 +51,7 @@ function unlockBundle()
 	<table cellspacing="10">
 		<tr>
 			<td width="150"><?php echo _mmt("Name"); ?>*</td>
-			<td><input id="mm-display-name" type="text" class="long-text" value="<?php echo htmlentities($bundle->getName(), ENT_QUOTES, "UTF-8"); ?>"/></td>
+			<td><input id="mm-display-name" type="text" class="long-text" value="<?php echo $nameModifier.htmlentities($bundle->getName(), ENT_QUOTES, "UTF-8"); ?>"/></td>
 		</tr>
 		
 		<tr>
@@ -72,10 +61,6 @@ function unlockBundle()
 					<input type="radio" name="status" value="active" onclick="mmjs.processForm()" <?php echo (($bundle->getStatus()=="1")?"checked":""); ?>  /> <?php echo _mmt("Active"); ?>  &nbsp;
 					<input type="radio" name="status" value="inactive" onclick="mmjs.processForm()" <?php echo (($bundle->getStatus()=="0")?"checked":""); ?>  /> <?php echo _mmt("Inactive"); ?>
 				</div>
-				<span style="font-size:11px">
-					<?php echo $archivedInfo;?>
-				</span>
-				
 				<input id="mm-status" type="hidden" />
 			</td>
 		</tr>
@@ -99,8 +84,9 @@ function unlockBundle()
 				
 				<div id="mm-paid-bundle-settings" style="margin-top:5px; <?php if($bundle->isFree()) { echo "display:none;"; } ?>">
 					<?php 
-						$productsList = MM_HtmlUtils::getBundleProducts($bundle->getId(), $bundle->getAssociatedProducts(),null, true);
-
+					    $idToUse = ($p->duplicate) ? "" : $bundle->getId();
+					    $productsList = MM_HtmlUtils::getBundleProducts($idToUse, $bundle->getAssociatedProducts(),null, !$bundle->isValid()); //only show archived products when editing
+					    
 						if(!empty($productsList))
 						{
 					?>
@@ -159,7 +145,7 @@ function unlockBundle()
 			</td>
 		</tr>
 		
-		<tr <?php echo ($provider_token == "default")?"style='display:none;'":""; ?>>
+		<tr <?php echo (!$p->duplicate && ($provider_token == "default"))?"style='display:none;'":""; ?>>
 			<?php $shortNameDesc = _mmt("Short names are passed to your email provider allowing you to segment your list based on which bundles a particular member has access to. You can name the short names anything you want. The best practice is to name it based on your bundle display name so that when you're looking to segment your list on your email provider you can readily associate the short names with the bundle."); ?>
 			<td nowrap>Short Name*<?php echo MM_Utils::getInfoIcon($shortNameDesc); ?></td>
 			<td><input id="mm-short-name" type="text" maxlength="10" class="long-text" value="<?php echo htmlentities($bundle->getShortName(), ENT_QUOTES, "UTF-8"); ?>" <?php if ($bundle->hasSubscribers() && !empty($bundle->getShortName)) { echo "readonly='readonly'"; } ?> />
@@ -229,7 +215,7 @@ function unlockBundle()
 		</tr>
 	</table>
 	
-	<input id='id' type='hidden' value='<?php if($bundle->getId() != 0) { echo $bundle->getId(); } ?>' />
+	<input id='id' type='hidden' value='<?php if (!$p->duplicate && ($bundle->getId() != 0)) { echo $bundle->getId(); } ?>' />
 	<input id='autogen_shortname' type='hidden' value='<?php echo (($provider_token == "default")&&($bundle->getShortName() == ""))?"true":"false";?>' />
 </div>
 

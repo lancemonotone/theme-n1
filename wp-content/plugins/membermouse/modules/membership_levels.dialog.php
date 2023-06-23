@@ -8,18 +8,38 @@
 	$membership = new MM_MembershipLevel($p->id);
 	$product = new MM_Product($membership->getDefaultProduct());
 	
-	if(!$membership->isFree() && count($membership->getProductIds()) > 0 && !$membership->hasSubscribers()) {
-		$productsDisabled = "";
-	}
-	else {
-		$productsDisabled = "disabled='disabled'";
-	}
-	
-	if($membership->hasSubscribers()) {
-		$subTypeDisabled = "disabled='disabled'";
+	if (!$p->duplicate)
+	{
+    	if(!$membership->isFree() && count($membership->getProductIds()) > 0 && !$membership->hasSubscribers()) {
+    		$productsDisabled = "";
+    	}
+    	else {
+    		$productsDisabled = "disabled='disabled'";
+    	}
+    	
+    	if($membership->hasSubscribers()) {
+    		$subTypeDisabled = "disabled='disabled'";
+    	} 
+    	else {
+    		$subTypeDisabled = "";	
+    	}
+    	
+		$archivedInfo = "";
+    	if($membership->isDefault() == "0") {
+    		$disableForDefault = "";
+    	} 
+    	else {
+    		$disableForDefault = "disabled='disabled'";	
+    		$subTypeDisabled = "disabled='disabled'";	
+    	}
+    
+    	$nameModifier = "";
 	} 
-	else {
-		$subTypeDisabled = "";	
+	else
+	{
+	   $nameModifier = _mmt("Copy of")." ";
+	   $disableForDefault = "";
+	   $subTypeDisabled = "";
 	}
 	
 	$archivedInfo = "";
@@ -37,7 +57,7 @@
 	<table cellspacing="10">
 		<tr>
 			<td width="160"><?php echo _mmt("Name"); ?>*</td>
-			<td><input id="mm-display-name" type="text" style="width:100%;" value='<?php echo htmlentities($membership->getName(),ENT_QUOTES, 'UTF-8', true); ?>'/></td>
+			<td><input id="mm-display-name" type="text" style="width:100%;" value='<?php echo $nameModifier.htmlentities($membership->getName(),ENT_QUOTES, 'UTF-8', true); ?>'/></td>
 		</tr>
 		
 		<tr>
@@ -95,7 +115,8 @@
 				
 				<div id="mm-paid-membership-settings" style="margin-top:5px; <?php if($membership->isFree()){ echo "display:none;"; } ?>">
 					<?php 
-						$productsList = MM_HtmlUtils::getMembershipProducts($membership->getId(), $membership->getProductIds(), null, true);
+					    $idToUse = ($p->duplicate) ? "" : $membership->getId();
+						$productsList = MM_HtmlUtils::getMembershipProducts($idToUse, $membership->getProductIds(), null, false);
 
 						if(!empty($productsList))
 						{
@@ -130,8 +151,8 @@
 									{
 										foreach($products as $pid)
 										{
-											$p = new MM_Product($pid);
-											$productsArr[$pid] = $p->getName();
+											$prod = new MM_Product($pid);
+											$productsArr[$pid] = $prod->getName();
 										}
 										
 										$selections = MM_HtmlUtils::generateSelectionsList($productsArr, $product->getId());
@@ -251,7 +272,7 @@
 						<textarea id='mm-email-body' style="width:100%; height:140px; font-family:courier; font-size: 11px;"><?php echo htmlentities($membership->getEmailBody(),ENT_QUOTES, 'UTF-8', true); ?></textarea>
 					</div>
 				</div>
-				<input id='id' type='hidden' value='<?php if($membership->getId() != 0) { echo $membership->getId(); } ?>' />
+				<input id='id' type='hidden' value='<?php if (!$p->duplicate && ($membership->getId() != 0)) { echo $membership->getId(); } ?>' />
 			</td>
 		</tr>
 		
@@ -300,7 +321,7 @@
 		</tr>
 	</table>
 	
-	<input id='mm-is-default' type='hidden' value='<?php echo $membership->isDefault(); ?>' />
+	<input id='mm-is-default' type='hidden' value='<?php echo ($p->duplicate) ? false : $membership->isDefault(); ?>' />
 	
 	<script type='text/javascript'>
 	mmjs.welcomeEmailChanged();

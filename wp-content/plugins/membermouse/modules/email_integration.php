@@ -189,7 +189,7 @@ $active_provider_token = $provider_entity->getToken();
 <script type='text/javascript'>
 <?php if($active_provider_token!="default"){ ?>
 	jQuery(document).ready(function() {
-	jQuery("#provider_token").removeAttr("disabled"); //resolve a potential issue with initial state 
+	jQuery("#provider_token").prop('disabled',false); //resolve a potential issue with initial state 
 	mmjs.showListMappingDialog(jQuery('#provider-config-form :input').serializeArray());
 	});
 <?php }else{ ?>
@@ -197,7 +197,7 @@ $active_provider_token = $provider_entity->getToken();
 jQuery(document).ready(function() {
 	jQuery("#mm-email-service-provider-list-mappings").hide();
 	jQuery("#mm-email-service-provider-list-bundle-mappings").hide();
-	jQuery("#provider_token").removeAttr("disabled");
+	jQuery("#provider_token").prop('disabled',false);
 });
 
 <?php }?>

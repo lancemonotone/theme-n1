@@ -22,19 +22,18 @@ if(isset($_POST["mm-country"]))
 		
 		$saved = true;
 	}
-	
-	if(isset($_POST["mm-default-country"]))
-	{
-		//MM_OptionUtils::setOption(MM_OptionUtils::$OPTION_KEY_DFLT_COUNTRY_SELECTION, in_array($_POST["mm-default-country"], $_POST["mm-country"]) ? $_POST["mm-default-country"] : $_POST["mm-country"][0]);
-		MM_OptionUtils::setOption(MM_OptionUtils::$OPTION_KEY_DFLT_COUNTRY_SELECTION, $_POST["mm-default-country"]);
-	}
 }
 
-// get country selections
-$selections = MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_COUNTRY_SELECTIONS);
+if(isset($_POST["mm-default-country"]))
+{
+    MM_OptionUtils::setOption(MM_OptionUtils::$OPTION_KEY_DFLT_COUNTRY_SELECTION, $_POST["mm-default-country"]);
+}
+
 $dfltCountry = MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_DFLT_COUNTRY_SELECTION);
-$fullCountryList = MM_HtmlUtils::getFullCountryList($selections);
 $countryList = MM_HtmlUtils::getCountryList($dfltCountry);
+
+$selections = MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_COUNTRY_SELECTIONS);
+$fullCountryList = MM_HtmlUtils::getFullCountryList($selections);
 ?>
 <div class="mm-wrap">
 <form name='savecountry' method='post'>

@@ -47,11 +47,22 @@ if(isset($_REQUEST[MM_Session::$PARAM_USER_ID]))
   .spacing{
     padding: 10px 10px 10px 10px
   }
-  </style>
-   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ </style>
+  
+<script>
+    function unlockUsernameField() 
+    {
+    	if(jQuery('#mm-username').prop( 'disabled') == true)
+    	{
+       		jQuery('#mm-username').prop( 'disabled', false );
+       		jQuery("#mm-unlock-usermame").hide();
+       		jQuery("#mm-username-change-override").val(1);
+       	}
+    }
+</script>
 <div id="mm-form-container">
 	<input type="hidden" id="page" value="<?php echo $_REQUEST["page"];?>"/>
-	<input type="hidden" id="module" value="<?php echo $_REQUEST["module"];?>"/>
+
 	<table cellspacing="8">
 		<tr>
 			<td width="<?php echo $columnWidth; ?>px;">Membership Status</td>
@@ -183,7 +194,7 @@ if(isset($_REQUEST[MM_Session::$PARAM_USER_ID]))
 						<?php echo MM_Utils::getIcon('calendar-o', 'purple', '1.2em', '1px'); ?> Last Login Date: <?php echo $user->getLastLoginDate(true); ?>
 					</div>
 					<div style="margin-bottom:5px;">
-						<?php echo MM_Utils::getIcon('globe', 'purple', '1.3em', '1px'); ?> Last Login IP: <span style='font-family:courier; font-size:12px;'><a href="http://www.infosniper.net/index.php?ip_address=<?php echo $user->getLastLoginIpAddress() ?>" target="_blank"><?php echo $user->getLastLoginIpAddress() ?></a></span>
+						<?php echo MM_Utils::getIcon('globe', 'purple', '1.3em', '1px'); ?> Last Login IP: <span style='font-family:courier; font-size:12px;'><?php echo MM_Utils::generateIPLinks($user->getLastLoginIpAddress(), ",");  ?></span>
 					</div>
 					<div style="margin-bottom:5px;">
 						<?php echo MM_Utils::getIcon('key', 'yellow', '1.2em', '1px'); ?> Logins: 
@@ -262,7 +273,12 @@ if(isset($_REQUEST[MM_Session::$PARAM_USER_ID]))
 			<td>
 				<input id="mm-username" type="text" style="width:200px;" value="<?php echo $user->getUsername() ?>" <?php echo ($enableUsernameChange == true) ? "":"disabled"; ?>>
 				<?php if(!$enableUsernameChange) { ?>
-				<span class="description">Username cannot be changed.</span> <a href="http://support.membermouse.com/support/solutions/articles/9000020516-allow-members-to-change-their-username" target="_blank"><em>Learn more</em></a>
+				<span class="description">Username locked by default.</span> <a href="http://support.membermouse.com/support/solutions/articles/9000020516-allow-members-to-change-their-username" target="_blank"><?php echo _mmt("Learn more"); ?></a>
+				
+				<span id="mm-unlock-usermame">
+					| <a onclick="unlockUsernameField();" style="cursor:pointer; text-decoration:underline;"><?php echo MM_Utils::getIcon('unlock', 'yellow', '1.2em', '1px'); ?> <?php echo _mmt("Unlock"); ?></a>
+				</span>
+				<input id="mm-username-change-override" type="hidden" value="0">
 				<?php } ?>
 			</td>
 		</tr>

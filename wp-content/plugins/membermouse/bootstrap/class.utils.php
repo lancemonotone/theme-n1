@@ -161,10 +161,8 @@
 		{
 			curl_setopt($ch, CURLOPT_POST, $post);
 		}
-		if (!ini_get('safe_mode') && !ini_get('open_basedir'))
-		{
-			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		}
+		
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_HEADER, 0);  // DO NOT RETURN HTTP HEADERS
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);  // RETURN THE CONTENTS OF THE CALL
@@ -244,7 +242,7 @@
 	 * This funciton returns the current UTC/GMT time in a format appropriate for
 	 * storing in the database.
 	 * 
-	 * @return String returns a date-time string representing the current UTC/GMT time
+	 * @return String|int returns a date-time string representing the current UTC/GMT time if format is 'mysql', integer timestamp if format is 'timestamp' or 'U'
 	 */
 	public static function getCurrentTime($format="mysql", $isUTC = true)
 	{
@@ -528,7 +526,7 @@
 			$newdate = null;
 			switch($freq){
 				case "months":
-					$months = floor((mktime()-$start)/2628000);
+					$months = floor((time() - $start)/2628000);
 					$newStart = strtotime( $months.' month' , strtotime ( $start ) ) ;
 					$newdate = strtotime( $period.' month' , strtotime ( $newStart ) ) ;
 					break;
@@ -749,10 +747,45 @@
 		
 		return $items;
 	}
+
+
+	/**
+	 * When we reference IP addresses within the plugin we link it to infosniper by opening a new page.   
+	 * In this manner, this provides a central point to split up ip addresses as this will support any number of ips that are 
+	 * separated by space or comma and generate html links for it.  
+	 * 
+	 * @param $ipAddress is the string of ips separated by comma or space
+	 * @param $delim (optional) how you want the generated html to be split apart.
+	 * @param $link (optional) if you want to redirect to a different link/ip service, provide it here with the %s option in place as needed.
+	 * 
+	 * @return a valid html string with links provided an ip address is found.  Otherwise empty string.
+	 */
+	public static function generateIPLinks($ipAddress, $delim="<br />", $link = "http://www.infosniper.net/index.php?ip_address=%s")
+	{ 
+		$ipAddressHtml = "";
+		$ips = preg_split("/(\,)|[\s]+/", $ipAddress);
+		if(count($ips)>0)
+		{ 
+			foreach($ips as $ip)
+			{
+				$url = sprintf($link, $ip);
+				$ipAddressHtml .= "<a href='{$url}' target='_blank'>".$ip."</a>{$delim}";	
+			}
+			if(strlen($delim)>0)
+			{
+				$ipAddressHtml = substr($ipAddressHtml,0,strlen($ipAddressHtml)-strlen($delim));
+			}
+		}  
+		return $ipAddressHtml;
+	}
 	
 	public static function getClientIPAddress()
 	{
-		if (!empty($_SERVER['HTTP_CLIENT_IP'])) 
+	    if (!empty($_SERVER['HTTP_CF_CONNECTING_IP']))
+	    {
+	        $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+	    }
+		else if (!empty($_SERVER['HTTP_CLIENT_IP'])) 
 	    {
 	      $ip = $_SERVER['HTTP_CLIENT_IP'];
 	    }
@@ -818,32 +851,38 @@
 	
 	public static function getEditIcon($description="", $addlStyles='', $actionString="", $isDisabled=false)
 	{
-		$color = ($isDisabled) ? "grey" : "yellow";
-		
-		if(empty($actionString) || $isDisabled)
-		{
-			return MM_Utils::getIcon('pencil', $color, '1.3em', '2px', $description, $addlStyles);
-		}
-		else
-		{
-			$description = _mmt($description);
-			return "<a {$actionString} style='cursor:pointer; {$addlStyles}' title='{$description}'>".MM_Utils::getIcon('pencil', $color, '1.3em', '2px', '', '')."</a>";
-		}
+	    return self::getGridActionIcon('yellow', 'pencil',$description, $addlStyles, $actionString, $isDisabled);
 	}
 	
 	public static function getDeleteIcon($description="", $addlStyles='', $actionString="", $isDisabled=false)
 	{
-		$color = ($isDisabled) ? "grey" : "red";
-		
-		if(empty($actionString) || $isDisabled)
-		{
-			return MM_Utils::getIcon('trash-o', $color, '1.3em', '2px', $description, $addlStyles);
-		}
-		else
-		{
-			$description = _mmt($description);
-			return "<a {$actionString} style='cursor:pointer; {$addlStyles}' title='{$description}'>".MM_Utils::getIcon('trash-o', $color, '1.3em', '2px', '', '')."</a>";
-		}
+	    return self::getGridActionIcon('red', 'trash-o',$description, $addlStyles, $actionString, $isDisabled);
+	}
+	
+	
+	public static function getDuplicateIcon($description="", $addlStyles='', $actionString="")
+	{
+	    return self::getGridActionIcon('blue', 'clone',$description, $addlStyles, $actionString);
+	}
+	
+	
+	protected static function getGridActionIcon($activeColor, $icon, $description="", $addlStyles='', $actionString="", $isDisabled=false)
+	{
+	    $color = ($isDisabled) ? "grey" : $activeColor;
+	    
+	    if(empty($actionString) || $isDisabled)
+	    {
+	        if (empty($addlStyles) || (strpos($addlStyles,"cursor") === false))
+	        {
+	            $addlStyles = "cursor:pointer;{$addlStyles}"; //change pointer to indicate that the action icons are interactive
+	        }
+	        return MM_Utils::getIcon($icon, $color, '1.3em', '2px', $description, $addlStyles);
+	    }
+	    else
+	    {
+	        $description = _mmt($description);
+	        return "<a {$actionString} style='cursor:pointer; {$addlStyles}' title='{$description}'>".MM_Utils::getIcon($icon, $color, '1.3em', '2px', '', '')."</a>";
+	    }
 	}
 	
 	public static function getHideIcon($description="", $addlStyles='', $actionString="", $isHidden=false)
@@ -851,15 +890,6 @@
 		$description = _mmt($description);
 		$color = ($isHidden) ? "light-blue" : "salmon";
 		$icon = ($isHidden) ? "eye" : "eye-slash";
-		
-		return "<a {$actionString} style='cursor:pointer; {$addlStyles}' title='{$description}'>".MM_Utils::getIcon($icon, $color, '1.3em', '2px', '', '')."</a>";
-	}
-	
-	public static function getArchiveIcon($description="", $addlStyles='', $actionString="", $isArchived=false)
-	{
-		$description = _mmt($description);
-		$color = "light-blue";
-		$icon = ($isArchived) ? "toggle-on" : "toggle-off";
 		
 		return "<a {$actionString} style='cursor:pointer; {$addlStyles}' title='{$description}'>".MM_Utils::getIcon($icon, $color, '1.3em', '2px', '', '')."</a>";
 	}
@@ -988,32 +1018,38 @@
  	
  	public static function constructPageUrl() 
  	{
- 		$pageURL = "http://";
- 		$siteUrl = MM_OptionUtils::getOption("siteurl");
- 		
- 		if((MM_Utils::isSSL() == true) 
- 			|| (isset($_SERVER["HTTPS"]) && ($_SERVER["HTTPS"] == "on"))
- 			|| (isset($_SERVER["SERVER_PORT"]) && ($_SERVER["SERVER_PORT"] == "443"))
- 		    || (stripos(site_url(), 'https://') === 0))
- 		{
- 			$pageURL = "https://";
- 		}
-		
-		if (isset($_SERVER["SERVER_PORT"]) && ($_SERVER["SERVER_PORT"] != "80") && ($_SERVER["SERVER_PORT"] != "443")) 
+		static $pageURL = null; //make multiple invocations of this function less expensive
+
+		if ($pageURL == null)
 		{
-			$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-		} 
-		else if (isset($_SERVER["SERVER_NAME"]) && isset($_SERVER["REQUEST_URI"])) 
-		{
-			$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+     		$pageURL = "http://";
+     		
+     		if((MM_Utils::isSSL() == true) 
+     			|| (isset($_SERVER["HTTPS"]) && ($_SERVER["HTTPS"] == "on"))
+     			|| (isset($_SERVER["SERVER_PORT"]) && ($_SERVER["SERVER_PORT"] == "443"))
+     		    || (stripos(site_url(), 'https://') === 0))
+     		{
+     			$pageURL = "https://";
+     		}
+    		
+    		if (isset($_SERVER["SERVER_PORT"]) && ($_SERVER["SERVER_PORT"] != "80") && ($_SERVER["SERVER_PORT"] != "443")) 
+    		{
+    			$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+    		} 
+    		else if (isset($_SERVER["SERVER_NAME"]) && isset($_SERVER["REQUEST_URI"])) 
+    		{
+    			$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+    		}
+    		else 
+    		{
+    		    $siteUrl = MM_OptionUtils::getOption("siteurl");
+    		    $pageURL = $siteUrl;
+    		}
+			$pageURL = htmlspecialchars($pageURL, ENT_COMPAT, "UTF-8");
 		}
-		else 
-		{
-		    $pageURL = $siteUrl;
-		}
-		
 		return $pageURL;
 	}
+	
  	
  	public static function getStatusImage($status) 
  	{
@@ -1139,6 +1175,20 @@
 		return current_user_can('manage_options');
 	}
 	
+	public static function inMembermouseAdmin()
+	{
+	    if (is_admin())
+	    {
+	        $module = MM_ModuleUtils::getModule();      // Returns empty string when not a MM page or module
+	        $request_base = isset($_SERVER["PHP_SELF"]) ? basename($_SERVER["PHP_SELF"]) : "";
+	        $additional_pages = array("edit.php", "post.php", "post-new.php");
+	        return ($module != "" || in_array($request_base, $additional_pages));
+	    }
+	    else
+	    {
+	        return false;
+	    }
+	}
 	
 	/**
 	 * Pluralizes a word if quantity is not one.

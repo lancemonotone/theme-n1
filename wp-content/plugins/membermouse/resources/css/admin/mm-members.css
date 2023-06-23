@@ -1,27 +1,22 @@
 .mbtDialog{ 
-    width:600px;
-    margin:80px auto;
-    border:5px solid #e5e5e5; 
-    border-radius:10px;
-    padding:10px 10px 50px 10px;
+    width:500px;
+    margin:50px auto;
+    border:3px solid #e5e5e5; 
+    border-radius:5px;
+    padding:10px 10px 20px 10px;
     position:relative;
     display:inline-block;
 }
 .mbtDialog img{
     margin:10px;
 }
-.mbtDialog h1{
-    font:bold 36px/1.4 Arial, Helvetica, sans-serif;
-    color:#1B4875;
-}
-.mbtDialog p{
-    font:bold 16px Arial, Helvetica, sans-serif;
-    color:#1B4875;
+.mbtDialog h3{
+    font-size:1.8em;
 }
 .mbtBox {
     display:inline-block;
-    color:#1B4875;
-    padding-bottom: 25px;
+    margin-top: 10px;
+    padding-bottom: 15px;
 }
 .mbtMale {
     padding-right:25px;
@@ -83,3 +78,59 @@
     80% { opacity:1; transform: translateX(90px); }
     100% { opacity:0; transform: translateX(160px); }
 }
+
+
+/**
+ * ==============================================
+ * Dot Flashing
+ * ==============================================
+ */
+ .dot-flashing {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #066cd2;
+    color: #066cd2;
+    animation: dotFlashing 1s infinite linear alternate;
+    animation-delay: .5s;
+  }
+  
+  .dot-flashing::before, .dot-flashing::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+  
+  .dot-flashing::before {
+    left: -15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #066cd2;
+    color: #066cd2;
+    animation: dotFlashing 1s infinite alternate;
+    animation-delay: 0s;
+  }
+  
+  .dot-flashing::after {
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #066cd2;
+    color: #066cd2;
+    animation: dotFlashing 1s infinite alternate;
+    animation-delay: 1s;
+  }
+  
+  @keyframes dotFlashing {
+    0% {
+      background-color: #066cd2;
+    }
+    50%,
+    100% {
+      background-color: #EAF2FA;
+    }
+  } 

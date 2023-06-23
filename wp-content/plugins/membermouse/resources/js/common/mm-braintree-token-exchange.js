@@ -216,7 +216,15 @@ var MM_BraintreeTokenExchanger = Class.extend({
 	
 	displayError: function(errMsg)
 	{
-		alert(errMsg);
+		mmjs.isAlreadySubmitting = false;
+		if (jQuery.fn.block)
+		{
+			jQuery.unblockUI({ fadeIn:0, timeout:0, onUnblock: () => {alert(errMsg);}});
+		}
+		else
+		{
+			alert(errMsg);
+		}
 	},
 	
 	

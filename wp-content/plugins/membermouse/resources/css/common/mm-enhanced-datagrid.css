@@ -1,0 +1,61 @@
+.mm-ehd-controls {
+    margin-top: 8px; 
+    margin-bottom: 8px; 
+    font-size: 11px;
+}
+
+.mm-ehd-controls-pagecontrols {
+    margin-left: 10px;
+}
+
+.mm-ehd-controls-pagecontrols span {
+    margin-left: 5px;
+}
+
+.mm-ehd-controls-prevpage,.mm-ehd-controls-nextpage, .mm-ehd-table-header-sortable, .mm-ehd-controls-cachestatus {
+    cursor:pointer;
+}
+
+.mm-ehd-controls-nextpage {
+    margin-right: 5px;
+}
+
+.mm-ehd-controls-pagesize-select {
+    margin: 0 5px 0 5px;
+
+}
+
+.mm-ehd-controls-pagesize,.mm-ehd-controls-totalresults {
+    margin-left: 30px;
+}
+
+.mm-ehd-controls-bulkoperations,.mm-ehd-controls-search {
+    float: right;
+}
+
+.mm-ehd-bulk-partial-selection {
+	filter: brightness(1.4); 
+}
+
+.mm-ehd-controls-cachestatus {
+    margin-left: 5px;
+}
+
+.mm-ehd-table-header, .mm-ehd-table-cell-nowrap {
+	white-space: nowrap;
+}
+
+.mm-ehd-table-cell-nodata {
+	height:150px; 
+	background-color: #f6f7f7; 
+	text-align:center; 
+	vertical-align:middle !important;
+}
+
+.mm-ehd-bulk-selector-all {
+	margin: 0px !important;
+}
+
+.has-overlay {
+    opacity: 0.4;
+}

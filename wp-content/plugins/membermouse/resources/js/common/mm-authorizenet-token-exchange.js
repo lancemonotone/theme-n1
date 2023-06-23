@@ -42,8 +42,15 @@ var MM_AuthorizenetTokenExchanger = Class.extend({
 	
 	errorHandler: function(errorMessage)
 	{
-		//for now, alert the message
-		alert(errorMessage);
+		mmjs.isAlreadySubmitting = false;
+		if (jQuery.fn.block)
+		{
+			jQuery.unblockUI({ fadeIn:0, timeout:0, onUnblock: () => {alert(errorMessage);}});
+		}
+		else
+		{
+			alert(errorMessage);
+		}
 	},
 	
 	authnetResponseHandler: function(response) 

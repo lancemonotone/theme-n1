@@ -202,7 +202,7 @@ function relevanssi_default_post_ok( $post_ok, $post_id ) {
 		$current_user = wp_get_current_user();
 		if ( ! $post_ok && $current_user->ID > 0 ) {
 			$post = relevanssi_get_post( $post_id );
-			if ( $current_user->ID === (int) $post->post_author ) {
+			if ( ! is_wp_error( $post ) && $current_user->ID === (int) $post->post_author ) {
 				// Allow authors to see their own private posts.
 				$post_ok = true;
 			}
@@ -1041,8 +1041,14 @@ function relevanssi_permalink( $link, $link_post = null ) {
 		global $post;
 		$link_post = $post;
 	} elseif ( is_int( $link_post ) ) {
-		$link_post = get_post( $link_post );
+		$link_post = relevanssi_get_post( $link_post );
 	}
+	if ( is_object( $link_post ) && ! property_exists( $link_post, 'relevance_score' ) ) {
+		// get_permalink( $post_id ) uses get_post() which eliminates Relevanssi
+		// data from the post, thus we use relevanssi_get_post() to get it.
+		$link_post = relevanssi_get_post( $link_post->ID );
+	}
+
 	// Using property_exists() to avoid troubles from magic variables.
 	if ( is_object( $link_post ) && property_exists( $link_post, 'relevanssi_link' ) ) {
 		// $link_post->relevanssi_link can still be false.
@@ -1063,11 +1069,28 @@ function relevanssi_permalink( $link, $link_post = null ) {
 		$add_highlight_and_tracking = true;
 	}
 
-	if ( $add_highlight_and_tracking && is_object( $link_post ) && property_exists( $link_post, 'relevance_score' ) ) {
+	if ( is_object( $link_post ) && ! property_exists( $link_post, 'relevance_score' ) ) {
+		$add_highlight_and_tracking = false;
+	}
+
+	/**
+	 * Filters whether to add the highlight and tracking parameters to the link.
+	 *
+	 * @param boolean $add_highlight_and_tracking Whether to add the highlight
+	 * and tracking parameters to the link.
+	 * @param object $link_post                   The post object.
+	 */
+	$add_highlight_and_tracking = apply_filters(
+		'relevanssi_add_highlight_and_tracking',
+		$add_highlight_and_tracking,
+		$link_post
+	);
+
+	if ( $add_highlight_and_tracking ) {
 		$link = relevanssi_add_highlight( $link, $link_post );
 	}
 
-	if ( $add_highlight_and_tracking && function_exists( 'relevanssi_add_tracking' ) && property_exists( $link_post, 'relevance_score' ) ) {
+	if ( $add_highlight_and_tracking && function_exists( 'relevanssi_add_tracking' ) ) {
 		$link = relevanssi_add_tracking( $link, $link_post );
 	}
 
@@ -1873,4 +1896,41 @@ function relevanssi_remove_metadata_fields( array $custom_fields ) : array {
 		'classic-editor-remember',
 	);
 	return array_diff( $custom_fields, $excluded_fields );
+}
+
+/**
+ * Returns the list of custom fields included in the index.
+ *
+ * This list contains the names of all the custom fields that are assigned to
+ * the posts in the Relevanssi index. This also includes ACF fields excluded
+ * with filters and from ACF field settings.
+ *
+ * @see relevanssi_list_custom_fields()
+ *
+ * @return string A comma-separated list of custom field names.
+ */
+function relevanssi_list_all_indexed_custom_fields() {
+	global $wpdb, $relevanssi_variables;
+
+	$custom_fields = get_option( 'relevanssi_index_fields' );
+
+	if ( 'visible' === $custom_fields ) {
+		$custom_fields = $wpdb->get_col(
+			"SELECT DISTINCT(meta_key)
+			FROM $wpdb->postmeta AS pm, {$relevanssi_variables['relevanssi_table']} AS r
+			WHERE pm.post_id = r.doc AND meta_key NOT LIKE '\_%'
+			ORDER BY meta_key ASC"
+		);
+	} else if ( 'all' === $custom_fields ) {
+		$custom_fields = $wpdb->get_col(
+			"SELECT DISTINCT(meta_key)
+			FROM $wpdb->postmeta AS pm, {$relevanssi_variables['relevanssi_table']} AS r
+			WHERE pm.post_id = r.doc
+			ORDER BY meta_key ASC"
+		);
+	} else {
+		$custom_fields = explode( ',', $custom_fields );
+	}
+
+	return implode( ', ', $custom_fields );
 }

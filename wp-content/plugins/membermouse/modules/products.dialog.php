@@ -31,7 +31,7 @@ else
 
 $hasBeenPurchased = false;
 
-if($product->isValid())
+if($product->isValid() && !$p->duplicate)
 {
 	$hasBeenPurchased = MM_Product::hasBeenPurchased($product->getId());
 }
@@ -49,6 +49,8 @@ $membershipList = MM_HtmlUtils::getMemberships($associatedMembership->getId(), f
 
 $bundleList = MM_HtmlUtils::getBundles($associatedBundle->getId(), false, MM_Bundle::$SUB_TYPE_PAID, true);
 $commissionProfileList = MM_HtmlUtils::getCommissionProfilesList($product->getCommissionProfileId());
+
+$nameModifier = $p->duplicate ? (_mmt("Copy of")." ") : "";
 
 function renderFieldOption($optionId, $affiliateId, $profileId)
 {
@@ -165,12 +167,12 @@ function unlockProduct()
 		echo "</p>";
 	}
 	?>
-	<input type='hidden' id='mm-id' value='<?php echo $p->id; ?>' />
+	<input type='hidden' id='mm-id' value='<?php echo $p->duplicate ? "" : $p->id; ?>' />
 	<table style="width:100%" cellpadding="2">
 	<tr>
 		<td width="140">Name*</td>
 		
-		<td><input type='text' id='mm-name' value='<?php echo htmlentities($product->getName(), ENT_COMPAT | ENT_HTML401, "UTF-8"); ?>' class="long-text"/></td>
+		<td><input type='text' id='mm-name' value='<?php echo $nameModifier.htmlspecialchars($product->getName(), ENT_QUOTES, "UTF-8"); ?>' class="long-text"/></td>
 	</tr>
 	
 	<tr>

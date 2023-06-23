@@ -554,7 +554,68 @@ textarea, input, select
 	<?php echo MM_SupportUtils::supportMenuItem($module); ?>
 </ul>
 </div>
-<?php } ?>		
+<?php } ?>	
+
+<?php if($crntPage == MM_MODULE_ACCOUNT_LOGIN) { 
+	$account_email = MM_OptionUtils::getOption( MM_OptionUtils::$OPTION_KEY_AUTH_ACCOUNT_EMAIL );
+	$secret = MM_OptionUtils::getOption( MM_OptionUtils::$OPTION_KEY_AUTH_ACCOUNT_SECRET );
+	$site_uuid = MM_OptionUtils::getOption( MM_OptionUtils::$OPTION_KEY_AUTH_ACCOUNT_SITE_UUID );
+?>
+<div class="mm-navbar">	
+	<div class="mm-account-login">
+	  <h3><?php esc_html_e('MemberMouse.com Account Login', 'membermouse'); ?></h3>
+
+	  <?php if ( $site_uuid && $account_email && $secret ) : ?>
+
+	    <div class="mm-account-connected">
+
+	      <h3><?php esc_html_e( 'Connected to MemberMouse.com', 'membermouse' ); ?></h3>
+
+	      <table class="form-table">
+	        <tr>
+	          <th><?php esc_html_e( 'Account Email', 'membermouse' ); ?></th>
+	          <td><?php echo esc_html($account_email); ?></td>
+	        </tr>
+	        <tr>
+	          <th><?php esc_html_e( 'Site ID', 'membermouse' ); ?></th>
+	          <td><?php echo esc_html($site_uuid); ?></td>
+	        </tr>
+	      </table>
+
+	      <?php
+
+	        $disconnect_url = add_query_arg(array(
+	          'mm-disconnect' => 'true',
+	          'nonce' => wp_create_nonce( 'mm-disconnect' )
+	        ));
+
+	      ?>
+
+	      <p>
+	        <a href="<?php echo esc_url($disconnect_url); ?>" class="button-primary mm-confirm" data-message="<?php esc_attr_e('Are you sure? This action will disconnect any of your Stripe payment methods, block webhooks from being processed, and prevent you from charging Credit Cards with and being notified of automatic rebills from Stripe.', 'membermouse'); ?>"><?php esc_html_e( 'Disconnect from MemberMouse.com', 'membermouse' ); ?></a>
+	      </p>
+
+	    </div>
+
+	  <?php else : ?>
+
+	    <div class="mm-account-not-connected">
+
+	      <p class="description"><?php esc_html_e( 'Connect your site to MemberMouse.com to enable MemberMouse Cloud Services!', 'membermouse' ); ?></p>
+
+	      <p>
+	        <a href="<?php echo esc_url(MM_AuthenticatorService::get_auth_connect_url()); ?>" class="button-primary"><?php esc_html_e( 'Connect to MemberMouse.com', 'membermouse' ); ?></a>
+	      </p>
+
+	    </div>
+
+	  <?php endif; ?>
+
+	  <?php do_action('mm_account_login_page'); ?>
+
+	</div>
+</div>
+<?php } ?>	
 
 <div style="clear: both"></div>
 

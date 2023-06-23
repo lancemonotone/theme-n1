@@ -1,6 +1,7 @@
 <?php
 /**
  * 
+ * 
 MemberMouse(TM) (http://www.membermouse.com)
 (c) MemberMouse, LLC. All rights reserved.
  */
@@ -84,7 +85,7 @@ MemberMouse(TM) (http://www.membermouse.com)
 			$crntUrl = MM_Utils::constructPageUrl();
 			$isLogoutPage = MM_CorePageEngine::isLogoutPageByUrl($crntUrl);
 			
-			if($isLogoutPage)
+			if ($isLogoutPage)
 			{
 				wp_logout();
 				wp_redirect(MM_Utils::constructPageUrl());
@@ -102,56 +103,52 @@ MemberMouse(TM) (http://www.membermouse.com)
 	 */
 	public function checkCorePageTypeInput()
 	{	
-		$corePage = new MM_CorePage();
+		$corePageInfo = MM_CorePage::getCorePageInfo(get_the_ID());
 		
-		if($corePage->isDefaultCorePage(get_the_ID()))
+		if(!is_null($corePageInfo))
 		{
-			$corePageInfo = $corePage->getCorePageInfo(get_the_ID());
-			
-			if(!is_null($corePageInfo))
+			switch($corePageInfo->core_page_type_id)
 			{
-				switch($corePageInfo->core_page_type_id)
-				{
-					case MM_CorePageType::$RESET_PASSWORD:
-						$result = MM_ResetPasswordForm::checkInput();
-						
-						if($result['success'] === false)
-						{
-							MM_Messages::addError($result['message']);
-							wp_redirect(MM_CorePageEngine::getUrl(MM_CorePageType::$LOGIN_PAGE));
-							exit;
-						}
-						
-						break;
-					case MM_CorePageType::$CHECKOUT:
-					    $onsiteService = MM_PaymentServiceFactory::getOnsitePaymentService();
-					    if ($onsiteService != null)
-					    {
-					        $onsiteService->checkoutInit();
-					    }
-						if (!headers_sent())
-						{
-							//send headers to discourage caching (especially bfcache) to force checkout page to be regenerated every page hit
-							//this should also ensure the generation of a fresh form submission id
-							nocache_headers();
-						}
-						break;
-						
-					case MM_CorePageType::$MY_ACCOUNT:
-						$onsiteService = MM_PaymentServiceFactory::getOnsitePaymentService();
-						if ($onsiteService != null)
-						{
-							$onsiteService->myAccountInit();
-						}
-						
-						//TODO: offsite services may utilize checkoutInit in the future. Determining which offsite payment services are possibly available
-						//		may be necessary here to support those services
-						
-						break;
-				}
+				case MM_CorePageType::$RESET_PASSWORD:
+					$result = MM_ResetPasswordForm::checkInput();
+					
+					if($result['success'] === false)
+					{
+						MM_Messages::addError($result['message']);
+						wp_redirect(MM_CorePageEngine::getUrl(MM_CorePageType::$LOGIN_PAGE));
+						exit;
+					}
+					
+					break;
+				case MM_CorePageType::$CHECKOUT:
+				    $onsiteService = MM_PaymentServiceFactory::getOnsitePaymentService();
+				    if ($onsiteService != null)
+				    {
+				        $onsiteService->checkoutInit();
+				    }
+					if (!headers_sent())
+					{
+						//send headers to discourage caching (especially bfcache) to force checkout page to be regenerated every page hit
+						//this should also ensure the generation of a fresh form submission id
+						nocache_headers();
+					}
+					break;
+					
+				case MM_CorePageType::$MY_ACCOUNT:
+					$onsiteService = MM_PaymentServiceFactory::getOnsitePaymentService();
+					if ($onsiteService != null)
+					{
+						$onsiteService->myAccountInit();
+					}
+					
+					//TODO: offsite services may utilize checkoutInit in the future. Determining which offsite payment services are possibly available
+					//		may be necessary here to support those services
+					
+					break;
 			}
 		}
 	}
+	
 	
 	public function removeWPAutoPOnCorePages()
 	{
@@ -476,10 +473,8 @@ MemberMouse(TM) (http://www.membermouse.com)
 
 		if(current_user_can('administrator') || MM_Employee::isEmployee())
 		{
-		    $previewEnabled = (MM_OptionUtils::getOption(MM_OptionUtils::$OPTION_KEY_SHOW_PREVIEW_BAR) == "1") ? true : false;
-		    
-		    if(!$previewEnabled || (isset($_REQUEST["mm_preview_admin"]) && $_REQUEST["mm_preview_admin"]=="1"))
-			{ 
+		    if(!MM_Preview::previewEnabled() || (isset($_REQUEST["mm_preview_admin"]) && $_REQUEST["mm_preview_admin"]=="1"))
+			{
 				return;
 			}
 		} 

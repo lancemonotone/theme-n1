@@ -21,6 +21,7 @@
 	}
 ?>
 <div id="mm-form-container" style="background-color: #EAF2FA; padding-top:2px; padding-left:8px; padding-bottom:8px;">
+	<form id="manage-members-advanced-search-form" action="javascript:void(0);">
 	<table>
 		<tr>
 			<!-- LEFT COLUMN -->
@@ -31,22 +32,22 @@
 					<td>
 						<select id="mm-member-search-by-date" >
 							<option value='user_registered'><?php echo _mmt('Registration Date'); ?></option>
-							<option value='status_updated'>Status Changed Date</option>
+							<option value='status_updated'><?php echo _mmt('Status Changed Date'); ?></option>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td>From</td>
 					<td>
-						<input id="mm-from-date" type="text" style="width: 152px" placeholder="mm/dd/yyyy" /> 
-						<a onClick="jQuery('#mm-from-date').focus();"><?php echo MM_Utils::getCalendarIcon(); ?></a>
+						<input id="mm-from-date" type="date" style="width: 152px" placeholder="mm/dd/yyyy" /> 
+						<a role="button" class="datepicker-calendar" style="display:none" onClick="jQuery('#mm-from-date').focus();"><?php echo MM_Utils::getCalendarIcon(); ?></a>
 					</td>
 				</tr>
 				<tr>
 					<td>To</td>
 					<td>
-						<input id="mm-to-date" type="text" style="width: 152px" placeholder="mm/dd/yyyy" />
-						<a onClick="jQuery('#mm-to-date').focus();"><?php echo MM_Utils::getCalendarIcon(); ?></a>
+						<input id="mm-to-date" type="date" style="width: 152px" placeholder="mm/dd/yyyy" />
+						<a role="button" class="datepicker-calendar" style="display:none" onClick="jQuery('#mm-to-date').focus();"><?php echo MM_Utils::getCalendarIcon(); ?></a>
 					</td>
 				</tr>
 				<tr>
@@ -74,7 +75,7 @@
 				<tr>
 					<td><?php echo _mmt('Membership Levels'); ?></td>
 					<td>
-						<select id="mm-memberships[]" size="6" multiple="multiple" style="width:300px;">
+						<select id="mm-memberships[]" size="4" multiple="multiple" style="width:300px;">
 						<?php echo MM_HtmlUtils::getMemberships($selectedMembership); ?>
 						</select>
 					</td>
@@ -82,8 +83,16 @@
 				<tr>
 					<td><?php echo _mmt('Bundles'); ?></td>
 					<td>
-						<select id="mm-bundles[]" size="6" multiple="multiple" style="width:300px;">
+						<select id="mm-bundles[]" size="4" multiple="multiple" style="width:300px;">
 						<?php echo MM_HtmlUtils::getBundles($selectedBundle); ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><?php echo _mmt('Country'); ?></td>
+					<td>
+						<select id="mm-country" size=4 multiple style="width:13.8em;"/>
+							<?php echo MM_HtmlUtils::getCountryList("None"); ?>
 						</select>
 					</td>
 				</tr>
@@ -102,7 +111,11 @@
 					</td>
 				</tr>
 				
-				<?php if(MM_CustomField::hasCustomFields(false)) { ?>
+				<?php 
+				$numberofCustomFields = MM_CustomField::getCustomFieldsList(false, false);
+				
+				if($numberofCustomFields > 0) 
+				{ ?>
 				<tr>
 					<td><?php echo _mmt('Custom Field 1'); ?></td>
 					<td>
@@ -114,7 +127,7 @@
 						<input type='text' id='mm-member-custom-field-value' value='' style='width: 200px;display:none' />
 					</td>
 				</tr>
-				<?php if(count(MM_CustomField::getCustomFieldsList(false, false)) > 1) { ?>
+				<?php if($numberofCustomFields > 1) { ?>
 				<tr>
 					<td><?php echo _mmt('Custom Field 2'); ?></td>
 					<td>
@@ -138,24 +151,41 @@
 		</tr>
 	</table>
 	
-	<input type="button" class="mm-ui-button blue" value="<?php echo _mmt('Show Members'); ?>" onclick="mmjs.search(0);">
+	<input type="button" class="mm-ui-button blue" value="<?php echo _mmt('Show Members'); ?>" onclick="mmjs.processSearchForm();">
 	<input type="button" class="mm-ui-button" value="<?php echo _mmt('Reset Form'); ?>" onclick="mmjs.resetForm();">
+	</form>
 </div>
 
 <script type='text/javascript'>
 	jQuery(document).ready(function(){
-		jQuery("#mm-from-date").datepicker({
-				dateFormat: "mm/dd/yy"
-		});
-		jQuery("#mm-to-date").datepicker({
-				dateFormat: "mm/dd/yy"
-		});
-		jQuery("#mm-form-container :input").keypress(function(e) {
-	        if(e.which == 13) {
-	            jQuery(this).blur();
-	            mmjs.search(0);
-	        }
-	    });
+		 var isDateSupported = () => {
+				var input = document.createElement('input');
+				input.setAttribute('type', 'date');
+				input.setAttribute('value', 'a');
+				return (input.value !== 'a'); //native date controls discard invalid date values, so we can use this to test for support
+			};
+			
+			if (!isDateSupported())
+			{
+        		jQuery("#mm-from-date").datepicker({
+        				dateFormat: "mm/dd/yy"
+        		});
+        		jQuery("#mm-to-date").datepicker({
+        				dateFormat: "mm/dd/yy"
+        		});
+			}
+			else if (!window.chrome)
+			{
+				//the chrome native control has a calendar icon inside of it, so only show the mm calendar icon if the browser is not chrome
+				jQuery(".datepicker-calendar").show();
+			}
+			
+    		jQuery("#mm-form-container :input").keypress(function(e) {
+    	        if(e.which == 13) {
+    	            jQuery(this).blur();
+    	            mmjs.processSearchForm();
+    	        }
+    	    });
 				
 	});
 </script>

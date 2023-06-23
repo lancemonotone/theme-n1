@@ -112,14 +112,14 @@ $limeLightService = MM_PaymentServiceFactory::getPaymentService(MM_PaymentServic
 					?>
 					<span style="font-family:courier;"><?php echo $stickyioProduct->getStickyioProductName(); ?> [<?php echo $stickyioProduct->getStickyioProductId(); ?>]</span>
 					<?php } else { ?>
-					<a href="javascript:mmjs.getStickyioProducts();">Load Lime Light Products</a>
+					<a href="javascript:mmjs.getStickyioProducts();">Load Sticky.io Products</a>
 					<?php } ?>
-					<a href="javascript:mmjs.getStickyioProducts();" title="Get Lime Light Products"><?php echo MM_Utils::getIcon("download", "green", "1.4em", "2px;"); ?></a>
-					<a href="javascript:mmjs.getStickyioProductDescription('');" title="View Lime Light Product Info"><?php echo MM_Utils::getIcon("info-circle", "blue", "1.3em", "1px;"); ?></a>
+					<a href="javascript:mmjs.getStickyioProducts();" title="Get Sticky.io Products"><?php echo MM_Utils::getIcon("download", "green", "1.4em", "2px;"); ?></a>
+					<a href="javascript:mmjs.getStickyioProductDescription('');" title="View Sticky.io Product Info"><?php echo MM_Utils::getIcon("info-circle", "blue", "1.3em", "1px;"); ?></a>
 					<br />
 					<?php if($stickyioProduct->getStickyioProductId()>0){ ?>
 						<div style='clear:both; height: 10px;'></div>
-					<input type='checkbox' onchange="mmjs.doToggleCampaignSelection();" id='stickyio_map_all_associated_campaigns' name='stickyio_map_all_associated_campaigns' value='1' <?php echo (($stickyioProduct->getStickyioCampaignId()==0)?"checked":"");?> /> Use the product mapping specified above across all Lime Light campaigns. <?php echo MM_Utils::getIcon("info-circle", "blue", "1.3em", "1px;","When this is checked, Lime Light product whatever will be mapped to the MemberMouse product whatever regardless of what Lime Light campaign is specified. This can be overridden for specific campaigns in a separate mapping."); ?>
+					<input type='checkbox' onchange="mmjs.doToggleCampaignSelection();" id='stickyio_map_all_associated_campaigns' name='stickyio_map_all_associated_campaigns' value='1' <?php echo (($stickyioProduct->getStickyioCampaignId()==0)?"checked":"");?> /> Use the product mapping specified above across all Sticky.io campaigns. <?php echo MM_Utils::getIcon("info-circle", "blue", "1.3em", "1px;","When this is checked, Sticky.io product whatever will be mapped to the MemberMouse product whatever regardless of what Sticky.io campaign is specified. This can be overridden for specific campaigns in a separate mapping."); ?>
 					<?php } ?>
 					 
 				</div>
@@ -127,10 +127,10 @@ $limeLightService = MM_PaymentServiceFactory::getPaymentService(MM_PaymentServic
 				<div id="stickyio_select_product_section" style="display:none;">
 					<select name='stickyio_product_id_selector' id='stickyio_product_id_selector' style="display:none;">
 					</select>
-					<a href="javascript:mmjs.getStickyioProductDescription('');" title="View Lime Light Product Info"><?php echo MM_Utils::getIcon("info-circle", "blue", "1.3em", "1px;"); ?></a>
+					<a href="javascript:mmjs.getStickyioProductDescription('');" title="View Sticky.io Product Info"><?php echo MM_Utils::getIcon("info-circle", "blue", "1.3em", "1px;"); ?></a>
 					<br />
 						<div style='clear:both; height: 10px;'></div>
-					<input type='checkbox' onchange="mmjs.doToggleCampaignSelection();" id='stickyio_map_all_associated_campaigns' name='stickyio_map_all_associated_campaigns' value='1' /> Use the product mapping specified above across all Lime Light campaigns. <?php echo MM_Utils::getIcon("info-circle", "blue", "1.3em", "1px;","When this is checked, Lime Light product whatever will be mapped to the MemberMouse product whatever regardless of what Lime Light campaign is specified. This can be overridden for specific campaigns in a separate mapping."); ?>
+					<input type='checkbox' onchange="mmjs.doToggleCampaignSelection();" id='stickyio_map_all_associated_campaigns' name='stickyio_map_all_associated_campaigns' value='1' /> Use the product mapping specified above across all Sticky.io campaigns. <?php echo MM_Utils::getIcon("info-circle", "blue", "1.3em", "1px;","When this is checked, Sticky.io product whatever will be mapped to the MemberMouse product whatever regardless of what Sticky.io campaign is specified. This can be overridden for specific campaigns in a separate mapping."); ?>
 				</div>
 				
 			</td>

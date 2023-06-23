@@ -48,28 +48,38 @@ function generatePurchaseSection($productId)
 	<p><span class="mm-section-header">Purchase Links for '<?php echo $p->accessTypeName; ?>'</span></p>
 	
 	<?php 
-		if(!$membership->isFree()) { 
+		if(!$membership->isFree()) 
+		{
+		    $filteredProducts = array();
+		    
+		    foreach($p->productIds as $id)
+		    {
+		        $product = new MM_Product($id);
+		        
+		        if($product->isValid() && $product->isHidden() == false)
+		        {
+		            array_push($filteredProducts, $product);
+		        }
+		    }
 	?>
 		<p>MemberMouse offers two methods for creating purchase links. First, select the product you want to create
 		a purchase link for and then use one of the links below to allow customers to purchase access to the 
 		'<?php echo $p->accessTypeName; ?>' membership.</p>
 		
+		<?php if(count($filteredProducts) > 0) { ?>
 		<input id="mm-last-selected-product-id" type="hidden" value="0" /> 
 		<select id="mm-product-selector" onchange="mmjs.productChangeHandler();">
 		<option value='0'>Select a product</option>
 		<?php
-			foreach($p->productIds as $id) 
-			{
-				$product = new MM_Product($id);
-				
-				if($product->isValid())
-				{
-					echo "<option value='{$product->getId()}'>{$product->getName()}</option>";
-				}
-			}
+    		foreach($filteredProducts as $product)
+    		{
+    		    echo "<option value='{$product->getId()}'>{$product->getName()}</option>";
+    		}
 		?>
 		</select>
-		
+		<?php } else { 
+    	    echo "<i>"._mmt("No available products. Hidden products are not available for purchase.")."</i>";
+    	} ?>
 	<?php
 			foreach($p->productIds as $id) 
 			{

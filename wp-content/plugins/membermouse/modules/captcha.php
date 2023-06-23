@@ -8,7 +8,7 @@ if(isset($_POST["mm_captcha_public_key"]))
 	
 	$scoreThreshold = floatval($_POST["mm_score_threshold"]);
 	
-	if(is_numeric($_POST["mm_cleanup_interval"]) && intval($_POST["mm_cleanup_interval"]) > 0)
+	if(isset($_POST["mm_cleanup_interval"]) && is_numeric($_POST["mm_cleanup_interval"]) && intval($_POST["mm_cleanup_interval"]) > 0)
 	{
 	   MM_CaptchaUtils::setCaptchaLogCleanupInterval($_POST["mm_cleanup_interval"]);
 	}
@@ -17,7 +17,7 @@ if(isset($_POST["mm_captcha_public_key"]))
 	    $error = _mmt("reCAPTCHA log cleanup interval must be a number greater than 0.");
 	}
 	
-	if(is_numeric($_POST["mm_score_threshold"]) && $scoreThreshold >= 0 && $scoreThreshold <= 1)
+	if(isset($_POST["mm_cleanup_interval"]) && is_numeric($_POST["mm_score_threshold"]) && ($scoreThreshold >= 0) && ($scoreThreshold <= 1))
 	{
 	    MM_CaptchaUtils::setScoreThreshold($scoreThreshold);
 	}
@@ -35,7 +35,7 @@ if(isset($_POST["mm_captcha_public_key"]))
 	    $error = _mmt("reCAPTCHA action name can only contain letters, numbers and slashes.");
 	}
 	
-	if($_POST["mm_enable_captcha"] == "on")
+	if(($_POST["mm_enable_captcha"] ?? false) == "on")
 	{
 	    MM_CaptchaUtils::enableCaptcha(true);
 	}
@@ -44,7 +44,7 @@ if(isset($_POST["mm_captcha_public_key"]))
 	    MM_CaptchaUtils::enableCaptcha(false);
 	}
 	
-	if($_POST["mm_hide_captcha_badge"] == "on")
+	if(($_POST["mm_hide_captcha_badge"] ?? false) == "on")
 	{
 	    MM_CaptchaUtils::setHideCaptchaBadge(true);
 	}

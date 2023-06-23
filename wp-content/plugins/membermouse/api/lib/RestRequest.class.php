@@ -40,7 +40,7 @@ class RestRequest {
         $this->user = "matt";
         $this->pwd = "pass";
 
-        if(isset($_SERVER["HTTP_AUTHORIZATION"])) {
+        if(isset($_SERVER["HTTP_AUTHORIZATION"]) && !empty($_SERVER["HTTP_AUTHORIZATION"])) {
             $base = base64_decode(substr($_SERVER["HTTP_AUTHORIZATION"],6));
             $arr = explode(":",$base);
             $this->user = $arr[0];

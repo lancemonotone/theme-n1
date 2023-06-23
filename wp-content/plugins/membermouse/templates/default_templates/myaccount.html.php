@@ -251,6 +251,21 @@
    		</div>
      </div>
      [/MM_Form_Section]
+    
+    [MM_Form_Section type='courses']
+    <div id="mm-courses-section" class="mm-myaccount-module">
+   		<div id="mm-courses-header" class="mm-myaccount-module-header"> 
+			 <?php echo MM_Utils::getIcon('graduation-cap', 'blue', '1.2em', '1px'); ?>
+    	 Courses
+    	</div>
+        <div class="mm-myaccount-content-wrapper">
+	   	<div id="mm-courses-body">
+	    	[mmcs-my-courses]
+	    </div>
+   		</div>
+    </div>
+    [/MM_Form_Section]
+
 
 </div>
 [/MM_Form]

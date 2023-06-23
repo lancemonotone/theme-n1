@@ -31,11 +31,11 @@ if(!isset($p->day))
 		</tr>
 		<tr>
 			<td>
-				<select id='mm_access_tags_opt' ><?php echo ((isset($p->options))?$p->options:""); ?></select>
+				<select id='mm_access_tags_opt' name='mm_access_tags_opt' ><?php echo ((isset($p->options))?$p->options:""); ?></select>
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td> 
 				<?php echo MM_Utils::getInfoIcon("Access starts at zero so to grant access on the first day set this to 0, to grant access on the second day set this to 1, for access on the tenth set this to 9 and so on.", ""); ?>
 				Grant access on day 
 				<input type='text' id='at_day' name='at_day' style="width:40px;" value='<?php echo $p->day; ?>' />
@@ -50,7 +50,7 @@ if(!isset($p->day))
 		</tr>
 		<tr>
 			<td>
-				<select id='mm_member_types_opt' ><?php echo ((isset($p->options))?$p->options:""); ?></select>
+				<select id='mm_member_types_opt'  name='mm_member_types_opt' ><?php echo ((isset($p->options))?$p->options:""); ?></select>
 			</td>
 		</tr>
 		<tr>
@@ -72,9 +72,11 @@ jQuery(document).ready(function() {
 });
 </script>
 
+<?php if(!isset($p->hide_buttons) || (isset($p->hide_buttons) && $p->hide_buttons!= 1)){?>
 <div class="mm-dialog-footer-container">
 <div class="mm-dialog-button-container">
 <a href="javascript:accessrights_js.save();" class="mm-ui-button blue">Grant Access</a>
 <a href="javascript:accessrights_js.closeDialog();" class="mm-ui-button">Cancel</a>
 </div>
 </div>
+<?php }?>

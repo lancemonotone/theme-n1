@@ -1,44 +1,57 @@
-/* IE polyfill for javascript startsWith function */
+/* This class initializes Stripe Elements, parses custom css rules for Element fields, and is 
+ * responsible for PaymentIntent management and payment authentication 
+ */
 
-if (!String.prototype.startsWith) {
+/* IE polyfill for javascript startsWith function */
+if (!String.prototype.startsWith) 
+{
     Object.defineProperty(String.prototype, 'startsWith', {
-        value: function(search, rawPos) {
+        value: function(search, rawPos) 
+		{
             var pos = rawPos > 0 ? rawPos|0 : 0;
             return this.substring(pos, pos + search.length) === search;
         }
     });
 }
 
-stripe = Stripe(stripeElementsInfo.stripePublishableKey);
+/**
+ * 
+ * MM_StripeElements is a support class that: 
+ * * provides token exchange services
+ * * controls configuration/display of Elements payment fields
+ * * manages Stripe PaymentIntents/SetupIntents and handles pre-purchase authentication
+ * 
+ * @namespace MemberMouse Plugin
+ * @name  MM_StripeElements
+ * @class MM_StripeElements stripe elements support class
+ */
 
-var MM_StripeElements = Class.extend({ 
+class MM_StripeElements
+{ 
 	
-	pageObject: {},
-	stripe: {},
-	elements: {}, 
-	card: {}, 
+	/**
+ 	 * MM_StripeElements constructor
+	 */
+	constructor() 
+	{
+		this.myAccount = false;
+		this.pageObject = {};
+		this.stripe = {};
+		this.elements = {}; 
+		this.card = {};
+		this.cardExpiry = {};
+		this.cardCvc = {};
+		this.activeIntent = false;
+	}
 	
-	init: function()
-	{       
-	},
-	
-	createElementDiv: function(el, wrapperID) {  
-		if ((el != null) && (document.getElementById(wrapperID) == null))
-		{
-			var wrapper = document.createElement('div');
-			wrapper.id = wrapperID;
-		    el.parentNode.insertBefore(wrapper, el);
-		    wrapper.appendChild(el);
-		}
-	}, 
-	  
-	parseCss: function(text) {
-		let tokenizer = /([\s\S]+?)\{([\s\S]*?)\}/gi,
-			rules = [],
-			rule, token;
+	parseCss(text) 
+	{
+		let tokenizer = /([\s\S]+?)\{([\s\S]*?)\}/gi;
+		let	rules = [], rule, token, style;
 		text = text.replace(/\/\*[\s\S]*?\*\//g, '');
-		while ( (token=tokenizer.exec(text)) ) {
-			style = mmStripeElements.parseRule( token[2].trim() );
+		while ( (token=tokenizer.exec(text)) ) 
+		{
+			style = mmStripeElements.parseRule(token[2].trim());
 			style.cssText = mmStripeElements.stringifyRule(style);
 			rule = {
 				selectorText : token[1].trim().replace(/\s*\,\s*/, ', '),
@@ -48,57 +61,63 @@ var MM_StripeElements = Class.extend({
 			rules.push(rule);
 		}
 		return rules;
-	},
-
-
-	parseRule: function(css) {
-		let tokenizer = /\s*([a-z\-]+)\s*:\s*((?:[^;]*url\(.*?\)[^;]*|[^;]*)*)\s*(?:;|$)/gi,
-			obj = {},
-			token;
-		while ( (token=tokenizer.exec(css)) ) {
+	}
+	
+	
+	parseRule(css) 
+	{
+		let tokenizer = /\s*([a-z\-]+)\s*:\s*((?:[^;]*url\(.*?\)[^;]*|[^;]*)*)\s*(?:;|$)/gi, obj = {}, token;
+		while (token=tokenizer.exec(css)) 
+		{
 			obj[token[1]] = token[2];
 		}
 		return obj;
-	},
-
-	stringifyRule: function(style) {
-		let text = '',
-			keys = Object.keys(style).sort();
-		for (let i=0; i<keys.length; i++) {
+	}
+	
+	
+	stringifyRule(style) 
+	{
+		let text = '';
+		let keys = Object.keys(style).sort();
+		for (let i=0; i<keys.length; i++) 
+		{
 			text += ' ' + keys[i] + ': ' + style[keys[i]] + ';';
 		}
 		return text.substring(1);
-	},
+	}
 	
-	parseStyleRulesIntoElements: function(rules, matchingStr, myMMReferenceVar)
+	
+	parseStyleRulesIntoElements(rules, matchingStr, myMMReferenceVar)
 	{
+		//TODO: use filter/map here
 		if(myMMReferenceVar == null)
 		{
 			myMMReferenceVar = {};
 		}
 
-		if(rules!=undefined && rules != null)
+		if ((rules != undefined) && (rules != null))
 		{
-			if(rules.selectorText == matchingStr)
+			if (rules.selectorText == matchingStr)
 			{   
-				for(var eachvar in rules.style)
+				for (var eachvar in rules.style)
 				{
-					if(eachvar!="cssText")
+					if (eachvar != "cssText")
 					{   
-						if(myMMReferenceVar[eachvar] == undefined)
+						if (myMMReferenceVar[eachvar] == undefined)
 						{ 
 							myMMReferenceVar[eachvar] = rules.style[eachvar]; 
 						}
-					} 
-				} 
+					}
+				}
 			}
 		}
-	}, 
+	}
+	
 	
 	/*
 	 * Replace css elements from valid 
 	 */
-	translateCssForStripe: function(css)
+	translateCssForStripe(css)
 	{
 		/*
 		 * Stripe style elements:
@@ -124,9 +143,10 @@ var MM_StripeElements = Class.extend({
     		css = css.replace(eachvar, replaceArr[eachvar]);
 		}	
 		return css;
-	},
+	}
 	
-	getCustomStyleAndPlaceholder: function(divName)
+	
+	getCustomStyleAndPlaceholder(divName)
 	{  
 		var divStr = "#"+divName+" .mm-stripe-elements-container"; 
 		var divBaseStr = "#"+divName+" .mm-stripe-elements-container .base"; 
@@ -143,7 +163,8 @@ var MM_StripeElements = Class.extend({
 		var cssText = "";
 		var foundStyleSheet = false;
 		jQuery.each(document.styleSheets, function(sheetIndex, sheet) {
-			try{
+			try
+			{
 				if(sheet.cssRules!=undefined && sheet.cssRules!=null)
 				{ 
 				    jQuery.each(sheet.cssRules || sheet.rules, function(ruleIndex, rule) {
@@ -166,7 +187,7 @@ var MM_StripeElements = Class.extend({
 			}
 			catch(ex)
 			{
-				console.log("MemberMouse :: Loading style sheet exception :: "+ex.message); 
+				console.log("MemberMouse :: Loading style sheet exception :: "+ex.message);
 			}
 		});
 		
@@ -184,7 +205,7 @@ var MM_StripeElements = Class.extend({
 			}
 		}
 
-		for(i=0; i<rules.length; i++)
+		for (let i=0; i<rules.length; i++)
 		{    
 			// generic style definition for given div
 			mmStripeElements.parseStyleRulesIntoElements(rules[i], divStr, mmStripeElementsBaseStyle); 
@@ -228,11 +249,10 @@ var MM_StripeElements = Class.extend({
 			styleForDiv["style"]["complete"] = mmStripeElementsCompleteStyle;
 		} 
 		return styleForDiv;   
-	},
-	  
-	load: function()
+	}
+	
+	load()
 	{
-		console.log("Building... loading form elements !");
 		this.stripe = Stripe(stripeElementsInfo.stripePublishableKey); 
 		
 		this.elements = this.stripe.elements();  
@@ -240,82 +260,88 @@ var MM_StripeElements = Class.extend({
 		this.card = this.elements.create('cardNumber', mmStripeElements.getCustomStyleAndPlaceholder("mm_field_cc_number_div"));  
 		this.card.mount('#mm_field_cc_number_div');
 		
-		var cardExpiry = this.elements.create('cardExpiry', mmStripeElements.getCustomStyleAndPlaceholder("mm_field_cc_exp_div"));
-		cardExpiry.mount('#mm_field_cc_exp_div');
+		this.cardExpiry = this.elements.create('cardExpiry', mmStripeElements.getCustomStyleAndPlaceholder("mm_field_cc_exp_div"));
+		this.cardExpiry.mount('#mm_field_cc_exp_div');
 		 
-		var cardCvc = this.elements.create('cardCvc', mmStripeElements.getCustomStyleAndPlaceholder("mm_field_cc_cvv_div"));
-		cardCvc.mount('#mm_field_cc_cvv_div');   
+		this.cardCvc = this.elements.create('cardCvc', mmStripeElements.getCustomStyleAndPlaceholder("mm_field_cc_cvv_div"));
+		this.cardCvc.mount('#mm_field_cc_cvv_div');   
 		
 		// Handle real-time validation errors from the card Element.
-		 this.card.addEventListener('change', function(event) {
-		  var displayError = document.getElementById('card-errors');
-		  if(displayError!=undefined && displayError!=null){ 
-			  if (event.error) {
-			    displayError.textContent = event.error.message;
-			  } else {
-			    displayError.textContent = '';
-			  }
-		  }
-		  else{
-			  if (event.error) {
-				  console.log("Error with Stripe Elements: ");
-				  console.log(event.error);
-				  mmStripeElements.errorHandler(event.error.message);
-			  }
-		  }
+		this.card.addEventListener('change', function(event) {
+			var displayError = document.getElementById('card-errors');
+			if ((displayError != undefined) && (displayError != null))
+			{ 
+				if (event.error) 
+				{
+					displayError.textContent = event.error.message;
+				} 
+				else 
+				{
+					displayError.textContent = '';
+				}
+			}
+			else
+			{
+				if (event.error) 
+				{
+					//TODO: only show this if debug is set
+					//console.log("Error with Stripe Elements: ");
+					//console.log(event.error);
+					//mmStripeElements.errorHandler(event.error.message);
+				}
+			}
 		});
-	},
+	}
 	
-	buildForm: function()
-	{   
-		mmStripeElements.load();
-	},
 	
-	errorHandler: function(errorMessage)
+	errorHandler(errorMessage)
 	{ 
-		alert(errorMessage);
-	}, 
+		mmjs.isAlreadySubmitting = false;
+		mmStripeElements.card.update({disabled: false});
+		mmStripeElements.cardExpiry.update({disabled: false});
+		mmStripeElements.cardCvc.update({disabled: false});
+		
+		if (jQuery.fn.block)
+		{
+			jQuery.unblockUI({ fadeIn:0, timeout:0, onUnblock: () => {alert(errorMessage);}});
+		}
+		else
+		{
+			alert(errorMessage);
+		}
+	}
 	
-	doTokenExchange: function()
+	
+	doTokenExchange()
 	{     
-		mmStripeElements.pageObject.usePaymentTokenField = true;  
-
-		var firstName = "";
-		var lastName = "";
 		var cardholderName = "";
 		
 		var paymentMethodData = {};
 		var billingDetailsData = {};
 		var billingDetailsAddressData = {};
 		
-		var optionalBillingFieldMapping = {}
-		if (!mmStripeElements.myAccount)
-	    { 
-			optionalBillingFieldMapping = {"mm_field_billing_address":"line1",
+		var optionalBillingFieldMapping = {"mm_field_billing_address":"line1",
 					   "mm_field_billing_address2":"line2",
 					   "mm_field_billing_city":"city",
 					   "mm_field_billing_state":"state",
 					   "mm_field_billing_zip":"postal_code",
 					   "mm_field_billing_country":"country",
 					   "mm_field_email":"email",
-					   "mm_field_phone":"phone",
-					   "mm_field_first_name":"firstname",
-					   "mm_field_last_name":"lastname"
-			};
+					   "mm_field_phone":"phone"};
+		
+		mmStripeElements.card.update({disabled: true});
+		mmStripeElements.cardExpiry.update({disabled: true});
+		mmStripeElements.cardCvc.update({disabled: true});
+		
+		if (!mmStripeElements.myAccount)
+	    { 
+			optionalBillingFieldMapping["mm_field_first_name"] = "firstname";
+			optionalBillingFieldMapping["mm_field_last_name"] = "lastname";
 	    }
 		else
 		{
-			optionalBillingFieldMapping = {"mm_field_billing_address":"line1",
-					   "mm_field_billing_address2":"line2",
-					   "mm_field_billing_city":"city",
-					   "mm_field_billing_state":"state",
-					   "mm_field_billing_zip":"postal_code",
-					   "mm_field_billing_country":"country",
-					   "mm_field_email":"email",
-					   "mm_field_phone":"phone",
-					   "mm-data-first-name":"firstname",
-					   "mm-data-last-name":"lastname"
-			};
+			optionalBillingFieldMapping["mm-data-first-name"] = "firstname";
+			optionalBillingFieldMapping["mm-data-last-name"] = "lastname";
 		}
 		
 		for (var optionalFormField in optionalBillingFieldMapping)
@@ -373,77 +399,196 @@ var MM_StripeElements = Class.extend({
 		{
 			paymentMethodData.billing_details = billingDetailsData;
 		}
-		
-		if (typeof stripeSecret === 'undefined' || stripeSecret==null || stripeSecret.length<=0)
+
+		paymentMethodData.card = mmStripeElements.card;
+
+		if (mmStripeElements.myAccount != true)
 		{
-			if(typeof stripeSecretError !== 'undefined' && stripeSecretError!==null && stripeSecretError.length>0)
-			{
-				mmStripeElements.errorHandler(stripeSecretError);
-			}
-			else
-			{
-				mmStripeElements.errorHandler("Invalid gateway configuration.");
-			}
+			//checkout page
+			mmStripeElements.validateCaptcha(paymentMethodData);
 			return false;
-		}		
-		
-		mmStripeElements.stripe.handleCardSetup(
-				  stripeSecret, mmStripeElements.card, {
-					  payment_method_data: paymentMethodData
-				  }
-	  	).then(function(result) {
-	  	  console.log(result); 
-		  if (result.error) {  
-			// token exchange failed read the preupdate callback
-			if (mmStripeElements.myAccount)
-		    { 
-		    	myaccount_js.addPreUpdateCallback('onsite',mmStripeElements.doTokenExchange);
-		    }
-	    	else{ 
-		    	mmjs.addPrecheckoutCallback('onsite',mmStripeElements.doTokenExchange);	 
-	    	}
-			var errorMessage = result.error.message; 
-			mmStripeElements.errorHandler(errorMessage);
-		  } else {
-			  	console.log(result);
-				if (mmStripeElements.myAccount)
-			    { 
-			    	mmStripeElements.pageObject.addPaymentTokenToForm(result.setupIntent.payment_method);  
-		    		mmStripeElements.pageObject.doSubscriptionBillingUpdate(); 
-			    }
-		    	else{ 
-			    	mmStripeElements.pageObject.addPaymentTokenToForm(result.setupIntent.payment_method);  
-			    	mmStripeElements.pageObject.submitCheckoutForm(false); 
-		    	}
-		    	return true;
-		    }
-		}); 
-		  
-		return false; 
+		}
+		else
+		{
+			//my account page
+			mmStripeElements.confirmIntent(paymentMethodData);
+			return false; 
+		}
 	}
-}); 
+	
+	
+	validateCaptcha(paymentMethodData)
+	{
+		//TODO: verify captcha works if placed on myaccount page. Also verify this method passes through if no captcha is present for myaccount
+		
+		//Captcha must be validated prior to calling confirm on the paymentintent, so captcha verification is temporarily reimplemented here
+		if ((mmStripeElements.pageObject.submitDependency != null) && 
+			("serviceToken" in mmStripeElements.pageObject.submitDependency) && 
+			(mmStripeElements.pageObject.submitDependency.serviceToken == "captcha"))
+		{
+			let siteKey = jQuery("#mm_grsk").val();
+			let actionName = jQuery("#mm_graction").val();
+	    	if (((siteKey.length == 0) || (siteKey == "")) || ((actionName.length == 0) || (actionName == "")))
+	    	{
+				return false;
+			}
+			
+	        grecaptcha.ready(function() {
+	          grecaptcha.execute(siteKey, {action: actionName}).then(function(token) {
+	            jQuery("#mm_grtok").val(token); 
+	            mmStripeElements.validateCheckout(paymentMethodData);
+	          });
+	        });
+	        return false;
+		}
+		else
+		{
+			return mmStripeElements.validateCheckout(paymentMethodData);
+		}
+	}
+	
+	
+	validateCheckout(paymentMethodData)
+	{
+		let data = {
+					action : 'mm_stripe_validate_checkout',
+					data: jQuery(document.mm_checkout_form).serialize(),
+					'_ajax_nonce': stripeElementsInfo.stripeAjaxNonce
+				   };
 
-var mmStripeElements = new MM_StripeElements();  
-if ((typeof myaccount_js !== 'undefined') && (myaccount_js instanceof MM_MyAccountView))
+		jQuery.ajax({
+					type: "POST",
+				    url: MemberMouseGlobal.ajaxurl,
+				    data: data,
+				    dataType: 'json'
+				}).done(function(response) {
+				if ((response.type) && (response.type == "success"))
+				{
+					if ((mmStripeElements.pageObject.submitDependency != null) && 
+						("serviceToken" in mmStripeElements.pageObject.submitDependency) && 
+						(mmStripeElements.pageObject.submitDependency.serviceToken == "captcha"))
+					{
+						//captcha is in use, but it will have already been validated, so remove the submitDependency to avoid retesting and generating a new token
+						mmStripeElements.pageObject.submitDependency = null;
+					}
+					mmStripeElements.activeIntent = response.message;
+					mmStripeElements.confirmIntent(paymentMethodData);					
+				}
+				else
+				{
+					let errMsg = (response.message) ? response.message : "There was an error processing your payment, please try again";
+					console.log("AJAX call to server to validate checkout returned an error, aborting...");
+					mmStripeElements.restoreCallback();
+					mmStripeElements.errorHandler(errMsg);
+				}
+			}).fail(function(result) {
+				console.log("AJAX call to server to validate checkout failed, aborting...");
+				mmStripeElements.restoreCallback();
+				mmStripeElements.errorHandler("There was a network error when processing your payment, please try again");
+			});
+		return false;
+	}
+
+
+	confirmIntent(paymentMethodData)
+	{
+		if ((typeof paymentMethodData != 'object') || (paymentMethodData == null))
+		{
+			console.log("Incorrect data passed to confirmIntent method, aborting...");
+			mmStripeElements.restoreCallback();
+			mmStripeElements.errorHandler("There was an error processing your payment, please try again");
+			return false;
+		}
+
+		if (mmStripeElements.activeIntent.type == 'setupintent')
+		{
+			mmStripeElements.stripe.confirmCardSetup(mmStripeElements.activeIntent.clientSecret, {
+				payment_method: paymentMethodData,
+			})
+			.then(function(result) {
+				mmStripeElements.postCardConfirm(result);
+			});
+		}
+		else if (mmStripeElements.activeIntent.type == 'paymentintent')
+		{
+			mmStripeElements.stripe.confirmCardPayment(mmStripeElements.activeIntent.clientSecret, {
+				payment_method: paymentMethodData,
+			})
+			.then(function(result) {
+				mmStripeElements.postCardConfirm(result);
+			});
+		}
+		else
+		{
+			console.log("Intent has unknown type, not sure how to confirm it, aborting...");
+			mmStripeElements.restoreCallback();
+			mmStripeElements.errorHandler("There was an error processing your payment, please try again");
+		}
+	}
+	
+	
+	postCardConfirm(result)
+	{
+		if (result.error) 
+		{  
+			// token exchange failed
+			mmStripeElements.restoreCallback();
+			
+			//display the error message and return false to halt the payment process
+			mmStripeElements.errorHandler(result.error.message);
+			return false
+	  	} 
+		else 
+		{
+			let pmToken = ('setupIntent' in result) ?  `si||${result.setupIntent.id}` : `pi||${result.paymentIntent.id}`;
+		  	if (mmStripeElements.myAccount)
+		    {
+		    	mmStripeElements.pageObject.addPaymentTokenToForm(pmToken);  
+	    		mmStripeElements.pageObject.doSubscriptionBillingUpdate(); 
+		    }
+	    	else
+			{ 
+		    	mmStripeElements.pageObject.addPaymentTokenToForm(pmToken);  
+		    	mmStripeElements.pageObject.submitCheckoutForm(false); 
+	    	}
+	    	return true;
+	    }
+	}
+	
+	
+	restoreCallback()
+	{
+		if (mmStripeElements.myAccount)
+		{
+			mmStripeElements.pageObject.addPreUpdateCallback('onsite',mmStripeElements.doTokenExchange);
+		}
+		else
+		{
+			//checkout page
+			mmStripeElements.pageObject.addPrecheckoutCallback('onsite',mmStripeElements.doTokenExchange);
+		}
+	}
+}
+
+
+var mmStripeElements = new MM_StripeElements();
+mmStripeElements.myAccount = ((typeof myaccount_js !== 'undefined') && (myaccount_js instanceof MM_MyAccountView)); //My Account page setup is slightly different from checkout pages
+mmStripeElements.pageObject = (mmStripeElements.myAccount) ? myaccount_js : mmjs;
+mmStripeElements.pageObject.usePaymentTokenField = true;
+
+
+if (mmStripeElements.myAccount)
 {
-	//my account page
-	mmStripeElements.myAccount = true;
-	mmStripeElements.pageObject = myaccount_js;   
-	mmStripeElements.pageObject.usePaymentTokenField = true;
-	myaccount_js.addPreUpdateCallback('onsite',mmStripeElements.doTokenExchange);  
-
+	mmStripeElements.pageObject.addPreUpdateCallback('onsite',mmStripeElements.doTokenExchange); 
 	jQuery( ".mm-update-subscription-button" ).on( "form:loaded", function( event ) { 
-		mmStripeElements.buildForm(); 
+		mmStripeElements.load(); 
     });
 }
 else
 {
-	//checkout page 
-	mmStripeElements.pageObject = mmjs;      
-	mmStripeElements.pageObject.usePaymentTokenField = true;
-	mmjs.addPrecheckoutCallback('onsite',mmStripeElements.doTokenExchange);
-
-	jQuery(document).ready(function() {
-		mmStripeElements.buildForm();
+	mmStripeElements.pageObject.addPrecheckoutCallback('onsite',mmStripeElements.doTokenExchange); 
+	jQuery(document).ready(function() 
+	{
+		mmStripeElements.load();
 	}); 
-} 
+}

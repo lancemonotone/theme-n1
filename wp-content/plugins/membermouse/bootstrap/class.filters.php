@@ -12,4 +12,5 @@ class MM_Filters
 	public static $LOGIN_REDIRECT = "mm_login_redirect";
 	public static $SET_COOKIE = "mm_set_cookie";
 	public static $PASSWORD_STRENGTH_VALIDATOR = "mm_password_strength_validator";
+	public static $PAYPAL_STANDARD_RETURN_URL = "mm_paypal_standard_return_url";
 }

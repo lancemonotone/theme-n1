@@ -1,6 +1,4 @@
 <style>
-	/* MemberDev Custom CSS */
-
 	.ui-widget {
 		font-family: sans-serif;
 	}

@@ -39,7 +39,7 @@ var MM_GiftViewJS = MM_Core.extend({
 			else
 			{
 				// refresh page
-				document.location.href = document.location.href;
+				document.location.href = document.location.href.replace(/#/, '');
 			}
 		},
 	

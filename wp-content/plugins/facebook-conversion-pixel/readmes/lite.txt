@@ -2,32 +2,34 @@
 
 Contributors: fatcatapps, davidhme, ryannovotny, facebookpixel
 Donate link: https://fatcatapps.com/pixelcat
-Tags: facebook pixel, facebook conversion pixel, facebook pixel events, facebook standard events, facebook retargeting, facebook custom audiences, standard events, WooCommerce, easy digital downloads, Facebook Pixel woocommerce, facebook pixel easy digital downloads
-Author URI: https://fatcatapps.com/
+Tags: facebook pixel, facebook conversion pixel, facebook pixel events, facebook standard events, facebook retargeting, facebook custom audiences, standard events, WooCommerce, easy digital downloads, Facebook Pixel woocommerce, facebook pixel easy digital downloads, conversions API, CAPI, Meta pixel, Google Analytics, GA3, GA4,
 Plugin URI: https://fatcatapps.com/
 Requires at least: 4.0
-Tested up to: 5.9
+Tested up to: 6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 2.6.6
+Stable tag: 3.0.0
 
-Facebook Pixel Management Made Easy. From Facebook retargeting to conversion tracking, this plugin includes everything you need to run successful Facebook ads.
+Facebook Pixel Management Made Easy. From Facebook retargeting to Google conversion tracking, this plugin includes everything you need to run successful Facebook and Google ads.
 
 == Description ==
 
 = Facebook Pixel For WordPress Made Easy =
 
-Pixel Cat - Conversion Pixel Manager (formerly known as "Facebook Conversion Pixel") lets you add a Facebook Pixel to your site in a matter of minutes.
-From Facebook Retargeting to conversion tracking, this free plugin makes setting up your Facebook Pixel a breeze.
+Pixel Cat - Conversion Pixel Manager (formerly known as "Facebook Conversion Pixel") lets you add a Facebook(Meta) Pixel and Conversions API or Google Analytics Pixel to your site in a matter of minutes.
+From Facebook Retargeting to conversion tracking, this free plugin makes setting up your Facebook and Google Analytics Pixel a breeze.
 
 = Run Better Facebook Ad Campaigns =
-Using Pixel Cat, you can track Facebook Conversions and build powerful retargeting audiences.
+Using Pixel Cat, you can track Facebook and Google Conversions and build powerful retargeting audiences.
 
 = Track Facebook Conversions =
-Send conversion events (including the exact amount and currency) to Facebook, so you can track, improve and *automatically optimize your ad campaigns*.
+Send conversion events (including the exact amount and currency) to Facebook to Google, so you can track, improve and *automatically optimize your ad campaigns*.
 
 = Build Powerful Retargeting Audiences =
-Pixel Cat lets you send granular events (blog posts read, products viewed, …) to Facebook, so you can build insanely effective retargeting audiences.
+Pixel Cat lets you send granular events (blog posts read, products viewed, …) to Facebook and Google, so you can build insanely effective retargeting audiences.
+
+= Conversions API =
+Pixel Cat has a quick and easy Conversions API that will have you running server side tracking in no time.
 
 
 > Upgrading from the Old Facebook Conversion pixel?
@@ -39,7 +41,7 @@ Pixel Cat lets you send granular events (blog posts read, products viewed, …) 
 
 
 = How Pixel Cat helps you run better ads =
-Our Facebook Pixel manager - Pixel Cat - comes with *everything you need to run successful Facebook ads*. This plugin lets you easily add the new Facebook Pixel to your WordPress site with ease, so you can track conversions and create retargeting audiences.
+Our Facebook Pixel manager - Pixel Cat - comes with *everything you need to run successful Facebook and Google ads*. This plugin lets you easily add the new Facebook Pixel, Conversions API or Google Analytics Pixel to your WordPress site with ease, so you can track conversions and create retargeting audiences.
 
 
 [>> For more details & screnshots, head over to our website <<](https://fatcatapps.com/pixelcat/)
@@ -52,7 +54,7 @@ Our Facebook Pixel manager - Pixel Cat - comes with *everything you need to run 
 * *Search event*. Automatically track searches on your WordPress site.
 * *Exclude Team Members*. Make sure you don’t pollute your Pixel data by excluding members of your team. You can exclude specific WordPress user levels, such as Admins, Editors & Contributors.
 * *No Coding Required*. Our 1-click setup takes the pain out of setting up the Facebook Pixel for WordPress, no coding required.
-* *Completely Free*. Pixel Cat Lite is completely free, and includes everything you need to get started with the Facebook Pixel. Experienced advertiser? We also offer a [powerful paid version](https://fatcatapps.com/pixelcat/premium/) that will help you boost your Ad ROI.
+* *Completely Free*. Pixel Cat Lite is completely free, and includes everything you need to get started with the Facebook and Google Analytics Pixel. Experienced advertiser? We also offer a [powerful paid version](https://fatcatapps.com/pixelcat/premium/) that will help you boost your Ad ROI.
 
 
 [>> For more details & screnshots, head over to our website <<](https://fatcatapps.com/pixelcat/)
@@ -124,7 +126,13 @@ Please read this guide: [Facebook Pixel WordPress Installation & Best Practices:
 == Frequently Asked Questions ==
 
 = How to get started? =
-After installing this plugin, simply go to Settings -> Facebook Pixel Manager and add your Facebook Pixel ID. Or, [view a quick-start guide here](https://fatcatapps.com/pixel-cat-quick-start/).
+After installing this plugin, simply go to Pixel Cat in your WP Admin and add your Facebook Pixel ID. Or, [view a quick-start guide here](https://fatcatapps.com/pixel-cat-quick-start/).
+
+= Does Pixel Cat integrate with Conversions API =
+Yes, you can add your Conversions API and Pixel together using Pixel Cat.
+
+= Can I add a Google Analytics code using Pixel Cat? =
+Yes, you can add both GA3 and GA4 analytics codes.
 
 = What is my Facebook Pixel ID? =
 You can find the Pixel ID in the Ads Manager here: https://www.facebook.com/ads/manager/pixel/facebook_pixel
@@ -142,6 +150,20 @@ Pixel Cat - Conversion Pixel Manager will automatically detect your old settings
 
 
 == Changelog ==
+
+= Pixel Cat: Conversion Pixel Manager 3.0.0 =
+* Added custom script option
+* UI Improvements
+* Bug fixes
+
+= Pixel Cat: Conversion Pixel Manager 2.6.8 =
+* Fixed custom event not showing in event type dropdown
+
+= Pixel Cat: Conversion Pixel Manager 2.6.7 =
+* Improved onboarding
+* Improved Pixel ID validation
+* Added support for Google Analytics (GA3 & GA4)
+* UI Improvements
 
 = Pixel Cat: Conversion Pixel Manager 2.6.6 =
 * Added external_id to pixel
