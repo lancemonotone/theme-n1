@@ -1,4 +1,7 @@
 <?php
+
+return;
+
 // script downloaded from: https://support.membermouse.com/support/solutions/articles/9000055539-automatically-downgrade-to-a-free-membership-when-an-account-expires-or-is-canceled
 /*
 require_once("wp-load.php");
