@@ -1,0 +1,21 @@
+#header-main {
+  position: relative;
+  z-index: 0;
+
+  & div.header-signin.closebox {
+    text-indent: -10000px;
+    overflow-x: hidden;
+    cursor: pointer;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  & section.header-search, & section.header-signin {
+    display: none;
+  }
+
+  & section.active.header-search, & section.active.header-signin {
+    display: block;
+  }
+}

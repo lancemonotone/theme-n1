@@ -12,7 +12,7 @@
  */
 import './index.scss';
 
-import './js/smoothscroll.js';
+// import './js/smoothscroll.js';
 
 /**
  * Modules

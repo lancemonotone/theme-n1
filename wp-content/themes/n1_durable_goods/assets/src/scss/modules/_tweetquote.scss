@@ -1,0 +1,53 @@
+
+
+p.module.article.tweetquote {
+  line-height: 1.2;
+}
+
+body {
+  &.online-only-home p.module.article.tweetquote, &.archive p.module.article.tweetquote {
+    line-height: 1.2;
+  }
+}
+
+p.module.article.tweetquote:before {
+  content: "\201C";
+  display: none;
+  position: relative;
+  width: 0.4em;
+  text-indent: 0;
+}
+
+body {
+  &.online-only-home p.module.article.tweetquote:before, &.archive p.module.article.tweetquote:before {
+    content: "\201C";
+    display: none;
+    position: relative;
+    width: 0.4em;
+    text-indent: 0;
+  }
+}
+
+p.module.article.tweetquote:after {
+  content: "\201D";
+  display: none;
+}
+
+body {
+  &.online-only-home p.module.article.tweetquote:after, &.archive p.module.article.tweetquote:after {
+    content: "\201D";
+    display: none;
+  }
+}
+
+p.module.article.tweetquote {
+  font-weight: 100;
+  font-size: 22px;
+}
+
+body {
+  &.online-only-home p.module.article.tweetquote, &.archive p.module.article.tweetquote {
+    font-weight: 100;
+    font-size: 22px;
+  }
+}

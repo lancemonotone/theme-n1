@@ -1,0 +1,69 @@
+div {
+  &.main, &.supp {
+    position: relative;
+  }
+
+  &.hero {
+    &.category, &.dek {
+      position: relative;
+      z-index: 10;
+    }
+  }
+
+  &.hero-cell {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+  }
+
+  .supp {
+    padding: 32px 16px;
+  }
+}
+
+
+div.magazine-archive.issue, section.magazine-archive div.issue {
+  padding: 0;
+  width: 136px;
+  height: 160px;
+  margin: 7px;
+  margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+  border-top: 1px solid #333;
+}
+
+div.magazine-archive.issue:hover {
+  border-color: #ce4f25;
+}
+
+@media only screen and (min-width: 640px) {
+  div.magazine-archive.issue, section.magazine-archive div.issue {
+    width: 172px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  div.columns-4col.c4-1x {
+    float: left;
+    width: 25%;
+    border-left: 1px solid #ede4d5;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  div.columns-4col.c4-2x {
+    float: left;
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  div.columns-3col {
+    &.c1, &.c2, &.c3 {
+      float: left;
+      width: 33.3333333333%;
+      border-left: 1px solid #ede4d5;
+    }
+  }
+}

@@ -1,0 +1,113 @@
+
+@media only screen and (max-width: 639px) {
+  .strux-mob-25 {
+    float: left;
+    width: 25%;
+  }
+
+  .strux-mob-33 {
+    float: left;
+    width: 33.3333333333333333%;
+  }
+
+  .strux-mob-50 {
+    float: left;
+    width: 50%;
+  }
+
+  .strux-mob-full {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 640px) and (max-width: 1023px) {
+  .strux-tab-25 {
+    float: left;
+    width: 25%;
+  }
+
+  .strux-tab-33 {
+    float: left;
+    width: 33.33333333333333333%;
+  }
+
+  .strux-tab-50 {
+    float: left;
+    width: 50%;
+  }
+
+  .strux-tab-320min {
+    margin-left: auto;
+    width: 41.6666666666%;
+  }
+
+  .strux-tab-320fill {
+    float: left;
+    width: 58.33333333333%;
+  }
+
+  .strux-tab-full {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .strux-desk-25 {
+    width: 25%;
+  }
+
+  .strux-desk-33 {
+    float: left;
+    width: 33.33333333333333%;
+  }
+
+  .strux-desk-50 {
+    float: left;
+    width: 50%;
+  }
+
+  .strux-desk-320min {
+    margin-left: auto;
+    width: 31.25%;
+  }
+
+  .strux-desk-320fill {
+    float: left;
+    width: 68.75%;
+  }
+
+  .strux-desk-full {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .strux-wide-25 {
+    float: left;
+    width: 25%;
+  }
+
+  .strux-wide-25-stick {
+    float: none;
+    width: 25%;
+  }
+
+  .strux-wide-33 {
+    float: left;
+    width: 33%;
+  }
+
+  .strux-wide-50 {
+    float: left;
+    width: 50%;
+  }
+
+  .strux-wide-75 {
+    float: left;
+    width: 75%;
+  }
+
+  .strux-wide-full {
+    width: 100%;
+  }
+}

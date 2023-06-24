@@ -1,0 +1,62 @@
+@import "src/scss/fonts";
+
+$header-font: "Barlow", sans-serif;
+$body-font: "Roboto Serif", sans-serif;
+
+
+a {
+  &.jump {
+    &:focus, .button:focus, .jump-to-page:focus, input.submit:focus, .home div.current-issue &:focus {
+      background-color: #242424;
+    }
+
+    &:hover, .button:hover, .jump-to-page:hover, input.submit:hover, .home div.current-issue &:hover {
+      background-color: #ce4f25;
+    }
+
+    &:active, .button:active, .jump-to-page:active, input.submit:active, .home div.current-issue &:active {
+      background-color: #1cecfb;
+      color: #333;
+    }
+  }
+
+  &.pubinfo.wrapper:after {
+    text-indent: -10000px;
+    overflow-x: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &.module.article.wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+  }
+}
+
+h1 {
+  font-weight: 200;
+}
+
+h2 {
+  &.hero.title {
+    position: relative;
+    z-index: 10;
+  }
+}
+
+h3 {
+  &.subscribe.roadblock:before {
+    text-indent: -10000px;
+    overflow-x: hidden;
+    content: "";
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 24px;
+    background-image: url(../images/plus.png);
+  }
+}

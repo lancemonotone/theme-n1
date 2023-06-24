@@ -1,0 +1,19 @@
+figure {
+  &.hero {
+    position: relative;
+    z-index: 0;
+
+    &, a.module.article.wrapper {
+      top: 0;
+      bottom: 0;
+    }
+  }
+}
+
+figcaption {
+  &.hero {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}

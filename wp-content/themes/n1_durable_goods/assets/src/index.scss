@@ -1,6 +1,18 @@
-.booger {
-  color: red;
-}
+@import './scss/modules/reset';
+@import './scss/modules/a11y';
+@import './scss/modules/strux';
+@import './scss/modules/navigation';
+@import './scss/modules/header';
+@import './scss/modules/footer';
+@import './scss/modules/div';
+@import './scss/modules/section';
+@import './scss/modules/paragraph';
+@import './scss/modules/image';
+@import './scss/modules/list';
+@import './scss/modules/tweetquote';
+
+
+@import './scss/modules/module';
 @import './scss/style.scss';
 //@import './scss/global.scss';
 //@import './scss/header.scss';

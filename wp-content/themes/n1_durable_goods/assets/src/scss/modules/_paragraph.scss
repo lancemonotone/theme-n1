@@ -1,0 +1,23 @@
+p {
+  &.post-category {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &.issue.meta.button.close {
+    text-indent: -10000px;
+    overflow-x: hidden;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+
+p.subscribe {
+  font-size: 1.9rem;
+  line-height: 1.1;
+  text-align: center;
+  font-weight: 200;
+}
