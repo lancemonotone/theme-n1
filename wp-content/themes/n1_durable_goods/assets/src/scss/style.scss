@@ -2966,7 +2966,7 @@ html.gallery-active {
     right: 16px;
     width: 40px;
     height: 40px;
-    background-image: url("./img/ui-close-white.png");
+    background-image: url(../images/ui-close-white.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 40px 40px;
@@ -2974,7 +2974,7 @@ html.gallery-active {
     overflow: hidden;
 
     &:hover {
-      background-image: url("./img/ui-close-red.png");
+      background-image: url(../images/ui-close-red.png);
     }
   }
 
@@ -3051,20 +3051,20 @@ html.gallery-active {
     }
 
     #issue-gallery-prev {
-      background-image: url("https://nplusonemag.com/wp-content/themes/n1_durable_goods/img/l-white.png");
+      background-image: url(../images/l-white.png);
       left: 16px;
 
       &:hover {
-        background-image: url("https://nplusonemag.com/wp-content/themes/n1_durable_goods/img/l-red.png");
+        background-image: url(../images/l-red.png);
       }
     }
 
     #issue-gallery-next {
       right: 16px;
-      background-image: url("https://nplusonemag.com/wp-content/themes/n1_durable_goods/img/r-white.png");
+      background-image: url(../images/r-white.png);
 
       &:hover {
-        background-image: url("https://nplusonemag.com/wp-content/themes/n1_durable_goods/img/r-red.png");
+        background-image: url(../images/r-red.png);
       }
     }
   }
