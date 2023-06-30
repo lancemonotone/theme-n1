@@ -56,6 +56,7 @@ class N1 {
 		//add_filter( 'force_ssl',  array(&$this, 'http_feed_force_ssl', 10, 3));
 		add_shortcode( 'pullquote', array( &$this, 'article_pullquote' ) );
 		add_shortcode( 'date_today', array( &$this, 'date_shortcode' ) );
+		add_shortcode( 'login_error_message', array( &$this, 'login_error_shortcode' ) );
 		include_once( 'lib/twentytwelve_functions.php' );
 	}
 
@@ -214,6 +215,38 @@ class N1 {
 			       . '<a onclick="return popitup(\'' . $href . '\')" href="' . $href . '">Tweet</a>'
 			       . '</blockquote>';
 		}
+	}
+
+	/** Massage login error to provide link to login page */
+	function login_error_shortcode() {
+		global $is_login_error;
+		// retrieve current error message
+		$crntErrorMessage = stripslashes( $is_login_error );
+
+		// There is an existing account associated with the email nicoleklipman+test@gmail.com but the password entered is invalid. Please try placing your order again using the correct password.
+		// check if error message contains the string 'Incorrect username or password'
+		if ( strpos( $crntErrorMessage, "Please try placing your order again using the correct password" ) !== FALSE ) {
+			// extract the email address from the $crntErrorMessage string using regex
+			$pattern = '/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/';
+			preg_match( $pattern, $crntErrorMessage, $matches );
+			$email = $matches[0];
+
+			unset( $_GET['message'] );
+
+			// set a custom error message
+			return <<<EOT
+<style>
+/* Hide the error message immediately following .mm-formError.prime */
+.mm-formError.prime + .mm-formError {
+	display: none;
+}
+</style>
+<p class="mm-formError prime">
+ There is an existing account associated with the email <em>{$email}</em> but the password entered is invalid. <strong>Please place your order again using the correct password or try <a href="https://www.nplusonemag.com/forgot-password/">resetting your password</a></strong>.
+</p>
+EOT;
+		}
+
 	}
 
 	/**
