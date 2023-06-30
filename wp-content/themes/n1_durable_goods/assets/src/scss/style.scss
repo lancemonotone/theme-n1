@@ -1,22 +1,15 @@
-@media only screen and (min-width: 1400px) {
-  section {
-    &.current-issue {
-      padding: 48px;
-    }
-
-    &.featured {
-      &.books, &.pm {
-        padding: 48px;
-      }
-    }
-  }
+h3.home.subscribe.issuetitle,
+div.home.subscribe.category,
+p.subscribe {
+  text-align: left;
 }
 
+div.module-hero section.hero,
+section.hero + div#main {
+  margin-top: 632px;
 
-
-body.home section {
-  &.newsletter, &.social {
-    overflow: auto;
+  @media only screen and (min-width: 1400px) {
+    margin-top: 720px;
   }
 }
 
@@ -25,23 +18,9 @@ body.home section {
 }
 
 @media only screen and (min-width: 640px) and (max-width: 1023px) {
-  body.home section {
-    &.newsletter, &.social {
-      border-left: 1px solid #ede4d5;
-    }
-  }
-
   .featured-online-only, section.featured-magazine {
     border-left: 1px solid #ede4d5;
   }
-}
-
-img.module.article.thumbnail {
-  height: 100%;
-  max-height: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  display: block;
 }
 
 .current-issue article.post a {
@@ -56,12 +35,9 @@ body.magazine.landing section.issue article.post {
   padding: 8px 0;
 }
 
-
 .featured-online-only, section.offline {
   width: 100%;
 }
-
-
 
 .current-issue p.title, h1 {
   font-size: 2.5rem;
@@ -80,8 +56,6 @@ body {
 .current-issue p.title {
   font-weight: 600;
 }
-
-
 
 input {
   &.newsletter.email, &[type="text"], &[type="email"], &[type="password"], &[type="submit"] {
@@ -1391,10 +1365,6 @@ figure.hero {
   background-size: auto 100%;
 }
 
-body.home figure.hero {
-  background-position: center bottom;
-  background-size: auto 416px;
-}
 
 figcaption.hero {
   padding: 8px 16px;
@@ -1428,10 +1398,6 @@ section.subscribe {
   background-color: #f23e15;
 }
 
-body.home section.subscribe h3.subscribe.issuetitle {
-  font-size: 2.2rem;
-  text-align: center;
-}
 
 h3.subscribe {
   &.issuetitle, &.roadblock {
@@ -1703,6 +1669,7 @@ body.magazine.landing {
 
 .product-two-up {
   margin: auto;
+
   .subscribe-module {
   }
 }
@@ -1968,17 +1935,6 @@ div.module-paper-monument {
   margin-bottom: 16px;
 }
 
-body.home .featured .featured-online-only.flavor-online-only h3.supplementary.more.title {
-  font-size: 100%;
-  margin-top: 0;
-
-  .section-hed {
-    font-size: 1.1rem;
-    padding-bottom: 0.3em;
-    margin-bottom: 16px;
-  }
-}
-
 .magazine.landing section.current-issue-featured div.module.article {
   height: 320px;
   display: inline-block;
@@ -2098,9 +2054,6 @@ div {
   }
 }
 
-body.home section.newsletter {
-  overflow: visible;
-}
 
 section.social {
   border-bottom: 1px solid #ce4f25;
@@ -2125,11 +2078,6 @@ li.social {
 ul.social {
   margin-top: 16px;
   text-align: center;
-}
-
-body.home section.social {
-  overflow: visible;
-  border-bottom: none;
 }
 
 .featured-online-only {
@@ -2180,18 +2128,6 @@ section.featured-online-only {
   }
 }
 
-body.home #supplementary {
-  display: none;
-  padding: 0;
-  margin-top: 0;
-}
-
-@media only screen and (min-width: 640px) {
-  body.home #supplementary {
-    display: block;
-    clear: both;
-  }
-}
 
 p {
   &.magazine-archive.dek, &.online-only-archive.dek {
@@ -3250,9 +3186,6 @@ a.pubinfo.wrapper {
   }
 }
 
-body.home a.pubinfo.wrapper {
-  display: none;
-}
 
 li.issue.meta.pubinfo {
   height: 40px;
@@ -6216,118 +6149,8 @@ div.footer-wrapper {
   position: static;
 }
 
-footer {
-  position: relative;
-  text-align: center;
-  background-color: #242424;
-  color: white;
-  padding-bottom: 200px;
-  padding-top: 48px;
-  overflow: hidden;
-  clear: both;
 
-  #about {
-    position: static;
-  }
 
-  h6 {
-    border-color: #fff;
-    margin: 32px 0;
-  }
-
-  h5 {
-    font-size: 3em;
-    font-weight: 300;
-    text-indent: -100000px;
-    overflow-x: hidden;
-    background-image: url(../images/logo-trans-500.png);
-    background-size: 264px auto;
-    background-position: center center;
-    background-repeat: no-repeat;
-    height: 184px;
-    position: absolute;
-    bottom: 0;
-    left: -5px;
-    width: 100%;
-  }
-
-  p {
-    font-size: 1.3em;
-    font-weight: 600;
-    line-height: 1.3;
-    margin-left: 16px;
-    margin-right: 16px;
-
-    &.footer-copyright {
-      line-height: 1.7;
-    }
-
-    &.top {
-      padding-top: 2em;
-      margin-bottom: 2em;
-      clear: both;
-
-      a {
-        &:hover {
-          color: #fff;
-        }
-
-        &:active {
-          color: #333;
-        }
-      }
-    }
-  }
-
-  ul {
-    font-family: "adelle-sans", sans-serif;
-    font-weight: 300;
-    margin-bottom: 0;
-    text-align: center;
-
-    ul {
-      overflow: auto;
-    }
-
-    .article-title {
-      display: none;
-    }
-  }
-
-  li {
-    font-weight: 600;
-  }
-}
-
-@media only screen and (min-width: 640px) {
-  footer p {
-    margin-left: 72px;
-    margin-right: 72px;
-  }
-}
-
-@media only screen and (max-width: 639px) {
-  #header-main {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-    -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-}
-
-@media only screen and (max-width: 639px) and (min-width: 1024px) {
-  #header-main {
-    display: block;
-  }
-}
 
 @media only screen and (max-width: 639px) {
   #header-main form.header-search {
@@ -6786,13 +6609,6 @@ footer {
     border-left: 1px solid #ede4d5;
   }
 
-  body.home #main .featured-online-only div.module.article {
-    display: block;
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
   footer {
     padding: 16px 0;
 
@@ -6909,16 +6725,6 @@ footer {
 
   section.hero {
     height: 472px;
-  }
-
-  body.home {
-    section.hero {
-      height: 472px;
-    }
-
-    figure.hero {
-      background-size: auto 608px;
-    }
   }
 
   div {
@@ -7582,10 +7388,6 @@ footer {
     padding-bottom: 0;
   }
 
-  body.home section.subscribe h3.subscribe.issuetitle, h3.home.subscribe.issuetitle, div.home.subscribe.category, p.subscribe {
-    text-align: left;
-  }
-
   input.subscribe {
     &.form-text {
       margin-left: -4px;
@@ -8008,12 +7810,6 @@ footer {
 
     li.author {
       color: #333;
-    }
-  }
-
-  body.home div {
-    &.module-newsletter, &.module-social {
-      clear: none;
     }
   }
 
@@ -9076,6 +8872,7 @@ footer {
   }
   .product-two-up {
     margin: auto;
+
     .subscribe-module {
       width: 50%;
     }
@@ -9207,35 +9004,20 @@ footer {
     margin-right: auto;
     position: fixed;
     top: 0;
+
     body.admin-bar & {
       margin-top: 32px;
     }
+
     div {
       width: 1400px;
       margin: 0 auto;
     }
   }
 
-
   #header-main section.header-search {
     left: 560px;
     right: 560px;
-  }
-
-  body.home {
-    section.hero {
-      height: 616px;
-      top: 0;
-      z-index: -1;
-    }
-
-    figure.hero {
-      background-size: auto 100%;
-    }
-
-    div.hero-wrapper {
-      top: 144px;
-    }
   }
 
   div#main {
@@ -9278,12 +9060,6 @@ footer {
     }
   }
 
-  body.home header._headerSigninActive + {
-    section.hero, div.module-hero section.hero {
-      top: 72px;
-    }
-  }
-
   header {
     + div.module-hero + div.nurble {
       position: fixed;
@@ -9319,21 +9095,9 @@ footer {
     }
   }
 
-  body.home header + {
-    div.module-hero + div#main, section.hero + div#main {
-      margin-top: 632px;
-    }
-  }
-
   header._headerSigninActive + {
     div.module-hero + div#main, section.hero + div#main {
       margin-top: 704px;
-    }
-  }
-
-  body.home header._headerSigninActive + {
-    div.module-hero + div#main, section.hero + div#main {
-      margin-top: 720px;
     }
   }
 
@@ -9711,6 +9475,7 @@ footer {
   .product-two-up {
     width: 75%;
     margin: auto;
+
     .subscribe-module {
     }
   }

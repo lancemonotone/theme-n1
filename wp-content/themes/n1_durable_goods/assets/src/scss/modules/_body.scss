@@ -1,0 +1,135 @@
+body.home {
+  section {
+    &.newsletter {
+      overflow: visible;
+    }
+
+    &.social {
+      overflow: visible;
+      border-bottom: none;
+    }
+
+    &.newsletter, &.social {
+      overflow: auto;
+
+      @media only screen and (min-width: 640px) and (max-width: 1023px) {
+        border-left: 1px solid #ede4d5;
+      }
+    }
+
+
+    &.subscribe h3.subscribe.issuetitle {
+      font-size: 2.2rem;
+      text-align: center;
+    }
+  }
+
+  .featured .featured-online-only.flavor-online-only h3.supplementary.more.title {
+    font-size: 100%;
+    margin-top: 0;
+
+    .section-hed {
+      font-size: 1.1rem;
+      padding-bottom: 0.3em;
+      margin-bottom: 16px;
+    }
+  }
+
+
+  figure.hero {
+    background-position: center bottom;
+    background-size: auto 416px;
+  }
+}
+
+
+body.home section
+body.home #supplementary {
+  display: none;
+  padding: 0;
+  margin-top: 0;
+
+  @media only screen and (min-width: 640px) {
+    display: block;
+    clear: both;
+  }
+}
+
+body.home a.pubinfo.wrapper {
+  display: none;
+}
+
+@media only screen and (min-width: 640px) {
+
+  body.home #main .featured-online-only div.module.article {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+
+  body.home {
+    section.hero {
+      height: 472px;
+    }
+
+    figure.hero {
+      background-size: auto 608px;
+    }
+  }
+
+  body.home section.subscribe h3.subscribe.issuetitle, h3.home.subscribe.issuetitle, div.home.subscribe.category, p.subscribe {
+    text-align: left;
+  }
+
+}
+
+@media only screen and (min-width: 640px) and (max-width: 1023px) {
+
+  body.home div {
+    &.module-newsletter, &.module-social {
+      clear: none;
+    }
+  }
+
+}
+
+@media only screen and (min-width: 1400px) {
+  body.home {
+    section.hero {
+      height: 616px;
+      top: 0;
+      z-index: -1;
+    }
+
+    figure.hero {
+      background-size: auto 100%;
+    }
+
+    div.hero-wrapper {
+      top: 144px;
+    }
+  }
+
+
+  body.home header._headerSigninActive + {
+    section.hero, div.module-hero section.hero {
+      top: 72px;
+    }
+  }
+
+  body.home header + {
+    div.module-hero + div#main, section.hero + div#main {
+      margin-top: 632px;
+    }
+  }
+
+
+  body.home header._headerSigninActive + {
+    div.module-hero + div#main, section.hero + div#main {
+      margin-top: 720px;
+    }
+  }
+
+}

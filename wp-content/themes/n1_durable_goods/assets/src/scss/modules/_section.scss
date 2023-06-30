@@ -1,27 +1,41 @@
 section {
-  &.subscribe, &.offline, &.supp {
+  &.subscribe,
+  &.offline,
+  &.supp,
+  &.current-issue,
+  &.newsletter,
+  &.social,
+  &.featured.books,
+  &.featured.pm,
+  &.featured.magazine,
+  &.header-search,
+  &.header-signin,
+  &.active {
     position: relative;
     z-index: 10;
     padding: 32px 16px;
   }
 
-  &.current-issue, &.newsletter, &.social {
-    padding: 32px 16px;
-  }
-
-  &.featured {
-    &.books, &.pm, &.magazine {
-      padding: 32px 16px;
-    }
-  }
-
-  &.header-search, &.header-signin {
+  &.header-search,
+  &.header-signin,
+  &.active {
     display: none;
   }
 
   &.active {
-    &.header-search, &.header-signin {
+    &.header-search,
+    &.header-signin {
       display: block;
+    }
+  }
+
+  &.current-issue,
+  &.featured.books,
+  &.featured.pm {
+    padding: 32px 16px;
+
+    @media only screen and (min-width: 1400px) {
+      padding: 48px;
     }
   }
 
@@ -33,35 +47,26 @@ section {
       width: 100%;
     }
   }
-}
 
-
-section {
   &.magazine-archive div.issue:hover {
     border-color: #ce4f25;
   }
 
-  &.current-issue {
+  &.current-issue,
+  &.featured.books,
+  &.featured.pm {
     clear: left;
     z-index: 100;
   }
 
-  &.featured {
-    &.books, &.pm {
-      clear: left;
-      z-index: 100;
-    }
-  }
-}
-
-section {
   &.issue.meta.postinfo article.post {
     display: block;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
     padding: 8px 0;
   }
 
-  &.subscribe, &.current-issue {
+  &.subscribe,
+  &.current-issue {
     width: 100%;
   }
 }

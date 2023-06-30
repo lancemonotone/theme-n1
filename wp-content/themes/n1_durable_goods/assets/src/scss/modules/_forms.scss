@@ -1,0 +1,16 @@
+input {
+  &.newsletter.email, &[type="text"], &[type="email"], &[type="password"], &[type="submit"] {
+    font-size: 20px;
+    font-family: "adelle-sans", sans-serif;
+    font-weight: 400;
+    color: #333;
+  }
+
+  &.newsletter.email::-webkit-input-placeholder, &[type="text"]::-webkit-input-placeholder, &[type="email"]::-webkit-input-placeholder, &[type="password"]::-webkit-input-placeholder, &[type="submit"]::-webkit-input-placeholder, &.newsletter.email:-moz-placeholder, &[type="text"]:-moz-placeholder, &[type="email"]:-moz-placeholder, &[type="password"]:-moz-placeholder, &[type="submit"]:-moz-placeholder, &.newsletter.email::-moz-placeholder, &[type="text"]::-moz-placeholder, &[type="email"]::-moz-placeholder, &[type="password"]::-moz-placeholder, &[type="submit"]::-moz-placeholder, &.newsletter.email:-ms-input-placeholder, &[type="text"]:-ms-input-placeholder, &[type="email"]:-ms-input-placeholder, &[type="password"]:-ms-input-placeholder, &[type="submit"]:-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+  &.newsletter.email:focus::-webkit-input-placeholder, &[type="text"]:focus::-webkit-input-placeholder, &[type="email"]:focus::-webkit-input-placeholder, &[type="password"]:focus::-webkit-input-placeholder, &[type="submit"]:focus::-webkit-input-placeholder, &.newsletter.email:focus:-moz-placeholder, &[type="text"]:focus:-moz-placeholder, &[type="email"]:focus:-moz-placeholder, &[type="password"]:focus:-moz-placeholder, &[type="submit"]:focus:-moz-placeholder, &.newsletter.email:focus::-moz-placeholder, &[type="text"]:focus::-moz-placeholder, &[type="email"]:focus::-moz-placeholder, &[type="password"]:focus::-moz-placeholder, &[type="submit"]:focus::-moz-placeholder, &.newsletter.email:focus:-ms-input-placeholder, &[type="text"]:focus:-ms-input-placeholder, &[type="email"]:focus:-ms-input-placeholder, &[type="password"]:focus:-ms-input-placeholder, &[type="submit"]:focus:-ms-input-placeholder {
+    color: transparent;
+  }
+}

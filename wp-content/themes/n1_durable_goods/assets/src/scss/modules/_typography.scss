@@ -3,18 +3,59 @@
 $header-font: "Barlow", sans-serif;
 $body-font: "Roboto Serif", sans-serif;
 
-
 a {
   &.jump {
-    &:focus, .button:focus, .jump-to-page:focus, input.submit:focus, .home div.current-issue &:focus {
+    &:focus,
+    &:hover,
+    &:active,
+    .button:focus,
+    .button:hover,
+    .button:active,
+    .jump-to-page:focus,
+    .jump-to-page:hover,
+    .jump-to-page:active,
+    input.submit:focus,
+    input.submit:hover,
+    input.submit:active,
+    .home div.current-issue &:focus,
+    .home div.current-issue &:hover,
+    .home div.current-issue &:active {
       background-color: #242424;
     }
 
-    &:hover, .button:hover, .jump-to-page:hover, input.submit:hover, .home div.current-issue &:hover {
+    &:hover,
+    &:focus,
+    &:active,
+    .button:hover,
+    .button:focus,
+    .button:active,
+    .jump-to-page:hover,
+    .jump-to-page:focus,
+    .jump-to-page:active,
+    input.submit:hover,
+    input.submit:focus,
+    input.submit:active,
+    .home div.current-issue &:hover,
+    .home div.current-issue &:focus,
+    .home div.current-issue &:active {
       background-color: #ce4f25;
     }
 
-    &:active, .button:active, .jump-to-page:active, input.submit:active, .home div.current-issue &:active {
+    &:active,
+    &:hover,
+    &:focus,
+    .button:active,
+    .button:hover,
+    .button:focus,
+    .jump-to-page:active,
+    .jump-to-page:hover,
+    .jump-to-page:focus,
+    input.submit:active,
+    input.submit:hover,
+    input.submit:focus,
+    .home div.current-issue &:active,
+    .home div.current-issue &:hover,
+    .home div.current-issue &:focus {
       background-color: #1cecfb;
       color: #333;
     }
@@ -38,6 +79,23 @@ a {
   }
 }
 
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+  color: #ce4f25;
+}
+
+p a {
+  border-bottom: 1px solid;
+
+  &:hover {
+    color: #229fe2;
+  }
+}
+
 h1 {
   font-weight: 200;
 }
@@ -46,6 +104,12 @@ h2 {
   &.hero.title {
     position: relative;
     z-index: 10;
+  }
+
+  &.current-issue.category,
+  &.featured.books.category,
+  &.featured.pm.category {
+    text-align: center;
   }
 }
 
@@ -58,5 +122,23 @@ h3 {
     margin-right: auto;
     margin-bottom: 24px;
     background-image: url(../images/plus.png);
+  }
+
+  &.newsletter.category,
+  &.offline.category,
+  &.social.category {
+    text-align: center;
+  }
+
+  &.title {
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 100;
+    line-height: 1.1;
+    margin-top: 0.3em;
+
+    @media only screen and (min-width: 1400px) {
+      font-size: 2.2rem;
+    }
   }
 }
