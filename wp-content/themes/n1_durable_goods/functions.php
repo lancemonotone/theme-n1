@@ -217,9 +217,18 @@ class N1 {
 		}
 	}
 
-	/** Massage login error to provide link to login page */
+	/**
+	 * Massage login error to provide link to login page
+	 * NOTE: Requires `$is_login_error = $_GET["message"] ?: false;`
+	 * to be present in the header of the page template using this shortcode.
+	 */
 	function login_error_shortcode() {
 		global $is_login_error;
+
+		if ( ! $is_login_error ) {
+			return;
+		}
+
 		// retrieve current error message
 		$crntErrorMessage = stripslashes( $is_login_error );
 
@@ -233,17 +242,13 @@ class N1 {
 
 			unset( $_GET['message'] );
 
-			// set a custom error message
+			/**
+			 * Hide the error message immediately following
+			 * `.mm-formError.prime` so we can replace it with our own.
+			 */
 			return <<<EOT
-<style>
-/* Hide the error message immediately following .mm-formError.prime */
-.mm-formError.prime + .mm-formError {
-	display: none;
-}
-</style>
-<p class="mm-formError prime">
- There is an existing account associated with the email <em>{$email}</em> but the password entered is invalid. <strong>Please place your order again using the correct password or try <a href="https://www.nplusonemag.com/forgot-password/">resetting your password</a></strong>.
-</p>
+<style> .mm-formError.prime + .mm-formError { display: none; } </style>
+<p class="mm-formError prime"> There is an existing account associated with the email <em>{$email}</em> but the password entered is invalid. <strong>Please place your order again using the correct password or try <a href="https://www.nplusonemag.com/forgot-password/">resetting your password</a></strong>.</p>
 EOT;
 		}
 
