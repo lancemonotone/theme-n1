@@ -12,7 +12,7 @@ if($current_page->taxonomy == 'authors') $archive_description = _('All articles 
 $taxonomy = $is_scroll ? $pagename : ($taxonomy ? $taxonomy : $current_page->taxonomy);
 $term = $term ? $term : $current_page->slug;
 ?>
-<div id="main" class="main wrapper cf">
+<div id="main" class="cf">
 	<div class="<?php echo $archive_class?>-wrapper cf">
 
 		<section class="bug">

@@ -65,27 +65,27 @@ if(count($the_posts)){
 		<?php echo $flavor != 'archive' ? '<section class="articles">' : '';?>
 			<?php
 			$this->print_multi_posts($the_posts, $ad_after, $flavor, $newsletter_after, $social_after, $taxonomy, $term);
-			
-			if($infinite){ 
+
+			if($infinite){
 			$totalpages = floor($this->multi_query->found_posts / $number);
 			?>
 			<div class="online-only loadmore">
-		    	<a class="infinite loadmore jump trigger" href="<?php echo home_url()?>/online-only" 
+		    	<a class="infinite loadmore jump trigger" href="<?php echo home_url()?>/online-only"
 					data-paged="1"
 					data-totalpages="<?php echo $totalpages?>"
-					data-flavor="<?php echo $flavor?>" 
-					data-number="<?php echo $number?>" 
+					data-flavor="<?php echo $flavor?>"
+					data-number="<?php echo $number?>"
 					data-ad_after="<?php echo $ad_after?>"
 					data-newsletter_after="<?php echo $newsletter_after?>"
 					data-social_after="<?php echo $social_after?>"
-					data-order="<?php echo $order?>" 
+					data-order="<?php echo $order?>"
 					data-orderby="<?php echo $orderby?>"
 					data-taxonomy="<?php echo $taxonomy?>"
 					data-term="<?php echo $term?>"
 					data-meta_key="<?php echo $meta_key?>">
 					<?php _e('Load more' . $loadmore)?>
 				</a>
-				<div class="spinner"><img src="<?php echo get_template_directory_uri()?>/img/spinner.gif"></div>
+				<div class="spinner"><img src="<?php echo get_template_directory_uri()?>/assets/build/images/spinner.gif"></div>
 			</div><!-- .online-only.loadmore -->
 			<?php }?>
 		<?php echo $flavor != 'archive' ? '</section><!-- .articles-->' : '';?>

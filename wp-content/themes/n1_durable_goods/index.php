@@ -7,7 +7,7 @@ if (is_plugin_active('lj-maintenance-mode/lj-maintenance-mode.php')) {
     $page_type = 'static-page';
     ?>
 
-  <div id="main" class="main wrapper cf static-page">
+  <div id="main" class="cf static-page">
     <section id="content">
       <article>
         <div class="entry-header">
@@ -23,7 +23,7 @@ if (is_plugin_active('lj-maintenance-mode/lj-maintenance-mode.php')) {
   <script>
 
     $( function() {
-      $( '#menu-item-1640, .nav-actions.signin' ).hide();
+      $( '#menu-item-1640, #nav-actions-signin' ).hide();
     } );
 
   </script>

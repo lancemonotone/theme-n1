@@ -2,7 +2,7 @@
 	echo adrotate_group( 3 );
 } ?>
 
-<div id="main" class="main wrapper cf">
+<div id="main" class="cf">
 	<div class="main content">
 
 	<?php get_template_part( 'sidebars/sidebar', 'single_online-only' ); ?>

@@ -1,6 +1,6 @@
 <?php
 $sidebars = array(
-	'sidebar-hero'					=> __( 'Hero Modules'),
+	// 'sidebar-hero'					=> __( 'Hero Modules'),
 	'sidebar-home-0' 				=> __( 'Home Left Modules'),
 	'sidebar-home-1' 				=> __( 'Home Center Modules'),
 	'sidebar-home-2' 				=> __( 'Home Right Modules'),

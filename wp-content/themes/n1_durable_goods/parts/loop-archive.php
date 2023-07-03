@@ -16,8 +16,7 @@ $taxonomy = $is_scroll ? $pagename : ( ! empty( $taxonomy ) ? $taxonomy : ( $is_
 $term     = ! empty( $term ) ? $term : ( $is_term ? $current_page->slug : '' );
 
 ?>
-<div id="main"
-     class="main wrapper cf">
+<div id="main" class="cf">
     <div class="<?php echo $archive_class ?>-wrapper cf">
 
         <section

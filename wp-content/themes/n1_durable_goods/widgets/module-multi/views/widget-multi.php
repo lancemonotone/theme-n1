@@ -87,7 +87,7 @@ if(count($the_posts)){
 					data-meta_key="<?php echo $meta_key?>">
 					<?php _e('Load more' . $loadmore)?>
 				</a>
-				<div class="spinner"><img src="<?php echo get_template_directory_uri()?>/img/spinner.gif"></div>
+				<div class="spinner"><img src="<?php echo get_template_directory_uri()?>/assets/build/images/spinner.gif"></div>
 			</div><!-- .online-only.loadmore -->
 			<?php }?>
 		<?php echo ($flavor != 'archive' && $flavor != 'sticky') ? '</section><!-- .articles-->' : '';?>

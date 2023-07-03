@@ -9,24 +9,10 @@ section {
   &.featured.pm,
   &.featured.magazine,
   &.header-search,
-  &.header-signin,
   &.active {
     position: relative;
     z-index: 10;
     padding: 32px 16px;
-  }
-
-  &.header-search,
-  &.header-signin,
-  &.active {
-    display: none;
-  }
-
-  &.active {
-    &.header-search,
-    &.header-signin {
-      display: block;
-    }
   }
 
   &.current-issue,

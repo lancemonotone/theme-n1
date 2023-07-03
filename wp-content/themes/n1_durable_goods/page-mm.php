@@ -7,7 +7,7 @@ $is_login_error = $_GET["message"] ?: false;
 
 get_header();?>
 
-<div id="main" class="main wrapper cf">
+<div id="main" class="cf">
 	<section id="content">
 	<?php while ( have_posts() ) { the_post(); ?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>

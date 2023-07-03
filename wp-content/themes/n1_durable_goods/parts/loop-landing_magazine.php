@@ -25,8 +25,8 @@
 				<?php } ?>
 			</div>
 			<div class="clearfix"></div>
-			<a id="next3" class="als-next next" href="#"><img title="next" alt="next" src="<?php echo get_stylesheet_directory_uri()?>/img/r-black.png"></a>
-			<a id="prev3" class="als-prev prev" href="#"><img title="previous" alt="prev" src="<?php echo get_stylesheet_directory_uri()?>/img/l-black.png"></a>
+			<a id="next3" class="als-next next" href="#"><img title="next" alt="next" src="<?php echo get_stylesheet_directory_uri()?>/assets/build/images/r-black.png"></a>
+			<a id="prev3" class="als-prev prev" href="#"><img title="previous" alt="prev" src="<?php echo get_stylesheet_directory_uri()?>/assets/build/images/l-black.png"></a>
 		</div>
 	</div> <!-- als-container end -->
 
