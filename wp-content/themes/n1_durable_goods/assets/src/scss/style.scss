@@ -209,7 +209,12 @@ body {
   }
 }
 
-a.jump, .button, .jump-to-page, input.submit, .home div.current-issue a.jump {
+a.jump,
+.button,
+.jump-to-page,
+input.submit,
+input[type=submit],
+.home div.current-issue a.jump {
   padding: 7.2px 16px 8px 16px;
   border-radius: 4em;
   font-weight: 600;
@@ -219,6 +224,7 @@ a.jump, .button, .jump-to-page, input.submit, .home div.current-issue a.jump {
   width: auto;
   display: inline-block;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 div.jump {
@@ -2622,15 +2628,15 @@ body {
   }
 }
 
-@media only screen and (min-width: 640px) {
-  .issue-gallery-callout {
-    height: 400px;
-  }
-}
-
-body.admin-bar .issue-gallery-callout {
-  display: block !important;
-}
+//@media only screen and (min-width: 640px) {
+//  .issue-gallery-callout {
+//    height: 400px;
+//  }
+//}
+//
+//body.admin-bar .issue-gallery-callout {
+//  display: block !important;
+//}
 
 //html.gallery-active {
 //  padding-top: 0;

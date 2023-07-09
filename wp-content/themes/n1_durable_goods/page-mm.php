@@ -3,7 +3,7 @@
  * Template Name: MemberMouse Core Page
  */
 // check for $_GET["message"] to see if there is an error message. if not, set to false
-$is_login_error = $_GET["message"] ?: false;
+$is_login_error = $_GET["message"] ?? false;
 
 get_header();?>
 

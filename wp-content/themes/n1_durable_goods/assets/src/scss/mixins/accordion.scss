@@ -1,23 +1,16 @@
-@mixin accordion {
-  position: relative;
+@mixin accordion($arrow-color: var(--white)) {
+  .toggle-section {
+    display: none;
+  }
 
-  .accordion-header {
+  .toggle-label {
+    outline: none;
     display: grid;
     align-items: center;
     grid-template-columns: 1fr 1rem;
     column-gap: 1rem;
     cursor: pointer;
-
-    @media screen and (max-width: 1029px) {
-      & > * {
-        padding: 0;
-      }
-    }
-
-    @media screen and (min-width: 1030px) {
-      pointer-events: none;
-      cursor: default;
-    }
+    user-select: none;
 
     .drop-icon {
       display: grid;
@@ -37,49 +30,40 @@
         // Target Safari because the border-color renders
         // much lighter, then we override it for other browsers
         // because Safari doesn't support the -webkit- prefix
-        border-color: transparent transparent $primary-dark transparent;
+        border-color: transparent transparent $arrow-color transparent;
         // Use the appearance property to target all browsers except Safari
         appearance: none;
         @media not all and (min-resolution: .001dpcm) {
           @supports (-webkit-appearance:none) {
-            border-color: transparent transparent $black transparent;
+            border-color: transparent transparent $arrow-color transparent;
             // Use the -webkit-appearance property to override the appearance property for Safari
             -webkit-appearance: none;
           }
         }
       }
+    }
+  }
 
-      @media screen and (min-width: 1030px) {
-        display: none;
+  & > .toggle {
+    display: none;
+
+    &:checked {
+      & ~ .toggle-section {
+        display: block;
+        position: absolute;
+        top: calc(100% - 1rem);
+        right: 0;
+        transform: translateY(1rem);
+        z-index: 1;
       }
-    }
-  }
 
-  .accordion-content {
-    overflow: hidden;
-    transition: all var(--transition);
-    max-height: 0;
-    margin-block-start: 0;
-    padding-inline-end: 1rem;
-
-    @media screen and (min-width: 1030px) {
-      max-height: 3000px;
-    }
-  }
-
-  input.accordion-toggle:checked {
-    & ~ .accordion-header {
-      .drop-icon {
-        &:after {
-          transform: rotate(0deg);
+      & ~ .toggle-label {
+        .drop-icon {
+          &:after {
+            transform: rotate(0deg);
+          }
         }
       }
     }
-
-    & ~ .accordion-content {
-      max-height: 3000px;
-      margin-block-start: rem(30);
-    }
   }
-
 }

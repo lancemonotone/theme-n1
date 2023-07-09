@@ -1,0 +1,14 @@
+:root {
+  --max-width-content: 1200px;
+  --inner-padding: 0;
+  --transition: 0.1s cubic-bezier(1, -0.02, 1, 1);
+  --padding-block-end: clamp(2.25rem, 4vw, 3.375rem);
+
+  --brown: #242424;
+  --white: #ffffff;
+  --inactive: #999999;
+  --orange: #ce4f25;
+  --light-orange: #d1765b;
+  --dark-blue: #2da0e0;
+  --light-blue: #56b3e6;
+}

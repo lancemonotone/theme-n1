@@ -1,9 +1,14 @@
 @import './scss/modules/reset';
+@import './scss/global';
 @import './scss/modules/a11y';
 @import './scss/modules/strux';
 @import './scss/modules/forms';
-@import './scss/modules/navigation';
+
+@import './scss/modules/header/nav-menu';
+@import './scss/modules/header/nav-search';
+@import './scss/modules/header/nav-actions';
 @import './scss/modules/header';
+
 @import './scss/modules/footer';
 @import './scss/modules/div';
 @import './scss/modules/section';
@@ -16,7 +21,6 @@
 
 @import './scss/modules/module';
 @import './scss/style.scss';
-//@import './scss/global.scss';
 //@import './scss/header.scss';
 //@import './scss/footer.scss';
 //@import './scss/buttons.scss';

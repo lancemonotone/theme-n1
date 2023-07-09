@@ -1,0 +1,72 @@
+@import "../../mixins/accordion";
+
+.nav-search {
+  --font-size: 1rem;
+  @media screen and (min-width: 900px) {
+    --font-size: clamp(.7rem, 1.2vw, 1rem);
+  }
+
+  grid-area: search;
+
+  .search {
+    &, * {
+      transition: var(--transition);
+    }
+
+    input[type=text] {
+      background-color: var(--brown);
+      border: 1px solid var(--inactive);
+      color: var(--white);
+      margin: 0;
+      padding-block: 0.5rem;
+      max-width: 100%;
+      font-size: var(--font-size);
+      padding-inline: 1rem 3rem;
+
+      &::placeholder {
+        color: var(--inactive);
+        text-align: center;
+      }
+
+      &:focus,
+      &:focus-within {
+        outline: none;
+        background-color: var(--white);
+        color: var(--brown);
+
+        &::placeholder {
+          color: transparent;
+        }
+
+        & + button[type=submit] {
+          svg {
+            fill: var(--brown);
+          }
+        }
+      }
+    }
+
+    button[type=submit] {
+      position: absolute;
+      top: 1px;
+      right: 1rem;
+      width: 1.6rem;
+      height: 100%;
+      padding: 0;
+      background: transparent;
+      color: var(--inactive);
+      border: none;
+      cursor: pointer;
+
+      svg {
+        width: 70%;
+        height: auto;
+        fill: var(--inactive);
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

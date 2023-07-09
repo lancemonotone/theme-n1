@@ -34,29 +34,32 @@ class N1 {
 		//error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_WARNING);
 		// error reporting errors only
 		//error_reporting( E_NOTICE | E_WARNING | E_ERROR | E_PARSE );
-		// add_action( 'send_headers', array( &$this, 'send_headers' ) );
-		add_action( 'after_setup_theme', array( &$this, 'setup_widgets' ) );
-		add_action( 'after_setup_theme', array( &$this, 'setup_plugins' ) );
-		add_action( 'init', array( &$this, 'setup_utility' ) );
-		add_action( 'after_setup_theme', array( &$this, 'setup_comments' ) );
-		add_action( 'init', array( &$this, 'setup_post_types' ) );
-		add_action( 'init', array( &$this, 'setup_taxonomies' ) );
-		add_action( 'init', array( &$this, 'setup_magazine' ) );
-		add_action( 'admin_init', array( &$this, 'setup_search' ) );
-		add_action( 'widgets_init', array( &$this, 'remove_widgets' ) );
-		add_action( 'wp_enqueue_scripts', array( &$this, 'setup_scripts_styles' ) );
-		add_action( 'admin_enqueue_scripts', array( &$this, 'setup_admin_style' ) );
-		add_action( 'login_enqueue_scripts', array( &$this, 'setup_admin_style' ) );
-		add_filter( 'pre_get_posts', array( &$this, 'only_published_in_feed' ) );
+		// add_action( 'send_headers', [$this, 'send_headers'] );
+		$this->setup_constants();
+		add_action( 'after_setup_theme', [ $this, 'setup_widgets' ] );
+		add_action( 'after_setup_theme', [ $this, 'setup_plugins' ] );
+		add_action( 'init', [ $this, 'setup_utility' ] );
+		add_action( 'after_setup_theme', [ $this, 'setup_comments' ] );
+		add_action( 'init', [ $this, 'setup_post_types' ] );
+		add_action( 'init', [ $this, 'setup_taxonomies' ] );
+		add_action( 'init', [ $this, 'setup_magazine' ] );
+		add_action( 'init', [ $this, 'setup_assets' ] );
+		add_action( 'init', [ $this, 'setup_nav_search' ] );
+		add_action( 'admin_init', [ $this, 'setup_search' ] );
+		add_action( 'widgets_init', [ $this, 'remove_widgets' ] );
+		// add_action( 'wp_enqueue_scripts', [$this, 'setup_scripts_styles'] );
+		// add_action( 'admin_enqueue_scripts', [$this, 'setup_admin_style'] );
+		// add_action( 'login_enqueue_scripts', [$this, 'setup_admin_style'] );
+		add_filter( 'pre_get_posts', [ $this, 'only_published_in_feed' ] );
 		add_filter( 'post_link', array( 'Custom_Taxonomies', 'filter_post_link' ), 10, 2 );
 		add_filter( 'post_type_link', array( 'Custom_Taxonomies', 'filter_post_type_link' ), 10, 2 );
-		add_filter( 'wp_title', array( &$this, 'twentytwelve_wp_title' ), 10, 2 );
-		add_filter( 'loginout', array( &$this, 'loginout_text_change' ) );
+		add_filter( 'wp_title', [ $this, 'twentytwelve_wp_title' ], 10, 2 );
+		add_filter( 'loginout', [ $this, 'loginout_text_change' ] );
 		//add_filter( 'feed_link', array(&$this, 'http_feed', 10));
 		//add_filter( 'force_ssl',  array(&$this, 'http_feed_force_ssl', 10, 3));
-		add_shortcode( 'pullquote', array( &$this, 'article_pullquote' ) );
-		add_shortcode( 'date_today', array( &$this, 'date_shortcode' ) );
-		add_shortcode( 'login_error_message', array( &$this, 'login_error_shortcode' ) );
+		add_shortcode( 'pullquote', [ $this, 'article_pullquote' ] );
+		add_shortcode( 'date_today', [ $this, 'date_shortcode' ] );
+		add_shortcode( 'login_error_message', [ $this, 'login_error_shortcode' ] );
 		include_once( 'lib/twentytwelve_functions.php' );
 	}
 
@@ -67,30 +70,16 @@ class N1 {
 		}
 	}
 
-	function setup_scripts_styles() {
-		// scripts
-		wp_enqueue_script( 'classie', get_stylesheet_directory_uri() . '/js/classie.js', array(), $this->version, TRUE );
-		// wp_enqueue_script( 'fastclick', get_stylesheet_directory_uri() . '/js/fastclick.js', array(), $this->version, TRUE );
-		wp_enqueue_script( 'menus', get_stylesheet_directory_uri() . '/js/menus.js', array( 'classie' ), $this->version, TRUE );
-		wp_enqueue_script( 'caroufredsel', get_stylesheet_directory_uri() . '/js/caroufredsel/jquery.carouFredSel-6.2.1-packed.js', array(), $this->version, TRUE );
-		wp_enqueue_script( 'main', get_stylesheet_directory_uri() . '/js/main.js', array( 'caroufredsel' ), $this->version, TRUE );
-		// styles
-		wp_enqueue_style( 'n1-styles', get_stylesheet_uri(), array(), $this->version );
+	function setup_nav_search() {
+		include_once( 'lib/class.nav_search.php' );
 	}
 
+	function setup_constants(){
+		include_once( 'lib/class.constants.php' );
+	}
 
-	function setup_admin_style() {
-		// scripts
-		// AdRotate script load is buggy, don't know why.
-		// We'll load our own versions here and hope they don't need to be updated.
-		wp_enqueue_script( 'raphael-n1', get_stylesheet_directory_uri() . '/js/r.js', array( 'jquery' ) );
-		wp_enqueue_script( 'elycharts-n1', get_stylesheet_directory_uri() . '/js/e.js', array( 'jquery', 'raphael-n1' ) );
-		wp_enqueue_script( 'textatcursor-n1', get_stylesheet_directory_uri() . '/js/t.js' );
-		wp_enqueue_script( 'clicktracker-n1', get_stylesheet_directory_uri() . '/js/jquery.clicktracker.js' );
-		wp_enqueue_script( 'jshowoff-n1', get_stylesheet_directory_uri() . '/js/jquery.jshowoff.min.js' );
-		wp_enqueue_script( 'uploader-hook-n1', get_stylesheet_directory_uri() . '/js/uploader-hook.js' );
-		// styles
-		wp_enqueue_style( 'n1-admin-style', get_stylesheet_directory_uri() . '/css/admin-style.css', array(), $this->version );
+	function setup_assets() {
+		include_once( 'lib/class.assets.php' );
 	}
 
 	function setup_utility() {

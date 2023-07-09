@@ -1,285 +1,39 @@
-//#header-main {
-//  position: relative;
-//  z-index: 0;
-//  min-height: 216px;
-//  background-color: #242424;
-//
-//  &._headerSigninActive {
-//    margin-top: 88px;
-//  }
-//
-//  section {
-//    &.header-signin {
-//      order: 1;
-//      overflow: auto;
-//      padding: 16px;
-//      background-color: #229fe2;
-//
-//
-//
-//      div.header-signin.closebox {
-//        background-size: contain;
-//        text-indent: -10000px;
-//        overflow-x: hidden;
-//        cursor: pointer;
-//        position: absolute;
-//        top: 16px;
-//        right: 16px;
-//        display: none;
-//        width: 40px;
-//        background-image: url(../images/ui-close-white.png);
-//        background-repeat: no-repeat;
-//        background-position: center center;
-//
-//        &:hover {
-//          background-image: url(../images/ui-close-black.png);
-//          background-repeat: no-repeat;
-//          background-position: center center;
-//        }
-//      }
-//    }
-//
-//    &.header-search {
-//      order: 2;
-//      padding: 16px;
-//      background-color: #1a1a1a;
-//    }
-//
-//    &.header-search, &.header-signin {
-//      display: none;
-//
-//      &.active {
-//        display: block;
-//      }
-//    }
-//  }
-//
-//  input {
-//    &.header-search {
-//      position: relative;
-//      text-align: center;
-//
-//      &::placeholder {
-//        text-align: center;
-//      }
-//    }
-//
-//    &.text {
-//      width: 100%;
-//      max-width: none;
-//      border: 1px solid #666;
-//      background-color: transparent;
-//      color: #229fe2;
-//
-//      &::placeholder {
-//        color: rgba(255, 255, 255, 0.3);
-//      }
-//
-//      &:focus {
-//        border-color: #229fe2;
-//        color: #229fe2;
-//
-//        &::placeholder {
-//          color: transparent;
-//        }
-//      }
-//    }
-//
-//    &.header-signin {
-//      &.form-text {
-//        color: #fff;
-//        border: 1px solid rgba(255, 255, 255, 0.2);
-//        border-left-color: rgba(0, 0, 0, 0.06);
-//        border-right-color: rgba(0, 0, 0, 0.06);
-//        border-top-color: rgba(0, 0, 0, 0.1);
-//
-//        &:hover, &:focus {
-//          border-color: rgba(255, 255, 255, 0.8);
-//        }
-//
-//        &:focus {
-//          color: #fff;
-//        }
-//      }
-//
-//      &.username:focus {
-//        &::placeholder {
-//          color: rgba(255, 255, 255, 0.3);
-//        }
-//      }
-//    }
-//  }
-//
-//  form.header-search {
-//    padding-top: 16px;
-//  }
-//
-//  h3 {
-//    &.header-signin {
-//      padding-bottom: 16px;
-//    }
-//
-//    &.category {
-//      display: none;
-//    }
-//  }
-//
-//  fieldset.header-signin {
-//    display: block;
-//    float: left;
-//    width: 100%;
-//    margin-bottom: 16px;
-//  }
-//
-//  @media only screen and (max-width: 639px) {
-//    display: flex;
-//    flex-direction: column;
-//
-//    @media (min-width: 1024px) {
-//      display: block;
-//    }
-//
-//    form.header-search {
-//      padding-top: 0;
-//    }
-//
-//    header._headerSigninActive {
-//      margin-top: 0;
-//    }
-//
-//    .header-signin {
-//      input.submit {
-//        display: inline-block;
-//      }
-//
-//      a {
-//        display: inline;
-//        margin-left: 8px;
-//        position: relative;
-//        bottom: 2px;
-//      }
-//
-//      fieldset.header-signin {
-//        margin-bottom: 8px;
-//      }
-//    }
-//  }
-//
-//  @media only screen and (min-width: 640px) {
-//    min-height: 144px;
-//
-//    h3.category {
-//      display: none;
-//    }
-//
-//    section.header-search {
-//      display: block;
-//      position: absolute;
-//      top: 18px;
-//      left: 160px;
-//      right: 160px;
-//      height: 40px;
-//      background-color: transparent;
-//      border-top: none;
-//      padding: 0;
-//    }
-//
-//    form.header-search {
-//      padding-top: 0;
-//      width: 30em;
-//      margin-left: auto;
-//      margin-right: auto;
-//    }
-//
-//    section.header-signin {
-//      max-width: 1200px;
-//      margin-left: auto;
-//      margin-right: auto;
-//      padding-top: 16px;
-//      padding-bottom: 0;
-//      height: 88px;
-//
-//      &.active {
-//        position: absolute;
-//        top: -88px;
-//        left: 0;
-//        right: 0;
-//        border-bottom: 16px solid #242424;
-//        padding-right: 64px;
-//      }
-//    }
-//
-//    fieldset.header-signin {
-//      width: 248px;
-//    }
-//
-//    fieldset.header-signin {
-//      &.username {
-//        padding-right: 4px;
-//      }
-//
-//      &.password {
-//        padding-left: 4px;
-//      }
-//    }
-//
-//    input.header-signin.submit {
-//      float: left;
-//      width: 120px;
-//      margin-left: 8px;
-//      margin-top: 4px;
-//    }
-//
-//    div.header-signin.closebox {
-//      display: block;
-//    }
-//  }
-//
-//  @media only screen and (min-width: 1024px) {
-//    section.header-search {
-//      &.hidden {
-//        display: block;
-//      }
-//
-//      left: 320px;
-//      right: 320px;
-//    }
-//  }
-//
-//  @media only screen and (min-width: 1400px) {
-//    background-color: transparent;
-//    width: 100%;
-//    margin-left: auto;
-//    margin-right: auto;
-//    position: fixed;
-//    top: 0;
-//
-//    body.admin-bar & {
-//      margin-top: 32px;
-//    }
-//
-//    div {
-//      width: 1400px;
-//      margin: 0 auto;
-//    }
-//
-//    section.header-search {
-//      left: 560px;
-//      right: 560px;
-//    }
-//
-//    &._headerSigninActive {
-//      + #main {
-//        margin-top: 232px;
-//      }
-//    }
-//  }
-//}
-
-#pwbox-7830, #pwbox-10059 {
-  margin-bottom: 1em;
+@media screen and (max-width: 600px) {
+  #wpadminbar {
+    position: fixed !important;
+  }
 }
 
-.post-password-form input[type="submit"]:hover {
-  background-color: #ce4f25;
+header {
+  background-color: var(--brown);
+  display: flex;
+  justify-content: center;
+
+  .inner {
+    width: 100%;
+    max-width: var(--max-width-content);
+    padding-inline: 1rem;
+  }
+
+  .sections {
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 1rem;
+    padding-block: 0.5rem;
+
+    grid-template-areas:
+      "nav nav nav nav nav nav"
+      "search search search search search actions";
+
+    @media screen and (min-width: 600px) {
+      grid-template-areas:
+    "nav nav nav nav nav actions"
+    "search search search search search search";
+    }
+
+    @media screen and (min-width: 900px) {
+      display: flex;
+    }
+  }
 }
