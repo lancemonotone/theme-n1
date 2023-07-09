@@ -30,8 +30,6 @@
   display: grid;
   grid-template-rows: var(--grid-template-rows);
   column-gap: var(--gap);
-  //justify-content: var(--nav-justify);
-  //justify-items: start;
   align-items: center;
   grid-auto-flow: column;
 
@@ -39,6 +37,9 @@
     color: var(--white);
     font-size: var(--font-size);
     padding: 1rem;
+    display: block;
+    height: 100%;
+    width: 100%;
 
     &:hover {
       color: var(--orange);
@@ -70,6 +71,11 @@
       margin-inline-end: var(--home-margin-end);
       text-indent: -10000px;
       overflow-x: hidden;
+
+      a {
+        background-color: transparent;
+        color: transparent;
+      }
     }
   }
 }
