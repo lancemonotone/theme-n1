@@ -15,7 +15,7 @@
 
     input[type=text] {
       background-color: var(--brown);
-      border: 1px solid var(--inactive);
+      border: 1px solid var(--inactive-dark);
       color: var(--white);
       margin: 0;
       padding-block: 0.5rem;
@@ -24,7 +24,7 @@
       padding-inline: 1rem 3rem;
 
       &::placeholder {
-        color: var(--inactive);
+        color: var(--inactive-dark);
         text-align: center;
       }
 
@@ -54,14 +54,14 @@
       height: 100%;
       padding: 0;
       background: transparent;
-      color: var(--inactive);
+      color: var(--inactive-dark);
       border: none;
       cursor: pointer;
 
       svg {
         width: 70%;
         height: auto;
-        fill: var(--inactive);
+        fill: var(--inactive-dark);
       }
 
       &:focus {

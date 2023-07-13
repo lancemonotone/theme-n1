@@ -65,9 +65,9 @@ class Assets {
 		// scripts
 		// AdRotate script load is buggy, don't know why.
 		// We'll load our own versions here and hope they don't need to be updated.
-		wp_enqueue_script( 'raphael-n1', get_stylesheet_directory_uri() . '/js/r.js', array( 'jquery' ) );
-		wp_enqueue_script( 'elycharts-n1', get_stylesheet_directory_uri() . '/js/e.js', array( 'jquery', 'raphael-n1' ) );
-		wp_enqueue_script( 'textatcursor-n1', get_stylesheet_directory_uri() . '/js/t.js' );
+		wp_enqueue_script( 'raphael-n1', get_stylesheet_directory_uri() . '/js/raphael.js', array( 'jquery' ) );
+		wp_enqueue_script( 'elycharts-n1', get_stylesheet_directory_uri() . '/js/ely-charts.js', array( 'jquery', 'raphael-n1' ) );
+		wp_enqueue_script( 'textatcursor-n1', get_stylesheet_directory_uri() . '/js/text-at-cursor.js' );
 		wp_enqueue_script( 'clicktracker-n1', get_stylesheet_directory_uri() . '/js/jquery.clicktracker.js' );
 		wp_enqueue_script( 'jshowoff-n1', get_stylesheet_directory_uri() . '/js/jquery.jshowoff.min.js' );
 		wp_enqueue_script( 'uploader-hook-n1', get_stylesheet_directory_uri() . '/js/uploader-hook.js' );

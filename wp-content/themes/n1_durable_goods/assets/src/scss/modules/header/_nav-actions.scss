@@ -1,173 +1,191 @@
 @import '../../mixins/accordion';
 
 #nav-actions {
-  --font-size: 1rem;
-  @media screen and (min-width: 900px) {
-    --font-size: clamp(.7rem, 1.2vw, 1rem);
-  }
-
-  grid-area: actions;
-  @include accordion(var(--white));
-
-  & > label {
-    font-size: var(--font-size);
-    background: var(--orange);
-    color: var(--white);
-    border: none;
-    white-space: nowrap;
-    padding: clamp(1rem, 2vw, 1.5rem) 1rem;
-
-    &.logged-in {
-      background: var(--dark-blue);
-      color: var(--white);
+    --font-size: 1rem;
+    --actions-height: 50px;
+    @media screen and (min-width: 900px) {
+        --font-size: clamp(.7rem, 1.2vw, 1rem);
+        --actions-height: 75px;
     }
 
-    .toggle:checked ~ & {
-      background: var(--orange);
-      color: var(--white);
+    grid-area: actions;
+    @include accordion(var(--white));
 
-      &.logged-in {
-        background: var(--dark-blue);
+    height: var(--actions-height);
+    max-height: 100%;
+
+    & > label {
+        font-size: var(--font-size);
+        background: var(--orange);
         color: var(--white);
-      }
-    }
-  }
+        border: none;
+        white-space: nowrap;
+        padding-inline: 1rem;
+        height: 100%;
 
-  & > section {
-    .signin-container,
-    .status-container {
-      border-radius: 0.5rem 0 0.5rem 0.5rem;
-      border-width: 1rem;
-      border-style: solid;
-      padding: 1rem;
-      font-size: 0.8rem;
-      min-width: 270px;
-
-      .button {
-        color: var(--white);
-
-        &:hover {
-          background: var(--white);
-          color: var(--brown);
-        }
-      }
-    }
-
-    .signin-container {
-      border-color: var(--orange);
-      background-color: var(--light-orange);
-      text-wrap: nowrap;
-
-      label {
-        color: var(--white);
-        margin-block-end: 0.5rem;
-        display: block;
-      }
-
-      input[type=text],
-      input[type=password] {
-        margin-block-end: 1rem;
-        font-size: 0.8rem;
-      }
-
-      .links {
-        display: grid;
-        align-items: center;
-        grid-template-columns: 5rem 1fr;
-        justify-items: start;
-        text-align: left;
-        gap: 1.3rem;
-
-        .button {
-          background-color: var(--dark-blue);
-          width: auto;
-          margin: 0;
-          height: auto;
-          line-height: 1;
+        &.logged-in {
+            background: var(--dark-blue);
+            color: var(--white);
         }
 
-        a {
-          text-decoration: none;
+        .toggle:checked ~ & {
+            background: var(--orange);
+            color: var(--white);
 
-          &:hover {
-            text-decoration: underline;
-          }
+            &.logged-in {
+                background: var(--dark-blue);
+                color: var(--white);
+            }
         }
-      }
     }
 
-    .status-container {
-      border-color: var(--dark-blue);
-      background-color: var(--light-blue);
+    & > section {
+        .signin-container,
+        .status-container {
+            border-radius: 0.5rem 0 0.5rem 0.5rem;
+            border-width: 1rem;
+            border-style: solid;
+            padding: 1rem;
+            font-size: 0.8rem;
+            min-width: 270px;
 
-      .name-status {
-        display: grid;
-        grid-template-columns: 3rem 1fr;
-        grid-template-rows: 1fr 1fr;
-        align-items: center;
-        grid-template-areas:
+            .button {
+                color: var(--white);
+
+                &:hover {
+                    background: var(--white);
+                    color: var(--brown);
+                }
+            }
+        }
+
+        .signin-container {
+            border-color: var(--orange);
+            background-color: var(--light-orange);
+            text-wrap: nowrap;
+
+            label {
+                color: var(--white);
+                margin-block-end: 0.5rem;
+                display: block;
+            }
+
+            input[type=text],
+            input[type=password] {
+                margin-block-end: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .links {
+                display: grid;
+                align-items: center;
+                grid-template-columns: 5rem 1fr;
+                justify-items: start;
+                text-align: left;
+                gap: 1.3rem;
+
+                .button {
+                    background-color: var(--dark-blue);
+                    width: auto;
+                    margin: 0;
+                    height: auto;
+                    line-height: 1;
+                }
+
+                a {
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        .status-container {
+            border-color: var(--dark-blue);
+            background-color: var(--light-blue);
+
+            .name-status {
+                display: grid;
+                grid-template-columns: 3rem 1fr;
+                grid-template-rows: 1fr 1fr;
+                align-items: center;
+                grid-template-areas:
           "user-svg name"
           "user-svg status";
-        margin-block-end: 1rem;
+                margin-block-end: 1rem;
 
-        .user-svg {
-          grid-area: user-svg;
+                .user-svg {
+                    grid-area: user-svg;
 
-          svg {
-            width: 90%;
-            height: auto;
-            fill: var(--white);
-          }
+                    svg {
+                        width: 90%;
+                        height: auto;
+                        fill: var(--white);
+                    }
+                }
+
+                .name {
+                    grid-area: name;
+                    font-size: 1rem;
+                    text-wrap: nowrap;
+                    font-weight: bold;
+                    color: white;
+                }
+
+                .status {
+                    grid-area: status;
+                    text-wrap: nowrap;
+
+                    strong {
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            .links {
+                display: grid;
+                grid-template-rows: auto;
+                margin-inline-start: 1.7rem;
+                margin-block-end: 1rem;
+
+                a {
+                    display: flex;
+                    line-height: 2;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+
+                    &::before {
+                        width: 1.3rem;
+                        content: "";
+                        display: inline-block;
+                        background: url(../images/r-black.png) no-repeat center;
+                        background-size: contain;
+                        height: 100%;
+                    }
+                }
+            }
+
+            .button {
+                background-color: var(--orange);
+                margin-inline-start: 3rem;
+            }
+
+            &.status-inactive {
+                .link-gift-subscription {
+                    display: none;
+                }
+            }
+
+            &.status-active {
+                .link-renew {
+                    display: none;
+                }
+            }
         }
 
-        .name {
-          grid-area: name;
-          font-size: 1rem;
-          text-wrap: nowrap;
-          font-weight: bold;
-          color: white;
-        }
-
-        .status {
-          grid-area: status;
-          text-wrap: nowrap;
-
-          strong {
-            font-weight: bold;
-          }
-        }
-      }
-
-      .links {
-        display: grid;
-        grid-template-rows: auto;
-        margin-inline-start: 1.7rem;
-        margin-block-end: 1rem;
-
-        a {
-          display: flex;
-          line-height: 2;
-
-          &:hover {
-            text-decoration: underline;
-          }
-
-          &::before {
-            width: 1.3rem;
-            content: "";
-            display: inline-block;
-            background: url(../images/r-black.png) no-repeat center;
-            background-size: contain;
-            height: 100%;
-          }
-        }
-      }
-
-      .button {
-        background-color: var(--orange);
-        margin-inline-start: 3rem;
-      }
     }
-
-  }
 }

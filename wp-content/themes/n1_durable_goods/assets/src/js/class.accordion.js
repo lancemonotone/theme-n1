@@ -2,12 +2,12 @@ window.addEventListener('load', function() {
   const containers = document.querySelectorAll('.accordion')
 
   containers.forEach(container => {
-    new Accordion(container)
+    new ClassAccordion(container)
   })
 })
 
 // transform toggleAriaExpanded into a class
-class Accordion {
+class ClassAccordion {
   constructor(container, focus = false) {
     this.focus = focus
     this.container = container

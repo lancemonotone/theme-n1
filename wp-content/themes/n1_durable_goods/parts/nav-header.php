@@ -1,7 +1,4 @@
-<?php namespace N1_Durable_Goods;
-
-
-?>
+<?php namespace N1_Durable_Goods; ?>
 
 <nav class="sections">
 	<?php get_template_part( 'parts/nav-header/nav', 'menu' ) ?>

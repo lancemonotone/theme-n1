@@ -39,6 +39,7 @@ class N1 {
 		add_action( 'after_setup_theme', [ $this, 'setup_widgets' ] );
 		add_action( 'after_setup_theme', [ $this, 'setup_plugins' ] );
 		add_action( 'init', [ $this, 'setup_utility' ] );
+		add_action( 'init', [ $this, 'setup_login' ] );
 		add_action( 'after_setup_theme', [ $this, 'setup_comments' ] );
 		add_action( 'init', [ $this, 'setup_post_types' ] );
 		add_action( 'init', [ $this, 'setup_taxonomies' ] );
@@ -71,7 +72,7 @@ class N1 {
 	}
 
 	function setup_nav_search() {
-		include_once( 'lib/class.nav_search.php' );
+		include_once( 'lib/class.search.php' );
 	}
 
 	function setup_constants(){
@@ -80,6 +81,10 @@ class N1 {
 
 	function setup_assets() {
 		include_once( 'lib/class.assets.php' );
+	}
+
+	function setup_login() {
+		include_once( 'lib/class.login.php' );
 	}
 
 	function setup_utility() {

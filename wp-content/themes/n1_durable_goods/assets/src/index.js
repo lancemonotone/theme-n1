@@ -12,7 +12,8 @@
  */
 import './index.scss';
 
-import './js/accordion.js';
+import './js/class.accordion.js';
+import './js/class.header.js';
 
 /**
  * Modules

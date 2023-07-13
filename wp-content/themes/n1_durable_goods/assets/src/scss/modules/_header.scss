@@ -1,39 +1,58 @@
 @media screen and (max-width: 600px) {
-  #wpadminbar {
-    position: fixed !important;
-  }
+    #wpadminbar {
+        position: fixed !important;
+    }
 }
 
-header {
-  background-color: var(--brown);
-  display: flex;
-  justify-content: center;
+#site-header {
+    --header-position: relative;
+    --header-max-height: 7.5rem;
+    --sections-max-height: 75px;
 
-  .inner {
-    width: 100%;
-    max-width: var(--max-width-content);
-    padding-inline: 1rem;
-  }
+    @media screen and (min-width: 900px) {
+        --header-position: sticky;
+        --header-max-height: 10rem;
+    }
 
-  .sections {
-    display: grid;
-    align-items: center;
-    justify-content: space-between;
-    column-gap: 1rem;
-    padding-block: 0.5rem;
+    background-color: var(--brown);
+    display: flex;
+    justify-content: center;
+    position: var(--header-position);
+    height: 10rem;
+    max-height: var(--header-max-height);
+    top: 0;
+    z-index: 1000;
 
-    grid-template-areas:
+    .inner {
+        width: 100%;
+        max-width: var(--max-width-content);
+        padding-inline: 1rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .sections {
+        display: grid;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 1rem;
+        //padding-block: 0.5rem;
+        height: 100%;
+        max-height: var(--sections-max-height);
+        width: 100%;
+
+        grid-template-areas:
       "nav nav nav nav nav nav"
       "search search search search search actions";
 
-    @media screen and (min-width: 600px) {
-      grid-template-areas:
+        @media screen and (min-width: 600px) {
+            grid-template-areas:
     "nav nav nav nav nav actions"
     "search search search search search search";
-    }
+        }
 
-    @media screen and (min-width: 900px) {
-      display: flex;
+        @media screen and (min-width: 900px) {
+            display: flex;
+        }
     }
-  }
 }
