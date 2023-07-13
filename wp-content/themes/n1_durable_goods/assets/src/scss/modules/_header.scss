@@ -6,12 +6,24 @@
 
 #site-header {
     --header-position: relative;
-    --header-max-height: 7.5rem;
+    --header-max-height: clamp(7rem, 31vw, 7.8rem);
+    --header-align-items: start;
+    --padding-block: .5rem;
     --sections-max-height: 75px;
+    --column-gap: 1rem;
+    --row-gap: 0.5rem;
+
+    @media screen and (min-width: 600px) {
+        --header-max-height: 7rem;
+        --header-align-items: top;
+        --row-gap: 0.6rem;
+    }
 
     @media screen and (min-width: 900px) {
+        --padding-block: 0;
         --header-position: sticky;
         --header-max-height: 10rem;
+        --header-align-items: center;
     }
 
     background-color: var(--brown);
@@ -26,29 +38,32 @@
     .inner {
         width: 100%;
         max-width: var(--max-width-content);
-        padding-inline: 1rem;
+        padding-inline: var(--inner-padding);
         display: flex;
-        align-items: center;
+        align-items: var(--header-align-items);
     }
 
     .sections {
         display: grid;
+        grid-template-rows: auto 2.5rem;
         align-items: center;
         justify-content: space-between;
-        column-gap: 1rem;
-        //padding-block: 0.5rem;
+        column-gap: var(--column-gap);
+        row-gap: var(--row-gap);
         height: 100%;
         max-height: var(--sections-max-height);
         width: 100%;
+        padding-block: var(--padding-block);
 
         grid-template-areas:
-      "nav nav nav nav nav nav"
-      "search search search search search actions";
+          "nav nav nav nav nav nav"
+          "search search search search search actions";
 
         @media screen and (min-width: 600px) {
             grid-template-areas:
-    "nav nav nav nav nav actions"
-    "search search search search search search";
+        "nav nav nav nav nav actions"
+        "search search search search search search";
+            row-gap: .6rem;
         }
 
         @media screen and (min-width: 900px) {
