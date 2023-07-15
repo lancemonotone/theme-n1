@@ -1,4 +1,5 @@
-<?php
+<?php namespace N1_Durable_Goods;
+
 $sidebars = array(
 	// 'sidebar-hero'					=> __( 'Hero Modules'),
 	'sidebar-home-0' 				=> __( 'Home Left Modules'),
@@ -27,4 +28,3 @@ foreach($sidebars as $id => $name){
 		'after_title' => '</h3>',
 	) );
 }
-?>

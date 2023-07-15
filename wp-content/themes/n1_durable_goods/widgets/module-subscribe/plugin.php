@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /*
 Plugin Name: Subscribe Module
 Description: Subscription message and link with login form.
@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 // TODO: change 'Module_Subscribe' to the name of your plugin
-class Module_Subscribe extends WP_Widget {
+class Module_Subscribe extends \WP_Widget {
 
     /*--------------------------------------------------*/
     /* Constructor
@@ -233,5 +233,5 @@ class Module_Subscribe extends WP_Widget {
 } // end class
 
 add_action('widgets_init', function () {
-    register_widget("Module_Subscribe");
+    register_widget("\N1_Durable_Goods\Module_Subscribe");
 });

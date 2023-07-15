@@ -1,72 +1,73 @@
 @import "../../mixins/accordion";
 
 .nav-search {
-  --font-size: 1rem;
-  @media screen and (min-width: 900px) {
-    --font-size: clamp(.7rem, 1.2vw, 1rem);
-  }
-
-  grid-area: search;
-
-  .search {
-    &, * {
-      transition: var(--transition);
+    --font-size: 1rem;
+    @media screen and (min-width: 900px) {
+        --font-size: clamp(.7rem, 1.2vw, 1rem);
     }
 
-    input[type=text] {
-      background-color: var(--brown);
-      border: 1px solid var(--inactive-dark);
-      color: var(--white);
-      margin: 0;
-      padding-block: 0.5rem;
-      max-width: 100%;
-      font-size: var(--font-size);
-      padding-inline: 1rem 3rem;
+    grid-area: search;
 
-      &::placeholder {
-        color: var(--inactive-dark);
-        text-align: center;
-      }
-
-      &:focus,
-      &:focus-within {
-        outline: none;
-        background-color: var(--white);
-        color: var(--brown);
-
-        &::placeholder {
-          color: transparent;
+    .search {
+        &, * {
+            transition: var(--transition);
         }
 
-        & + button[type=submit] {
-          svg {
-            fill: var(--brown);
-          }
+        input[type=text] {
+            background-color: var(--brown);
+            border: 1px solid var(--dark-brown);
+            color: var(--white);
+            margin: 0;
+            padding-block: 0.5rem;
+            max-width: 100%;
+            font-size: var(--font-size);
+            padding-inline: 1rem 3rem;
+            //box-shadow: inset 0 0 3px 1px #6e6e6e45;
+
+            &::placeholder {
+                color: var(--inactive-dark);
+                text-align: center;
+            }
+
+            &:focus,
+            &:focus-within {
+                outline: none;
+                background-color: var(--white);
+                color: var(--brown);
+
+                &::placeholder {
+                    color: transparent;
+                }
+
+                & + button[type=submit] {
+                    svg {
+                        fill: var(--brown);
+                    }
+                }
+            }
         }
-      }
+
+        button[type=submit] {
+            position: absolute;
+            top: 1px;
+            right: 1rem;
+            width: 1.6rem;
+            height: 100%;
+            padding: 0;
+            background: transparent;
+            color: var(--inactive-dark);
+            border: none;
+            cursor: pointer;
+
+            svg {
+                width: 70%;
+                height: auto;
+                fill: var(--white);
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
     }
-
-    button[type=submit] {
-      position: absolute;
-      top: 1px;
-      right: 1rem;
-      width: 1.6rem;
-      height: 100%;
-      padding: 0;
-      background: transparent;
-      color: var(--inactive-dark);
-      border: none;
-      cursor: pointer;
-
-      svg {
-        width: 70%;
-        height: auto;
-        fill: var(--inactive-dark);
-      }
-
-      &:focus {
-        outline: none;
-      }
-    }
-  }
 }

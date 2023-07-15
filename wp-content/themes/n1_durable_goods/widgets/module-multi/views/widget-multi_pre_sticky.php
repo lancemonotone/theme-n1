@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 $title 				= strip_tags($instance['title']);
 $subtitle 			= strip_tags($instance['subtitle']);
 $flavor 			= strip_tags($instance['flavor']);
@@ -35,7 +35,7 @@ if(count($the_posts)){
 			$loadmore = ' Features';
 			break;
 		case 'issue':
-			$context_title = N1_Magazine::Instance()->context_issue->post_title;
+			$context_title = N1_Magazine::get_context_issue()->post_title;
 			$title = $title . ' ' . $context_title;
 			$class = 'supplementary more more-from';
 			$loadmore = ' from ' . $context_title;

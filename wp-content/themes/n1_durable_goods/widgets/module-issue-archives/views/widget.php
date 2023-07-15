@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 $title = strip_tags($instance['title']);
 $subtitle = strip_tags($instance['subtitle']);
 $issues = get_posts(
@@ -29,7 +29,7 @@ $issues = get_posts(
 					<li class="magazine-archive issue title"><?php echo get_field('issue_name', $issue->ID)?></li>
 					<li class="magazine-archive issue pubdate"><?php echo get_field('issue_date', $issue->ID)?></li>
 				</ol>
-		</a>	
+		</a>
 	</div><!-- .magazine-archive issue -->
 <?php } ?>
 </div><!-- .floatwrapper -->

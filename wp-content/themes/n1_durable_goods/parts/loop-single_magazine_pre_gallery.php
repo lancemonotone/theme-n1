@@ -1,4 +1,6 @@
-<?php if ( N1_Magazine::Instance()->is_paywalled() && function_exists( 'adrotate_group' ) ) {
+<?php namespace N1_Durable_Goods; ?>
+
+<?php if ( N1_Magazine::is_paywalled() && function_exists( 'adrotate_group' ) ) {
 	echo adrotate_group( 3 );
 } ?>
 
@@ -9,7 +11,7 @@
 	$cat = reset(wp_get_post_terms($post->ID, 'category'));
 	$issue_obj = N1_Magazine::get_issue_by_slug($issue);
 ?>
-	<section id="content" class="content-post issue-content<?php echo N1_Magazine::Instance()->is_paywalled($post->ID) ? ' unlogged' : ''?>"> <!-- includes POST and PREV-NEXT -->
+	<section id="content" class="content-post issue-content<?php echo N1_Magazine::is_paywalled($post->ID) ? ' unlogged' : ''?>"> <!-- includes POST and PREV-NEXT -->
 		<article id="post-<?php the_ID(); ?>" <?php post_class('post issue-content-post'); ?>>
 			<div class="post-header issue-content-post-header">
 				<p class="post-category issue-content-post-header-category"><?php echo $cat->name?></p>
@@ -24,7 +26,7 @@
 				<section class="post-meta-pubinfo issue-content-post-meta-pubinfo">
 					<p class="post-meta-entry issue-content-post-meta-pubinfo-entry">
 						<span class="category post-meta-hed runin"><?php _e('Published in')?></span>
-						<a href="<?php echo N1_Magazine::Instance()->get_context_issue_url()?>" title="<?php echo $issue_obj->post_title?>">
+						<a href="<?php echo N1_Magazine::get_context_issue_url()?>" title="<?php echo $issue_obj->post_title?>">
 							<?php echo $issue_obj->post_title?>: <?php echo get_field('issue_name', $issue_obj->ID)?>
 						</a>
 					</p>
@@ -34,8 +36,8 @@
 					</p>
 				</section> <!-- .post-meta-pubinfo -->
 
-				<?php N1_Magazine::Instance()->print_post_tags($post->ID, true);?>
-				<?php N1_Magazine::Instance()->print_social($post->ID);?>
+				<?php N1_Magazine::print_post_tags( $post->ID, true );?>
+				<?php N1_Magazine::print_social($post->ID);?>
 
 			</div><!-- .post-meta -->
 
@@ -62,7 +64,7 @@
 
 			<div class="post-body issue-content-post-body">
 				<?php
-				if(N1_Magazine::Instance()->is_paywalled($post->ID)){
+				if(N1_Magazine::is_paywalled($post->ID)){
 					$the_content = apply_filters('the_content', get_field('article_long_excerpt', $post->ID));
 					echo Utility::insert_advertisement($the_content, 2, 2);
 
@@ -85,7 +87,7 @@
 				<?php } ?>
 			</div><!-- .post-body -->
 		</article><!-- #post -->
-		<?php if(N1_Magazine::Instance()->is_paywalled($post->ID)){?>
+		<?php if(N1_Magazine::is_paywalled($post->ID)){?>
 
 			<div class="roadblock">
 				<!-- subscribe -->

@@ -1,7 +1,7 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /*
 Plugin Name: TOC Module
-Description: Current issue table of contents. 
+Description: Current issue table of contents.
 Module title (issue name and number)
 Module subtitle ("Table of Contents")
 Issue ToC: Output automatically all issue contents in category order, with category headings. Article title and author only.
@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 // TODO: change 'Module_Issue_TOC' to the name of your plugin
-class Module_Issue_TOC extends WP_Widget {
+class Module_Issue_TOC extends \WP_Widget {
 
     /*--------------------------------------------------*/
     /* Constructor
@@ -199,5 +199,5 @@ class Module_Issue_TOC extends WP_Widget {
 } // end class
 
 add_action('widgets_init', function () {
-    register_widget("Module_Issue_TOC");
+    register_widget("\N1_Durable_Goods\Module_Issue_TOC");
 });

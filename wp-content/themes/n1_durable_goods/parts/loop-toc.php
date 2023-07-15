@@ -1,5 +1,6 @@
-<?php 
-$context_issue = N1_Magazine::Instance()->context_issue;
+<?php namespace N1_Durable_Goods;
+
+$context_issue = N1_Magazine::get_context_issue();
 $hero_img = get_field('issue_toc_image', $context_issue->ID);
 ?>
 <section class="magazine issue-landing hero" id="hero">

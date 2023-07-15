@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /*
 Plugin Name: Issue Archives Module
 Description: Visual listing of all past issues, with issue number (Issue 17), issue title (Amnesty), date (Spring 2013), and cover image, clicking through to that issue's ToC page. Output automatically, reverse chronological order (newest first).
@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 // TODO: change 'Module_Issue_Archives' to the name of your plugin
-class Module_Issue_Archives extends WP_Widget {
+class Module_Issue_Archives extends \WP_Widget {
 
     /*--------------------------------------------------*/
     /* Constructor
@@ -198,5 +198,5 @@ class Module_Issue_Archives extends WP_Widget {
 } // end class
 
 add_action('widgets_init', function () {
-    register_widget("Module_Issue_Archives");
+    register_widget("\N1_Durable_Goods\Module_Issue_Archives");
 });

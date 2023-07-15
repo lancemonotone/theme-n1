@@ -1,11 +1,13 @@
-<?php if ( N1_Magazine::Instance()->is_paywalled() && function_exists( 'adrotate_group' ) ) {
+<?php namespace N1_Durable_Goods;?>
+
+<?php if ( N1_Magazine::is_paywalled() && function_exists( 'adrotate_group' ) ) {
 	echo adrotate_group( 3 );
 } ?>
 
 <?php
 $current_page = get_queried_object();
 $is_scroll = is_a($current_page, 'WP_Post');
-$archive_name = $is_scroll ? $current_page->post_title : (isset($authors) ? N1_Magazine::Instance()->format_author_name($current_page->name) : $current_page->name);
+$archive_name = $is_scroll ? $current_page->post_title : (isset($authors) ? N1_Magazine::format_author_name($current_page->name) : $current_page->name);
 $archive_class = $is_scroll ? 'online-only' : 'archive';
 $archive_description = $is_scroll ? get_field('options_online-only_landing_page_dek','options') : $current_page->description;
 if($current_page->taxonomy == 'authors') $archive_description = _('All articles by this author');

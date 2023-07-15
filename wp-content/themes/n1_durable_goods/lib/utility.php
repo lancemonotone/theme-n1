@@ -1,16 +1,7 @@
-<?php
+<?php namespace N1_Durable_Goods;
 
 class Utility {
     var $url_css, $path_css;
-
-    public static function Instance() {
-        static $inst = null;
-        if ( $inst === null ) {
-            $inst = new Utility();
-        }
-
-        return $inst;
-    }
 
     function __construct() {
         $this->url_css  = get_stylesheet_directory_uri() . '/css';
@@ -179,5 +170,4 @@ EOD;
     }
 }
 
-Utility::instance();
-?>
+new Utility();

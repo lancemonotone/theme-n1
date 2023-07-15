@@ -1,7 +1,9 @@
-/*!*********************************************************************
- * A Small Javascript function insert text at the position of the cursor in a HTML textarea.
- * Arnan de Gans from AJdG Solutions (http://meandmymac.net, http://www.ajdg.net)
- **********************************************************************/
+/*
+insert text at the position of the cursor in a HTML textarea
+Version: 1.0
+Original code: Arnan de Gans
+Copyright: (c) 2020 Arnan de Gans
+*/
 function textatcursor(areaId,text) {
 	var txtarea = document.getElementById(areaId);
 	var scrollPos = txtarea.scrollTop;

@@ -1,11 +1,11 @@
-<?php
+<?php namespace N1_Durable_Goods;
 $books_module_id = $instance['books_module'];
 
 // Get latest or specific module as set in widget admin.
-if($instance['always_latest'] === '1'){ 
-	$the_args = array( 'order'=> 'DESC' ); 
-} else { 
-	$the_args = array( 'p' => $books_module_id ); 
+if($instance['always_latest'] === '1'){
+	$the_args = array( 'order'=> 'DESC' );
+} else {
+	$the_args = array( 'p' => $books_module_id );
 }
 
 // Merge query args and get_posts.
@@ -29,9 +29,9 @@ $books = get_field('books_module_books', $books_module->ID);
 
 <section class="featured books">
 	<h2 class="featured books category"><span class="module-hed"><?php echo $title?></span></h2>
-	<p class="featured books dek"><?php echo $subtitle?></p>	
+	<p class="featured books dek"><?php echo $subtitle?></p>
 	<h3 class="featured books title"><?php echo $copy?></h3>
-	
+
 	<?php foreach($books as $b){?>
 		<div class="featured books module">
 			<figure class="featured books module cover">

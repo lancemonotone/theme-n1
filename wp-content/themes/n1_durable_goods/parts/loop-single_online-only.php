@@ -1,6 +1,6 @@
-<?php if ( N1_Magazine::Instance()->is_paywalled() && function_exists( 'adrotate_group' ) ) {
-	echo adrotate_group( 3 );
-} ?>
+<?php namespace N1_Durable_Goods; ?>
+
+<?php Adrotate::display(3); ?>
 
 <div id="main" class="cf">
 	<div class="main content">
@@ -53,8 +53,8 @@
 							</span>
 						</p>
 					</section> <!-- /publication-info -->
-					<?php N1_Magazine::Instance()->print_post_tags($post->ID,true);?>
-					<?php N1_Magazine::Instance()->print_social($post->ID);?>
+					<?php N1_Magazine::print_post_tags( $post->ID, true );?>
+					<?php N1_Magazine::print_social($post->ID);?>
 				</div>
 				<?php the_widget('Module_Newsletter');?>
 			</div><!-- .post-meta-->

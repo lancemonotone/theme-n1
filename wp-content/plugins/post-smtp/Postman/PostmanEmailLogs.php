@@ -327,8 +327,11 @@ class PostmanEmailLogs {
             foreach( $data as $row ) {
 
                 $row->time = date( "{$date_format} {$time_format}", $row->time );
-                $row->success = $row->success == 1 ? '<span title="Successful"></span>' : '<span title="Failed"></span><pre class="ps-status-log">' . str_replace( $search, $replace, $row->success ) . '</pre>';
+                $row->success = $row->success == 1 ? '<span title="Success">Success</span>' : '<span title="'.str_replace( $search, $replace, $row->success ).'">Failed</span><a href="#" class="ps-status-log ps-popup-btn">View details</a>';
                 $row->actions = '';
+
+                //Escape HTML
+                $row->original_subject = esc_html( $row->original_subject );
 
             }
 
@@ -534,6 +537,14 @@ class PostmanEmailLogs {
 
 			$email_query_log = new PostmanEmailQueryLog();
 			$log = $email_query_log->get_log( $id, $type );
+            $_log = $log;
+
+            //Escape HTML
+            foreach( $_log as $key => $value ) {
+
+                $log[$key] = esc_html( $value );
+
+            }
 
 			if( isset( $log['time'] ) ) {
 

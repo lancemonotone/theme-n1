@@ -1,9 +1,9 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /*
 Plugin Name: Paper Monument Module
-Description: This area of the homepage shows the latest four posts 
-from the Paper Monument category in Online Only. 
-Display post title (with click-through link) and author only. 
+Description: This area of the homepage shows the latest four posts
+from the Paper Monument category in Online Only.
+Display post title (with click-through link) and author only.
 In addition, admins will need the ability to edit:
 Module title (e.g. "Paper Monument"; text input)
 Module subtitle (�Contemporary writing on art�; text input)
@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 // TODO: change 'Module_Paper_Monument' to the name of your plugin
-class Module_Paper_Monument extends WP_Widget {
+class Module_Paper_Monument extends \WP_Widget {
 
 	/*--------------------------------------------------*/
 	/* Constructor
@@ -112,7 +112,7 @@ class Module_Paper_Monument extends WP_Widget {
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['subtitle'] = strip_tags($new_instance['subtitle']);
 		$instance['img_src'] = strip_tags($new_instance['img_src']);
-		
+
 
 		return $instance;
 
@@ -207,5 +207,5 @@ class Module_Paper_Monument extends WP_Widget {
 } // end class
 
 add_action( 'widgets_init', function(){
-    register_widget("Module_Paper_Monument");
+    register_widget("\N1_Durable_Goods\Module_Paper_Monument");
 });

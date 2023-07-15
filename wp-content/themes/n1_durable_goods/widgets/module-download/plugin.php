@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /*
 Plugin Name: Offline Module
 Description: Displays link and messages to download epub versions of the latest issue.
@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 // TODO: change 'Module_Offline' to the name of your plugin
-class Module_Offline extends WP_Widget {
+class Module_Offline extends \WP_Widget {
 
     /*--------------------------------------------------*/
     /* Constructor
@@ -80,7 +80,7 @@ class Module_Offline extends WP_Widget {
     }
 
     static function get_current_filename() {
-        return get_field('issue_pdf', N1_Magazine::Instance()->current_issue->ID);
+        return get_field('issue_pdf', N1_Magazine::get_current_issue()->ID);
     }
 
     static function get_current_filepath() {
@@ -100,11 +100,11 @@ class Module_Offline extends WP_Widget {
     static function has_download() {
         global $userdata;
         //$member = new MM_User($userdata->ID);
-        echo N1_Magazine::Instance()->is_paywalled() ? "<!-- Yes -->" : " <!-- No -->";
+        echo N1_Magazine::is_paywalled() ? "<!-- Yes -->" : " <!-- No -->";
         return is_user_logged_in()
-            && N1_Magazine::Instance()->is_current_issue()
+            && N1_Magazine::is_current_issue()
             && file_exists(self::get_current_filepath())
-            && !N1_Magazine::Instance()->is_paywalled();
+            && !N1_Magazine::is_paywalled();
     }
 
     /**
@@ -283,5 +283,5 @@ class Module_Offline extends WP_Widget {
 } // end class
 
 add_action('widgets_init', function () {
-    register_widget("Module_Offline");
+    register_widget("\N1_Durable_Goods\Module_Offline");
 });

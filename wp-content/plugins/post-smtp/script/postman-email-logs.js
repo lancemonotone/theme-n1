@@ -89,7 +89,7 @@ jQuery(document).ready(function($) {
 				<div class="ps-email-log-resend-container"></div>
 			` );
 
-			if( data['success'] == '<span title="Successful"></span>' ) {
+			if( data['success'] == '<span title="Success">Success</span>' ) {
 
 				jQuery( status ).addClass( 'ps-email-log-status-success' );
 
@@ -319,7 +319,7 @@ jQuery(document).ready(function($) {
 
 				if( response.success === true ) {
 
-					logsDT.ajax.reload();
+					logsDT.ajax.reload( null, false );
 
 				}
 				else {
@@ -509,7 +509,7 @@ jQuery(document).ready(function($) {
 				else {
 
 					alert( response.message );
-					logsDT.ajax.reload();
+					logsDT.ajax.reload( null, false );
 
 				}
 
@@ -557,19 +557,28 @@ jQuery(document).ready(function($) {
 				if( response.success === true ) {
 
 					alert( response.message );
-					logsDT.ajax.reload();
+					logsDT.ajax.reload( null, false );
 
 				}
 				else {
 
 					alert( response.message );
-					logsDT.ajax.reload();
+					logsDT.ajax.reload( null, false );
 
 				}
 
 			}
 		} );
 
+
+	} );
+
+
+	jQuery( document ).on( 'click', '.ps-status-log', function( e ) {
+
+		e.preventDefault();
+		var _details = jQuery( this ).siblings( 'span' ).attr( 'title' );
+		jQuery( '.ps-popup-container' ).html( `<h1>Details</h1>${_details}` );
 
 	} );
 

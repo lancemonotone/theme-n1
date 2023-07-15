@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /**
  * Search results are contained within a div.searchwp-live-search-results
  * which you can style accordingly as you would any other element on your site
@@ -23,7 +23,7 @@
     while (have_posts()) {
         the_post();
         $post_type = get_post_type_object(get_post_type());
-        $authors = N1_Magazine::Instance()->get_authors(get_the_ID());
+        $authors = N1_Magazine::get_authors(get_the_ID());
         ?>
       <div class="searchwp-live-search-result" role="option" id="" aria-selected="false">
         <p class="post-author"><?php echo $authors ?></p>

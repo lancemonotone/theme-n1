@@ -1,4 +1,5 @@
-<?php
+<?php namespace N1_Durable_Goods;
+
 $archive_name = 'Search results for';
 $archive_description = $wp_query->query['s'];
 $the_posts = $wp_query->posts;

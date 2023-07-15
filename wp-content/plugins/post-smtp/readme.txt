@@ -4,7 +4,7 @@ Contributors: wpexpertsio
 Tags: email, mail, smtp, wordpress smtp, email log, postman smtp, postman, gmail, google apps, hotmail, yahoo, mandrill api, sendgrid api, elastic email, office365, mailgun
 Requires at least: 5.6.0
 Tested up to: 6.2.2
-Stable tag: 2.5.7
+Stable tag: 2.5.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,7 +71,7 @@ Simple Mail Transfer Protocol or SMTP is the protocol used for sending emails ov
 In essence, SMTP is a set of commands that authenticates and directs the transfer of electronic mail. When configuring your email program, you will typically need to set the SMTP server to your local ISP's SMTP settings.
 
 = Looking for Post SMTP Pro Extensions? = 
-[Post SMTP Pro Extensions](https://postmansmtp.com/extensions/) are everything you need to enhance your WordPress email deliverability experience. Check our extensions for Amazon SES, Better Email Logger and Office365.
+[Post SMTP Pro Extensions](https://postmansmtp.com/extensions/) are everything you need to enhance your WordPress email deliverability experience. Check our extensions for Amazon SES, Advanced Email Delivery and Logs, and Office365.
 
 **Office365 API delivery**
 [Office365 Pro Extension](https://postmansmtp.com/extensions/office-365-extension-for-post-smtp/) allows you to connect PostSMTP with your Outlook and Microsoft 365 accounts to improve email deliverability.
@@ -91,6 +91,8 @@ In essence, SMTP is a set of commands that authenticates and directs the transfe
 **Mail Control Pro Extension**
 [Mail Control Pro Extension](https://postmansmtp.com/extensions/post-smtp-mail-control/) allows you to control Post SMTP's email actions like sending email alerts to authors, webmasters, and new users. 
 
+**Advanced Email Delivery and Logs Extension**
+With the [Advanced Email Delivery and Logs Extension](https://postmansmtp.com/extensions/advanced-email-delivery/), boost your email efficiency and improve deliverability. Also, implement effective email quota management and streamlined log storage for optimal email communication.
 = Post SMTP Membership Plans = 
 [Post SMTP membership plans](https://postmansmtp.com/membership-plan/) offer access to all pro extensions along with other benefits including 1-year extension updates and support, Email Reporting, Logging, and Tracking, all other SMTP Services and a 30-day money-back guarantee.
 
@@ -226,6 +228,9 @@ To use OAuth, your website needs it's own Client ID. The Client ID is used to co
 * If you have a Microsoft Live account, from the [Microsoft account Developer Center](https://account.live.com/developers/applications/index), select the Application and choose Delete Application.
 * If you have a Yahoo Account, from the [Yahoo Developer Network My Apps](https://developer.yahoo.com/apps/), select the Application and choose Delete App.
 
+= How can I report security bugs? =
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/woocommerce)
+
 == Grant OAuth permission error messages ==
 
 Please note that the Client ID and Client Secret fields are NOT for your username and password. They are for OAuth Credentials only.
@@ -300,6 +305,18 @@ To avoid being flagged as spam, you need to prove your email isn't forged. On a 
 1. Email Log Filter
 
 == Changelog ==
+
+= 2.5.8 - 2023-07-11 =
+**IMPROVEMENTS**
+
+* Added function to escape backend email content popup HTML. 
+* Added Failed/success labels for better visibility. 
+* Displayed error message on hover and in the popup to simplify the interface and UX in the log section.
+* Updated Feedback SDK to the latest version
+
+**FIXES**
+
+* Fix: Pagination was getting reset on resending emails.
 
 = 2.5.7 - 2023-06-21 =
 **IMPROVEMENTS**

@@ -1,8 +1,9 @@
 #menu-nav-sections {
     --font-size: clamp(.75rem, 3.5vw, 1rem);
-    --grid-template-columns: minmax(65px, 1fr) 1.5fr 1.5fr;
+    --grid-template-columns: minmax(65px, 1fr) 1fr 1fr;
     --grid-template-rows: auto auto auto;
-    --gap: .5rem;
+    --row-gap: .5rem;
+    --column-gap: 2rem;
     --nav-justify: start;
     --home-grid-row: 1 / span 3;
     --home-margin-end: 0;
@@ -10,21 +11,23 @@
 
     @media screen and (min-width: 600px) {
         --font-size: clamp(.75rem, 3.5vw, 1rem);
-        --grid-template-columns: minmax(65px, 1fr) 1fr 1fr 1fr;
+        --grid-template-columns: minmax(65px, 1.4fr) 1fr 1fr 1fr;
         --grid-template-rows: repeat(2, 1fr);
         --home-grid-row: 1 / span 2;
-        --home-width: 130px;
-        --gap: 1rem;
+        --home-width: clamp(100px, 16vw, 150px);
+        --row-gap: .5rem;
+        --column-gap: clamp(1rem, 2vw, 2rem);
     }
-    @media screen and (min-width: 900px) {
+    @media screen and (min-width: 1100px) {
         --font-size: clamp(.7rem, 1.5vw, 1rem);
         --grid-template-columns: auto;
         --grid-template-rows: 1fr;
-        --gap: clamp(1rem, 2vw, 2rem);
+        --row-gap: clamp(1rem, 2vw, 2rem);
+        --column-gap: 1rem;
         --nav-justify: space-between;
         --home-grid-row: 1 / span 1;
         --home-margin-end: 1rem;
-        --home-width: clamp(65px, 10vw, 165px);
+        //--home-width: clamp(65px, 10vw, 165px);
     }
 
     grid-area: nav;
@@ -32,15 +35,15 @@
     grid-auto-flow: column;
     grid-template-columns: var(--grid-template-columns);
     grid-template-rows: var(--grid-template-rows);
-    column-gap: var(--gap);
-    row-gap: var(--gap);
+    column-gap: var(--column-gap);
+    row-gap: var(--row-gap);
     align-items: center;
     height: 100%;
 
     a {
         color: var(--white);
         font-size: var(--font-size);
-        //padding-inline: 1rem;
+        padding: .5rem;
         height: 100%;
         width: 100%;
         display: grid;
@@ -80,6 +83,7 @@
 
             .height-at-minimum & {
                 height: 80%;
+                width: 90px;
             }
 
             a {

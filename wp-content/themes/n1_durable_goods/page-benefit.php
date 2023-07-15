@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /**
  * Template Name: Benefit */
 get_header();?>

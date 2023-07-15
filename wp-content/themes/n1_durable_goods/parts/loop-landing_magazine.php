@@ -1,4 +1,6 @@
-<?php if ( N1_Magazine::Instance()->is_paywalled() && function_exists( 'adrotate_group' ) ) {
+<?php namespace N1_Durable_Goods; ?>
+
+<?php if ( N1_Magazine::is_paywalled() && function_exists( 'adrotate_group' ) ) {
 	echo adrotate_group( 3 );
 } ?>
 
@@ -7,7 +9,7 @@
 		<div class="list_carousel responsive">
 			<div id="issue-slider">
 				<?php
-				$issues = N1_Magazine::Instance()->issues;
+				$issues = N1_Magazine::get_issues();
 				foreach ($issues as $issue){
 					$issue_art = get_field('issue_art', $issue->ID);?>
 					<div class="als-item issue">

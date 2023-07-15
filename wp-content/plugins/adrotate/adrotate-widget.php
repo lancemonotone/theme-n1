@@ -1,14 +1,22 @@
 <?php
-/*  
-Copyright 2010-2014 Arnan de Gans - AJdG Solutions (email : info@ajdg.net)
-*/
+/* ------------------------------------------------------------------------------------
+*  COPYRIGHT AND TRADEMARK NOTICE
+*  Copyright 2008-2023 Arnan de Gans. All Rights Reserved.
+*  ADROTATE is a registered trademark of Arnan de Gans.
+
+*  COPYRIGHT NOTICES AND ALL THE COMMENTS SHOULD REMAIN INTACT.
+*  By using this code you agree to indemnify Arnan de Gans from any
+*  liability that might arise from its use.
+------------------------------------------------------------------------------------ */
+
+function adrotate_widget() {
+	register_widget('adrotate_widgets');
+}
 
 /*-------------------------------------------------------------
  Name:      adrotate_widget
 
  Purpose:   Unlimited widgets for the sidebar
- Receive:   -none-
- Return:    -none-
  Since:		0.8
 -------------------------------------------------------------*/
 class adrotate_widgets extends WP_Widget {
@@ -16,21 +24,26 @@ class adrotate_widgets extends WP_Widget {
 	/*-------------------------------------------------------------
 	 Purpose:   Construct the widget
 	-------------------------------------------------------------*/
-	function adrotate_widgets() {
-
-        parent::WP_Widget(false, 'AdRotate', array('description' => "Show unlimited ads in the sidebar."));	
-
+	public function __construct() {
+		$widget_ops = array( 
+			'classname' => 'adrotate_widgets',
+			'description' => 'Show a group of adverts or a single advert in any widget area.',
+		);
+		parent::__construct('adrotate_widgets', 'AdRotate', $widget_ops);
 	}
 
 	/*-------------------------------------------------------------
 	 Purpose:   Display the widget
 	-------------------------------------------------------------*/
-	function widget($args, $instance) {
-		global $adrotate_config;
+	public function widget($args, $instance) {
+		global $adrotate_config, $blog_id;
 
 		extract($args);
+		if(empty($instance['adid'])) $instance['adid'] = 0;
+		if(empty($instance['siteid'])) $instance['siteid'] = $blog_id;
+		if(empty($instance['title'])) $instance['title'] = '';
+
         $title = apply_filters('widget_title', $instance['title']);
-		if(empty($instance['id'])) $instance['id'] = 0;
 
 		echo $before_widget;
 		if($title) {
@@ -38,27 +51,41 @@ class adrotate_widgets extends WP_Widget {
 		}
 		
 		if($adrotate_config['widgetalign'] == 'Y') echo '<ul><li>';
-		if($adrotate_config['w3caching'] == 'Y') echo '<!-- mfunc -->';
-		
-		if($instance['type'] == "single") {
-			if($adrotate_config['supercache'] == "Y") echo '<!--mfunc echo adrotate_ad('.$instance['id'].', true, 0, 0) -->';
-			echo adrotate_ad($instance['id'], true, 0, 0);
-			if($adrotate_config['supercache'] == "Y") echo '<!--/mfunc-->';
+
+		if($adrotate_config['w3caching'] == 'Y') {
+			echo '<!-- mfunc '.W3TC_DYNAMIC_SECURITY.' -->';
+			if($instance['type'] == "single") {
+				echo 'echo adrotate_ad('.$instance['adid'].', true);';
+			}
+	
+			if($instance['type'] == "group") {
+				echo 'echo adrotate_group('.$instance['adid'].');';
+			}
+			echo '<!-- /mfunc '.W3TC_DYNAMIC_SECURITY.' -->';
+		} else if($adrotate_config['borlabscache'] == "Y" AND function_exists('BorlabsCacheHelper') AND BorlabsCacheHelper()->willFragmentCachingPerform()) {
+			$borlabsphrase = BorlabsCacheHelper()->getFragmentCachingPhrase();
+	
+			echo '<!--[borlabs cache start: '.$borlabsphrase.']-->';
+			if($instance['type'] == "single") {
+				echo 'echo adrotate_ad('.$instance['adid'].', true);';
+			}
+	
+			if($instance['type'] == "group") {
+				echo 'echo adrotate_group('.$instance['adid'].');';
+			}
+			echo '<!--[borlabs cache end: '.$borlabsphrase.']-->';
+
+			unset($borlabsphrase);
+		} else {
+			if($instance['type'] == "single") {
+				echo adrotate_ad($instance['adid'], true);
+			}
+	
+			if($instance['type'] == "group") {
+				echo adrotate_group($instance['adid']);
+			}
 		}
 
-		if($instance['type'] == "group") {
-			if($adrotate_config['supercache'] == "Y") echo '<!--mfunc echo adrotate_group('.$instance['id'].', 0, 0) -->';
-			echo adrotate_group($instance['id'], 0, 0);
-			if($adrotate_config['supercache'] == "Y") echo '<!--/mfunc-->';
-		}
-		
-		if($instance['type'] == "block") {
-			if($adrotate_config['supercache'] == "Y") echo '<!--mfunc echo adrotate_block('.$instance['id'].') -->';
-			echo adrotate_block($instance['id']);
-			if($adrotate_config['supercache'] == "Y") echo '<!--/mfunc-->';
-		}
-		
-		if($adrotate_config['w3caching'] == 'Y') echo '<!-- /mfunc -->';
 		if($adrotate_config['widgetalign'] == 'Y') echo '</li></ul>';
 		
 		echo $after_widget;
@@ -68,12 +95,18 @@ class adrotate_widgets extends WP_Widget {
 	/*-------------------------------------------------------------
 	 Purpose:   Save the widget options per instance
 	-------------------------------------------------------------*/
-	function update($new_instance, $old_instance) {
+	public function update($new_instance, $old_instance) {
 		$new_instance['title'] = strip_tags($new_instance['title']);
 		$new_instance['description'] = strip_tags($new_instance['description']);
-		$new_instance['type'] = strip_tags($new_instance['type']);	
-		$new_instance['id'] = strip_tags($new_instance['id']);
-		$new_instance['siteid'] = 0;
+		$new_instance['type'] = strip_tags($new_instance['type']);
+		
+		//Try and preserve pre-fix widget IDs
+		if(isset($new_instance['id']) and $new_instance['adid'] < 1) {
+			$new_instance['adid'] = $new_instance['id'];
+		} else {
+			$new_instance['adid'] = strip_tags($new_instance['adid']);
+		}
+		$new_instance['siteid'] = strip_tags($new_instance['siteid']);
 
 		$instance = wp_parse_args($new_instance, $old_instance);
 
@@ -84,18 +117,18 @@ class adrotate_widgets extends WP_Widget {
 	/*-------------------------------------------------------------
 	 Purpose:   Display the widget options for admins
 	-------------------------------------------------------------*/
-	function form($instance) {
+	public function form($instance) {
+		global $blog_id;
 
 		$defaults = array();
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		
-		$title = $description = $type = $id = $siteid = '';
+		$title = $description = $type = $adid = '';
 		extract($instance);
-		$title = esc_attr( $title );
-		$description = esc_attr( $description );
-		$type = esc_attr( $type );
-		$id = esc_attr( $id );
-		$siteid = esc_attr( $siteid );
+		$title = sanitize_title($title);
+		$description = sanitize_text_field($description);
+		$type = sanitize_key($type);
+		$adid = sanitize_key($adid);
 ?>
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title (optional):', 'adrotate' ); ?></label>
@@ -112,21 +145,20 @@ class adrotate_widgets extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id('type'); ?>"><?php _e( 'Type:', 'adrotate' ); ?></label>
 			<select class="widefat" id="<?php echo $this->get_field_id('type'); ?>" name="<?php echo $this->get_field_name('type'); ?>" class="postform">
-			    <option value="single" <?php if($type == "single") { echo 'selected'; } ?>><?php _e( 'Single Ad - Use Ad ID', 'adrotate' ); ?></option>
-		        <option value="group" <?php if($type == "group") { echo 'selected'; } ?>><?php _e( 'Group of Ads - Use group ID', 'adrotate' ); ?></option>
-			    <option value="block" <?php if($type == "block") { echo 'selected'; } ?>><?php _e( 'Block of Ads - Use Block ID', 'adrotate' ); ?></option>
+			    <option value="single" <?php if($type == "single") { echo 'selected'; } ?>><?php _e( 'Advert - Use Advert ID', 'adrotate' ); ?></option>
+		        <option value="group" <?php if($type == "group") { echo 'selected'; } ?>><?php _e( 'Group - Use group ID', 'adrotate' ); ?></option>
 			</select>
 			<br />
 			<small><?php _e( 'Choose what you want to use this widget for', 'adrotate' ); ?></small>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id('id'); ?>"><?php _e( 'ID:', 'adrotate' ); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id('id'); ?>" name="<?php echo $this->get_field_name('id'); ?>" type="text" value="<?php echo $id; ?>" />
+			<label for="<?php echo $this->get_field_id('adid'); ?>"><?php _e( 'ID:', 'adrotate' ); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('adid'); ?>" name="<?php echo $this->get_field_name('adid'); ?>" type="text" value="<?php echo $adid; ?>" />
 			<br />
 			<small><?php _e( 'Fill in the ID of the type you want to display!', 'adrotate' ); ?></small>
 		</p>
+		<input id="<?php echo $this->get_field_id('siteid'); ?>" name="<?php echo $this->get_field_name('siteid'); ?>" type="hidden" value="<?php echo $blog_id; ?>" />
 <?php
 	}
-
 }
 ?>

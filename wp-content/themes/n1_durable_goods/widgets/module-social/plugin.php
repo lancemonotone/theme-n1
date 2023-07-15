@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /*
 Plugin Name: Social Media Module
 Description: Social media links.
@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 // TODO: change 'Module_Social' to the name of your plugin
-class Module_Social extends WP_Widget {
+class Module_Social extends \WP_Widget {
 
     /*--------------------------------------------------*/
     /* Constructor
@@ -234,5 +234,5 @@ class Module_Social extends WP_Widget {
 } // end class
 
 add_action('widgets_init', function () {
-    register_widget("Module_Social");
+    register_widget("\N1_Durable_Goods\Module_Social");
 });

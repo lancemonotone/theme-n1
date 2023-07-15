@@ -1,12 +1,12 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /*
 Plugin Name: Hero Module
-Description: The hero is a kind of ultra-feature displayed rarely, 
-and only on the homepage. We�d like to be able to set any type of 
-content as a hero. For example, to direct users to the store for a 
-special sale, to promote a newly posted magazine article, to show 
-off the new issue, to feature an Online Only article, to advertise an 
-upcoming event, or to encourage donations via a Wikipedia-style plea. 
+Description: The hero is a kind of ultra-feature displayed rarely,
+and only on the homepage. We�d like to be able to set any type of
+content as a hero. For example, to direct users to the store for a
+special sale, to promote a newly posted magazine article, to show
+off the new issue, to feature an Online Only article, to advertise an
+upcoming event, or to encourage donations via a Wikipedia-style plea.
 The hero appears only on the home page.
 
 Version: 1.0
@@ -34,7 +34,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 // TODO: change 'Module_Hero' to the name of your plugin
-class Module_Hero extends WP_Widget {
+class Module_Hero extends \WP_Widget {
 
     /*--------------------------------------------------*/
     /* Constructor
@@ -243,5 +243,5 @@ class Module_Hero extends WP_Widget {
 } // end class
 
 add_action('widgets_init', function () {
-    register_widget("Module_Hero");
+    register_widget("\N1_Durable_Goods\Module_Hero");
 });

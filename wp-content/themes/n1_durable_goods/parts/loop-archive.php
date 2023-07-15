@@ -1,4 +1,6 @@
-<?php if ( N1_Magazine::Instance()->is_paywalled() && function_exists( 'adrotate_group' ) ) {
+<?php namespace N1_Durable_Goods; ?>
+
+<?php if ( N1_Magazine::is_paywalled() && function_exists( 'adrotate_group' ) ) {
 	echo adrotate_group( 3 );
 }?>
 
@@ -6,7 +8,7 @@
 $current_page        = get_queried_object();
 $is_scroll           = is_a( $current_page, 'WP_Post' );
 $is_term             = is_a( $current_page, 'WP_Term' );
-$archive_name        = $is_scroll ? $current_page->post_title : ( isset( $authors ) ? N1_Magazine::Instance()->format_author_name( $current_page->name ) : $current_page->name );
+$archive_name        = $is_scroll ? $current_page->post_title : ( isset( $authors ) ? N1_Magazine::format_author_name( $current_page->name ) : $current_page->name );
 $archive_class       = $is_scroll ? 'online-only' : 'archive';
 $archive_description = $is_scroll ? get_field( 'options_online-only_landing_page_dek', 'options' ) : $current_page->description;
 if ( $current_page->taxonomy == 'authors' ) {
@@ -41,7 +43,7 @@ $term     = ! empty( $term ) ? $term : ( $is_term ? $current_page->slug : '' );
 				'order'            => $term == 'events' ? 'DESC' : NULL,
 				'meta_key'         => $term == 'events' ? 'event_date' : NULL,
 			);
-			the_widget( 'Module_Multi', $multi_args );
+			the_widget( '\N1_Durable_Goods\Module_Multi', $multi_args );
 			?>
         </div><!-- .main-content -->
 

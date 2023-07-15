@@ -1,6 +1,6 @@
-<?php
+<?php namespace N1_Durable_Goods;
 
-class N1_Search {
+class Search {
     public function __construct() {
         $this->hooks();
     }
@@ -13,4 +13,4 @@ class N1_Search {
     }
 }
 
-new N1_Search();
+new Search();

@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /**
  * RSS2 Feed Template for displaying RSS2 Posts feed.
  *

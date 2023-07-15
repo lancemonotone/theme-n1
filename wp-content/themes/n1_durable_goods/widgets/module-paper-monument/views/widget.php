@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 $title = $instance['title'];
 $subtitle = $instance['subtitle'];
 $img_src = $instance['img_src'];
@@ -11,7 +11,7 @@ $pm_posts = get_posts(
 	)
 );
 if(count($pm_posts)){
-	$pm_img = get_field('options_paper_monument_img', 'options');	
+	$pm_img = get_field('options_paper_monument_img', 'options');
 ?>
 
 <section class="module featured pm" style="background-image:url(<?php echo $pm_img['sizes']['full']?>);">
@@ -19,7 +19,7 @@ if(count($pm_posts)){
 	<?php echo $subtitle ? '<p class="featured pm dek">' . $subtitle . '</p>' : ''?>
 
 <?php foreach($pm_posts as $pm){
-	$authors = N1_Magazine::Instance()->get_authors($pm->ID, true, false);
+	$authors = N1_Magazine::get_authors($pm->ID, true, false);
 	?>
 	<div class="featured pm article">
 	<a href="<?php echo get_permalink($pm->ID)?>" title="<?php echo $pm->post_title?>">

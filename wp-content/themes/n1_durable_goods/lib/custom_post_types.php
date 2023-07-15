@@ -1,20 +1,7 @@
-<?php
+<?php namespace N1_Durable_Goods;
 
 class Custom_Posts {
     var $custom_posts;
-
-    /**
-     * Call this method to get singleton
-     *
-     * @return Custom_Posts
-     */
-    public static function Instance() {
-        static $inst = null;
-        if ($inst === null) {
-            $inst = new Custom_Posts();
-        }
-        return $inst;
-    }
 
     function __construct() {
         $this->setup();
@@ -100,4 +87,4 @@ class Custom_Posts {
     }
 }
 
-Custom_Posts::Instance();
+new Custom_Posts();

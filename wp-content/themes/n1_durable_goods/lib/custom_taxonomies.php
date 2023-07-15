@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 
 /**
  * issue, magazine, online-only, tagged, author
@@ -7,20 +7,9 @@
 class Custom_Taxonomies {
     var $custom_taxonomies;
 
-    /**
-     * Call this method to get singleton
-     *
-     * @return Custom_Taxonomies
-     */
-    public static function Instance() {
-        static $inst = null;
-        if ($inst === null) {
-            $inst = new Custom_Taxonomies();
-        }
-        return $inst;
-    }
-
     function __construct() {
+        add_filter( 'post_link', [ $this, 'filter_post_link' ], 10, 2 );
+        add_filter( 'post_type_link', [ $this, 'filter_post_type_link' ], 10, 2 );
         $this->setup();
     }
 
@@ -233,5 +222,4 @@ class Custom_Taxonomies {
     }
 }
 
-Custom_Taxonomies::Instance();
-?>
+new Custom_Taxonomies();

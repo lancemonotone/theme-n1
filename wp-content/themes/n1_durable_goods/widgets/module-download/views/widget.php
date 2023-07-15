@@ -1,4 +1,5 @@
-<?php 
+<?php namespace N1_Durable_Goods;
+
 if(Module_Offline::has_download()){?>
 <section class="offline">
 	<div class="floatwrapper">

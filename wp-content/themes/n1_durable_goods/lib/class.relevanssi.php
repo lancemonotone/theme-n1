@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 
 class N1_Relevanssi {
     public function __construct() {

@@ -1,6 +1,6 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /**
- * A custom post type or widget-like module featuring promotions from the Bookstore, which is hosted offsite (Shopify). 
+ * A custom post type or widget-like module featuring promotions from the Bookstore, which is hosted offsite (Shopify).
  * Admins will need to be able to edit the following fields:
  * Module title (e.g. "The Bookstore"; text input)
  * Module subtitle ("New and notable books from n+1"; text input)
@@ -10,14 +10,14 @@
  * Book promotional text (WYSIWYG)
  * Link to Shopify bookstore
  */
- 
+
 //	Defaults
-$instance = wp_parse_args( 
-	(array) $instance, array( 
+$instance = wp_parse_args(
+	(array) $instance, array(
 		'hero_module' 	=> '',
 		'always_latest' => '1',
 		'disable'		=> ''
-	) 
+	)
 );
 $disable = strip_tags($instance['disable']);
 $always_latest = strip_tags($instance['always_latest']);

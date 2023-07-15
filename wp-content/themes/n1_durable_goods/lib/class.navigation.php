@@ -1,8 +1,4 @@
-<?php
-
-namespace N1_Durable_Goods;
-
-use N1_Magazine;
+<?php namespace N1_Durable_Goods;
 
 class Navigation {
 	public function __construct() {
@@ -20,7 +16,7 @@ class Navigation {
 				$item_page = $matches[1];
 
 				// Get current page
-				$page_class = N1_Magazine::Instance()->page_class;
+				$page_class = N1_Magazine::get_page_class();
 
 				// Massage the page class to match the taxonomy
 				$current_taxonomy = $page_class === 'magazine' ? 'category' : $page_class;

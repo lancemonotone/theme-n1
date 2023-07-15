@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Implements an optional custom header for Twenty Twelve.
  * See http://codex.wordpress.org/Custom_Headers

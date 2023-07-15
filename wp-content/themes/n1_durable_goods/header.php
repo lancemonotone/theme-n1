@@ -1,3 +1,5 @@
+<?php namespace N1_Durable_Goods; ?>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" <?php language_attributes(); ?>> <![endif]-->
 <!--[if IE 7]><html class="ie ie7" <?php language_attributes(); ?>><![endif]-->
@@ -86,7 +88,7 @@
 } else {
 	$post_slug = '';
 } ?>
-<body <?php body_class( N1_Magazine::Instance()->page_class . ' ' . $post_slug ); ?>>
+<body <?php body_class( N1_Magazine::get_page_class() . ' ' . $post_slug ); ?>>
 <!--[if lt IE 9]>
 <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 <![endif]-->

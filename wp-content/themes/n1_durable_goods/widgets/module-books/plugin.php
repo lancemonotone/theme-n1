@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /*
 Plugin Name: Books Module
 Description: A custom post type or widget-like module featuring promotions from the Bookstore, which is hosted offsite (Shopify). Admins will need to be able to edit the following fields:
@@ -35,7 +35,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 // TODO: change 'Module_Books' to the name of your plugin
-class Module_Books extends WP_Widget {
+class Module_Books extends \WP_Widget {
 
     /*--------------------------------------------------*/
     /* Constructor
@@ -241,5 +241,5 @@ class Module_Books extends WP_Widget {
 } // end class
 
 add_action('widgets_init', function () {
-    register_widget("Module_Books");
+    register_widget("\N1_Durable_Goods\Module_Books");
 });

@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /*
 Plugin Name: Multi Module
 Description: Show n latest articles in reverse chronological order, newest first.
@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 // TODO: change 'Module_Multi' to the name of your plugin
-class Module_Multi extends WP_Widget {
+class Module_Multi extends \WP_Widget {
     var $version;
     /*--------------------------------------------------*/
     /* Constructor
@@ -284,7 +284,7 @@ class Module_Multi extends WP_Widget {
             'paged' => $paged,
         );
 
-        $this->multi_query = new WP_Query(array_merge((array)$flavor_args, (array)$default_args));
+        $this->multi_query = new \WP_Query(array_merge((array)$flavor_args, (array)$default_args));
         $the_posts = $this->multi_query->posts;
 
         // is this is an ajax call?
@@ -320,7 +320,7 @@ class Module_Multi extends WP_Widget {
         $post_counter = 0;
         foreach ($the_posts as $the_p) {
             if ($post_counter === $ad_after) {
-                if (N1_Magazine::Instance()->is_paywalled() && function_exists('adrotate_group')) {
+                if (N1_Magazine::is_paywalled() && function_exists('adrotate_group')) {
                     echo adrotate_group(1);
                 }
             }
@@ -370,7 +370,7 @@ class Module_Multi extends WP_Widget {
         switch ($flavor) {
             case 'archive':
                 // Force excerpt display on search results page.
-                if (N1_Magazine::Instance()->page_type == 'search') $format = '';
+                if (N1_Magazine::get_page_type() == 'search') $format = '';
                 switch ($format) {
                     case 'pullquote':
                         ?>
@@ -379,7 +379,7 @@ class Module_Multi extends WP_Widget {
                           <?php $this->print_post_head($the_p, $article_type, $section, $authors) ?>
                           <?php echo $section->name ? '<p class="post-category"><a href="' . get_term_link($section, $taxonomy) . '">' . $section->name . '</a></p>' : '' ?>
                         <a href="<?php echo get_permalink($the_p->ID) ?>"><?php echo $content ?></a>
-                          <?php N1_Magazine::Instance()->print_post_tags($the_p->ID); ?>
+                          <?php N1_Magazine::print_post_tags( $the_p->ID ); ?>
                         <h1 class="post-title"><a
                             href="<?php echo get_permalink($the_p->ID) ?>"><?php echo $the_p->post_title ?></a>
                         </h1>
@@ -412,7 +412,7 @@ class Module_Multi extends WP_Widget {
                         <h1 class="post-title"><a
                             href="<?php echo get_permalink($the_p->ID) ?>"><?php echo $the_p->post_title ?></a>
                         </h1>
-                          <?php N1_Magazine::Instance()->print_post_tags($the_p->ID); ?>
+                          <?php N1_Magazine::print_post_tags( $the_p->ID ); ?>
                         <p class="post-dek"><?php echo $subhead ?></p>
                         <div
                           class="post-excerpt"><?php echo apply_filters('the_excerpt', $the_p->post_excerpt) ?></div>
@@ -434,7 +434,7 @@ class Module_Multi extends WP_Widget {
                     <li class="module article meta category"><?php echo $section->name ?></li>
                     <li class="module article meta title"><?php echo $the_p->post_title ?></li>
                     <li
-                      class="module article meta author"><?php echo N1_Magazine::Instance()->get_authors($the_p->ID, true, false) ?></li>
+                      class="module article meta author"><?php echo N1_Magazine::get_authors($the_p->ID, true, false) ?></li>
                   </ul>
                 </a>
                   <?php edit_post_link(__('Edit'), '<span class="edit-link">', '</span>', $the_p->ID); ?>
@@ -570,7 +570,7 @@ class Module_Multi extends WP_Widget {
      */
     function get_issue_args() {
         global $post;
-        $context_issue = N1_Magazine::Instance()->get_context_issue();
+        $context_issue = N1_Magazine::get_context_issue();
         return array(
             'post__not_in' => array($post->ID),
             'tax_query' => array(
@@ -681,7 +681,7 @@ class Module_Multi extends WP_Widget {
 							SELECT DISTINCT tr2.object_id from $wpdb->term_relationships tr2 
 							INNER JOIN $wpdb->term_taxonomy tt2 ON tt2.term_taxonomy_id = tr2.term_taxonomy_id
 							INNER JOIN $wpdb->terms t2 ON t2.term_id = tt2.term_id
-							WHERE t2.slug = '" . N1_Magazine::Instance()->context_issue->post_name . "'
+							WHERE t2.slug = '" . N1_Magazine::get_context_issue()->post_name . "'
 						)
 					)  
 				) as f
@@ -689,7 +689,7 @@ class Module_Multi extends WP_Widget {
 				ORDER BY f.post_date DESC;";
         $posts_in = $wpdb->get_col($qry);
 
-        $context_issue = N1_Magazine::Instance()->get_context_issue();
+        $context_issue = N1_Magazine::get_context_issue();
 
         return array(
             'post__in' => $posts_in,
@@ -711,7 +711,7 @@ class Module_Multi extends WP_Widget {
      * @return unknown
      */
     function get_featured_default_args() {
-        $context_issue = N1_Magazine::Instance()->get_context_issue();
+        $context_issue = N1_Magazine::get_context_issue();
         $st = array();
         foreach (get_terms('online-only') as $temp) {
             array_push($st, $temp->term_id);
@@ -744,5 +744,5 @@ class Module_Multi extends WP_Widget {
 } // end class
 
 add_action('widgets_init', function () {
-    register_widget("Module_Multi");
+    register_widget("\N1_Durable_Goods\Module_Multi");
 });

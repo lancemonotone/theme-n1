@@ -1,4 +1,4 @@
-<?php
+<?php namespace N1_Durable_Goods;
 /*
 Plugin Name: Newsletter Module
 Description: Newsletter signup form.
@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 // TODO: change 'Module_Newsletter' to the name of your plugin
-class Module_Newsletter extends WP_Widget {
+class Module_Newsletter extends \WP_Widget {
 
 	/*--------------------------------------------------*/
 	/* Constructor
@@ -57,10 +57,10 @@ class Module_Newsletter extends WP_Widget {
 		'description'	=>	__( 'Newsletter login form.',
 		'Module_Newsletter' )
 		));
-		
+
 		// Register custom post types
 		//add_action( 'init', array( $this, 'register_cpt' ) );
-		
+
 		// Register admin styles and scripts
 		//add_action( 'admin_print_styles', array( $this, 'register_admin_styles' ) );
 		//add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
@@ -228,11 +228,11 @@ class Module_Newsletter extends WP_Widget {
 			'not_found' => 'No Newsletter Modules Found',
 			'not_found_in_trash' => 'No Newsletter Modules Found in Trash',
 			'parent' => 'Parent Newsletter Module',
-		))); 
+		)));
 	}
 
 } // end class
 
 add_action( 'widgets_init', function(){
-    register_widget("Module_Newsletter");
+    register_widget("\N1_Durable_Goods\Module_Newsletter");
 });

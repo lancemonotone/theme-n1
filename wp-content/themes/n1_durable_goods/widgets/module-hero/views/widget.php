@@ -1,12 +1,12 @@
-<?php
+<?php namespace N1_Durable_Goods;
 if(!is_home()) return;
 $hero_module_id = $instance['hero_module'];
 
 // Get latest or specific module as set in widget admin.
-if($instance['always_latest'] === '1'){ 
-	$the_args = array( 'order'=> 'DESC' ); 
-} else { 
-	$the_args = array( 'p' => $hero_module_id ); 
+if($instance['always_latest'] === '1'){
+	$the_args = array( 'order'=> 'DESC' );
+} else {
+	$the_args = array( 'p' => $hero_module_id );
 }
 
 // Merge query args and get_posts.

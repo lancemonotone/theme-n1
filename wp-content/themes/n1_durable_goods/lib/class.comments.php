@@ -1,6 +1,4 @@
-<?php
-
-namespace N1_Durable_Goods;
+<?php namespace N1_Durable_Goods;
 
 class Comments {
 	public function __construct() {

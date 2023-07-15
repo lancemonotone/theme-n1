@@ -1,7 +1,7 @@
-<?php
+<?php namespace N1_Durable_Goods;
 //	Defaults
-$instance = wp_parse_args( 
-	(array) $instance, array( 
+$instance = wp_parse_args(
+	(array) $instance, array(
 		'title' 			=> __('The Multi Widget'),
 		'subtitle' 			=> __('Regular dispatches from the world at large'),
 		'flavor'			=> __('online-only'),
@@ -12,7 +12,7 @@ $instance = wp_parse_args(
 		'order' 			=> 'DESC',
 		'orderby'			=> 'date',
 		'infinite'			=> 'n'
-	) 
+	)
 );
 $title = strip_tags($instance['title']);
 $subtitle = strip_tags($instance['subtitle']);

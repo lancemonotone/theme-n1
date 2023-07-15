@@ -1,9 +1,10 @@
-<?php
+<?php namespace N1_Durable_Goods;
+
 $type = strip_tags( $instance[ 'type' ] );
-$context_issue = N1_Magazine::Instance()->context_issue;
-$current_issue = N1_Magazine::Instance()->current_issue;
-$context_issue_obj = N1_Magazine::Instance()->get_issue_by_slug( $context_issue->post_name );
-$current_issue_obj = N1_Magazine::Instance()->get_issue_by_slug( $current_issue->post_name );
+$context_issue = N1_Magazine::get_context_issue();
+$current_issue = N1_Magazine::get_current_issue();
+$context_issue_obj = N1_Magazine::get_issue_by_slug( $context_issue->post_name );
+$current_issue_obj = N1_Magazine::get_issue_by_slug( $current_issue->post_name );
 
 switch ( $type ) {
     case 'home':
@@ -27,7 +28,7 @@ switch ( $type ) {
                 <h2 class="current-issue contents category"><span class="module-hed"><?php _e( 'Contents' ) ?></span>
                 </h2>
 
-                <?php the_widget( 'Module_Issue_TOC', array( 'type' => 'article' ) ) ?>
+                <?php the_widget( '\N1_Durable_Goods\Module_Issue_TOC', array( 'type' => 'article' ) ) ?>
                 <?php
                 $multi_args = array(
                     'title'   => 'Featured Articles',
@@ -36,13 +37,13 @@ switch ( $type ) {
                     'orderby' => 'menu_order',
                     'order'   => 'ASC'
                 );
-                the_widget( 'Module_Multi', $multi_args );
+                the_widget( '\N1_Durable_Goods\Module_Multi', $multi_args );
                 ?>
 
             </div>
             <!-- .wrapper -->
             <div class="current-issue jump">
-                <a href="<?php echo N1_Magazine::Instance()->get_current_issue_url() ?>" class="jump"><?php _e( 'Read this Issue' ) ?></a>
+                <a href="<?php echo N1_Magazine::get_current_issue_url() ?>" class="jump"><?php _e( 'Read this Issue' ) ?></a>
             </div>
         </section>
     <?php }
@@ -73,7 +74,7 @@ switch ( $type ) {
                     <ul class="cf"><?php
                         while ( the_repeater_field( 'issue_sections', $current_issue_obj->ID ) ) {
                             $section = get_sub_field( 'issue_section' );
-                            $section_posts = N1_Magazine::Instance()->get_section_posts( $section->slug );
+                            $section_posts = N1_Magazine::get_section_posts( $section->slug );
                             foreach ( $section_posts as $sp ) {
                                 ?>
                                 <article class="current-issue">
@@ -81,7 +82,7 @@ switch ( $type ) {
                                         <div class="current-issue article category tis"><?php echo $section->name?></div>
                                         <p class="current-issue article title"><?php echo $sp->post_title?></p>
 
-                                        <p class="current-issue article author"><?php echo N1_Magazine::Instance()->get_authors( $sp->ID, true, false )?></p>
+                                        <p class="current-issue article author"><?php echo N1_Magazine::get_authors( $sp->ID, true, false )?></p>
                                     </a>
                                     <?php edit_post_link( __( 'Edit' ), '<span class="edit-link">', '</span>', $sp->ID ); ?>
                                 </article><!-- /.current-issue -->
@@ -96,13 +97,13 @@ switch ( $type ) {
                     'orderby' => 'menu_order',
                     'order'   => 'ASC'
                 );
-                the_widget( 'Module_Multi', $multi_args );
+                the_widget( '\N1_Durable_Goods\Module_Multi', $multi_args );
                 ?>
 
             </div>
             <!-- .wrapper -->
             <div class="current-issue jump">
-                <a href="<?php echo N1_Magazine::Instance()->get_current_issue_url() ?>" class="jump"><?php _e( 'Read this Issue' ) ?></a>
+                <a href="<?php echo N1_Magazine::get_current_issue_url() ?>" class="jump"><?php _e( 'Read this Issue' ) ?></a>
             </div>
         </section>
     <?php }
@@ -114,7 +115,7 @@ switch ( $type ) {
         <section class="article-toc cf">
             <?php while ( the_repeater_field( 'issue_sections', $context_issue_obj->ID ) ) {
                 $section = get_sub_field( 'issue_section' );
-                $section_posts = N1_Magazine::Instance()->get_section_posts( $section->slug, $context_issue_obj->post_name );
+                $section_posts = N1_Magazine::get_section_posts( $section->slug, $context_issue_obj->post_name );
                 if ( count( $section_posts ) ) {
                     ?>
                     <h3 class="post-category"><?php echo $section->name?></h3>
@@ -125,7 +126,7 @@ switch ( $type ) {
                             <a class="article-link" href="<?php echo get_permalink( $sp->ID )?>" title="<?php echo $sp->post_title?>">
                                 <h1 class="post-title"><?php echo $sp->post_title?></h1>
 
-                                <p class="post-author"><?php echo N1_Magazine::Instance()->get_authors( $sp->ID, true, false )?></p>
+                                <p class="post-author"><?php echo N1_Magazine::get_authors( $sp->ID, true, false )?></p>
                             </a>
                             <?php edit_post_link( __( 'Edit' ), '<span class="edit-link">', '</span>', $sp->ID ); ?>
                         </article><!-- .post -->
@@ -139,8 +140,8 @@ switch ( $type ) {
     case 'landing-magazine':
         $temp_context = $context_issue;
         $i = 0;
-        foreach ( N1_Magazine::Instance()->issues as $issue ) {
-            N1_Magazine::Instance()->set_context_issue( $issue->post_name );
+        foreach ( N1_Magazine::get_issues() as $issue ) {
+            N1_Magazine::set_context_issue( $issue->post_name );
             $issue_art = get_field( 'issue_art', $issue->ID );?>
             <section class="issue">
                 <div class="issue-meta">
@@ -166,7 +167,7 @@ switch ( $type ) {
                 </div>
                 <!-- .issue-meta -->
                 <!-- issue ToC -->
-                <?php the_widget( 'Module_Issue_TOC', array( 'type' => 'article' ) )?>
+                <?php the_widget( '\N1_Durable_Goods\Module_Issue_TOC', array( 'type' => 'article' ) )?>
                 <?php
                 $multi_args = array(
                     'title'   => '',
@@ -175,10 +176,10 @@ switch ( $type ) {
                     'orderby' => 'menu_order',
                     'order'   => 'ASC'
                 );
-                the_widget( 'Module_Multi', $multi_args );?>
+                the_widget( '\N1_Durable_Goods\Module_Multi', $multi_args );?>
             </section><!-- /issue -->
         <?php }
-        N1_Magazine::Instance()->set_context_issue( $temp_context->post_name );
+        N1_Magazine::set_context_issue( $temp_context->post_name );
         break;
 
     case 'landing-issue':
@@ -196,7 +197,7 @@ switch ( $type ) {
         ?>
         <?php while ( the_repeater_field( 'issue_sections', $context_issue_obj->ID ) ) {
         $section = get_sub_field( 'issue_section' );
-        $section_posts = N1_Magazine::Instance()->get_section_posts( $section->slug, $context_issue_obj->post_name );
+        $section_posts = N1_Magazine::get_section_posts( $section->slug, $context_issue_obj->post_name );
         if ( count( $section_posts ) ) {
             ?>
             <div class="section-container">
@@ -211,7 +212,7 @@ switch ( $type ) {
                         <a href="<?php echo get_permalink( $sp->ID )?>"><?php echo $sp->post_title?></a></h1>
 
                     <div class="post-summary"><?php echo apply_filters( 'the_content', $sp->post_excerpt )?> </div>
-                    <?php N1_Magazine::Instance()->print_post_tags( $sp->ID );?>
+                    <?php N1_Magazine::print_post_tags( $sp->ID );?>
                     <?php edit_post_link( __( 'Edit' ), '<span class="edit-link">', '</span>', $sp->ID ); ?>
                 </article><!-- .post -->
                 <?php } ?>
