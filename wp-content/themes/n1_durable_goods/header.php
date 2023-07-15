@@ -97,7 +97,7 @@
 
     <div class="inner">
 
-		<?php get_template_part( 'parts/nav', 'header' ); ?>
+		<?php get_template_part( 'parts/nav' ); ?>
 
     </div>
 
