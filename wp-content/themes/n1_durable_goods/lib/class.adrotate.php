@@ -3,7 +3,7 @@
 class Adrotate {
     static function display($group_id){
         if(N1_Magazine::is_paywalled() && function_exists('adrotate_group')){
-            echo adrotate_group($group_id);
+            echo '<aside class="nurble">' . adrotate_group($group_id) . '</aside>';
         }
     }
 }
