@@ -613,33 +613,30 @@ class N1_Magazine {
     }
 
     /**
-     * Get next and previous elements in an array
+     * Gets the adjacent value in an array based on given parameters.
      *
-     * @param mixed $needle
-     * @param mixed $haystack
-     * @param bool $previous
-     * @param bool $wrap
+     * @param mixed $needle The value to find in the haystack.
+     * @param array $haystack The array to search within.
+     * @param bool $previous If true, search for the previous item; if false, search for the next item.
+     * @param bool $wrap If true, wrap around to the start or end of the array when an edge is reached.
      *
-     * @return string Next/Previous element or null if no value
+     * @return string The adjacent value, or an empty string if not found.
      */
-    static function get_adjacent_value( $needle, $haystack, bool $previous = true, bool $wrap ): string {
+    static function get_adjacent_value( $needle, $haystack, bool $previous = true, bool $wrap = false ): string {
+        // Find the index of the needle in the haystack
         $current_index = array_search( $needle, $haystack );
 
-        // Find the index of the next/prev items
-        if ( $previous ) {
-            if ( $wrap ) {
-                $output = $haystack[ ( $current_index - 1 < 0 ) ? count( $haystack ) - 1 : $current_index - 1 ];
-            } else {
-                $output = $haystack[ ( $current_index - 1 < 0 ) ? null : $current_index - 1 ];
-            }
-        } else {
-            if ( $wrap ) {
-                $output = $haystack[ ( $current_index + 1 == count( $haystack ) ) ? 0 : $current_index + 1 ];
-            } else {
-                $output = $haystack[ ( $current_index + 1 == count( $haystack ) ) ? null : $current_index + 1 ];
-            }
-        }
+        // Calculate the offset based on the direction of search (previous or next)
+        $offset = $previous ? -1 : 1;
 
-        return $output;
+        // Determine the default index if wrapping is enabled and an edge is reached
+        $defaultIndex = $wrap ? (($offset == -1 ? count($haystack) - 1 : 0)) : null;
+
+        // Calculate the new index based on the current index and offset, or set to the default index if an edge is reached
+        $newIndex = ($current_index + $offset < 0 || $current_index + $offset === count($haystack)) ? $defaultIndex : $current_index + $offset;
+
+        // Return the value at the new index if it exists, or an empty string if not
+        return array_key_exists($newIndex, $haystack) ? $haystack[$newIndex] : '';
     }
+
 }
