@@ -299,9 +299,7 @@ class Module_Multi extends \WP_Widget {
         $post_counter     = 0;
         foreach ( $the_posts as $the_p ) {
             if ( $post_counter === $ad_after ) {
-                if ( N1_Magazine::is_paywalled() && function_exists( 'adrotate_group' ) ) {
-                    echo adrotate_group( 1 );
-                }
+                Adrotate::display(1);
             }
             if ( $post_counter === $newsletter_after ) {
                 the_widget( '\N1_Durable_Goods\Module_Newsletter' );

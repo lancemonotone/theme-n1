@@ -1,8 +1,6 @@
 <?php namespace N1_Durable_Goods; ?>
 
-<?php if ( N1_Magazine::is_paywalled() && function_exists( 'adrotate_group' ) ) {
-	echo adrotate_group( 3 );
-}?>
+<?php Adrotate::display( 3 ) ?>
 
 <?php
 $current_page        = get_queried_object();
@@ -21,8 +19,7 @@ $term     = ! empty( $term ) ? $term : ( $is_term ? $current_page->slug : '' );
 <div id="main" class="cf">
     <div class="<?php echo $archive_class ?>-wrapper cf">
 
-        <section
-                class="bug">
+        <section class="bug">
             <h1 class="<?php echo $archive_class ?>"><?php _e( $archive_name ) ?></h1>
             <p class="dek <?php echo $archive_class ?>-dek"><?php _e( $archive_description ) ?></p>
         </section>

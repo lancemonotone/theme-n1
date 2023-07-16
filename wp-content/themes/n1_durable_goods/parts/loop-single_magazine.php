@@ -1,8 +1,6 @@
 <?php namespace N1_Durable_Goods; ?>
 
-<?php if ( N1_Magazine::is_paywalled() && function_exists( 'adrotate_group' ) ) {
-	echo adrotate_group( 3 );
-} ?>
+<?php Adrotate::display( 3 ) ?>
 
 <div id="main" class="main issue wrapper cf">
     <div class="main issue content">
