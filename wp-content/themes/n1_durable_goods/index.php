@@ -23,13 +23,6 @@ if ( is_plugin_active( 'lj-maintenance-mode/lj-maintenance-mode.php' ) ) {
             </article><!-- #post -->
         </section> <!-- #content -->
     </div><!-- #main -->
-    <script>
-
-        $(function () {
-            $('#menu-item-1640, #nav-actions-signin').hide()
-        })
-
-    </script>
 <?php } else {
     $page_type = N1_Magazine::get_page_type();
 
