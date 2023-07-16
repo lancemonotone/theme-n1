@@ -609,11 +609,35 @@ function adrotate_database_upgrade() {
 	// Database: 	69
 	// AdRotate:	5.9.2
 	if($adrotate_db_version['current'] < 69) {
+		adrotate_add_column("{$wpdb->prefix}adrotate_groups", 'cat_par', 'tinyint(2) NOT NULL default \'0\' AFTER `cat_loc`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_groups", 'page_par', 'tinyint(2) NOT NULL default \'0\' AFTER `page_loc`');
 		adrotate_add_column("{$wpdb->prefix}adrotate_groups", 'woo_cat', 'longtext NOT NULL AFTER `page_par`');
 		adrotate_add_column("{$wpdb->prefix}adrotate_groups", 'woo_loc', 'tinyint(1) NOT NULL default \'0\' AFTER `woo_cat`');
 		adrotate_add_column("{$wpdb->prefix}adrotate_groups", 'bbpress', 'longtext NOT NULL AFTER `woo_loc`');
 		adrotate_add_column("{$wpdb->prefix}adrotate_groups", 'bbpress_loc', 'tinyint(1) NOT NULL default \'0\' AFTER `bbpress`');
-		adrotate_add_column("{$wpdb->prefix}adrotate_groups", 'page_par', 'tinyint(2) NOT NULL default \'0\' AFTER `page_loc`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_groups", 'mobile', 'tinyint(1) NOT NULL default \'0\' AFTER `bbpress_loc`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_groups", 'align', 'tinyint(1) NOT NULL default \'0\' AFTER `wrapper_after`');
+
+		adrotate_add_column("{$wpdb->prefix}adrotate_schedule", 'spread', 'char(1) NOT NULL default \'N\' AFTER `maximpressions`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_schedule", 'spread_all', 'char(1) NOT NULL default \'N\' AFTER `spread`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_schedule", 'daystarttime', 'char(4) NOT NULL default \'0000\' AFTER `spread_all`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_schedule", 'daystoptime', 'char(4) NOT NULL default \'0000\' AFTER `daystarttime`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_schedule", 'day_mon', 'char(1) NOT NULL default \'Y\' AFTER `daystoptime`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_schedule", 'day_tue', 'char(1) NOT NULL default \'Y\' AFTER `day_mon`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_schedule", 'day_wed', 'char(1) NOT NULL default \'Y\' AFTER `day_tue`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_schedule", 'day_thu', 'char(1) NOT NULL default \'Y\' AFTER `day_wed`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_schedule", 'day_fri', 'char(1) NOT NULL default \'Y\' AFTER `day_thu`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_schedule", 'day_sat', 'char(1) NOT NULL default \'Y\' AFTER `day_fri`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_schedule", 'day_sun', 'char(1) NOT NULL default \'Y\' AFTER `day_sat`');
+		adrotate_add_column("{$wpdb->prefix}adrotate_schedule", 'autodelete', 'char(1) NOT NULL default \'N\' AFTER `day_sun`');
+
+		adrotate_add_column("{$wpdb->prefix}adrotate", 'desktop', 'char(1) NOT NULL default \'Y\' AFTER `show_everyone`');
+		adrotate_add_column("{$wpdb->prefix}adrotate", 'mobile', 'char(1) NOT NULL default \'Y\' AFTER `desktop`');
+		adrotate_add_column("{$wpdb->prefix}adrotate", 'tablet', 'char(1) NOT NULL default \'Y\' AFTER `mobile`');
+		adrotate_add_column("{$wpdb->prefix}adrotate", 'os_ios', 'char(1) NOT NULL default \'Y\' AFTER `tablet`');
+		adrotate_add_column("{$wpdb->prefix}adrotate", 'os_android', 'char(1) NOT NULL default \'Y\' AFTER `os_ios`');
+		adrotate_add_column("{$wpdb->prefix}adrotate", 'os_other', 'char(1) NOT NULL default \'Y\' AFTER `os_android`');
+		adrotate_add_column("{$wpdb->prefix}adrotate", 'budget', 'char(1) NOT NULL default \'Y\' AFTER `autodelete`');
 	}
 
 	update_option("adrotate_db_version", array('current' => ADROTATE_DB_VERSION, 'previous' => $adrotate_db_version['current']));
