@@ -1,20 +1,21 @@
 :root {
-  --max-width-content: 1210px;
-  --inner-padding: 20px;
-  --transition: 0.1s cubic-bezier(1, -0.02, 1, 1);
-  --padding-block-end: clamp(2.25rem, 4vw, 3.375rem);
+    --max-width-content: 1210px;
+    --max-width-banner-ads: 1200px;
+    --inner-padding: 20px;
+    --transition: 0.1s cubic-bezier(1, -0.02, 1, 1);
+    --padding-block-end: clamp(2.25rem, 4vw, 3.375rem);
 
-  --white: #ffffff;
-  --brown: #242424;
-  --dark-brown: #4d4d4d;
-  --inactive-dark: #666666;
-  --inactive: #999999;
-  --orange: #ce4f25;
-  --light-orange: #d1765b;
-  --dark-blue: #2da0e0;
-  --light-blue: #56b3e6;
+    --white: #ffffff;
+    --brown: #242424;
+    --dark-brown: #4d4d4d;
+    --inactive-dark: #666666;
+    --inactive: #999999;
+    --orange: #ce4f25;
+    --light-orange: #d1765b;
+    --dark-blue: #2da0e0;
+    --light-blue: #56b3e6;
 }
 
 .widget {
-  outline: 1px solid green;
+    outline: 1px solid green;
 }
