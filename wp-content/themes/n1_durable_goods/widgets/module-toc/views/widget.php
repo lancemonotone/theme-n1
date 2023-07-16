@@ -189,7 +189,7 @@ switch ( $type ) {
         if ( $issue_art ) {
             ?>
             <figure class="issue thumb">
-                <img src="<?php echo $issue_art[ 'sizes' ][ 'issue-art' ]?>" alt="<?php _e( 'Art for' )?> <?php echo $issue->post_title?>">
+                <img src="<?php echo $issue_art[ 'sizes' ][ 'issue-art' ]?>" alt="<?php _e( 'Art for' )?> <?php echo $context_issue_obj->post_title?>">
             </figure>
         <?php }?>
         <h1 class="section-title">Contents</h1>

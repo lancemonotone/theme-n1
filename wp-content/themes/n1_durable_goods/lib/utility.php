@@ -153,7 +153,7 @@ EOD;
      * @uses phpQuery to traverse and manipulate HTML
      * @uses AdRotate WP plugin
      */
-    function insert_advertisement( $content, $position, $ad_group ) {
+    function insert_advertisement( $content, $position, $ad_group ): string {
         global $post;
         if ( ! get_field( 'hide_content_ads', $post->ID ) ) {
             if ( function_exists( 'adrotate_group' ) ) {
