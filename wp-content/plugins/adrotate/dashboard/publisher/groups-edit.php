@@ -144,7 +144,7 @@ if($edit_group) {
 			<tr>
 				<th valign="top"><?php _e('Repeat impressions', 'adrotate'); ?></th>
 				<td>
-					<input type="checkbox" name="adrotate_repeat_impressions" checked disabled /> <?php _e('Count impressions for every cycle of adverts?', 'adrotate'); ?>
+					<input type="checkbox" name="adrotate_repeat_impressions" checked /> <?php _e('Count impressions for every cycle of adverts?', 'adrotate'); ?>
 				</td>
 				<td>
 					<em><?php _e('Dynamic Mode', 'adrotate'); ?> - <?php _e('Uncheck this option to only count impressions for the first cycle of adverts.', 'adrotate'); ?></em>
@@ -203,18 +203,18 @@ if($edit_group) {
 			</tr>
 		    <tr>
 				<th width="15%" valign="top"><?php _e('Geo Targeting', 'adrotate'); ?></th>
-				<td width="35%"><input type="checkbox" name="adrotate_geo" value="1" disabled /> <?php _e('Enable Geo Targeting for this group.', 'adrotate'); ?></td>
+				<td width="35%"><input type="checkbox" name="adrotate_geo" value="1" /> <?php _e('Enable Geo Targeting for this group.', 'adrotate'); ?></td>
 				<td><p><em><?php _e('Do not forget to tell the adverts for which areas they should show.', 'adrotate'); ?></em></p></td>
 			</tr>
 		    <tr>
 				<th width="15%" valign="top"><?php _e('Mobile Support', 'adrotate'); ?></th>
-				<td width="35%"><input type="checkbox" name="adrotate_mobile" value="1" disabled /> <?php _e('Enable mobile support for this group.', 'adrotate'); ?></td>
+				<td width="35%"><input type="checkbox" name="adrotate_mobile" value="1" /> <?php _e('Enable mobile support for this group.', 'adrotate'); ?></td>
 				<td><p><em><?php _e('Do not forget to put at least one mobile advert in this group.', 'adrotate'); ?></em></p></td>
 			</tr>
 		    <tr>
 				<th valign="top"><?php _e('Fallback Group', 'adrotate'); ?></th>
 				<td>
-					<select tabindex="16" name="adrotate_fallback" disabled>
+					<select tabindex="16" name="adrotate_fallback">
 				        <option value="0"><?php _e('Available in AdRotate Pro', 'adrotate'); ?></option>
 					</select>
 				</td>

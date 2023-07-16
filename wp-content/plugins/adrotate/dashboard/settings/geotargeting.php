@@ -22,11 +22,11 @@
 		<td>
 			<select name="adrotate_enable_geo_disabled">
 				<option value="0"><?php _e('Disabled', 'adrotate'); ?></option>
-				<option value="0" disabled="1">AdRotate Geo</option>
-				<option value="0" disabled="1">ipstack</option>
-				<option value="0" disabled="1">MaxMind City</option>
-				<option value="0" disabled="1">MaxMind Country</option>
-				<option value="0" disabled="1">CloudFlare</option>
+				<option value="0">AdRotate Geo</option>
+				<option value="0">ipstack</option>
+				<option value="0">MaxMind City</option>
+				<option value="0">MaxMind Country</option>
+				<option value="0">CloudFlare</option>
 			</select><br />
 			<span class="description">
 				<p><strong>AdRotate Geo</strong> - <?php _e('30000 free lookups every day, uses GeoLite2 databases from MaxMind!', 'adrotate'); ?><br />
@@ -40,7 +40,7 @@
 				<strong>MaxMind GeoIP2</strong> (<a href="https://www.maxmind.com/en/geoip2-precision-city-service" target="_blank>"><?php _e('More info', 'adrotate'); ?></a>)- <?php _e('The most accurate geo targeting available.', 'adrotate'); ?><br />
 				<em><strong><?php _e('Supports:', 'adrotate'); ?></strong> ipv4/ipv6, Countries, States, State ISO (3166-2) codes, Cities and DMA codes.</em><br />
 				<em><strong><?php _e('Scalability:', 'adrotate'); ?></strong> <?php _e('Suitable for any size website as long as you have lookups.', 'adrotate'); ?></em><br /><br />
-				
+
 				<strong>CloudFlare IP Geolocation</strong> - <?php _e('Basic geolocation included in every CloudFlare account.', 'adrotate'); ?><br />
 				<em><strong><?php _e('Supports:', 'adrotate'); ?></strong> ipv4/ipv6, Countries.</em><br />
 				<em><strong><?php _e('Scalability:', 'adrotate'); ?></strong> <?php _e('Suitable for any size website.', 'adrotate'); ?></em>
@@ -51,12 +51,12 @@
 		<th valign="top"><?php _e('Geo Cookie Lifespan', 'adrotate'); ?></th>
 		<td>
 			<select name="adrotate_geo_cookie_life_disabled">
-				<option value="0" disabled selected>24 (<?php _e('Default', 'adrotate'); ?>)</option>
-				<option value="0" disabled>36</option>
-				<option value="0" disabled>48</option>
-				<option value="0" disabled>72</option>
-				<option value="0" disabled>120</option>
-				<option value="0" disabled>168</option>
+				<option value="0" selected>24 (<?php _e('Default', 'adrotate'); ?>)</option>
+				<option value="0">36</option>
+				<option value="0">48</option>
+				<option value="0">72</option>
+				<option value="0">120</option>
+				<option value="0">168</option>
 			</select> <?php _e('Hours.', 'adrotate'); ?><br />
 			<span class="description"><?php _e('Geo Data is stored in a cookie to reduce lookups. How long should this cookie last? A longer period is less accurate for mobile users but may reduce the usage of your lookups drastically.', 'adrotate'); ?></span>
 
@@ -68,10 +68,10 @@
 <table class="form-table">
 	<tr>
 		<th valign="top"><?php _e('Username/Email', 'adrotate'); ?></th>
-		<td><input name="adrotate_geo_email_disabled" type="text" class="search-input" size="50" value="" disabled /></td>
+		<td><input name="adrotate_geo_email_disabled" type="text" class="search-input" size="50" value="" /></td>
 	</tr>
 	<tr>
 		<th valign="top"><?php _e('Password/License Key', 'adrotate'); ?></th>
-		<td><input name="adrotate_geo_pass_disabled" type="text" class="search-input" size="50" value="" disabled /></td>
+		<td><input name="adrotate_geo_pass_disabled" type="text" class="search-input" size="50" value="" /></td>
 	</tr>
 </table>

@@ -22,13 +22,13 @@
 		<th valign="top"><?php _e('How to notify', 'adrotate'); ?></th>
 		<td>
 			<label for="adrotate_notification_dash"><input type="checkbox" name="adrotate_notification_dash" id="adrotate_notification_dash" <?php if($adrotate_notifications['notification_dash'] == 'Y') { ?>checked="checked" <?php } ?> /> <?php _e('Dashboard banner.', 'adrotate'); ?></label><br />
-			<input type="checkbox" name="adrotate_notification_email_disabled" disabled /> <?php _e('Email message.', 'adrotate'); ?><br />
+			<input type="checkbox" name="adrotate_notification_email_disabled" /> <?php _e('Email message.', 'adrotate'); ?><br />
 		</td>
 	</tr>
 	<tr>
 		<th scope="row" valign="top"><?php _e('Test notification', 'adrotate'); ?></th>
 		<td>
-			<input type="submit" name="adrotate_notification_test_submit_disabled" class="button-secondary" value="<?php _e('Test', 'adrotate'); ?>" disabled /> <?php _e('Send a test notification to enabled methods. Before you test, save the options first!', 'adrotate'); ?>
+			<input type="submit" name="adrotate_notification_test_submit_disabled" class="button-secondary" value="<?php _e('Test', 'adrotate'); ?>" /> <?php _e('Send a test notification to enabled methods. Before you test, save the options first!', 'adrotate'); ?>
 		</td>
 	</tr>
 </table>
@@ -51,18 +51,18 @@
 	<tr>
 		<th valign="top"><?php _e('What', 'adrotate'); ?></th>
 		<td>
-			<input type="checkbox" name="adrotate_notification_mail_status" disabled="1" /> <?php _e('Daily digest of any advert status other than normal.', 'adrotate'); ?><br />
-			<input type="checkbox" name="adrotate_notification_mail_geo" disabled="1" /> <?php _e('When you are running out of Geo Targeting Lookups.', 'adrotate'); ?><br />
-			<input type="checkbox" name="adrotate_notification_mail_queue" disabled="1" /> <?php _e('Any advertiser saving an advert in your moderation queue.', 'adrotate'); ?><br />
-			<input type="checkbox" name="adrotate_notification_mail_approved" disabled="1" /> <?php _e('A moderator approved an advert from the moderation queue.', 'adrotate'); ?><br />
-			<input type="checkbox" name="adrotate_notification_mail_rejected" disabled="1" <?php _e('A moderator rejected an advert from the moderation queue.', 'adrotate'); ?><br /><span class="description"><?php _e('If you have a lot of activity with many advertisers adding/changing adverts you may get a lot of messages!', 'adrotate'); ?><br /><br /><strong><?php _e('Note:', 'adrotate'); ?></strong> <?php _e('Sending out a lot of email is sometimes seen as automated mailing and deemed spammy. This may result in automated filters such as those used in services like Google Gmail and Microsoft Hotmail/Outlook.com blocking your server. Make sure you whitelist the sending address in your email account once you start receiving notifications!', 'adrotate'); ?></span>
+			<input type="checkbox" name="adrotate_notification_mail_status" /> <?php _e('Daily digest of any advert status other than normal.', 'adrotate'); ?><br />
+			<input type="checkbox" name="adrotate_notification_mail_geo" /> <?php _e('When you are running out of Geo Targeting Lookups.', 'adrotate'); ?><br />
+			<input type="checkbox" name="adrotate_notification_mail_queue" /> <?php _e('Any advertiser saving an advert in your moderation queue.', 'adrotate'); ?><br />
+			<input type="checkbox" name="adrotate_notification_mail_approved" /> <?php _e('A moderator approved an advert from the moderation queue.', 'adrotate'); ?><br />
+			<input type="checkbox" name="adrotate_notification_mail_rejected" <?php _e('A moderator rejected an advert from the moderation queue.', 'adrotate'); ?><br /><span class="description"><?php _e('If you have a lot of activity with many advertisers adding/changing adverts you may get a lot of messages!', 'adrotate'); ?><br /><br /><strong><?php _e('Note:', 'adrotate'); ?></strong> <?php _e('Sending out a lot of email is sometimes seen as automated mailing and deemed spammy. This may result in automated filters such as those used in services like Google Gmail and Microsoft Hotmail/Outlook.com blocking your server. Make sure you whitelist the sending address in your email account once you start receiving notifications!', 'adrotate'); ?></span>
 
 		</td>
 	</tr>
 	<tr>
 		<th valign="top"><?php _e('Publishers', 'adrotate'); ?></th>
 		<td>
-			<textarea name="adrotate_notification_email_publisher" cols="50" rows="2" disabled="1"><?php echo get_option('admin_email'); ?></textarea><br />
+			<textarea name="adrotate_notification_email_publisher" cols="50" rows="2"><?php echo get_option('admin_email'); ?></textarea><br />
 			<span class="description"><?php _e('Messages are sent once every 24 hours.  Maximum of 5 addresses. Comma separated. This field may not be empty!', 'adrotate'); ?></span>
 		</td>
 	</tr>

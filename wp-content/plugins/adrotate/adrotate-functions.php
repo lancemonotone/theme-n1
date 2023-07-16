@@ -595,7 +595,7 @@ function adrotate_dashboard_styles() {
  Purpose:   List folder contents for dropdown menu
  Since:		5.6
 -------------------------------------------------------------*/
-function adrotate_dropdown_folder_contents($base_dir, $extensions = array('jpg', 'jpeg', 'gif', 'png', 'html', 'htm', 'js'), $max_level = 1, $level = 0, $parent = '') {
+function adrotate_dropdown_folder_contents($base_dir, $extensions = array('jpg', 'jpeg', 'gif', 'png'), $max_level = 1, $level = 0, $parent = '') {
 	$index = array();
 
 	// List the folders and files
@@ -605,7 +605,7 @@ function adrotate_dropdown_folder_contents($base_dir, $extensions = array('jpg',
 		$dir = $base_dir.'/'.$file;
 		if(is_dir($dir)) {
 			if($level >= $max_level) continue;
-			$index[]= adrotate_dropdown_folder_contents($dir, array('html', 'htm'), $max_level, $level+1, $file);
+			$index[]= adrotate_dropdown_folder_contents($dir, array('jpg', 'jpeg', 'gif', 'png'), $max_level, $level+1, $file);
 		} else {
 			$fileinfo = pathinfo($file);
 			if(in_array($fileinfo['extension'], $extensions)) {

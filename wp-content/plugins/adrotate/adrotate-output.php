@@ -459,6 +459,7 @@ function adrotate_inject_posts($post_content) {
 -------------------------------------------------------------*/
 function adrotate_preview($banner_id) {
 	global $wpdb;
+    $config = get_option('adrotate_config');
 
 	if($banner_id) {
 		$now = current_time('timestamp');
@@ -466,7 +467,7 @@ function adrotate_preview($banner_id) {
 		$banner = $wpdb->get_row($wpdb->prepare("SELECT * FROM `{$wpdb->prefix}adrotate` WHERE `id` = %d;", $banner_id));
 
 		if($banner) {
-			$image = str_replace('%folder%', '/banners/', $banner->image);
+			$image = str_replace('%folder%', "/{$config["banner_folder"]}/", $banner->image);
 			$output = adrotate_ad_output($banner->id, 0, $banner->title, $banner->bannercode, $banner->tracker, $image);
 		} else {
 			$output = adrotate_error('ad_expired');

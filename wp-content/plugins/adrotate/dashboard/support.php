@@ -76,16 +76,16 @@
 					<form name="request" id="post" method="post" action="admin.php?page=adrotate">
 						<p><img src="<?php echo plugins_url('/images/icon-contact.png', dirname(__FILE__)); ?>" class="alignleft pro-image" />&raquo; <?php _e('Premium support always has priority!', 'adrotate'); ?><br />&raquo; <?php _e('No queuing up on the forum...', 'adrotate'); ?><br />&raquo; <?php _e('Using this form includes all the technical information for a quick solution.', 'adrotate'); ?><br />&raquo; <?php _e('Available in AdRotate Professional!', 'adrotate'); ?></p>
 
-						<p><strong><?php _e('Your name:', 'adrotate'); ?></strong><br /><input tabindex="1" name="ajdg_support_username" type="text" class="search-input" style="width:100%;" value="<?php echo $current_user->display_name;?>" autocomplete="off" disabled /></p>
-						<p><strong><?php _e('Your Email Address:', 'adrotate'); ?></strong><br /><input tabindex="1" name="ajdg_support_email" type="text" class="search-input" style="width:100%;" value="<?php echo $current_user->user_email;?>" autocomplete="off" disabled /></p>
-						<p><strong><?php _e('Subject:', 'adrotate'); ?></strong><br /><input tabindex="2" name="ajdg_support_subject" type="text" class="search-input" style="width:100%;" value="" autocomplete="off" disabled /></p>
-						<p><strong><?php _e('Problem description / Question:', 'adrotate'); ?></strong><br /><textarea tabindex="3" name="ajdg_support_message" style="width:100%; height:100px;" disabled></textarea></p>
+						<p><strong><?php _e('Your name:', 'adrotate'); ?></strong><br /><input tabindex="1" name="ajdg_support_username" type="text" class="search-input" style="width:100%;" value="<?php echo $current_user->display_name;?>" autocomplete="off" /></p>
+						<p><strong><?php _e('Your Email Address:', 'adrotate'); ?></strong><br /><input tabindex="1" name="ajdg_support_email" type="text" class="search-input" style="width:100%;" value="<?php echo $current_user->user_email;?>" autocomplete="off" /></p>
+						<p><strong><?php _e('Subject:', 'adrotate'); ?></strong><br /><input tabindex="2" name="ajdg_support_subject" type="text" class="search-input" style="width:100%;" value="" autocomplete="off" /></p>
+						<p><strong><?php _e('Problem description / Question:', 'adrotate'); ?></strong><br /><textarea tabindex="3" name="ajdg_support_message" style="width:100%; height:100px;"></textarea></p>
 
-						<p><label for="ajdg_support_advert"><strong><?php _e('Advert I need help with:', 'adrotate'); ?></strong> 
+						<p><label for="ajdg_support_advert"><strong><?php _e('Advert I need help with:', 'adrotate'); ?></strong>
 							<select tabindex="4" name="ajdg_support_advert">
 						        <option value="0" disabled>-- <?php _e('Optionally select an advert', 'adrotate'); ?> --</option>
 						</select> <span class="ajdg-tooltip">[?]<span class="ajdg-tooltiptext ajdg-tooltip-top">Selecting an advert will include the ad settings for Arnan to test on his website. Does not include group or schedule data.</span></span></label></p>
-						<p><input tabindex="5" name="ajdg_support_account" type="checkbox" disabled /> <?php _e('Please log in to my website and take a look.', 'adrotate'); ?> <span class="ajdg-tooltip">[?]<span class="ajdg-tooltiptext ajdg-tooltip-top">Checking this option will create a (temporary) account for Arnan to log in and take a look at your setup.</span></span></p>
+						<p><input tabindex="5" name="ajdg_support_account" type="checkbox" /> <?php _e('Please log in to my website and take a look.', 'adrotate'); ?> <span class="ajdg-tooltip">[?]<span class="ajdg-tooltiptext ajdg-tooltip-top">Checking this option will create a (temporary) account for Arnan to log in and take a look at your setup.</span></span></p>
 
 						<p><strong><?php _e('When you send this form the following data will be submitted:', 'adrotate'); ?></strong><br/>
 						<em><?php _e('Your name, Account email address, Your website url and some basic WordPress information will be included with the message.', 'adrotate'); ?><br /><?php _e('This information is treated as confidential and is mandatory.', 'adrotate'); ?></em></p>

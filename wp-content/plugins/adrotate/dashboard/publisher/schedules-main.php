@@ -17,9 +17,9 @@
 
 	<div class="tablenav top">
 		<div class="alignleft actions">
-			<select name="adrotate_action" id="cat" class="postform" disabled="1">
+			<select name="adrotate_action" id="cat" class="postform">
 		        <option value=""><?php _e('Bulk Actions', 'adrotate'); ?></option>
-			</select> <input type="submit" id="post-action-submit" name="adrotate_action_submit" value="<?php _e('Go', 'adrotate'); ?>" class="button-secondary" disabled="1" />
+			</select> <input type="submit" id="post-action-submit" name="adrotate_action_submit" value="<?php _e('Go', 'adrotate'); ?>" class="button-secondary" />
 		</div>
 		<br class="clear" />
 	</div>
@@ -27,7 +27,7 @@
 	<table class="widefat tablesorter manage-schedules-main" style="margin-top: .5em">
 		<thead>
 		<tr>
-			<td scope="col" class="manage-column column-cb check-column"><input type="checkbox" disabled="1" /></td>
+			<td scope="col" class="manage-column column-cb check-column"><input type="checkbox" /></td>
 			<th width="4%"><center><?php _e('ID', 'adrotate'); ?></center></th>
 			<th width="20%"><?php _e('Start / End', 'adrotate'); ?></th>
 			<th><?php _e('Name', 'adrotate'); ?></th>
@@ -65,7 +65,7 @@
 			$edayminute = substr($schedule->daystoptime, 2, 2);
 			?>
 		    <tr id='adrotateindex' class='<?php echo $class; ?>'>
-				<th class="check-column"><input type="checkbox" name="schedulecheck[]" value="<?php echo $schedule->id; ?>" disabled="1" /></th>
+				<th class="check-column"><input type="checkbox" name="schedulecheck[]" value="<?php echo $schedule->id; ?>" /></th>
 				<td><center><?php echo $schedule->id;?></center></td>
 				<td><?php echo date_i18n("F d, Y H:i", $schedule->starttime);?><br /><span style="color: <?php echo adrotate_prepare_color($schedule->stoptime);?>;"><?php echo date_i18n("F d, Y H:i", $schedule->stoptime);?></span></td>
 				<td><?php echo stripslashes($schedule->name); ?><span style="color:#999;"><br /><?php _e('Mon:', 'adrotate'); ?> <?php echo ($schedule->day_mon == 'Y') ? $tick : $cross; ?> <?php _e('Tue:', 'adrotate'); ?> <?php echo ($schedule->day_tue == 'Y') ? $tick : $cross; ?> <?php _e('Wed:', 'adrotate'); ?> <?php echo ($schedule->day_wed == 'Y') ? $tick : $cross; ?> <?php _e('Thu:', 'adrotate'); ?> <?php echo ($schedule->day_thu == 'Y') ? $tick : $cross; ?> <?php _e('Fri:', 'adrotate'); ?> <?php echo ($schedule->day_fri == 'Y') ? $tick : $cross; ?> <?php _e('Sat:', 'adrotate'); ?> <?php echo ($schedule->day_sat == 'Y') ? $tick : $cross; ?> <?php _e('Sun:', 'adrotate'); ?> <?php echo ($schedule->day_sun == 'Y') ? $tick : $cross; ?> <?php if($schedule->daystarttime  > 0) { ?><?php _e('Between:', 'adrotate'); ?> <?php echo $sdayhour; ?>:<?php echo $sdayminute; ?> - <?php echo $edayhour; ?>:<?php echo $edayminute; ?> <?php } ?><br /><?php _e('Impression spread:', 'adrotate'); ?> <?php echo ($schedule->spread == 'Y') ? $tick : $cross; ?>, <?php _e('Auto Delete:', 'adrotate'); ?> <?php echo ($schedule->autodelete == 'Y') ? $tick : $cross; ?></span></td>

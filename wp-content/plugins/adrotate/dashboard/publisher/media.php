@@ -8,9 +8,8 @@
 *  By using this code you agree to indemnify Arnan de Gans from any
 *  liability that might arise from its use.
 ------------------------------------------------------------------------------------ */
-?>
-
-<?php $assets = adrotate_mediapage_folder_contents(WP_CONTENT_DIR."/".$adrotate_config['banner_folder']); ?>
+$adrotate_config = get_option('adrotate_config');
+$assets = adrotate_mediapage_folder_contents(WP_CONTENT_DIR."/".$adrotate_config['banner_folder']); ?>
 
 <form method="post" action="admin.php?page=adrotate-media" enctype="multipart/form-data">
 	<?php wp_nonce_field('adrotate_save_media','adrotate_nonce'); ?>
@@ -28,7 +27,7 @@
 					if(array_key_exists("contents", $level_one)) {
 						echo '<option value="'.$adrotate_config['banner_folder'].'/'.$asset['basename'].'/'.$level_one['basename'].'">&mdash; &mdash; '.$level_one['basename'].'</option>';
 					}
-				}		
+				}
 			}
 		}
 	}
@@ -55,13 +54,13 @@
 				<input tabindex="3" id="adrotate_folder" name="adrotate_folder" type="text" size="20" class="ajdg-inputfield" value="" autocomplete="off" /> <input tabindex="4" type="submit" name="adrotate_folder_submit" class="button-secondary" value="<?php _e('Create folder', 'adrotate'); ?>" />
 			</td>
 		</tr>
-		
+
 	<?php
 	if(count($assets) > 0) {
 		$class = '';
 		foreach($assets as $asset) {
 			$class = ($class != 'alternate') ? 'alternate' : '';
-			
+
 			echo "<tr class=\"$class\">";
 			echo "<td>";
 			echo $asset['basename'];
@@ -75,9 +74,9 @@
 						foreach($level_one['contents'] as $level_two) {
 							echo "<br />&mdash;&mdash; ".$level_two['basename'];
 							echo "<span style=\"float:right;\"><a href=\"".admin_url('/admin.php?page=adrotate-media&file='.$asset['basename'].'/'.$level_one['basename'].'/'.$level_two['basename'])."&_wpnonce=".wp_create_nonce('adrotate_delete_media_'.$asset['basename'].'/'.$level_one['basename'].'/'.$level_two['basename'])."\" title=\"".__('Delete', 'adrotate')."\">".__('Delete', 'adrotate')."</a></span>";
-						}		
+						}
 					}
-				}		
+				}
 				echo "</small>";
 			}
 			echo "</td>";
