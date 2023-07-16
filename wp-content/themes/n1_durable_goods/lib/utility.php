@@ -153,14 +153,14 @@ EOD;
      * @uses phpQuery to traverse and manipulate HTML
      * @uses AdRotate WP plugin
      */
-    function insert_advertisement( $content, $position, $ad_group ): string {
+    static function insert_advertisement( $content, $position, $ad_group ): string {
         global $post;
         if ( ! get_field( 'hide_content_ads', $post->ID ) ) {
             if ( function_exists( 'adrotate_group' ) ) {
                 require_once( 'phpQuery.php' );
                 $ad = adrotate_group( $ad_group );
-                $pq = phpQuery::newDocumentHTML( $content );
-                phpQuery::selectDocument( $pq );
+                $pq = \phpQuery::newDocumentHTML( $content );
+                \phpQuery::selectDocument( $pq );
                 $pq[ 'p:eq(' . ( $position - 1 ) . ')' ]->after( $ad );
                 $content = $pq->html();
             }
