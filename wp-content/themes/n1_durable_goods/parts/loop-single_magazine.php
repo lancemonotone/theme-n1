@@ -201,10 +201,7 @@
                                 <li class="next"><?php echo $next_link; ?></li><?php } ?>
                         </ul>
                     </nav>
-					<?php
-
-					echo $after_widget;
-				} // end if?>
+					<?php } // end if?>
             </section><!-- /#content -->
 		<?php } ?>
 		<?php // right sidebar content (currently blank) ?>

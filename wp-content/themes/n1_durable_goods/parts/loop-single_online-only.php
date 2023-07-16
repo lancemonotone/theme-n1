@@ -56,7 +56,7 @@
 					<?php N1_Magazine::print_post_tags( $post->ID, true );?>
 					<?php N1_Magazine::print_social($post->ID);?>
 				</div>
-				<?php the_widget('Module_Newsletter');?>
+				<?php the_widget('\N1_Durable_Goods\Module_Newsletter');?>
 			</div><!-- .post-meta-->
 
 			<?php if($reviewed_items = get_field('reviewed_items', $post->ID)){?>
@@ -109,10 +109,7 @@
 					<?php if( $next_link ){?><li class="next"><?php echo $next_link; ?></li><?php }?>
 				</ul>
 			</nav>
-			<?php
-
-			echo $after_widget;
-		} // end if?>
+			<?php } // end if?>
 	</section><!-- /#content -->
 
 	<!-- right sidebar content (currently blank) -->
