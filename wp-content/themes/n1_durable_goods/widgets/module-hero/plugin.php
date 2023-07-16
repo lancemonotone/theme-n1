@@ -89,7 +89,7 @@ class Module_Hero extends \WP_Widget {
      */
     public function widget($args, $instance) {
 
-        if ($instance['disable'] == '1') return;
+        if (!empty($instance['disable']) && $instance['disable'] == '1') return;
 
         echo $args['before_widget'];
 
