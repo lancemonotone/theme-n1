@@ -47,11 +47,6 @@ body {
       }
     }
 
-    figure.hero {
-      background-position: center bottom;
-      background-size: auto 416px;
-    }
-
     a.pubinfo.wrapper {
       display: none;
     }
@@ -65,17 +60,6 @@ body {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
-  }
-
-
-  body.home {
-    section.hero {
-      height: 472px;
-    }
-
-    figure.hero {
-      background-size: auto 608px;
-    }
   }
 
   body.home section.subscribe h3.subscribe.issuetitle, h3.home.subscribe.issuetitle, div.home.subscribe.category, p.subscribe {
@@ -94,20 +78,4 @@ body {
 
 }
 
-@media only screen and (min-width: 1400px) {
-  body.home {
-    section.hero {
-      height: 616px;
-      top: 0;
-      z-index: -1;
-    }
 
-    figure.hero {
-      background-size: auto 100%;
-    }
-
-    div.hero-wrapper {
-      top: 144px;
-    }
-  }
-}
