@@ -1,0 +1,112 @@
+.module-subscribe {
+    --sub-bg: #ffffff4c;
+
+    p {
+        font-size: clamp(1.2rem, 1.9vw, 1.9rem);
+        line-height: 1.1;
+        text-align: center;
+        font-weight: 200;
+        border-top: 1px solid var(--brown);
+        padding-top: 8px;
+        @media only screen and (min-width: 640px) {
+            text-align: left;
+        }
+    }
+
+    section {
+        padding-inline: 16px;
+        padding-block: 48px 32px;
+        background-color: var(--orange);
+        text-align: center;
+
+        @media only screen and (min-width: 640px) {
+            text-align: left;
+        }
+
+        @media only screen and (min-width: 1024px) {
+            padding: 48px;
+            background-color: var(--tan);
+            border: none;
+        }
+    }
+
+    .module-hed {
+        display: inline-block;
+        font-size: clamp(1rem, 1.1vw, 1.1rem);
+        font-weight: 600;
+        padding-bottom: 0.3em;
+        border-bottom: 4px solid var(--brown);
+        white-space: nowrap;
+    }
+
+    .issuetitle {
+        color: var(--white);
+        margin: 16px 0;
+        font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+        text-align: center;
+
+        @media only screen and (min-width: 640px) {
+            text-align: left;
+        }
+
+        @media only screen and (min-width: 1024px) {
+            font-weight: 600;
+            color: var(--orange);
+        }
+    }
+
+    .prompt {
+        color: #fff;
+        padding-bottom: 16px;
+        @media only screen and (min-width: 640px) {
+            text-align: left;
+        }
+        @media only screen and (min-width: 1024px) {
+            color: var(--orange);
+            border-color: var(--orange);
+        }
+    }
+
+    .action {
+        font-weight: 600;
+        border-color: var(--brown);
+        margin-top: 24px;
+        color: var(--brown);
+    }
+
+    form {
+        padding-block-start: 16px;
+    }
+
+    input[type=text],
+    input[type=password] {
+        margin-top: 8px;
+        border: 1px solid #0000000f;
+        border-top-color: #0000001e;
+        border-bottom-color: #ffffff26;
+        box-shadow: inset 0 1px 8px -2px #00000019;
+
+        @media only screen and (min-width: 640px) {
+            margin-left: 0;
+            margin-top: 16px;
+        }
+    }
+
+    a.button,
+    input[type=submit] {
+        margin-top: 8px;
+        @media only screen and (min-width: 640px) {
+            margin-left: 0;
+            margin-top: 16px;
+        }
+
+        &:hover {
+            background-color: var(--brown);
+        }
+
+        &:active {
+            background-color: var(--light-blue);
+        }
+    }
+
+}

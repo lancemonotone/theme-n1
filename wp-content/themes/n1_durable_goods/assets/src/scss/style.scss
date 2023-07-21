@@ -212,7 +212,7 @@ body {
 a.jump,
 .button,
 .jump-to-page,
-input.submit,
+input[type=submit],
 input[type=submit],
 .home div.current-issue a.jump {
   padding: 7.2px 16px 8px 16px;
@@ -310,7 +310,7 @@ span.section-hed, body.magazine.issue-landing .supp-more-by-title, span.module-h
   font-weight: 600;
   padding-bottom: .3em;
   border-bottom: 4px solid #333;
-  white-space: nowrap;
+  //white-space: nowrap;
 }
 
 @media only screen and (min-width: 640px) and (max-width: 1023px) {
@@ -454,7 +454,7 @@ input {
   }
 }
 
-input.submit {
+input[type=submit] {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -829,7 +829,7 @@ p a {
   position: relative;
 }
 
-input.submit {
+input[type=submit] {
   position: relative;
   padding: 5px 1em;
   height: auto;
@@ -1117,7 +1117,7 @@ span.edit-link {
 }
 
 form fieldset label {
-  display: none;
+  @extend .visually-hidden;
 }
 
 section, div, nav, header, footer {
@@ -1207,7 +1207,7 @@ div.main {
 }
 
 section.content {
-  max-width: 1200px;
+  max-width: var(--max-width-content);
   margin-left: auto;
   margin-right: auto;
 }
@@ -1328,11 +1328,11 @@ div.roadblock {
 section.subscribe.roadblock {
   padding-top: 8px;
 
-  a.button:hover, input.submit:hover {
+  a.button:hover, input[type=submit]:hover {
     background-color: #242424;
   }
 
-  a.button:active, input.submit:active {
+  a.button:active, input[type=submit]:active {
     background-color: #1cecfb;
   }
 }
@@ -1641,7 +1641,7 @@ h2.current-issue {
   h1.post-title {
     font-weight: 600;
     padding-right: .3em;
-    white-space: nowrap;
+    //white-space: nowrap;
   }
 
   p.post-author {
@@ -3118,7 +3118,7 @@ p {
 
   &.post-category {
     right: 16px;
-    white-space: nowrap;
+    //white-space: nowrap;
   }
 }
 
@@ -3187,7 +3187,7 @@ a {
     font-size: .7rem;
     line-height: 1;
     display: inline-block;
-    white-space: nowrap;
+    //white-space: nowrap;
   }
 
   &.author:hover, &.tag:hover, &.category:hover {
@@ -4908,7 +4908,7 @@ p.mm-formError {
   text-decoration: underline;
   font-weight: 600;
   font-size: .7rem;
-  white-space: nowrap;
+  //white-space: nowrap;
 }
 
 p.mm-error, .mm-form-error {
@@ -5334,7 +5334,7 @@ div.mm div.mm-myaccount-module h3 {
   font-weight: 600;
   font-size: 1rem;
   display: inline-block;
-  white-space: nowrap;
+  //white-space: nowrap;
   color: #ce4f25;
   border-bottom: 3px solid #ce4f25;
   padding-bottom: .3em;

@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_64b47b72c6df0",
-            "label": "Home Hero",
+            "label": "Home Featured Article",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -22,8 +22,8 @@
         },
         {
             "key": "field_64b47b8bc6df1",
-            "label": "Home Hero Content",
-            "name": "home_hero_content",
+            "label": "Home Featured Article",
+            "name": "home_featured",
             "aria-label": "",
             "type": "post_object",
             "instructions": "",
@@ -336,5 +336,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1689549759
+    "modified": 1689951333
 }

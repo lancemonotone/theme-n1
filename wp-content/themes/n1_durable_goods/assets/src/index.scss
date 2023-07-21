@@ -2,15 +2,18 @@
 @import './scss/global';
 @import './scss/modules/a11y';
 @import './scss/modules/strux';
+@import './scss/modules/grid';
 @import './scss/modules/adrotate';
 @import './scss/modules/forms';
 
+@import './scss/modules/header';
 @import './scss/modules/header/nav-menu';
 @import './scss/modules/header/nav-search';
 @import './scss/modules/header/nav-actions';
-@import './scss/modules/header';
 
-@import './scss/modules/home_hero';
+@import './scss/modules/home';
+@import './scss/modules/subscribe';
+@import './scss/modules/home_featured';
 
 @import './scss/modules/footer';
 @import './scss/modules/div';
@@ -24,6 +27,3 @@
 
 @import './scss/modules/module';
 @import './scss/style.scss';
-//@import './scss/header.scss';
-//@import './scss/footer.scss';
-//@import './scss/buttons.scss';

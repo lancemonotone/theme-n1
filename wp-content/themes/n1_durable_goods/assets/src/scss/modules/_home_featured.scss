@@ -1,15 +1,17 @@
-.module-home-hero {
-    --hero-height: 200px;
+.module-home-featured {
+    --featured-height: 200px;
+    --background-size: auto;
 
     @media screen and (min-width: 768px) {
-        --hero-height: 300px;
+        --featured-height: 300px;
+        --background-size: cover;
     }
 
     @media screen and (min-width: 1024px) {
-        --hero-height: 400px;
+        --featured-height: 400px;
     }
 
-    height: clamp(200px, 30vw, var(--hero-height));
+    height: clamp(200px, 30vw, var(--featured-height));
 
     section {
         --accent: var(--orange);
@@ -36,7 +38,7 @@
         bottom: 0;
         left: 0;
         margin: 0;
-        background-size: auto;
+        background-size: var(--background-size);
         background-repeat: no-repeat;
         background-position: center center;
     }

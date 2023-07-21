@@ -2,14 +2,17 @@
 
 <?php Adrotate::display( 4 ) ?>
 
-<div id="main" class="main main-home cf">
-    <section id="content" class="main-home content">
+<div id="main" class="main main-home">
+    <section class="content grid gap-3">
         <?php get_template_part( 'sidebars/sidebar', 'home' ); ?>
     </section><!-- /#content -->
 </div><!-- /#main -->
 
 <?php Adrotate::display( 3 ) ?>
 
-<div id="supplementary" class="supp">
-    <?php dynamic_sidebar( 'sidebar-home-3' ); ?>
-</div><!-- #supplementary -->
+<?php // Home Bottom Modules ?>
+<?php if ( is_active_sidebar( 'sidebar-home-0' ) ) { ?>
+    <div id="supplementary" class="supp">
+        <?php dynamic_sidebar( 'sidebar-home-3' ); ?>
+    </div><!-- #supplementary -->
+<?php } ?>
