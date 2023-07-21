@@ -1,17 +1,15 @@
 <?php namespace N1_Durable_Goods;
 /*
-Plugin Name: Home Hero Module
-Description: The hero is a kind of ultra-feature displayed rarely,
-and only on the homepage. We�d like to be able to set any type of
-content as a hero. For example, to direct users to the store for a
+Plugin Name: Home Featured Module
+Description: Ultra-feature displayed only on the homepage. We'd like to be able
+to set any type of content. For example, to direct users to the store for a
 special sale, to promote a newly posted magazine article, to show
 off the new issue, to feature an Online Only article, to advertise an
 upcoming event, or to encourage donations via a Wikipedia-style plea.
-The hero appears only on the home page.
 
 Version: 1.0
 Author: Durable Goods Design
-Text Domain: module-home-hero
+Text Domain: module-home-featured
 Domain Path: /lang/
 Network: false
 License: GPLv2 or later
@@ -33,8 +31,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-// TODO: change 'Module_Home_Hero' to the name of your plugin
-class Module_Home_Hero extends \WP_Widget {
+// TODO: change 'Module_Home_Featured' to the name of your plugin
+class Module_Home_Featured extends \WP_Widget {
 
     /*--------------------------------------------------*/
     /* Constructor
@@ -54,14 +52,14 @@ class Module_Home_Hero extends \WP_Widget {
         register_deactivation_hook(__FILE__, array($this, 'deactivate'));
 
         // TODO:	update classname and description
-        // TODO:	replace 'Module_Home_Hero' to be named more plugin specific. Other instances exist throughout the code, too.
+        // TODO:	replace 'Module_Home_Featured' to be named more plugin specific. Other instances exist throughout the code, too.
         parent::__construct(
-            'Module_Home_Hero',
-            __('Home Hero Module', 'Module_Home_Hero'),
+            'Module_Home_Featured',
+            __('Home Featured Module', 'Module_Home_Featured'),
             array(
-                'classname' => 'module module-home-hero',
-                'description' => __('The hero is a kind of ultra-feature displayed rarely, and only on the homepage.',
-                    'Module_Home_Hero')
+                'classname' => 'module module-home-featured',
+                'description' => __('Ultra-feature displayed only on the homepage.',
+                    'Module_Home_Featured')
             ));
 
         // Register custom post types
@@ -114,7 +112,7 @@ class Module_Home_Hero extends \WP_Widget {
         // TODO:	Here is where you update your widget's old values with the new, incoming values
         $instance['disable'] = strip_tags($new_instance['disable']);
         $instance['always_latest'] = strip_tags($new_instance['always_latest']);
-        $instance['home_hero_module'] = strip_tags($new_instance['home_hero_module']);
+        $instance['home_featured_module'] = strip_tags($new_instance['home_featured_module']);
 
         return $instance;
 
@@ -142,7 +140,7 @@ class Module_Home_Hero extends \WP_Widget {
     public function widget_textdomain() {
 
         // TODO be sure to change 'widget-name' to the name of *your* plugin
-        load_plugin_textdomain('Module_Home_Hero', false, plugin_dir_path(__FILE__) . '/lang/');
+        load_plugin_textdomain('Module_Home_Featured', false, plugin_dir_path(__FILE__) . '/lang/');
 
     } // end widget_textdomain
 
@@ -170,7 +168,7 @@ class Module_Home_Hero extends \WP_Widget {
     public function register_admin_styles() {
 
         // TODO:	Change 'widget-name' to the name of your plugin
-        wp_enqueue_style('module-home-hero-admin-styles', get_stylesheet_directory_uri() . '/widgets/module-home-hero/css/admin.css');
+        wp_enqueue_style('module-home-featured-admin-styles', get_stylesheet_directory_uri() . '/widgets/module-home-featured/css/admin.css');
 
     } // end register_admin_styles
 
@@ -180,7 +178,7 @@ class Module_Home_Hero extends \WP_Widget {
     public function register_admin_scripts() {
 
         // TODO:	Change 'widget-name' to the name of your plugin
-        wp_enqueue_script('module-home-hero-admin-script', get_stylesheet_directory_uri() . '/widgets/module-home-hero/js/admin.js', array('jquery'));
+        wp_enqueue_script('module-home-featured-admin-script', get_stylesheet_directory_uri() . '/widgets/module-home-featured/js/admin.js', array('jquery'));
 
     } // end register_admin_scripts
 
@@ -190,7 +188,7 @@ class Module_Home_Hero extends \WP_Widget {
     public function register_widget_styles() {
 
         // TODO:	Change 'widget-name' to the name of your plugin
-        wp_enqueue_style('module-home-hero-widget-styles', get_stylesheet_directory_uri() . '/widgets/module-home-hero/css/widget.css');
+        wp_enqueue_style('module-home-featured-widget-styles', get_stylesheet_directory_uri() . '/widgets/module-home-featured/css/widget.css');
 
     } // end register_widget_styles
 
@@ -200,7 +198,7 @@ class Module_Home_Hero extends \WP_Widget {
     public function register_widget_scripts() {
 
         // TODO:	Change 'widget-name' to the name of your plugin
-        wp_enqueue_script('module-home-hero-script', get_stylesheet_directory_uri() . '/widgets/module-home-hero/js/widget.js', array('jquery'));
+        wp_enqueue_script('module-home-featured-script', get_stylesheet_directory_uri() . '/widgets/module-home-featured/js/widget.js', array('jquery'));
 
     } // end register_widget_scripts
 
@@ -209,39 +207,39 @@ class Module_Home_Hero extends \WP_Widget {
      *
      */
     public function register_cpt() {
-        register_post_type('Module_Home_Hero', array(
-            'label' => 'Home Hero Modules',
-            'description' => 'Manage Home Hero Modules.',
+        register_post_type('Module_Home_Featured', array(
+            'label' => 'Home Featured Modules',
+            'description' => 'Manage Home Featured Modules.',
             'public' => true,
             'show_ui' => true,
             'show_in_menu' => true,
             'capability_type' => 'post',
             'hierarchical' => false,
-            'rewrite' => array('slug' => 'Module_Home_Hero', 'with_front' => '1'),
+            'rewrite' => array('slug' => 'Module_Home_Featured', 'with_front' => '1'),
             'query_var' => true,
             'exclude_from_search' => true,
             'menu_position' => 5,
             'supports' => array('title'),
             'labels' => array(
-                'name' => 'Home Hero Modules',
-                'singular_name' => 'Home Hero Module',
-                'menu_name' => 'Home Hero Modules',
-                'add_new' => 'Add Home Hero Module',
-                'add_new_item' => 'Add New Home Hero Module',
+                'name' => 'Home Featured Modules',
+                'singular_name' => 'Home Featured Module',
+                'menu_name' => 'Home Featured Modules',
+                'add_new' => 'Add Home Featured Module',
+                'add_new_item' => 'Add New Home Featured Module',
                 'edit' => 'Edit',
-                'edit_item' => 'Edit Home Hero Module',
-                'new_item' => 'New Home Hero Module',
-                'view' => 'View Home Hero Module',
-                'view_item' => 'View Home Hero Module',
-                'search_items' => 'Search Home Hero Modules',
-                'not_found' => 'No Home Hero Modules Found',
-                'not_found_in_trash' => 'No Home Hero Modules Found in Trash',
-                'parent' => 'Parent Home Hero Module',
+                'edit_item' => 'Edit Home Featured Module',
+                'new_item' => 'New Home Featured Module',
+                'view' => 'View Home Featured Module',
+                'view_item' => 'View Home Featured Module',
+                'search_items' => 'Search Home Featured Modules',
+                'not_found' => 'No Home Featured Modules Found',
+                'not_found_in_trash' => 'No Home Featured Modules Found in Trash',
+                'parent' => 'Parent Home Featured Module',
             )));
     }
 
 } // end class
 
 add_action('widgets_init', function () {
-    register_widget("\N1_Durable_Goods\Module_Home_Hero");
+    register_widget("\N1_Durable_Goods\Module_Home_Featured");
 });

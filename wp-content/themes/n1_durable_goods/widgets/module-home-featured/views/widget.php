@@ -2,10 +2,9 @@
 if ( ! is_home() ) {
     return;
 }
-$hero_module_id = $instance[ 'home_hero_module' ];
 
-// get home_hero_content from ACF options
-$article       = get_field( 'home_hero_content', 'option' );
+// get home_featured_content from ACF options
+$article       = get_field( 'home_featured', 'option' );
 $article_title = $article->post_title;
 $article_url   = get_permalink( $article->ID );
 $article_link  = '<a href="' . $article_url . '">' . $article_title . '</a>';
@@ -14,14 +13,12 @@ $authors       = N1_Magazine::get_authors( $article->ID );
 
 if ( $terms = wp_get_post_terms( $article->ID, 'category' ) ) {
     // Issue
-    $issue = wp_get_post_terms( $article->ID, 'issue' );
-    /** @var WP_Term $term */
+    $issue      = wp_get_post_terms( $article->ID, 'issue' );
     $issue      = reset( $issue );
     $issue_name = $issue->name;
     $issue_url  = get_term_link( $issue, 'issue' );
 
     // Article
-    /** @var WP_Term $term */
     $term      = reset( $terms );
     $term_name = $term->name;
     $term_url  = get_term_link( $term, 'category' );
@@ -29,7 +26,6 @@ if ( $terms = wp_get_post_terms( $article->ID, 'category' ) ) {
     $type = 'issue';
 } elseif ( $terms = wp_get_post_terms( $article->ID, 'online-only' ) ) {
     // Online Only
-    /** @var WP_Term $term */
     $term      = reset( $terms );
     $term_name = $term->name;
     $term_url  = get_term_link( $term, 'online-only' );
