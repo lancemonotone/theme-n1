@@ -41,6 +41,7 @@ class N1 {
         include_once( 'lib/class.assets.php' );
         include_once( 'lib/class.search.php' );
         include_once( 'lib/class.adrotate.php' );
+        include_once( 'lib/class.navigation.php' );
     }
 
     function setup_plugins() {
@@ -51,12 +52,13 @@ class N1 {
 
     function setup_widgets() {
         include_once( 'lib/widgets.php' );
-        include_once( 'widgets/module-books/plugin.php' );
+        // include_once( 'widgets/module-books/plugin.php' );
+        include_once( 'widgets/module-bookstore/plugin.php' );
         include_once( 'widgets/module-paper-monument/plugin.php' );
         include_once( 'widgets/module-issue-archives/plugin.php' );
         include_once( 'widgets/module-multi/plugin.php' );
         include_once( 'widgets/module-toc/plugin.php' );
-        include_once( 'widgets/module-hero/plugin.php' );
+        // include_once( 'widgets/module-hero/plugin.php' );
         include_once( 'widgets/module-home-featured/plugin.php' );
         include_once( 'widgets/module-subscribe/plugin.php' );
         include_once( 'widgets/module-newsletter/plugin.php' );
