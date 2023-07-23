@@ -104,9 +104,14 @@ class N1_Magazine {
             } elseif ( is_preview() && ! empty( wp_get_post_terms( $_REQUEST[ 'preview_id' ], 'category' ) ) ) {
                 self::$page_type  = 'magazine';
                 self::$page_class = 'magazine';
-            } else /*if(!empty($wp_query->query['online-only']))*/ {
-                self::$page_type  = 'online-only';
-                self::$page_class = 'online-only';
+            } elseif ( ! empty( $wp_query->query[ 'online-only' ] ) ) {
+                if ( $wp_query->query[ 'online-only' ] == 'events' ) {
+                    self::$page_type  = 'online-only';
+                    self::$page_class = 'events online-only';
+                } else {
+                    self::$page_type  = 'online-only';
+                    self::$page_class = 'online-only';
+                }
             }
         } elseif ( is_page( 'magazine' ) ) {
             self::$page_type  = 'magazine landing';
@@ -409,7 +414,7 @@ class N1_Magazine {
             $paywall = false;
         }
         // If this is a MM Core page.
-        if ( $post_id && MM_CorePage::getCorePageInfo( $post_id ) ) {
+        if ( $post_id && \MM_CorePage::getCorePageInfo( $post_id ) ) {
             $paywall = false;
         }
         // If a member is logged in
@@ -630,13 +635,13 @@ class N1_Magazine {
         $offset = $previous ? -1 : 1;
 
         // Determine the default index if wrapping is enabled and an edge is reached
-        $defaultIndex = $wrap ? (($offset == -1 ? count($haystack) - 1 : 0)) : null;
+        $defaultIndex = $wrap ? ( ( $offset == -1 ? count( $haystack ) - 1 : 0 ) ) : null;
 
         // Calculate the new index based on the current index and offset, or set to the default index if an edge is reached
-        $newIndex = ($current_index + $offset < 0 || $current_index + $offset === count($haystack)) ? $defaultIndex : $current_index + $offset;
+        $newIndex = ( $current_index + $offset < 0 || $current_index + $offset === count( $haystack ) ) ? $defaultIndex : $current_index + $offset;
 
         // Return the value at the new index if it exists, or an empty string if not
-        return array_key_exists($newIndex, $haystack) ? $haystack[$newIndex] : '';
+        return array_key_exists( $newIndex, $haystack ) ? $haystack[ $newIndex ] : '';
     }
 
 }
