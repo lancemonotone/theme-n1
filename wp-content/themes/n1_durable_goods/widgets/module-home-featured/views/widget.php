@@ -51,4 +51,7 @@ $img      = wp_get_attachment_image_src( $img_id, 'content-full' );
     <div class="term">
         <a href="<?= $term_url ?>"><?= $term_name ?></a>
     </div>
+    <span class="edit-link">
+        <a class="post-edit-link" href="<?= admin_url( 'admin.php?page=acf-options' ) ?>">Edit</a>
+    </span>
 </section>
