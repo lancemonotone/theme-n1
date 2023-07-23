@@ -74,11 +74,8 @@
   </script>
   <script>
     window.dataLayer = window.dataLayer || [];
-
     function gtag() {dataLayer.push( arguments );}
-
     gtag( 'js', new Date() );
-
     gtag( 'config', 'UA-152018343-2' );
   </script>
 <meta name="facebook-domain-verification" content="ku6hcqhqvzemw704rsv5mt4sog908v" />
