@@ -1,6 +1,4 @@
 <?php namespace N1_Durable_Goods;
-$products_module_id = $instance[ 'books_module' ];
-
 $heading    = get_field( 'bookstore_heading', 'options' );
 $subheading = get_field( 'bookstore_subheading', 'options' );
 $dek        = get_field( 'bookstore_dek', 'options' );

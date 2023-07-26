@@ -2,11 +2,11 @@
 
 <?php Adrotate::display( 4 ) ?>
 
-<div id="main" class="main main-home">
+<main>
     <section class="content grid gap-3">
         <?php get_template_part( 'sidebars/sidebar', 'home' ); ?>
     </section><!-- /#content -->
-</div><!-- /#main -->
+</main><!-- /#main -->
 
 <?php Adrotate::display( 3 ) ?>
 

@@ -59,7 +59,7 @@ class N1 {
         include_once( 'widgets/module-multi/plugin.php' );
         include_once( 'widgets/module-toc/plugin.php' );
         // include_once( 'widgets/module-hero/plugin.php' );
-        include_once( 'widgets/module-home-featured/plugin.php' );
+        // include_once( 'widgets/module-home-featured/plugin.php' );
         include_once( 'widgets/module-subscribe/plugin.php' );
         include_once( 'widgets/module-newsletter/plugin.php' );
         include_once( 'widgets/module-social/plugin.php' );

@@ -8,11 +8,14 @@
     --transition: 0.1s cubic-bezier(1, -0.02, 1, 1);
     --padding-block-end: clamp(2.25rem, 4vw, 3.375rem);
 
+    --black: #000000;
     --white: #ffffff;
     --tan: #f2ece2;
+    --dark-tan: #bcb5a7;
     --brown: #242424;
-    --dark-brown: #4d4d4d;
+    --light-brown: #333333;
     --inactive-dark: #666666;
+    --interactive-light: #717171;
     --inactive: #999999;
     --orange: #ce4f25;
     --light-orange: #d1765b;
@@ -22,4 +25,12 @@
 
 .widget {
     outline: 1px solid green;
+}
+
+a.button:hover, input[type=submit]:hover {
+    background-color: var(--brown);
+}
+
+a.button:active, input[type=submit]:active {
+    background-color: var(--light-blue);
 }

@@ -21,15 +21,15 @@ if(count($pm_posts)){
 <?php foreach($pm_posts as $pm){
 	$authors = N1_Magazine::get_authors($pm->ID, true, false);
 	?>
-	<div class="featured pm article">
-	<a href="<?php echo get_permalink($pm->ID)?>" title="<?php echo $pm->post_title?>">
-		<ul class="featured books module author meta">
-			<li class="featured pm article title"><?php echo $pm->post_title?></li>
-			<li class="featured pm article author"><?php echo $authors?></li>
-		</ul>
-	</a>
-	<?php edit_post_link( __( 'Edit', 'twentytwelve' ), '<span class="edit-link">', '</span>', $pm->ID ); ?>
-	</div>
+	<article class="featured pm article">
+        <a href="<?php echo get_permalink($pm->ID)?>" title="<?php echo $pm->post_title?>">
+            <ul class="featured books module author meta">
+                <li class="featured pm article title"><?php echo $pm->post_title?></li>
+                <li class="featured pm article author"><?php echo $authors?></li>
+            </ul>
+        </a>
+	<?php edit_post_link( __( 'Edit' ), null, null, $pm->ID ); ?>
+	</article>
 <?php } ?>
 	<div class="featured pm jump"><a href="<?php echo home_url()?>/online-only/paper-monument" class="jump"><?php _e('Visit Paper Monument')?></a></div>
 </section>

@@ -346,7 +346,7 @@ jQuery(document).ready(function($) {
 		toDo = ( toDo ) ? 'original_message' : 'session_transcript';
 		var heading = ( toDo == 'original_message' ) ? 'Email Message' : 'Session Transcript';
 		jQuery( '.ps-popup-container' ).html( `
-			<h1>${heading}</h1>
+			<h1 style="margin: 0; padding: 0;"></h1>
 			<h4>Loading...</h4>
 		` );
 
@@ -433,9 +433,26 @@ jQuery(document).ready(function($) {
 							</table>
 							<hr />
 							<div>
-								${response.data.original_message}
+								<iframe src="${response.data.log_url}" width="100%" height="310px"></iframe>
 							</div>
 						`;
+
+						//Show Attachments
+						if( response.data.attachments !== undefined ) {
+
+							popupContent += `
+									<hr />
+									<div>`;
+
+							jQuery.each( response.data.attachments, function( i, attachment ) {
+
+								popupContent += `<a href='${response.data.path}${attachment}' target="_blank">${attachment}</a><br />`;
+
+							} );
+
+							popupContent += `</div>`;
+
+						}
 
 						jQuery( '.ps-popup-container' ).find( 'h1' ).after( popupContent );
 
@@ -578,7 +595,7 @@ jQuery(document).ready(function($) {
 
 		e.preventDefault();
 		var _details = jQuery( this ).siblings( 'span' ).attr( 'title' );
-		jQuery( '.ps-popup-container' ).html( `<h1>Details</h1>${_details}` );
+		jQuery( '.ps-popup-container' ).html( `<h1 style="margin: 0; padding: 0;"></h1>${_details}` );
 
 	} );
 

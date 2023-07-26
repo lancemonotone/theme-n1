@@ -1,0 +1,71 @@
+.mm-button,
+.post-edit-link {
+    display: none;
+    border-radius: 4em;
+    font-family: "adelle-sans", sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: white;
+    background-color: #333;
+    width: auto;
+    margin-right: auto;
+    padding: 7.2px 16px 8px 16px;
+    height: auto;
+    background-image: none;
+    border-width: 0px;
+    border-color: transparent;
+    box-shadow: inherit;
+    text-shadow: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+        background-color: var(--orange);
+    }
+
+    &:active {
+        background-color: var(--light-blue);
+    }
+}
+
+.post-edit-link {
+    display: none;
+    position: absolute;
+    top: 8px;
+    right: 0;
+    width: auto;
+    font-size: 11px;
+    padding: 4px 12px 4px 16px;
+    border: 2px solid var(--dark-blue);
+    background-color: var(--tan);
+    color: var(--dark-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 800;
+
+    article:hover & {
+        display: block;
+    }
+
+    &:hover {
+        border-color: var(--orange);
+        color: var(--orange);
+        background-color: var(--tan);
+    }
+
+    &:active {
+        border-color: var(--light-blue);
+        background-color: var(--light-blue);
+        color: var(--white);
+    }
+
+    &:after {
+        content: "\21B2";
+        padding-left: 4px;
+        position: relative;
+    }
+
+}
+

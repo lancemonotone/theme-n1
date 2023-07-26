@@ -37,9 +37,8 @@ if ( $terms = wp_get_post_terms( $article->ID, 'category' ) ) {
 $img_id   = get_post_thumbnail_id( $article->ID );
 $img_meta = wp_prepare_attachment_for_js( $img_id );
 $img_url  = $img_meta[ 'url' ];
-$img      = wp_get_attachment_image_src( $img_id, 'content-full' );
 ?>
-<section class="home-hero <?= $type ?>">
+<article class="type-<?= $type ?>">
     <figure style="background-image: url(<?= $img_url ?>);">
         <figcaption>
             <h4 class="title"><?= $article_link ?></h4>
@@ -48,10 +47,10 @@ $img      = wp_get_attachment_image_src( $img_id, 'content-full' );
             <?php } ?>
         </figcaption>
     </figure>
-    <div class="term">
+    <div class="flags">
         <a href="<?= $term_url ?>"><?= $term_name ?></a>
     </div>
-    <span class="edit-link">
-        <a class="post-edit-link" href="<?= admin_url( 'admin.php?page=acf-options' ) ?>">Edit</a>
-    </span>
-</section>
+    <?php if ( current_user_can( 'edit_post', $the_p->ID ) ) { ?>
+    <a class="post-edit-link" href="<?= admin_url( 'admin.php?page=acf-options' ) ?>">Edit</a>
+    <?php } ?>
+</article>

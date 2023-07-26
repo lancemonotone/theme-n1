@@ -225,6 +225,9 @@ class Module_Multi extends \WP_Widget {
 
         $flavor_args = [];
         switch ( $flavor ) {
+            case 'home-featured':
+                $flavor_args = $this->get_home_featured_args();
+                break;
             case 'featured-default':
                 $flavor_args = $this->get_featured_default_args();
                 break;
@@ -263,7 +266,8 @@ class Module_Multi extends \WP_Widget {
             'paged'          => $paged,
         ];
 
-        $this->multi_query = new \WP_Query( array_merge( (array)$flavor_args, (array)$default_args ) );
+        $query_args        = array_merge( (array)$flavor_args, (array)$default_args );
+        $this->multi_query = new \WP_Query( $query_args );
         $the_posts         = $this->multi_query->posts;
 
         // is this is an ajax call?
@@ -299,7 +303,7 @@ class Module_Multi extends \WP_Widget {
         $post_counter     = 0;
         foreach ( $the_posts as $the_p ) {
             if ( $post_counter === $ad_after ) {
-                Adrotate::display(1);
+                Adrotate::display( 1 );
             }
             if ( $post_counter === $newsletter_after ) {
                 the_widget( '\N1_Durable_Goods\Module_Newsletter' );
@@ -316,8 +320,8 @@ class Module_Multi extends \WP_Widget {
     function print_post( $flavor, $the_p ) {
         // Boy, this function escalated quickly.
         // Try to get the category of the post
-        $array        = wp_get_post_terms( $the_p->ID, 'issue' );
-        $section      = reset( $array );
+        $terms        = wp_get_post_terms( $the_p->ID, 'issue' );
+        $section      = reset( $terms );
         $taxonomy     = 'category';
         $article_type = 'magazine';
         // If there is no category, then it might be an Online Only post.
@@ -331,20 +335,30 @@ class Module_Multi extends \WP_Widget {
             $taxonomy     = 'online-only';
             $article_type = 'online-only';
         }
-        // If it's not in the scroll it must be a page.
+
+        // If $sections is still empty, it's not in the scroll so it must be a page.
         if ( empty( $section ) ) {
             $article_type = 'page';
         }
         $flags = $this->get_flags( $flavor, $the_p, $section );
+
         // get the teaser style
-        $format = get_field( 'article_teaser_format', $the_p->ID );
-        $format = $format ? $format : 'no_image';
+        if ( $flavor == 'home-featured' ) {
+            $format = 'with_image';
+        } else {
+            $format = get_field( 'article_teaser_format', $the_p->ID );
+            $format = $format === 'no_image' ? 'default' : $format;
+        }
+
         // cache content for use later
         $content  = $this->get_content( $the_p, $flavor, $format );
-        $authors  = N1_Magazine::get_authors( $the_p->ID, true, true );
-        $featured = ! is_search() && get_field( 'article_featured', $the_p->ID ) ? 'featured' : '';
+        $authors  = N1_Magazine::get_authors( $the_p->ID, true, false );
+        $featured = ! is_search() && get_field( 'article_featured', $the_p->ID ) ? 'article-featured' : '';
         $subhead  = get_field( 'article_subhead', $the_p->ID );
         switch ( $flavor ) {
+            case 'home-featured':
+                include( plugin_dir_path( __FILE__ ) . '/views/cards/home-featured.php' );
+                break;
             case 'archive':
             case 'sticky':
                 // Force excerpt display on search results page.
@@ -353,84 +367,20 @@ class Module_Multi extends \WP_Widget {
                 }
                 switch ( $format ) {
                     case 'pullquote':
-                        ?>
-                        <article
-                                class="post tweetquote <?php echo $article_type ?> term-<?php echo $section->slug ?>">
-                            <?php $this->print_post_head( $the_p, $article_type, $section, $authors ) ?>
-                            <?php echo $section->name ? '<p class="post-category"><a href="' . get_term_link( $section, $taxonomy ) . '">' . $section->name . '</a></p>' : '' ?>
-                            <a href="<?php echo get_permalink( $the_p->ID ) ?>"><?php echo $content ?></a>
-                            <?php N1_Magazine::print_post_tags( $the_p->ID ); ?>
-                            <h1 class="post-title">
-                                <a
-                                        href="<?php echo get_permalink( $the_p->ID ) ?>"><?php echo $the_p->post_title ?></a>
-                            </h1>
-                            <?php echo $authors ? '<p class="post-author">' . $authors . '</p>' : '' ?>
-                            <div class="jump">
-                                <a href="<?php echo get_permalink( $the_p->ID ) ?>"
-                                   class="jump"><?php _e( 'Read More' ) ?></a>
-                            </div>
-                            <?php edit_post_link( __( 'Edit' ), '<span class="edit-link">', '</span>', $the_p->ID ); ?>
-                        </article>
-                        <?php break;
+                        include( plugin_dir_path( __FILE__ ) . '/views/cards/pullquote.php' );
+                        break;
+                    case 'with_image':
                     default:
-                        ?>
-                        <article
-                                class="post <?php echo $featured ?> <?php echo $article_type ?> term-<?php echo $section->slug ?>">
-                            <?php $this->print_post_head( $the_p, $article_type, $section, $authors ) ?>
-                            <?php if ( $article_type == 'magazine' && ( ! ! $featured || $format == 'with_image' ) ) {
-                                $img_src = wp_get_attachment_image_src( get_post_thumbnail_id( $the_p->ID ), 'content-full' );
-                                if ( is_array( $img_src ) ) {
-                                    ?>
-                                    <figure class="post-figure">
-                                        <img class="post-figure"
-                                             src="<?php echo $img_src[ 0 ] ?>"
-                                             alt="<?php echo $the_p->post_title ?>"/>
-                                    </figure>
-                                <?php }
-                            } else {
-                                if ( $format == 'with_image' ) { ?>
-                                    <a
-                                            href="<?php echo get_permalink( $the_p->ID ) ?>"><?php echo $content ?></a>
-                                <?php }
-                            } ?>
-                            <?php echo $section->name ? '<p class="post-category"><a href="' . get_term_link( $section, $taxonomy ) . '">' . $section->name . '</a></p>' : '' ?>
-                            <?php echo $authors ? '<p class="post-author">' . $authors . '</p>' : '' ?>
-                            <h1 class="post-title">
-                                <a
-                                        href="<?php echo get_permalink( $the_p->ID ) ?>"><?php echo $the_p->post_title ?></a>
-                            </h1>
-                            <?php N1_Magazine::print_post_tags( $the_p->ID ); ?>
-                            <p class="post-dek"><?php echo $subhead ?></p>
-
-                            <div
-                                    class="post-excerpt"><?php echo apply_filters( 'the_excerpt', $the_p->post_excerpt ) ?></div>
-                            <div class="jump">
-                                <a href="<?php echo get_permalink( $the_p->ID ) ?>"
-                                   class="jump"><?php _e( 'Read More' ) ?></a>
-                            </div>
-                            <?php edit_post_link( __( 'Edit' ), '<span class="edit-link">', '</span>', $the_p->ID ); ?>
-                        </article><!-- /.post -->
-                        <?php break;
+                        include( plugin_dir_path( __FILE__ ) . '/views/cards/with_image.php' );
+                        break;
                 }
                 break;
+            case 'online-only-home':
+            case 'featured-default':
             default:
-                $the_tax = $section->taxonomy == 'category' ? 'magazine' : $section->taxonomy ?>
-                <div
-                        class="module article <?php echo $format ?> <?php echo $the_tax ?> term-<?php echo $section->slug ?>">
-                    <a class="module article wrapper"
-                       href="<?php echo get_permalink( $the_p->ID ) ?>">
-                        <?php echo $flags; ?>
-                        <?php echo $content; ?>
-                        <ul class="module article meta article-info">
-                            <li class="module article meta category"><?php echo $section->name ?></li>
-                            <li class="module article meta title"><?php echo $the_p->post_title ?></li>
-                            <li
-                                    class="module article meta author"><?php echo N1_Magazine::get_authors( $the_p->ID, true, false ) ?></li>
-                        </ul>
-                    </a>
-                    <?php edit_post_link( __( 'Edit' ), '<span class="edit-link">', '</span>', $the_p->ID ); ?>
-                </div><!-- .module.article -->
-                <?php break;
+                $the_tax = $section->taxonomy == 'category' ? 'magazine' : $section->taxonomy;
+                include( plugin_dir_path( __FILE__ ) . '/views/cards/default.php' );
+                break;
         }
     }
 
@@ -438,31 +388,26 @@ class Module_Multi extends \WP_Widget {
         switch ( $flavor ) {
             case 'archive':
             case 'online-only-home':
+            case 'home-featured':
             case 'sticky':
-                $class    = 'post-figure';
                 $img_size = 'content-full';
                 break;
             default:
-                $class    = 'module article thumbnail';
                 $img_size = 'multi-module';
                 break;
         }
         switch ( $format ) {
             case 'with_image':
-                $img_src = wp_get_attachment_image_src( get_post_thumbnail_id( $the_p->ID ), $img_size );
-                if ( is_array( $img_src ) ) {
-                    $content = '<figure class="' . $class . '"><img class="' . $class . '" src="' . $img_src[ 0 ] . '" alt="' . $the_p->post_title . '" /></figure>';
-                } else {
-                    $content = '';
-                }
+                $img_id   = get_post_thumbnail_id( $the_p->ID );
+                $img_meta = wp_prepare_attachment_for_js( $img_id );
+                $img_url  = $img_meta[ 'url' ];
+                $content  = '<figure style="background-image: url(' . $img_url . ');" /></figure>';
                 break;
             case 'no_image':
                 $content = '';
                 break;
             case 'pullquote':
                 $found = false;
-                $start = '<p class="module article tweetquote">';
-                $end   = '</p>';
                 if ( $pullquotes = get_field( 'article_pullquote_repeater', $the_p->ID ) ) {
                     foreach ( $pullquotes as $pullquote ) {
                         if ( $pullquote[ 'article_pullquote_featured' ] ) {
@@ -476,7 +421,7 @@ class Module_Multi extends \WP_Widget {
                     }
                 }
                 $quote   = $quote != '' ? $quote : $the_p->post_excerpt;
-                $content = $start . $this->shorten_str_by_word( $quote, 130 ) . $end;
+                $content = '<p class="pullquote">' . $this->shorten_str_by_word( $quote, 130 ) . '</p>';
                 $content = apply_filters( 'the_excerpt', $content );
                 break;
             default:
@@ -489,46 +434,43 @@ class Module_Multi extends \WP_Widget {
         switch ( $article_type ) {
             case 'online-only':
                 $date = $section->slug == 'events' ? get_field( 'event_date', $the_p->ID ) : $the_p->post_date ?>
-                <p class="post-date"><?php echo date( 'F j, Y', strtotime( $date ) ) ?></p>
+                <p class="date"><?= date( 'F j, Y', strtotime( $date ) ) ?></p>
                 <?php break;
             case 'magazine':
                 $issue = N1_Magazine::get_issue_by_slug( $section->slug );
                 $issue_art = get_field( 'issue_art', $issue->ID );
                 ?>
-                <div class="issue-icon">
-                    <figure class="issue thumb">
-                        <a href="<?php echo home_url() ?>/magazine/<?php echo $issue->post_name ?>">
-                            <img src="<?php echo $issue_art[ 'sizes' ][ 'issue-art' ] ?>"
-                                 alt="<?php _e( 'Art for' ) ?> <?php echo $issue->post_title ?>">
-                        </a>
-                    </figure>
-                </div><!-- .issue-icon -->
+                <figure>
+                    <a href="<?= home_url() ?>/magazine/<?= $issue->post_name ?>">
+                        <img src="<?= $issue_art[ 'sizes' ][ 'issue-art' ] ?>"
+                             alt="<?php _e( 'Art for' ) ?> <?= $issue->post_title ?>">
+                    </a>
+                </figure>
                 <?php break;
             case 'page':
-                ?>
-
-                <?php break;
+                break;
         }
     }
 
-    function get_flags( $flavor, $the_p, $section ) {
-        $online_terms   = wp_get_post_terms( $the_p->ID, [ 'online-only' ] );
-        $is_scroll_post = ! ! reset( $online_terms );
-        $issue_terms    = wp_get_post_terms( $the_p->ID, [ 'issue' ] );
-        $is_issue       = ! ! reset( $issue_terms );
-        if ( $is_scroll_post ) {
-            $date  = $section->slug == 'events' ? get_field( 'event_date', $the_p->ID ) : $the_p->post_date;
-            $flags = '<div class="flags"><span class="date">' . date( 'F j, Y', strtotime( $date ) ) . '</span></div>';
+    function get_flags( $flavor, $the_p, $section ): string {
+        $is_event       = $section->slug === 'events';
+        $is_online_only = $section->taxonomy === 'online-only';
+        $is_issue       = $section->taxonomy === 'issue';
+
+        if ( $is_event ) {
+            $flags = $section->name;
+        } elseif ( $is_online_only ) {
+            // $date  = $section->slug == 'events' ? get_field( 'event_date', $the_p->ID ) : $the_p->post_date;
+            // $flags = '<div class="flags"><span class="date">' . date( 'F j, Y', strtotime( $date ) ) . '</span></div>';
+            $flags = $section->name;
         } elseif ( $is_issue ) {
-            $issue     = reset( $issue_terms );
-            $issue_obj = N1_Magazine::get_issue_by_slug( $issue->slug );
-            $flags     = '<div class="flags">
-					<span class="issuenumber">' . $issue_obj->post_title . '</span>
-					<span class="issuetitle">' . get_field( 'issue_name', $issue_obj->ID ) . '</span>
-				</div>';
+            $issue        = N1_Magazine::get_issue_by_slug( $section->slug );
+            $issue_number = $issue->post_title;
+            $issue_name   = get_field( 'issue_name', $issue->ID );
+            $flags        = "<strong>{$issue_number}</strong> {$issue_name}";
         }
 
-        return $flags;
+        return '<div class="flags">' . $flags . '</div>';
     }
 
     function shorten_str_by_word( $str, $limit, $ellipsis = '...' ) {
@@ -743,6 +685,16 @@ class Module_Multi extends \WP_Widget {
                     'operator' => 'NOT IN'
                 ]
             ]
+        ];
+    }
+
+    /**
+     * Returns post selected in Site Settings Home Featured.
+     */
+    function get_home_featured_args() {
+        // query wordpress database for 'home_featured' option
+        return [
+            'post__in' => [ get_field( 'home_featured', 'options' ) ]
         ];
     }
 
