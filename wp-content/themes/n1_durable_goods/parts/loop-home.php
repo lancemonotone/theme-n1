@@ -3,7 +3,7 @@
 <?php Adrotate::display( 4 ) ?>
 
 <main>
-    <section class="content grid gap-3">
+    <section class="content">
         <?php get_template_part( 'sidebars/sidebar', 'home' ); ?>
     </section><!-- /#content -->
 </main><!-- /#main -->

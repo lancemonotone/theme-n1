@@ -8,6 +8,7 @@ $number           = isset( $instance[ 'number' ] ) ? intval( strip_tags( $instan
 $ad_after         = isset( $instance[ 'ad_after' ] ) ? intval( strip_tags( $instance[ 'ad_after' ] ) ) : 0;
 $newsletter_after = isset( $instance[ 'newsletter_after' ] ) ? intval( strip_tags( $instance[ 'newsletter_after' ] ) ) : 0;
 $social_after     = isset( $instance[ 'social_after' ] ) ? intval( strip_tags( $instance[ 'social_after' ] ) ) : 0;
+$bookstore_after  = isset( $instance[ 'bookstore_after' ] ) ? intval( strip_tags( $instance[ 'bookstore_after' ] ) ) : 0;
 $order            = isset( $instance[ 'order' ] ) ? strip_tags( $instance[ 'order' ] ) : '';
 $orderby          = isset( $instance[ 'orderby' ] ) ? strip_tags( $instance[ 'orderby' ] ) : '';
 $meta_key         = isset( $instance[ 'meta_key' ] ) ? strip_tags( $instance[ 'meta_key' ] ) : '';
@@ -23,7 +24,7 @@ $infinite         = isset( $instance[ 'infinite' ] ) && bool_from_yn( strip_tags
  * tag
  * archive
  */
-$the_posts = $this->get_multi_posts( $flavor, $number, $ad_after, $order, $orderby, $newsletter_after, $social_after, $taxonomy, $term, $meta_key );
+$the_posts = $this->get_multi_posts( $flavor, $number, $ad_after, $order, $orderby, $newsletter_after, $social_after, $bookstore_after, $taxonomy, $term, $meta_key );
 
 if ( count( $the_posts ) ) {
     $loadmore = '';
@@ -52,13 +53,13 @@ if ( count( $the_posts ) ) {
         case 'home-featured':
         default:
             break;
-    } ?> <?= $flavor ?>
+    } ?><? //= $flavor ?>
 
     <section class="articles flavor-<?php echo $flavor; ?>">
         <?php echo $title ? '<h3 class="widget-title">' . $title . '</h3>' : ''; ?>
         <?php echo $subtitle ? '<p class="dek">' . $subtitle . '</p>' : '';
 
-        $this->print_multi_posts( $the_posts, $ad_after, $flavor, $newsletter_after, $social_after, $taxonomy, $term );
+        $this->print_multi_posts( $the_posts, $ad_after, $flavor, $newsletter_after, $social_after, $bookstore_after, $taxonomy, $term );
 
         if ( $infinite ) {
             $totalpages = floor( $this->multi_query->found_posts / $number );
@@ -72,6 +73,7 @@ if ( count( $the_posts ) ) {
                    data-ad_after="<?php echo $ad_after ?>"
                    data-newsletter_after="<?php echo $newsletter_after ?>"
                    data-social_after="<?php echo $social_after ?>"
+                   data-bookstore_after="<?php echo $bookstore_after ?>"
                    data-order="<?php echo $order ?>"
                    data-orderby="<?php echo $orderby ?>"
                    data-taxonomy="<?php echo $taxonomy ?>"

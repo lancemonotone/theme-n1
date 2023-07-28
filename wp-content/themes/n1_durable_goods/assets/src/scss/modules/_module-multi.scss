@@ -1,6 +1,12 @@
 .module-multi {
-  .widget-title {
-    font-size: clamp(1.5rem, 1.5vw, 2rem);
-    margin-block-end: 1rem;
-  }
+    margin-inline: 1rem;
+    padding-block-end: 0.1rem;
+
+    .widget-title {
+        font-size: clamp(1.5rem, 1.5vw, 2rem);
+        margin-block-end: 1rem;
+        @media screen and (min-width: 600px) {
+            text-align: center;
+        }
+    }
 }

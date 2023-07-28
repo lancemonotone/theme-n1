@@ -34,7 +34,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 class Module_Multi extends \WP_Widget {
-    var $version;
+    var int $version;
+
+    var array $default_args = [];
     /*--------------------------------------------------*/
     /* Constructor
       /*--------------------------------------------------*/
@@ -115,6 +117,7 @@ class Module_Multi extends \WP_Widget {
         $instance[ 'ad_after' ]         = strip_tags( $new_instance[ 'ad_after' ] );
         $instance[ 'newsletter_after' ] = strip_tags( $new_instance[ 'newsletter_after' ] );
         $instance[ 'social_after' ]     = strip_tags( $new_instance[ 'social_after' ] );
+        $instance[ 'bookstore_after' ]  = strip_tags( $new_instance[ 'bookstore_after' ] );
         $instance[ 'order' ]            = strip_tags( $new_instance[ 'order' ] );
         $instance[ 'orderby' ]          = strip_tags( $new_instance[ 'orderby' ] );
         $instance[ 'infinite' ]         = strip_tags( $new_instance[ 'infinite' ] );
@@ -187,7 +190,11 @@ class Module_Multi extends \WP_Widget {
      * Registers and enqueues widget-specific scripts.
      */
     public function register_widget_scripts() {
-        wp_register_script( 'module-multi-script', get_stylesheet_directory_uri() . '/widgets/module-multi/js/widget.js', [ 'jquery' ], $this->version, true );
+        $file_path = '/widgets/module-multi/js/widget.js';
+        if ( file_exists( $file = get_stylesheet_directory() . $file_path ) ) {
+            $this->version = filemtime( get_stylesheet_directory() . $file_path );
+        }
+        wp_register_script( 'module-multi-script', get_stylesheet_directory_uri() . $file_path, [ 'jquery' ], $this->version, true );
         wp_localize_script( 'module-multi-script', 'modmulti', [ 'ajaxurl' => admin_url( 'admin-ajax.php' ) ] );
         wp_enqueue_script( 'module-multi-script' );
     } // end register_widget_scripts
@@ -209,7 +216,7 @@ class Module_Multi extends \WP_Widget {
      *
      * @return array WP_Post
      */
-    function get_multi_posts( $flavor = 'online-only', $number = -1, $ad_after = 0, $order = 'DESC', $orderby = 'date', $newsletter_after = 0, $social_after = 0, $taxonomy = null, $term = null, $meta_key = null ) {
+    function get_multi_posts( $flavor = 'online-only', $number = -1, $ad_after = 0, $order = 'DESC', $orderby = 'date', $newsletter_after = 0, $social_after = 0, $bookstore_after = 0, $taxonomy = null, $term = null, $meta_key = null ) {
         $flavor           = isset( $_REQUEST[ 'flavor' ] ) ? $_REQUEST[ 'flavor' ] : $flavor;
         $taxonomy         = isset( $_REQUEST[ 'taxonomy' ] ) ? $_REQUEST[ 'taxonomy' ] : $taxonomy;
         $term             = isset( $_REQUEST[ 'term' ] ) ? $_REQUEST[ 'term' ] : $term;
@@ -217,14 +224,28 @@ class Module_Multi extends \WP_Widget {
         $ad_after         = isset( $_REQUEST[ 'ad_after' ] ) ? intval( $_REQUEST[ 'ad_after' ] ) : $ad_after;
         $newsletter_after = isset( $_REQUEST[ 'newsletter_after' ] ) ? intval( $_REQUEST[ 'newsletter_after' ] ) : $newsletter_after;
         $social_after     = isset( $_REQUEST[ 'social_after' ] ) ? intval( $_REQUEST[ 'social_after' ] ) : $social_after;
+        $bookstore_after  = isset( $_REQUEST[ 'bookstore_after' ] ) ? intval( $_REQUEST[ 'bookstore_after' ] ) : $social_after;
         $order            = isset( $_REQUEST[ 'order' ] ) ? $_REQUEST[ 'order' ] : $order;
         $orderby          = isset( $_REQUEST[ 'orderby' ] ) ? $_REQUEST[ 'orderby' ] : $orderby;
         $paged            = isset( $_REQUEST[ 'paged' ] ) ? intval( $_REQUEST[ 'paged' ] ) : null;
         $meta_key         = isset( $_REQUEST[ 'meta_key' ] ) ? $_REQUEST[ 'meta_key' ] : $meta_key;
 
+        // default args
+        $this->default_args = [
+            'post_type'      => 'article',
+            'post_status'    => 'publish',
+            'posts_per_page' => $number,
+            'order'          => $order,
+            'orderby'        => $orderby,
+            'meta_key'       => $meta_key,
+            'paged'          => $paged,
+        ];
 
         $flavor_args = [];
         switch ( $flavor ) {
+            case 'home-flow':
+                $flavor_args = $this->get_home_flow_args();
+                break;
             case 'home-featured':
                 $flavor_args = $this->get_home_featured_args();
                 break;
@@ -255,18 +276,8 @@ class Module_Multi extends \WP_Widget {
             default:
         }
 
-        // default args
-        $default_args = [
-            'post_type'      => 'article',
-            'post_status'    => 'publish',
-            'posts_per_page' => $number,
-            'order'          => $order,
-            'orderby'        => $orderby,
-            'meta_key'       => $meta_key,
-            'paged'          => $paged,
-        ];
-
-        $query_args        = array_merge( (array)$flavor_args, (array)$default_args );
+        $query_args = wp_parse_args( $flavor_args, $this->default_args );
+        // $query_args        = array_merge( (array)$flavor_args, (array)$this->default_args );
         $this->multi_query = new \WP_Query( $query_args );
         $the_posts         = $this->multi_query->posts;
 
@@ -276,7 +287,7 @@ class Module_Multi extends \WP_Widget {
             if ( count( $the_posts ) ) {
                 $response[ 'type' ] = 'success';
                 ob_start();
-                $this->print_multi_posts( $the_posts, $ad_after, $flavor, $newsletter_after, $social_after );
+                $this->print_multi_posts( $the_posts, $ad_after, $flavor, $newsletter_after, $social_after, $bookstore_after );
                 $response[ 'content' ] = ob_get_clean();
             } else {
                 $response[ 'type' ]    = 'fail';
@@ -296,10 +307,11 @@ class Module_Multi extends \WP_Widget {
 
     /** START HERE **/
 
-    function print_multi_posts( $the_posts, $ad_after, $flavor, $newsletter_after, $social_after ) {
+    function print_multi_posts( $the_posts, $ad_after, $flavor, $newsletter_after, $social_after, $bookstore_after ) {
         $ad_after         = $ad_after == 0 ? false : intval( $ad_after );
         $newsletter_after = $newsletter_after == 0 ? false : intval( $newsletter_after );
         $social_after     = $social_after == 0 ? false : intval( $social_after );
+        $bookstore_after     = $bookstore_after == 0 ? false : intval( $bookstore_after );
         $post_counter     = 0;
         foreach ( $the_posts as $the_p ) {
             if ( $post_counter === $ad_after ) {
@@ -310,6 +322,9 @@ class Module_Multi extends \WP_Widget {
             }
             if ( $post_counter === $social_after ) {
                 the_widget( '\N1_Durable_Goods\Module_Social' );
+            }
+            if ( $post_counter === $bookstore_after ) {
+                the_widget( '\N1_Durable_Goods\Module_Bookstore' );
             }
             $this->print_post( $flavor, $the_p );
 
@@ -484,7 +499,7 @@ class Module_Multi extends \WP_Widget {
     /**
      * Returns array of args to retrieve posts related by tag.
      */
-    function get_sticky_args( $taxonomy, $term ) {
+    function get_sticky_args( $taxonomy, $term ): array {
         $st = [];
         if ( $term ) {
             array_push( $st, $term );
@@ -513,7 +528,7 @@ class Module_Multi extends \WP_Widget {
     /**
      * Returns array of args to retrieve posts related by tag.
      */
-    function get_tag_args() {
+    function get_tag_args(): array {
         global $post;
 
         $id = ! empty( $post ) ? $post->ID : 0;
@@ -539,7 +554,7 @@ class Module_Multi extends \WP_Widget {
     /**
      * Returns array of args to retrieve posts in current issue.
      */
-    function get_issue_args() {
+    function get_issue_args(): array {
         global $post;
 
         $id = ! empty( $post ) ? $post->ID : 0;
@@ -563,7 +578,7 @@ class Module_Multi extends \WP_Widget {
      * Returns array of args to retrieve posts by current
      * article's author.
      */
-    function get_author_args() {
+    function get_author_args(): array {
         global $post;
 
         $id = ! empty( $post ) ? $post->ID : 0;
@@ -591,7 +606,7 @@ class Module_Multi extends \WP_Widget {
      * Online Only.
      *
      */
-    function get_scroll_args() {
+    function get_scroll_args(): array {
         global $post;
 
         $id = ! empty( $post ) ? $post->ID : 0;
@@ -618,7 +633,7 @@ class Module_Multi extends \WP_Widget {
      * Returns array of args to retrieve posts by taxonomy & term.
      *
      */
-    function get_archive_args( $taxonomy, $term ) {
+    function get_archive_args( $taxonomy, $term ): array {
         $st = [];
         if ( $term ) {
             array_push( $st, $term );
@@ -646,7 +661,7 @@ class Module_Multi extends \WP_Widget {
      * who have articles published in the current issue.
      *
      */
-    function get_featured_author_args() {
+    function get_featured_author_args(): array {
         global $wpdb;
         $qry      = "SELECT DISTINCT f.ID FROM (
 					SELECT DISTINCT p.*, t.name as author FROM $wpdb->posts AS p
@@ -691,11 +706,59 @@ class Module_Multi extends \WP_Widget {
     /**
      * Returns post selected in Site Settings Home Featured.
      */
-    function get_home_featured_args() {
+    function get_home_featured_args(): array {
         // query wordpress database for 'home_featured' option
         return [
             'post__in' => [ get_field( 'home_featured', 'options' ) ]
         ];
+    }
+
+    /**
+     * Returns posts selected in Site Settings Home Flow.
+     */
+    function get_home_flow_args(): array {
+        $scroll_args     = $this->get_scroll_args();
+        $query_args      = array_merge( (array)$this->default_args, (array)$scroll_args );
+        $the_query       = new \WP_Query( $query_args );
+        $scroll_posts    = $the_query->posts;
+        $scroll_post_ids = [];
+        foreach ( $scroll_posts as $scroll_post ) {
+            $scroll_post_ids[] = $scroll_post->ID;
+        }
+
+
+        // First, get the post IDs in order from the ACF field
+        $flow_posts = get_field( 'home_flow', 'option' );
+
+        $flow_post_ids = [];
+
+        if ( $flow_posts ) {
+            foreach ( $flow_posts as $flow_post ) {
+                $flow_post_ids[] = $flow_post[ 'article' ];
+            }
+        }
+
+        $flow_args = [
+            'post__in' => $flow_post_ids,
+            'orderby'  => 'post__in'
+        ];
+
+        // Grab the first 3 posts from the scroll
+        $first_set  = array_slice( $scroll_post_ids, 0, 3 );
+        $second_set = array_slice( $scroll_post_ids, 3, 4 );
+        $third_set  = array_slice( $scroll_post_ids, 7, 2 );
+
+        // Merge the first set of scroll posts with the flow posts
+        $post__in    = $first_set;
+        $post__in [] = $flow_post_ids[ 0 ];
+        $post__in    = array_merge( $post__in, $second_set );
+        $post__in [] = $flow_post_ids[ 1 ];
+        $post__in    = array_merge( $post__in, $third_set );
+
+        return [
+            'post__in' => $post__in,
+            'orderby'  => 'post__in'
+        ];;
     }
 
     /**

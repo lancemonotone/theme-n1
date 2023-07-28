@@ -1,8 +1,54 @@
 .home main {
-
     .content {
+        margin-inline: auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
         grid-template-areas:
+            "toc"
             "featured"
-            "content";
+            "flow";
+    }
+
+    .toc {
+        grid-area: toc;
+    }
+
+    .featured {
+        grid-area: featured;
+    }
+
+    .flow .articles {
+        grid-area: grid;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: minmax(200px, 250px);
+        grid-gap: 10px;
+        container-type: inline-size;
+
+        //@container and (max-width: 400px) {
+        //grid-template-columns: repeat(2, 1fr);
+        //}
+        .widget-title {
+            display: none;
+        }
+
+        article {
+            height: 100%;
+        }
+    }
+
+    @media screen and (min-width: 600px) {
+        .content {
+            grid-template-columns: 4fr 8fr;
+            grid-template-rows: auto 1fr;
+            grid-template-areas:
+                "toc featured"
+                "toc flow";
+        }
+
+        .flow .articles {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 }

@@ -7,12 +7,12 @@
             margin-inline: 5px;
         }
 
-        .article {
-            float: none !important;
-            width: unset !important;
-            height: unset !important;
-            min-height: unset !important;
-        }
+        //.article {
+        //    float: none !important;
+        //    width: unset !important;
+        //    height: unset !important;
+        //    min-height: unset !important;
+        //}
 
         .widget-title {
             color: var(--orange);
@@ -65,15 +65,22 @@
         font-weight: 100;
         grid-area: hed;
         align-self: end;
+        @media screen and (min-width: 600px) {
+            font-size: clamp(0.8rem, 1vw, 2rem);
+        }
     }
 
     .issue-name {
         color: var(--white);
         font-weight: 600;
         line-height: .95;
-        font-size: clamp(2rem, 5.5vw, 2.5rem);
+        font-size: clamp(1rem, 7vw, 4rem);
         grid-area: name;
         align-self: start;
+        padding-inline-end: 1rem;
+        @media screen and (min-width: 600px) {
+            font-size: clamp(1rem, 2vw, 2rem);
+        }
     }
 
     .module-multi {

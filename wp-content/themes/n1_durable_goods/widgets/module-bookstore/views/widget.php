@@ -6,11 +6,13 @@ $products   = get_field( 'bookstore_products', 'options' );
 ?>
 
 <aside>
-    <h3 class="title"><a href="<?= get_field( 'options_shopify_link', 'options' ) ?>" title="<?php _e( 'Browse the Shop' ) ?>"><?= $heading ?></a></h3>
+    <h3 class="module-title">
+        <a href="<?= get_field( 'options_shopify_link', 'options' ) ?>" title="<?php _e( 'Browse the Shop' ) ?>"><?= $heading ?></a>
+    </h3>
     <?php if ( $subheading ) { ?>
-        <p class="subheading"><?= $subheading ?></p>
+        <p class="module-subheading"><?= $subheading ?></p>
     <?php } ?>
-    <p class="dek"><?= $dek ?></p>
+    <p class="module-dek"><?= $dek ?></p>
 
     <div class="books">
         <?php foreach ( $products as $product ) { ?>
@@ -19,7 +21,9 @@ $products   = get_field( 'bookstore_products', 'options' );
                     <figure>
                         <img src="<?= $product[ 'bookstore_image' ] ?>" alt="<?= $product[ 'bookstore_promo' ] ?>">
                     </figure>
-                    <div class="promo"><?= $product[ 'bookstore_promo' ] ?></div>
+                    <div class="promo">
+                        <?= $product[ 'bookstore_promo' ] ?>
+                    </div>
                     <p class="price">
                         <?php if ( $product[ 'bookstore_from_price' ] ) { ?>
                             <span class="em"><?php _e( 'from' ) ?></span>

@@ -1,4 +1,5 @@
 <?php namespace N1_Durable_Goods;
+
 /*
 Plugin Name: Bookstore Module
 Description: A custom post type or widget-like module featuring promotions from the Bookstore, which is hosted offsite (Shopify). Admins will need to be able to edit the following fields:
@@ -46,24 +47,23 @@ class Module_Bookstore extends \WP_Widget {
      * loads localization files, and includes necessary stylesheets and JavaScript.
      */
     public function __construct() {
-
         // load plugin text domain
-        add_action('init', array($this, 'widget_textdomain'));
+        add_action( 'init', [ $this, 'widget_textdomain' ] );
 
         // Hooks fired when the Widget is activated and deactivated
-        register_activation_hook(__FILE__, array($this, 'activate'));
-        register_deactivation_hook(__FILE__, array($this, 'deactivate'));
+        register_activation_hook( __FILE__, [ $this, 'activate' ] );
+        register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
 
         // TODO:	update classname and description
         // TODO:	replace 'module_bookstore' to be named more plugin specific. Other instances exist throughout the code, too.
         parent::__construct(
             'module_bookstore',
-            __('Bookstore Module', 'module_bookstore'),
-            array(
-                'classname' => 'module-bookstore',
-                'description' => __('Features promotions from the Bookstore, which is hosted offsite. Be sure to enter the Shopify URL in Site Settings.',
-                    'module_bookstore')
-            ));
+            __( 'Bookstore Module', 'module_bookstore' ),
+            [
+                'classname'   => 'module-bookstore',
+                'description' => __( 'Features promotions from the Bookstore, which is hosted offsite. Be sure to enter the Shopify URL in Site Settings.',
+                    'module_bookstore' )
+            ] );
 
         // Register custom post types
         // add_action('init', array($this, 'register_cpt'));
@@ -88,16 +88,17 @@ class Module_Bookstore extends \WP_Widget {
      * @param array    args        The array of form elements
      * @param array    instance    The current instance of the widget
      */
-    public function widget($args, $instance) {
-
-        echo $args['before_widget'];
+    public function widget( $args, $instance ) {
+        if ( ! empty( $instance[ 'disable' ] ) ) {
+            return;
+        }
+        echo $args[ 'before_widget' ];
 
         // TODO:	Here is where you manipulate your widget's values based on their input fields
 
-        include(plugin_dir_path(__FILE__) . '/views/widget.php');
+        include( plugin_dir_path( __FILE__ ) . '/views/widget.php' );
 
-        echo $args['after_widget'];
-
+        echo $args[ 'after_widget' ];
     } // end widget
 
     /**
@@ -106,16 +107,14 @@ class Module_Bookstore extends \WP_Widget {
      * @param array    new_instance    The new instance of values to be generated via the update.
      * @param array    old_instance    The previous instance of values before the update.
      */
-    public function update($new_instance, $old_instance) {
-
+    public function update( $new_instance, $old_instance ) {
         $instance = $old_instance;
 
         // TODO:	Here is where you update your widget's old values with the new, incoming values
-        $instance['always_latest'] = strip_tags($new_instance['always_latest']);
-        $instance['bookstore_module'] = strip_tags($new_instance['bookstore_module']);
+        $instance[ 'disable' ]          = strip_tags( $new_instance[ 'disable' ] );
+        $instance[ 'bookstore_module' ] = strip_tags( $new_instance[ 'bookstore_module' ] );
 
-        return $instance;
-
+        return array_filter($instance);
     } // end widget
 
     /**
@@ -123,11 +122,10 @@ class Module_Bookstore extends \WP_Widget {
      *
      * @param array    instance    The array of keys and values for the widget.
      */
-    public function form($instance) {
+    public function form( $instance ) {
         // TODO:	Store the values of the widget in their own variable
         // Display the admin form
-        include(plugin_dir_path(__FILE__) . '/views/admin.php');
-
+        include( plugin_dir_path( __FILE__ ) . '/views/admin.php' );
     } // end form
 
     /*--------------------------------------------------*/
@@ -138,10 +136,8 @@ class Module_Bookstore extends \WP_Widget {
      * Loads the Widget's text domain for localization and translation.
      */
     public function widget_textdomain() {
-
         // TODO be sure to change 'widget-name' to the name of *your* plugin
-        load_plugin_textdomain('module_bookstore', false, plugin_dir_path(__FILE__) . '/lang/');
-
+        load_plugin_textdomain( 'module_bookstore', false, plugin_dir_path( __FILE__ ) . '/lang/' );
     } // end widget_textdomain
 
     /**
@@ -149,7 +145,7 @@ class Module_Bookstore extends \WP_Widget {
      *
      * @param boolean $network_wide True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog.
      */
-    public function activate($network_wide) {
+    public function activate( $network_wide ) {
         // TODO define activation functionality here
     } // end activate
 
@@ -158,7 +154,7 @@ class Module_Bookstore extends \WP_Widget {
      *
      * @param boolean $network_wide True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog
      */
-    public function deactivate($network_wide) {
+    public function deactivate( $network_wide ) {
         // TODO define deactivation functionality here
     } // end deactivate
 
@@ -166,40 +162,32 @@ class Module_Bookstore extends \WP_Widget {
      * Registers and enqueues admin-specific styles.
      */
     public function register_admin_styles() {
-
         // TODO:	Change 'widget-name' to the name of your plugin
-        wp_enqueue_style('module-bookstore-admin-styles', get_stylesheet_directory_uri() . '/widgets/module-bookstore/css/admin.css');
-
+        wp_enqueue_style( 'module-bookstore-admin-styles', get_stylesheet_directory_uri() . '/widgets/module-bookstore/css/admin.css' );
     } // end register_admin_styles
 
     /**
      * Registers and enqueues admin-specific JavaScript.
      */
     public function register_admin_scripts() {
-
         // TODO:	Change 'widget-name' to the name of your plugin
-        wp_enqueue_script('module-bookstore-admin-script', get_stylesheet_directory_uri() . '/widgets/module-bookstore/js/admin.js', array('jquery'));
-
+        wp_enqueue_script( 'module-bookstore-admin-script', get_stylesheet_directory_uri() . '/widgets/module-bookstore/js/admin.js', [ 'jquery' ] );
     } // end register_admin_scripts
 
     /**
      * Registers and enqueues widget-specific styles.
      */
     public function register_widget_styles() {
-
         // TODO:	Change 'widget-name' to the name of your plugin
-        wp_enqueue_style('module-bookstore-widget-styles', get_stylesheet_directory_uri() . '/widgets/module-bookstore/css/widget.css');
-
+        wp_enqueue_style( 'module-bookstore-widget-styles', get_stylesheet_directory_uri() . '/widgets/module-bookstore/css/widget.css' );
     } // end register_widget_styles
 
     /**
      * Registers and enqueues widget-specific scripts.
      */
     public function register_widget_scripts() {
-
         // TODO:	Change 'widget-name' to the name of your plugin
-        wp_enqueue_script('module-bookstore-script', get_stylesheet_directory_uri() . '/widgets/module-bookstore/js/widget.js', array('jquery'));
-
+        wp_enqueue_script( 'module-bookstore-script', get_stylesheet_directory_uri() . '/widgets/module-bookstore/js/widget.js', [ 'jquery' ] );
     } // end register_widget_scripts
 
     /**
@@ -207,39 +195,40 @@ class Module_Bookstore extends \WP_Widget {
      *
      */
     public function register_cpt() {
-        register_post_type('module_bookstore', array(
-            'label' => __('Bookstore Modules'),
-            'description' => 'Manage Bookstore modules.',
-            'public' => false,
-            'show_ui' => true,
-            'show_in_menu' => true,
-            'capability_type' => 'post',
-            'hierarchical' => false,
-            'rewrite' => array('slug' => 'module_bookstore', 'with_front' => '1'),
-            'query_var' => true,
+        register_post_type( 'module_bookstore', [
+            'label'               => __( 'Bookstore Modules' ),
+            'description'         => 'Manage Bookstore modules.',
+            'public'              => false,
+            'show_ui'             => true,
+            'show_in_menu'        => true,
+            'capability_type'     => 'post',
+            'hierarchical'        => false,
+            'rewrite'             => [ 'slug' => 'module_bookstore', 'with_front' => '1' ],
+            'query_var'           => true,
             'exclude_from_search' => true,
-            'menu_position' => '5',
-            'supports' => array('title'),
-            'labels' => array(
-                'name' => 'Bookstore Modules',
-                'singular_name' => 'Bookstore Module',
-                'menu_name' => 'Bookstore Modules',
-                'add_new' => 'Add Bookstore Module',
-                'add_new_item' => 'Add New Bookstore Module',
-                'edit' => 'Edit',
-                'edit_item' => 'Edit Bookstore Module',
-                'new_item' => 'New Bookstore Module',
-                'view' => 'View Bookstore Module',
-                'view_item' => 'View Bookstore Module',
-                'search_items' => 'Search Bookstore Modules',
-                'not_found' => 'No Bookstore Modules Found',
+            'menu_position'       => '5',
+            'supports'            => [ 'title' ],
+            'labels'              => [
+                'name'               => 'Bookstore Modules',
+                'singular_name'      => 'Bookstore Module',
+                'menu_name'          => 'Bookstore Modules',
+                'add_new'            => 'Add Bookstore Module',
+                'add_new_item'       => 'Add New Bookstore Module',
+                'edit'               => 'Edit',
+                'edit_item'          => 'Edit Bookstore Module',
+                'new_item'           => 'New Bookstore Module',
+                'view'               => 'View Bookstore Module',
+                'view_item'          => 'View Bookstore Module',
+                'search_items'       => 'Search Bookstore Modules',
+                'not_found'          => 'No Bookstore Modules Found',
                 'not_found_in_trash' => 'No Bookstore Modules Found in Trash',
-                'parent' => 'Parent Bookstore Module',
-            )));
+                'parent'             => 'Parent Bookstore Module',
+            ]
+        ] );
     }
 
 } // end class
 
-add_action('widgets_init', function () {
-    register_widget("\N1_Durable_Goods\Module_Bookstore");
-});
+add_action( 'widgets_init', function () {
+    register_widget( "\N1_Durable_Goods\Module_Bookstore" );
+} );

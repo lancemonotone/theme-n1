@@ -48,6 +48,61 @@
             "ui": 1
         },
         {
+            "key": "field_64c2fc89d5170",
+            "label": "Home Flow",
+            "name": "home_flow",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_64c2fe51d5171",
+                    "label": "Article",
+                    "name": "article",
+                    "aria-label": "",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "relevanssi_exclude": 0,
+                    "post_type": [
+                        "article"
+                    ],
+                    "post_status": [
+                        "publish"
+                    ],
+                    "taxonomy": [
+                        "issue:issue-45"
+                    ],
+                    "return_format": "id",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 1,
+                    "parent_repeater": "field_64c2fc89d5170"
+                }
+            ]
+        },
+        {
             "key": "field_64bc3b4cf3a3d",
             "label": "Bookstore",
             "name": "",
@@ -377,5 +432,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1690146853
+    "modified": 1690506839
 }

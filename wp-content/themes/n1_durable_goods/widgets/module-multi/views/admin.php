@@ -21,6 +21,7 @@ $number = intval(strip_tags($instance['number']));
 $ad_after = intval(strip_tags($instance['ad_after']));
 $newsletter_after = intval(strip_tags($instance['newsletter_after']));
 $social_after = intval(strip_tags($instance['social_after']));
+$bookstore_after = intval(strip_tags($instance['bookstore_after']));
 $order = strip_tags($instance['order']);
 $orderby = strip_tags($instance['orderby']);
 $infinite = strip_tags($instance['infinite']);
@@ -42,6 +43,7 @@ $infinite = strip_tags($instance['infinite']);
 <p class="cf">
 	<label for="<?php echo $this->get_field_id('flavor'); ?>"><?php _e( 'Flavor:' ); ?></label>
 	<select class="widefat"  name="<?php echo $this->get_field_name('flavor'); ?>" id="<?php echo $this->get_field_id('flavor'); ?>">
+		<option value="home-flow" <?php selected( $instance['flavor'],  'home-flow', true); ?>><?php _e('Home Flow')?></option>
 		<option value="home-featured" <?php selected( $instance['flavor'],  'home-featured', true); ?>><?php _e('Home Featured')?></option>
         <option value="featured-default" <?php selected( $instance['flavor'],  'featured-default', true); ?>><?php _e('Featured (default)')?></option>
 		<option value="featured-author" <?php selected( $instance['flavor'],  'featured-author', true); ?>><?php _e('Featured (by author)')?></option>
@@ -68,7 +70,7 @@ $infinite = strip_tags($instance['infinite']);
 	<label for="<?php echo $this->get_field_id('ad_after'); ?>"><?php _e( 'Ad After:' ); ?></label>
 	<select class="alignright widefat narrow"  name="<?php echo $this->get_field_name('ad_after'); ?>" id="<?php echo $this->get_field_id('ad_after'); ?>">
 		<option value="" <?php selected( $instance['ad_after'],  "", true); ?>>No Ad</option>
-		<?php for($i = 1; $i < 6; $i++){?>
+		<?php for($i = 1; $i < 10; $i++){?>
 		<option value="<?php echo $i?>" <?php selected( $instance['ad_after'],  $i, true); ?>><?php echo $i?></option>
 		<?php } ?>
 	</select>
@@ -79,7 +81,7 @@ $infinite = strip_tags($instance['infinite']);
 	<label for="<?php echo $this->get_field_id('newsletter_after'); ?>"><?php _e( 'Newsletter After:' ); ?></label>
 	<select class="alignright widefat narrow"  name="<?php echo $this->get_field_name('newsletter_after'); ?>" id="<?php echo $this->get_field_id('newsletter_after'); ?>">
 		<option value="" <?php selected( $instance['newsletter_after'],  "", true); ?>>No Newsletter</option>
-		<?php for($i = 1; $i < 6; $i++){?>
+		<?php for($i = 1; $i < 10; $i++){?>
 		<option value="<?php echo $i?>" <?php selected( $instance['newsletter_after'],  $i, true); ?>><?php echo $i?></option>
 		<?php } ?>
 	</select>
@@ -90,8 +92,19 @@ $infinite = strip_tags($instance['infinite']);
 	<label for="<?php echo $this->get_field_id('social_after'); ?>"><?php _e( 'Social After:' ); ?></label>
 	<select class="alignright widefat narrow"  name="<?php echo $this->get_field_name('social_after'); ?>" id="<?php echo $this->get_field_id('social_after'); ?>">
 		<option value="" <?php selected( $instance['social_after'],  "", true); ?>>No Social</option>
-		<?php for($i = 1; $i < 6; $i++){?>
+		<?php for($i = 1; $i < 10; $i++){?>
 		<option value="<?php echo $i?>" <?php selected( $instance['social_after'],  $i, true); ?>><?php echo $i?></option>
+		<?php } ?>
+	</select>
+</p>
+
+<?php // select ?>
+<p class="cf">
+	<label for="<?php echo $this->get_field_id('bookstore_after'); ?>"><?php _e( 'Bookstore After:' ); ?></label>
+	<select class="alignright widefat narrow"  name="<?php echo $this->get_field_name('bookstore_after'); ?>" id="<?php echo $this->get_field_id('bookstore_after'); ?>">
+		<option value="" <?php selected( $instance['bookstore_after'],  "", true); ?>>No Bookstore</option>
+		<?php for($i = 1; $i < 10; $i++){?>
+		<option value="<?php echo $i?>" <?php selected( $instance['bookstore_after'],  $i, true); ?>><?php echo $i?></option>
 		<?php } ?>
 	</select>
 </p>
