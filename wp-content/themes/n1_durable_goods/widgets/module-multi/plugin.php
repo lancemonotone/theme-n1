@@ -743,22 +743,24 @@ class Module_Multi extends \WP_Widget {
             'orderby'  => 'post__in'
         ];
 
-        // Grab the first 3 posts from the scroll
-        $first_set  = array_slice( $scroll_post_ids, 0, 3 );
-        $second_set = array_slice( $scroll_post_ids, 3, 4 );
-        $third_set  = array_slice( $scroll_post_ids, 7, 2 );
+        return $flow_args;
 
-        // Merge the first set of scroll posts with the flow posts
-        $post__in    = $first_set;
-        $post__in [] = $flow_post_ids[ 0 ];
-        $post__in    = array_merge( $post__in, $second_set );
-        $post__in [] = $flow_post_ids[ 1 ];
-        $post__in    = array_merge( $post__in, $third_set );
-
-        return [
-            'post__in' => $post__in,
-            'orderby'  => 'post__in'
-        ];;
+        // // Grab the first 3 posts from the scroll
+        // $first_set  = array_slice( $scroll_post_ids, 0, 3 );
+        // $second_set = array_slice( $scroll_post_ids, 3, 4 );
+        // $third_set  = array_slice( $scroll_post_ids, 7, 2 );
+        //
+        // // Merge the first set of scroll posts with the flow posts
+        // $post__in    = $first_set;
+        // $post__in [] = $flow_post_ids[ 0 ];
+        // $post__in    = array_merge( $post__in, $second_set );
+        // $post__in [] = $flow_post_ids[ 1 ];
+        // $post__in    = array_merge( $post__in, $third_set );
+        //
+        // return [
+        //     'post__in' => $post__in,
+        //     'orderby'  => 'post__in'
+        // ];
     }
 
     /**
