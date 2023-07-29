@@ -1,9 +1,11 @@
 .home main {
     .content {
+        padding-inline: var(--inner-padding);
         margin-inline: auto;
         display: grid;
         grid-template-columns: 1fr;
-        grid-gap: 10px;
+        row-gap: 1rem;
+        column-gap: 3rem;
         grid-template-areas:
             "toc"
             "featured"

@@ -42,6 +42,7 @@
     justify-content: center;
     position: var(--header-position);
     z-index: 9999999;
+    margin-block-end: 3rem;
 
     .inner {
         width: 100%;
