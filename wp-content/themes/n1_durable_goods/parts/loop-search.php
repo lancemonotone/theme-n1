@@ -15,7 +15,7 @@ $multi = new Module_Multi();
 			<?php //get_template_part( 'sidebars/sidebar', 'archive' ); ?>
 			<section id="content" class="content-post">
 				<?php if(count($the_posts)){
-					$multi->print_multi_posts($the_posts, 0, 'archive', 0, 0);
+					$multi->print_multi_posts($the_posts);
 				}else{?>
 				<div class="static-page">
 					<div class="entry-header">

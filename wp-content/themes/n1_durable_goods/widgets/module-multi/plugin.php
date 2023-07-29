@@ -307,7 +307,7 @@ class Module_Multi extends \WP_Widget {
 
     /** START HERE **/
 
-    function print_multi_posts( $the_posts, $ad_after, $flavor, $newsletter_after, $social_after, $bookstore_after ) {
+    function print_multi_posts( $the_posts, $ad_after = 0, $flavor = 'archive', $newsletter_after = 0, $social_after = 0, $bookstore_after = 0 ) {
         $ad_after         = $ad_after == 0 ? false : intval( $ad_after );
         $newsletter_after = $newsletter_after == 0 ? false : intval( $newsletter_after );
         $social_after     = $social_after == 0 ? false : intval( $social_after );
@@ -415,7 +415,7 @@ class Module_Multi extends \WP_Widget {
             case 'with_image':
                 $img_id   = get_post_thumbnail_id( $the_p->ID );
                 $img_meta = wp_prepare_attachment_for_js( $img_id );
-                $img_url  = $img_meta[ 'url' ];
+                $img_url  = $img_meta[ 'url' ] ?? '';
                 $content  = '<figure style="background-image: url(' . $img_url . ');" /></figure>';
                 break;
             case 'no_image':
