@@ -52,7 +52,7 @@ EOD;
     </div>
     <div class="links">
         <a class="link-renew" href="{$home_url}/renew/">{$renew_text}</a>
-        <a class="link-my-account" href="{$home_url}/my-account/">{$account_text}</a>
+        <a class="link-my-account" href="{$home_url}/your-account/">{$account_text}</a>
         <a class="link-gift-subscription" href="https://shop.nplusonemag.com/products/gift-subscription">{$gift_text}</a>
     </div>
     <a class="button" href="{$logout_link}">{$logout_text}</a>
@@ -60,7 +60,7 @@ EOD;
 EOD;
 }
 
-$actions_text  = is_user_logged_in() ? _( 'Your Account' ) : _( 'Sign In' );
+$actions_text  = is_user_logged_in() ? _( 'My Account' ) : _( 'Sign In' );
 $actions_class = is_user_logged_in() ? 'logged-in' : '';
 ?>
 <div id="nav-actions" class="accordion">

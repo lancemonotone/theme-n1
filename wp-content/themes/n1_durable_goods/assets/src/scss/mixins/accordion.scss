@@ -16,6 +16,7 @@
       display: grid;
       place-content: center;
       pointer-events: none;
+      margin-block-start: 3px;
 
       &:after {
         content: " ";
@@ -25,7 +26,7 @@
         display: inline-block;
         transition: all var(--transition);
         border-style: inset;
-        border-width: 0 7.5px 15px 7.5px;
+        border-width: 0 5px 10px 5px;
 
         // Target Safari because the border-color renders
         // much lighter, then we override it for other browsers
@@ -60,7 +61,7 @@
       & ~ .toggle-label {
         .drop-icon {
           &:after {
-            transform: rotate(0deg);
+            transform: rotate(360deg);
           }
         }
       }

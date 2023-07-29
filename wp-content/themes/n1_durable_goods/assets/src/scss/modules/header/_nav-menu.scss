@@ -16,7 +16,7 @@
         --home-grid-row: 1 / span 2;
         --home-width: clamp(100px, 16vw, 150px);
         --row-gap: .5rem;
-        --column-gap: clamp(1rem, 2vw, 2rem);
+        --column-gap: 3rem;
     }
     @media screen and (min-width: 1100px) {
         --font-size: clamp(.7rem, 1.5vw, 1rem);
@@ -57,6 +57,9 @@
 
     .subscribe a {
         color: var(--orange);
+        &:hover {
+            color: var(--light-blue);
+        }
     }
 
     .current-menu-item a,
