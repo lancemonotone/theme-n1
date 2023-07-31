@@ -64,7 +64,7 @@
         //outline: 1px solid transparent;
         background-color: var(--background);
         text-align: center;
-        margin-bottom: 16px;
+        margin-block-end: 2.3rem;
 
         &:hover {
             outline: 2px solid var(--border-color);
@@ -97,7 +97,7 @@
         position: absolute;
         bottom: 10%;
         left: -1px;
-        max-width: 75%;
+        width: 75%;
         background-color: var(--accent);
         padding-inline: clamp(1%, 0.8vw, 4%);
         padding-block: clamp(0.5rem, 1vw, 0.6rem);
@@ -132,7 +132,7 @@
         padding-inline: clamp(0.5rem,0.4vw,0.5rem);
         padding-block: clamp(0.5rem,0.6vw,1rem);
         font-size: clamp(0.7rem,0.9vw,0.6rem);
-        font-weight: 400;
+        font-weight: 100;
         color: var(--white);
     }
 }

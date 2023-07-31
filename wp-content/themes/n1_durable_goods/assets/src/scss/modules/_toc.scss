@@ -1,21 +1,20 @@
 .module-issue-toc {
     .home & {
         background-color: var(--light-brown);
+        padding-inline: 1rem;
 
         .module-issue-toc,
         .module-multi {
-            margin-inline: 5px;
+            padding-inline: 1rem;
         }
-
-        //.article {
-        //    float: none !important;
-        //    width: unset !important;
-        //    height: unset !important;
-        //    min-height: unset !important;
-        //}
 
         .widget-title {
             color: var(--orange);
+            margin-block-end: 1.6rem
+        }
+
+        .flags {
+            display: none;
         }
     }
 
@@ -49,13 +48,13 @@
     }
 
     .bug {
-        height: 96px;
-        width: 96px;
+        height: 100px;
+        width: 100px;
         margin: 0 auto;
-        border-radius: 96px;
+        border-radius: 100px;
         overflow: hidden;
         grid-area: image;
-        transform: translateX(-25%);
+        transform: translate(-45%);
     }
 
     .hed {
@@ -84,7 +83,7 @@
     }
 
     .module-multi {
-        margin-inline: 2rem;
+        //margin-inline: 2rem;
     }
 
     .title {
@@ -123,7 +122,7 @@
         }
 
         .post-title {
-            font-size: 1rem;
+            font-size: 0.9rem;
             line-height: 1.4;
             display: inline;
             text-align: left;
@@ -142,7 +141,7 @@
             color: var(--interactive-light);
             text-transform: none;
             letter-spacing: 0;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-family: adelle-sans, sans-serif;
         }
     }
