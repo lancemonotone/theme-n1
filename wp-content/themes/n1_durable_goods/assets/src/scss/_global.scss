@@ -12,8 +12,8 @@
     --white: #ffffff;
     --tan: #f2ece2;
     --dark-tan: #bcb5a7;
-    --brown: #242424;
-    --light-brown: #333333;
+    --dark-grey: #242424;
+    --light-grey: #333333;
     --inactive-dark: #666666;
     --interactive-light: #717171;
     --inactive: #999999;
@@ -28,7 +28,7 @@
 }
 
 a.button:hover, input[type=submit]:hover {
-    background-color: var(--brown);
+    background-color: var(--dark-grey);
 }
 
 a.button:active, input[type=submit]:active {

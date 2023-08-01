@@ -6,7 +6,7 @@
         line-height: 1.1;
         text-align: center;
         font-weight: 200;
-        border-top: 1px solid var(--brown);
+        border-top: 1px solid var(--dark-grey);
         padding-top: 8px;
         @media only screen and (min-width: 640px) {
             text-align: left;
@@ -35,7 +35,7 @@
         font-size: clamp(1rem, 1.1vw, 1.1rem);
         font-weight: 600;
         padding-bottom: 0.3em;
-        border-bottom: 4px solid var(--brown);
+        border-bottom: 4px solid var(--dark-grey);
         white-space: nowrap;
     }
 
@@ -69,9 +69,9 @@
 
     .action {
         font-weight: 600;
-        border-color: var(--brown);
+        border-color: var(--dark-grey);
         margin-top: 24px;
-        color: var(--brown);
+        color: var(--dark-grey);
     }
 
     form {
@@ -101,7 +101,7 @@
         }
 
         &:hover {
-            background-color: var(--brown);
+            background-color: var(--dark-grey);
         }
 
         &:active {

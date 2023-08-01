@@ -1,6 +1,6 @@
 .module-issue-toc {
     .home & {
-        background-color: var(--light-brown);
+        background-color: var(--light-grey);
         padding-inline: 1rem;
 
         .module-issue-toc,
@@ -32,7 +32,7 @@
 
     a.button,
     input[type=submit] {
-        background-color: var(--brown);
+        background-color: var(--dark-grey);
         margin-block: 2rem;
         display: block;
         margin-inline: auto;

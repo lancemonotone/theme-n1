@@ -14,8 +14,8 @@
         }
 
         input[type=text] {
-            background-color: var(--brown);
-            border: 1px solid var(--light-brown);
+            background-color: var(--dark-grey);
+            border: 1px solid var(--light-grey);
             color: var(--white);
             margin: 0;
             padding-block: 0.5rem;
@@ -33,7 +33,7 @@
             &:focus-within {
                 outline: none;
                 background-color: var(--white);
-                color: var(--brown);
+                color: var(--dark-grey);
 
                 &::placeholder {
                     color: transparent;
@@ -41,7 +41,7 @@
 
                 & + button[type=submit] {
                     svg {
-                        fill: var(--brown);
+                        fill: var(--dark-grey);
                     }
                 }
             }
