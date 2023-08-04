@@ -1,23 +1,4 @@
 .module-issue-toc {
-    .home & {
-        background-color: var(--light-grey);
-        padding-inline: 1rem;
-
-        .module-issue-toc,
-        .module-multi {
-            padding-inline: 1rem;
-        }
-
-        .widget-title {
-            color: var(--orange);
-            margin-block-end: 1.6rem
-        }
-
-        .flags {
-            display: none;
-        }
-    }
-
     .inner {
         display: grid;
         grid-template-areas:

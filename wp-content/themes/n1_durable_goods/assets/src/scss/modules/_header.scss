@@ -23,7 +23,7 @@
     }
 
     @media screen and (min-width: 1100px) {
-        --padding-block: 0;
+        //--padding-block: 0;
         --header-position: sticky;
         --header-max-height: 10rem;
         --header-min-height: 4.5rem;
@@ -31,17 +31,19 @@
         --sections-max-height: 75px;
     }
 
+    // for testing
+    //background-color: var(--dark-blue);
+
     height: 11rem;
     max-height: var(--header-max-height);
     min-height: var(--header-min-height);
-    top: 0;
     background-color: var(--dark-grey);
-    // for testing
-    //background-color: var(--dark-blue);
+    position: var(--header-position);
+    transition: var(--transition);
+    z-index: 9999999;
+    top: 0;
     display: flex;
     justify-content: center;
-    position: var(--header-position);
-    z-index: 9999999;
     margin-block-end: 3rem;
 
     .inner {

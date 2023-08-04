@@ -1,8 +1,8 @@
 <?php namespace N1_Durable_Goods; ?>
 
-<article class="type-<?= $article_type ?> term-<?= $section->slug ?> format-<?= $format ?> <?= $featured ?>">
+<article class="type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? '' ?> <?= $featured ?? '' ?>">
 
-    <?= $article_type ?> <?= $format ?> <?= $featured ?>
+    <?= $article_type ?? '' ?> <?= $format ?? '' ?> <?= $featured ?? '' ?>
 
     <?php $this->print_post_head( $the_p, $article_type, $section, $authors ) ?>
 

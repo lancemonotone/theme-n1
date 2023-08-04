@@ -1,26 +1,28 @@
 .articles {
-    --border-width: 1px;
-    --height: 250px;
-    --background-size: auto;
+    //@media screen and (min-width: 768px) {
+    //    --height: 150px;
+    //    --background-size: cover;
+    //}
+    //
+    //@media screen and (min-width: 1024px) {
+    //    --height: 200px;
+    //}
+    //
+    //&.flavor-home-featured {
+    //    @media screen and (min-width: 768px) {
+    //        --height: 300px;
+    //    }
+    //
+    //    @media screen and (min-width: 1024px) {
+    //        --height: 400px;
+    //    }
+    //}
 
-    @media screen and (min-width: 768px) {
-        --height: 150px;
-        --background-size: cover;
-    }
-
-    @media screen and (min-width: 1024px) {
-        --height: 200px;
-    }
-
-    &.flavor-home-featured {
-        @media screen and (min-width: 768px) {
-            --height: 300px;
-        }
-
-        @media screen and (min-width: 1024px) {
-            --height: 400px;
-        }
-    }
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    grid-gap: 2rem;
+    container-type: inline-size;
 
     article {
         --flags: var(--orange);
@@ -29,6 +31,10 @@
         --title-color: var(--dark-grey);
         --author-color: var(--white);
         --border-color: var(--flags);
+        --border-width: 1px;
+        --height: auto;
+        --background-size: cover;
+        --aspect-ratio: 4/3;
         &:hover {
             --title-color: var(--white);
             --border-color: var(--flags);
@@ -57,11 +63,11 @@
         position: relative;
         width: 100%;
         height: var(--height);
+        aspect-ratio: var(--aspect-ratio);
         margin-inline: auto;
-        //outline: 1px solid transparent;
+        outline: 2px solid transparent;
         background-color: var(--background);
         text-align: center;
-        margin-block-end: 2.3rem;
 
         &:hover {
             outline: 2px solid var(--border-color);
@@ -93,7 +99,7 @@
     .meta {
         position: absolute;
         bottom: 10%;
-        left: -1px;
+        left: 0;
         width: 75%;
         background-color: var(--meta);
         padding-inline: clamp(1%, 0.8vw, 4%);

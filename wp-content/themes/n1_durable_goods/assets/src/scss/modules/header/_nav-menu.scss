@@ -72,7 +72,11 @@
         text-wrap: nowrap;
         height: 100%;
 
-        &-home {
+        &:not(.logo){
+            max-height: 45px;
+        }
+
+        &.logo {
             grid-row: var(--home-grid-row);
             height: 100%;
             width: var(--home-width);

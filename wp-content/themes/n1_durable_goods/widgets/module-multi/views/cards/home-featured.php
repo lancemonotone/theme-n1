@@ -1,8 +1,8 @@
 <?php namespace N1_Durable_Goods; ?>
 
-<article class="type-<?= $article_type ?> format-<?= $format ?> tax-<?= $the_tax ?> term-<?= $section->slug ?>">
+<article class="type-<?= $article_type ?? '' ?> format-<?= $format ?? '' ?> tax-<?= $the_tax ?? '' ?> term-<?= $section->slug ?? '' ?>">
 
-    <?= $article_type ?> <?= $format ?> <?= $featured ?>
+    <?= $article_type ?? '' ?> <?= $format ?? '' ?> <?= $featured ?? '' ?>
 
     <a href="<?= get_permalink( $the_p->ID ) ?>">
 

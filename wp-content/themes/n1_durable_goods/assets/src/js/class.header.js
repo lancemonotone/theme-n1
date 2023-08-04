@@ -39,8 +39,6 @@ class Header {
         })
     }
 
-    // Your other methods here...
-
     // Throttle function from: https://lodash.com/docs/4.17.15#throttle
     throttle (func, minWait, maxWait) {
         let context, args, result
@@ -114,5 +112,76 @@ class Header {
 }
 
 // Create an instance of the Header class and initialize the resize on scroll with the desired selector and parameters
-let header = new Header();
-header.resizeOnScroll('#site-header', 'height', '3.2rem', '11rem', 200, '0.1s ease-out 0s');
+// let header = new Header();
+// header.resizeOnScroll('#site-header', 'max-height', '3.2rem', '11rem', 200, '0.1s ease-out 0s');
+
+// (function () {
+//     const element = document.getElementById('site-header');
+//
+//     // Get the initial height of the element
+//     const initialHeight = element.offsetHeight;
+//
+//     window.addEventListener('scroll', () => {
+//         // Get the current scroll position
+//         const scrollY = window.scrollY;
+//
+//         // Calculate the new height by subtracting the scroll position from the initial height
+//         const newHeight = Math.max(initialHeight - scrollY, 0); // Ensure it doesn't go negative
+//
+//         // Set the height of the element to the new height
+//         element.style.height = newHeight + 'px';
+//     });
+// })();
+
+// (function () {
+//     const element = document.getElementById('site-header');
+//
+//     // Get the value of the --header-max-height custom property
+//     const style = getComputedStyle(element);
+//     const initialHeight = parseInt(style.getPropertyValue('--header-max-height'), 10);
+//
+//     let isCollapsed = false;
+//
+//     window.addEventListener('scroll', () => {
+//         const scrollY = window.scrollY;
+//
+//         // Check if the user has scrolled down enough to trigger the animation
+//         if (scrollY >= initialHeight && !isCollapsed) {
+//             element.style.height = 'var(--header-min-height)';
+//             isCollapsed = true;
+//         } else if (scrollY < initialHeight && isCollapsed) {
+//             element.style.height = 'var(--header-max-height)';
+//             isCollapsed = false;
+//         }
+//     });
+// })();
+
+(function () {
+    const element = document.getElementById('site-header');
+
+    // Get the value of the --header-max-height custom property
+    const style = getComputedStyle(element);
+    const initialHeight = parseInt(style.getPropertyValue('--header-max-height'), 10);
+
+    let isCollapsed = false;
+
+    window.addEventListener('scroll', () => {
+        const scrollY = Math.floor(window.scrollY);
+
+        // Inform the browser that the height property will change, optimizing rendering
+        element.style.willChange = 'height';
+
+        // Check if the user has scrolled down enough to trigger the animation
+        if (scrollY >= initialHeight && !isCollapsed) {
+            element.style.height = 'var(--header-min-height)';
+            isCollapsed = true;
+        } else if (scrollY < initialHeight && isCollapsed) {
+            element.style.height = 'var(--header-max-height)';
+            isCollapsed = false;
+        }
+
+        // Optionally, you can reset willChange after the animation to release optimization resources
+        // setTimeout(() => { element.style.willChange = 'auto'; }, 300);
+    });
+})();
+
