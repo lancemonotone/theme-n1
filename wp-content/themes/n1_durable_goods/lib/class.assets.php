@@ -7,6 +7,13 @@ class Assets {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueueLegacyScripts' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'setup_admin_style' ] );
 		add_action( 'login_enqueue_scripts', [ $this, 'setup_admin_style' ] );
+
+        // remove CSS variables --wp--preset--color/gradient/duotone
+        remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
+        remove_action( 'wp_footer', 'wp_enqueue_global_styles', 1 );
+
+        // remove SVG definitions for gradient/duotone
+        remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
 	}
 
 	/**
