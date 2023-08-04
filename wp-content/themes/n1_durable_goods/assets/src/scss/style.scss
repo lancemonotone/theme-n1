@@ -97,13 +97,13 @@ body.magazine.landing section.issue {
   }
 }
 
-section.issue.meta.postinfo {
-  h1.post-title, p.post-author {
-    font-size: 1rem;
-    font-weight: 200;
-    line-height: 1.4;
-  }
-}
+//section.issue.meta.postinfo {
+//  h1.post-title, p.post-author {
+//    font-size: 1rem;
+//    font-weight: 200;
+//    line-height: 1.4;
+//  }
+//}
 
 .current-issue {
   div.article.category, h1.post-title, p.post-author {
@@ -121,13 +121,13 @@ body.magazine.landing section.issue {
   }
 }
 
-section.issue.meta.postinfo {
-  h1.post-title, p.post-author {
-    display: inline;
-    text-align: left;
-    padding: 0;
-  }
-}
+//section.issue.meta.postinfo {
+//  h1.post-title, p.post-author {
+//    display: inline;
+//    text-align: left;
+//    padding: 0;
+//  }
+//}
 
 body.magazine.landing section.issue h1.post-title, section.issue.meta.postinfo h1.post-title {
   margin-right: 0.3em;

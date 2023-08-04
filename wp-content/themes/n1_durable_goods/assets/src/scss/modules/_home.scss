@@ -25,6 +25,20 @@
                 margin-block-end: 1.6rem
             }
 
+            article {
+                --color: var(--white);
+                &:hover {
+                    --color: inherit;
+                }
+                .post-title {
+                    color: var(--color);
+                }
+            }
+
+            .post-author {
+                color: var(--inactive-light);
+            }
+
             .flags {
                 display: none;
             }
