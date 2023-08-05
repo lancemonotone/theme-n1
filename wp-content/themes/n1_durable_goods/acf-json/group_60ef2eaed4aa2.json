@@ -91,9 +91,7 @@
                     "post_status": [
                         "publish"
                     ],
-                    "taxonomy": [
-                        "issue:issue-45"
-                    ],
+                    "taxonomy": "",
                     "return_format": "id",
                     "multiple": 0,
                     "allow_null": 0,
@@ -432,5 +430,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1690506839
+    "modified": 1691268484
 }

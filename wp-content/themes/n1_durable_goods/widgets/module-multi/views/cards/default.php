@@ -1,4 +1,6 @@
-<?php namespace N1_Durable_Goods; ?>
+<?php namespace N1_Durable_Goods;
+$authors = N1_Magazine::get_authors( $the_p->ID, true, false );
+?>
 
 <article class="type-<?= $article_type ?? '' ?> format-<?= $format  ?? ''?> tax-<?= $the_tax ?? '' ?> term-<?= $section->slug ?? '' ?>">
 
@@ -13,7 +15,9 @@
         <ul class="meta">
 <!--            <li class="category">--><?//= $section->name ?><!--</li>-->
             <li class="title"><?= $the_p->post_title ?></li>
-            <li class="author"><?= N1_Magazine::get_authors( $the_p->ID, true, false ) ?></li>
+            <?php if ( $authors ) { ?>
+                <li class="author"><?= $authors ?></li>
+            <?php } ?>
         </ul>
 
     </a>

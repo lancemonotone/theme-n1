@@ -126,6 +126,8 @@
             --category-color: var(--white);
             --pullquote-color: var(--orange);
             --pullquote-hover-color: var(--dark-grey);
+
+            --dek-color: var(--orange);
         }
 
         &.type-online-only {
@@ -135,6 +137,21 @@
             --category-color: var(--white);
             --pullquote-color: var(--dark-blue);
             --pullquote-hover-color: var(--dark-grey);
+
+            --dek-color: var(--dark-blue);
+
+            &.term-events {
+                --title-color: var(--dark-grey);
+                --title-hover-color: var(--dark-blue);
+                --author-color: var(--dark-grey);
+                --author-hover-color: var(--dark-blue);
+                --category-background-color: var(--dark-grey);
+                --category-color: var(--white);
+                --pullquote-color: var(--dark-grey);
+                --pullquote-hover-color: var(--dark-blue);
+                --dek-color: var(--dark-grey);
+
+            }
         }
 
         .author {
@@ -278,7 +295,7 @@
             margin: var(--dek-margin);
             padding: 0;
             line-height: 1.27;
-            color: var(--orange);
+            color: var(--dek-color);
         }
 
         .excerpt {
