@@ -27,10 +27,12 @@
     //outline: 1px solid green;
 }
 
-a.button:hover, input[type=submit]:hover {
+a.button:hover,
+input[type=submit]:hover {
     background-color: var(--dark-grey);
 }
 
-a.button:active, input[type=submit]:active {
+a.button:active,
+input[type=submit]:active {
     background-color: var(--light-blue);
 }

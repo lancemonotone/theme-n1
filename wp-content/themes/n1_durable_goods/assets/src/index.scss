@@ -12,8 +12,12 @@
 @import './scss/modules/header/nav-search';
 @import './scss/modules/header/nav-actions';
 
-@import './scss/modules/module-multi';
+@import './scss/modules/flavors/home-featured';
+@import './scss/modules/flavors/home-flow';
+@import './scss/modules/flavors/archive';
+
 @import './scss/modules/home';
+@import './scss/modules/module-multi';
 @import './scss/modules/subscribe';
 @import './scss/modules/toc';
 @import './scss/modules/bookstore';

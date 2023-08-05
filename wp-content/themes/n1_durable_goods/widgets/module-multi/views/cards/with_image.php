@@ -2,7 +2,7 @@
 
 <article class="type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? '' ?> <?= $featured ?? '' ?>">
 
-    <?//= $article_type ?? '' ?><!-- --><?//= $format ?? '' ?><!-- --><?//= $featured ?? '' ?>
+    <span class="debug">with_image <?= $article_type ?? '' ?> <?= $format ?? '' ?> <?= $featured ?? '' ?></span>
 
     <?php $this->print_post_head( $the_p, $article_type, $section, $authors ) ?>
 

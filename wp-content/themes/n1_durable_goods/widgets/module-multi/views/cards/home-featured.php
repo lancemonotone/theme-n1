@@ -2,7 +2,7 @@
 
 <article class="type-<?= $article_type ?? '' ?> format-<?= $format ?? '' ?> tax-<?= $the_tax ?? '' ?> term-<?= $section->slug ?? '' ?>">
 
-    <?//= $article_type ?? '' ?><!-- --><?//= $format ?? '' ?><!-- --><?//= $featured ?? '' ?>
+    <span class="debug">home-featured <?= $article_type ?? '' ?> <?= $format ?? '' ?> <?= $featured ?? '' ?></span>
 
     <div class="ribbon ribbon-top-left">
         <span>Featured</span>

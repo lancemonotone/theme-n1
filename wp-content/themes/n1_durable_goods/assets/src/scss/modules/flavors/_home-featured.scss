@@ -1,0 +1,32 @@
+@import '../../mixins/_ribbon';
+
+.flavor-home-featured.articles {
+    grid-template-columns: 1fr;
+
+    .ribbon {
+        @include ribbon;
+    }
+
+    .flags {
+        font-size: clamp(.7rem, 1.3vw, 1rem);
+    }
+
+    .meta {
+        .title {
+            font-size: clamp(1.3rem, 2.1vw, 2.1rem);
+        }
+
+        .author {
+            font-size: clamp(.9rem, 1.5vw, 1.2rem);
+        }
+    }
+
+    article {
+        --aspect-ratio: 4/3;
+        margin-block-end: 0.6rem;
+
+        @media screen and (min-width: 768px) {
+            --aspect-ratio: 16/9;
+        }
+    }
+}

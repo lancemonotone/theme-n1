@@ -311,7 +311,7 @@ class Module_Multi extends \WP_Widget {
         $ad_after         = $ad_after == 0 ? false : intval( $ad_after );
         $newsletter_after = $newsletter_after == 0 ? false : intval( $newsletter_after );
         $social_after     = $social_after == 0 ? false : intval( $social_after );
-        $bookstore_after     = $bookstore_after == 0 ? false : intval( $bookstore_after );
+        $bookstore_after  = $bookstore_after == 0 ? false : intval( $bookstore_after );
         $post_counter     = 0;
         foreach ( $the_posts as $the_p ) {
             if ( $post_counter === $ad_after ) {
@@ -351,7 +351,7 @@ class Module_Multi extends \WP_Widget {
             $article_type = 'online-only';
         }
 
-        // If $sections is still empty, it's not in the scroll so it must be a page.
+        // If $sections is still empty, it's not in the scroll, so it must be a page.
         if ( empty( $section ) ) {
             $article_type = 'page';
         }
@@ -391,6 +391,7 @@ class Module_Multi extends \WP_Widget {
                 }
                 break;
             case 'online-only-home':
+            case 'home-flow':
             case 'featured-default':
             default:
                 $the_tax = $section->taxonomy == 'category' ? 'magazine' : $section->taxonomy;

@@ -1,0 +1,23 @@
+.flavor-home-flow.articles {
+    .module-bookstore {
+        @media (min-width: 600px) {
+            grid-column: 2;
+            grid-row: 3 / span 3;
+        }
+    }
+
+    @media screen and (min-width: 600px) {
+        --article-columns: repeat(2, 1fr);
+    }
+
+    grid-area: grid;
+    grid-template-columns: var(--article-columns);
+
+    .widget-title {
+        display: none;
+    }
+
+    article {
+        --height: 100%;
+    }
+}
