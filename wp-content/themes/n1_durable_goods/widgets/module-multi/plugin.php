@@ -367,7 +367,7 @@ class Module_Multi extends \WP_Widget {
 
         // cache content for use later
         $content  = $this->get_content( $the_p, $flavor, $format );
-        $authors  = N1_Magazine::get_authors( $the_p->ID, true, false );
+        $authors  = N1_Magazine::get_authors( $the_p->ID );
         $featured = ! is_search() && get_field( 'article_featured', $the_p->ID ) ? 'article-featured' : '';
         $subhead  = get_field( 'article_subhead', $the_p->ID );
         switch ( $flavor ) {
@@ -417,7 +417,7 @@ class Module_Multi extends \WP_Widget {
                 $img_id   = get_post_thumbnail_id( $the_p->ID );
                 $img_meta = wp_prepare_attachment_for_js( $img_id );
                 $img_url  = $img_meta[ 'url' ] ?? '';
-                $content  = '<figure style="background-image: url(' . $img_url . ');" /></figure>';
+                $content  = '<figure class="article-image" style="background-image: url(' . $img_url . ');" /></figure>';
                 break;
             case 'no_image':
                 $content = '';
@@ -456,7 +456,7 @@ class Module_Multi extends \WP_Widget {
                 $issue = N1_Magazine::get_issue_by_slug( $section->slug );
                 $issue_art = get_field( 'issue_art', $issue->ID );
                 ?>
-                <figure>
+                <figure class="issue-icon">
                     <a href="<?= home_url() ?>/magazine/<?= $issue->post_name ?>">
                         <img src="<?= $issue_art[ 'sizes' ][ 'issue-art' ] ?>"
                              alt="<?php _e( 'Art for' ) ?> <?= $issue->post_title ?>">

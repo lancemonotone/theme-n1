@@ -3,7 +3,7 @@
     margin-inline: auto;
     text-align: center;
 
-    .widget-title {
+    & > .widget-title {
         font-size: clamp(1.5rem, 1.5vw, 2rem);
         display: inline-block;
         font-weight: 600;
@@ -24,5 +24,10 @@
                 background-image: url(../images/plus.png);
             }
         }
+    }
+
+    .module-newsletter + .module-social,
+    .module-social + .module-newsletter {
+        margin-block-start: -2rem;
     }
 }

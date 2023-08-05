@@ -1,7 +1,7 @@
 input {
   &.newsletter.email, &[type="text"], &[type="email"], &[type="password"], &[type="submit"] {
     font-size: 20px;
-    font-family: "adelle-sans", sans-serif;
+    font-family: var(--adelle-sans);
     font-weight: 400;
     color: #333;
   }

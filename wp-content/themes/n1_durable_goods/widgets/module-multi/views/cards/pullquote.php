@@ -16,9 +16,9 @@
         <a href="<?= get_permalink( $the_p->ID ) ?>"><?= $the_p->post_title ?></a>
     </h3>
 
-    <?= $authors ? '<p class="post-author">' . $authors . '</p>' : '' ?>
+    <?= $authors ? '<p class="author">' . $authors . '</p>' : '' ?>
 
-    <a href="<?= get_permalink( $the_p->ID ) ?>" class="jump"><?php _e( 'Read More' ) ?></a>
+<!--    <a href="--><?//= get_permalink( $the_p->ID ) ?><!--" class="jump">--><?php //_e( 'Read More' ) ?><!--</a>-->
 
     <?php edit_post_link( __( 'Edit' ), null, null, $the_p->ID ); ?>
 

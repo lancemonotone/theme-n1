@@ -18,10 +18,14 @@
 
 @import './scss/modules/home';
 @import './scss/modules/module-multi';
-@import './scss/modules/subscribe';
-@import './scss/modules/toc';
-@import './scss/modules/bookstore';
+@import './scss/modules/module-subscribe';
+@import './scss/modules/module-toc';
+@import './scss/modules/module-bookstore';
+@import './scss/modules/module-newsletter';
+
 @import './scss/modules/articles';
+
+@import './scss/modules/pages/landing-magazine';
 
 @import './scss/modules/footer';
 @import './scss/modules/div';

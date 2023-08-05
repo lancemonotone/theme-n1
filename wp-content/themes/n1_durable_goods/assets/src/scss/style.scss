@@ -4502,12 +4502,12 @@ body {
     font-weight: 100;
   }
 
-  &.online-only-home section.articles, &.archive section.articles {
+  &.online-only-home section.articles/*, &.archive section.articles*/ {
     margin-top: 16px;
-    padding: 0 16px;
+    //padding: 0 16px;
   }
 
-  &.online-only-home ul.post-meta-tags-list, &.archive ul.post-meta-tags-list {
+  &.online-only-home ul.post-meta-tags-list/*, &.archive ul.post-meta-tags-list*/ {
     margin-top: 16px;
   }
 

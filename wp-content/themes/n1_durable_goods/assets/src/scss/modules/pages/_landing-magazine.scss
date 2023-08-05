@@ -1,0 +1,16 @@
+body.magazine.landing {
+    @media only screen and (min-width: 640px) {
+        section.issue {
+            padding-inline-end: 2rem !important;
+        }
+
+    }
+    @media only screen and (min-width: 1400px) {
+        .module-multi {
+            margin-inline-start: 1rem;
+        }
+        section.issue {
+            padding-inline-end: 0 !important;
+        }
+    }
+}

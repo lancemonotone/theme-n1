@@ -10,7 +10,7 @@
         $img_src = wp_get_attachment_image_src( get_post_thumbnail_id( $the_p->ID ), 'content-full' );
         if ( is_array( $img_src ) ) {
             ?>
-            <figure>
+            <figure class="article-image">
                 <img src="<?= $img_src[ 0 ] ?>" alt="<?= $the_p->post_title ?>"/>
             </figure>
         <?php }
