@@ -41,11 +41,11 @@
     .hed {
         color: var(--inactive-light);
         border-bottom: none;
-        font-size: clamp(1rem, 2vw, 2rem);
+        font-size: clamp(.8rem, 4vw, 1.5rem);
         font-weight: 100;
         grid-area: hed;
         align-self: end;
-        @media screen and (min-width: 600px) {
+        @media screen and (min-width: 768px) {
             font-size: clamp(0.8rem, 1vw, 2rem);
         }
     }
@@ -58,13 +58,9 @@
         grid-area: name;
         align-self: start;
         padding-inline-end: 1rem;
-        @media screen and (min-width: 600px) {
+        @media screen and (min-width: 768px) {
             font-size: clamp(1rem, 2vw, 2rem);
         }
-    }
-
-    .module-multi {
-        //margin-inline: 2rem;
     }
 
     .title {

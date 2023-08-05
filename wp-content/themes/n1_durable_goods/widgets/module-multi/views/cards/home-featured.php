@@ -2,7 +2,11 @@
 
 <article class="type-<?= $article_type ?? '' ?> format-<?= $format ?? '' ?> tax-<?= $the_tax ?? '' ?> term-<?= $section->slug ?? '' ?>">
 
-    <?= $article_type ?? '' ?> <?= $format ?? '' ?> <?= $featured ?? '' ?>
+    <?//= $article_type ?? '' ?><!-- --><?//= $format ?? '' ?><!-- --><?//= $featured ?? '' ?>
+
+    <div class="ribbon ribbon-top-left">
+        <span>Featured</span>
+    </div>
 
     <a href="<?= get_permalink( $the_p->ID ) ?>">
 

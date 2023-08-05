@@ -33,7 +33,7 @@ function get_status(): string {
     $account_text = _( 'Manage Account' );
     $gift_text    = _( 'Give a Gift Subscription' );
     $logout_text  = _( 'Sign Out' );
-    $logout_link  = wp_logout_url( home_url() );
+    $logout_link  = wp_logout_url( $home_url );
 
     $user_svg = <<<EOD
 <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
@@ -51,11 +51,22 @@ EOD;
         <div class="status">{$status_text}: <strong>{$user_status}</strong></div>
     </div>
     <div class="links">
-        <a class="link-renew" href="{$home_url}/renew/">{$renew_text}</a>
-        <a class="link-my-account" href="{$home_url}/your-account/">{$account_text}</a>
-        <a class="link-gift-subscription" href="https://shop.nplusonemag.com/products/gift-subscription">{$gift_text}</a>
+        <a class="link-renew" href="{$home_url}/renew/">
+            <span class="arrow"></span>
+            <span>{$renew_text}</span>
+        </a>
+        <a class="link-my-account" href="{$home_url}/your-account/">
+            <span class="arrow"></span>
+            <span>{$account_text}</span>
+        </a>
+        <a class="link-gift-subscription" href="https://shop.nplusonemag.com/products/gift-subscription">
+            <span class="arrow"></span>
+            <span>{$gift_text}</span>
+        </a>
     </div>
-    <a class="button" href="{$logout_link}">{$logout_text}</a>
+    <div class="button-container">
+        <span></span></span><a class="button" href="{$logout_link}">{$logout_text}</a>
+    </div>
 </div>
 EOD;
 }

@@ -55,10 +55,12 @@ if ( count( $the_posts ) ) {
             break;
     } ?><? //= $flavor ?>
 
-    <section class="articles flavor-<?php echo $flavor; ?>">
-        <?php echo $title ? '<h3 class="widget-title">' . $title . '</h3>' : ''; ?>
-        <?php echo $subtitle ? '<p class="dek">' . $subtitle . '</p>' : '';
+    <?php echo $title ? '<h3 class="widget-title">' . $title . '</h3>' : ''; ?>
+    <?php echo $subtitle ? '<p class="dek">' . $subtitle . '</p>' : ''; ?>
 
+    <section class="articles flavor-<?php echo $flavor; ?>">
+
+        <?php
         $this->print_multi_posts( $the_posts, $ad_after, $flavor, $newsletter_after, $social_after, $bookstore_after, $taxonomy, $term );
 
         if ( $infinite ) {

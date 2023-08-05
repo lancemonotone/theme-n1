@@ -1,0 +1,88 @@
+@mixin ribbon {
+    width: 125px;
+    height: 125px;
+    overflow: hidden;
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+
+    &::before,
+    &::after {
+        position: absolute;
+        z-index: -1;
+        content: '';
+        display: block;
+        border: 5px solid rgba(157, 162, 162, 0.5);
+    }
+
+    span {
+        position: absolute;
+        display: block;
+        width: 225px;
+        padding: 10px 0;
+        background-color: var(--orange);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+        color: #fff;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 400;
+        font-size: .7rem;
+        line-height: 1;
+        letter-spacing: 4px;
+    }
+
+    &-top-left {
+        top: -10px;
+        left: -10px;
+
+        &::before,
+        &::after {
+            border-top-color: transparent;
+            border-left-color: transparent;
+        }
+
+        &::before {
+            top: 0;
+            right: 0;
+        }
+
+        &::after {
+            bottom: 0;
+            left: 0;
+        }
+
+        span {
+            right: -45px;
+            top: 30px;
+            transform: rotate(-45deg);
+        }
+    }
+
+    &-bottom-left {
+        bottom: -10px;
+        left: -10px;
+
+        &::before,
+        &::after {
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+        }
+
+        &::before {
+            bottom: 0;
+            right: 0;
+        }
+
+        &::after {
+            top: 0;
+            left: 0;
+        }
+
+        span {
+            right: -25px;
+            bottom: 30px;
+            transform: rotate(225deg);
+        }
+    }
+}

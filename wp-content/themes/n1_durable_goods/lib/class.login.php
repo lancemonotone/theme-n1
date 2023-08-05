@@ -8,9 +8,9 @@ use MM_User;
  * @package N1_Durable_Goods
  */
 class Login {
-    public function __construct(){
+    public function __construct() {
         // Disable email check interval, which returns user to sign-in page.
-        add_filter('admin_email_check_interval', '__return_false');
+        add_filter( 'admin_email_check_interval', '__return_false' );
         add_filter( 'login_redirect', [ &$this, 'redirect_to_request' ], 10, 3 );
         add_filter( 'wp_head', [ &$this, 'redirect_logout_to_home' ] );
         add_filter( 'loginout', [ $this, 'loginout_text_change' ] );
@@ -22,13 +22,10 @@ class Login {
             $home = home_url();
             echo <<<EOD
 			<script type="text/javascript">
-			(function($){
-				"use strict";
-				$(function(){
-					$('.nav-actions').hide();
-				});	
-			}(jQuery));
-			setTimeout(function(){location.href="{$home}"} , 3000);
+			(function(){ setTimeout(function(){
+                // alert("You have been logged out.")
+                location.href="{$home}"} , 100
+             )}());
 			</script>
 EOD;
         }
@@ -55,7 +52,7 @@ EOD;
         ];
 
         // instead of using $redirect_to we're redirecting back to $request
-        if ( user_can( $user->ID, 'edit_posts' ) ) {
+        if ( ! N1_Magazine::is_paywalled() && user_can( $user->ID, 'edit_posts' ) ) {
             $where = $redirect_to;
         } elseif ( $member->getMembershipId() === "1" ) {
             // Push free members to renew when they log in.
@@ -105,13 +102,13 @@ EOD;
 
         // There is an existing account associated with the email nicoleklipman+test@gmail.com but the password entered is invalid. Please try placing your order again using the correct password.
         // check if error message contains the string 'Incorrect username or password'
-        if ( strpos( $crntErrorMessage, "Please try placing your order again using the correct password" ) !== FALSE ) {
+        if ( strpos( $crntErrorMessage, "Please try placing your order again using the correct password" ) !== false ) {
             // extract the email address from the $crntErrorMessage string using regex
             $pattern = '/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/';
             preg_match( $pattern, $crntErrorMessage, $matches );
-            $email = $matches[0];
+            $email = $matches[ 0 ];
 
-            unset( $_GET['message'] );
+            unset( $_GET[ 'message' ] );
 
             /**
              * Hide the error message immediately following
@@ -122,7 +119,6 @@ EOD;
 <p class="mm-formError prime"> There is an existing account associated with the email <em>{$email}</em> but the password entered is invalid. <strong>Please place your order again using the correct password or try <a href="https://www.nplusonemag.com/forgot-password/">resetting your password</a></strong>.</p>
 EOT;
         }
-
     }
 }
 

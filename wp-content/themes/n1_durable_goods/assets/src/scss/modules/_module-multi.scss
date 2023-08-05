@@ -1,9 +1,28 @@
 .module-multi {
+    max-width: var(--max-width-content);
+    margin-inline: auto;
+    text-align: center;
+
     .widget-title {
         font-size: clamp(1.5rem, 1.5vw, 2rem);
-        margin-block-end: 1rem;
+        display: inline-block;
+        font-weight: 600;
+        margin-block-end: 3rem;
+        border-block-end: 4px solid;
+        white-space: nowrap;
+
         @media screen and (min-width: 600px) {
-            text-align: center;
+            &::before {
+                content: "";
+                display: block;
+                height: 40px;
+                width: 40px;
+                background-size: 40px 40px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 24px;
+                background-image: url(../images/plus.png);
+            }
         }
     }
 }
