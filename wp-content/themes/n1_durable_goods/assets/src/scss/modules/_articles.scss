@@ -38,6 +38,7 @@
         &.type-online-only {
             --flags: var(--dark-blue);
             --background: var(--dark-blue);
+            --title-color: var(--white);
             --author-color: var(--light-blue);
 
             &.term-events {
