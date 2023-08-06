@@ -105,7 +105,7 @@ class N1_Magazine {
                 self::$page_type  = 'magazine';
                 self::$page_class = 'magazine';
             } elseif ( ! empty( $wp_query->query[ 'online-only' ] ) ) {
-                if ( $wp_query->query[ 'online-only' ] == 'events' ) {
+                if ( $wp_query->query[ 'online-only' ] === 'events' ) {
                     self::$page_type  = 'online-only';
                     self::$page_class = 'events online-only';
                 } else {

@@ -8,19 +8,34 @@ class Navigation {
     public function add_current_nav_ancestor_class( $classes, $item, $args ) {
         $page_class = N1_Magazine::get_page_class();
 
-        // Flatten the array of classes.
-        $body_class = join( ' ', $classes );
+        // Convert the menu item classes string into an array.
+        $menu_item_classes_array = explode(' ', join(' ', $classes));
 
-        // Check if the page class is in the classes array.
-        // This is a bit of a fudge because Events is also Online
-        // Only, and has a class of 'events online-only', so we
-        // need to check for both.
-        if ( stristr( $body_class, $page_class ) ) {
+        // Convert the page class string into an array.
+        $page_classes_array = explode(' ', $page_class);
+
+        // Check if all individual classes in $page_class exist in $menu_item_class.
+        $contains_all = true;
+        foreach ($page_classes_array as $class) {
+            if (!in_array($class, $menu_item_classes_array)) {
+                $contains_all = false;
+                break;
+            }
+        }
+
+        // Special case for online-only without events
+        if ($page_class == 'online-only' && in_array('events', $menu_item_classes_array)) {
+            $contains_all = false;
+        }
+
+        if ($contains_all) {
             $classes[] = 'current-ancestor';
         }
 
         return $classes;
     }
+
+
 }
 
 new Navigation();
