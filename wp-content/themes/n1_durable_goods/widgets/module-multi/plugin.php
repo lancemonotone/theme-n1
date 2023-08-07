@@ -474,11 +474,13 @@ class Module_Multi extends \WP_Widget {
         $is_issue       = $section->taxonomy === 'issue';
 
         if ( $is_event ) {
-            $flags = $section->name;
+            if ( $date = $section->slug == 'events' ? get_field( 'event_date', $the_p->ID ) : '' ) {
+                $flags = "<strong>{$section->name}</strong> " . date( 'F j, Y', strtotime( $date ) );
+            } else {
+                $flags = "<strong>{$section->name}</strong>";
+            }
         } elseif ( $is_online_only ) {
-            // $date  = $section->slug == 'events' ? get_field( 'event_date', $the_p->ID ) : $the_p->post_date;
-            // $flags = '<div class="flags"><span class="date">' . date( 'F j, Y', strtotime( $date ) ) . '</span></div>';
-            $flags = $section->name;
+            $flags = "<strong>{$section->name}</strong>";
         } elseif ( $is_issue ) {
             $issue        = N1_Magazine::get_issue_by_slug( $section->slug );
             $issue_number = $issue->post_title;
