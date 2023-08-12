@@ -5,6 +5,7 @@
 
     .supp & {
         padding-block: 72px;
+        padding-inline: var(--inner-padding);
     }
 
     & > .widget-title {
