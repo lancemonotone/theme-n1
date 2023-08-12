@@ -17,7 +17,7 @@
     </div><!-- #supplementary -->
 <?php } ?>
 
-<?php Adrotate::display( 5 ) ?>
+<?php Adrotate::display( 3 ) ?>
 
 <?php // Home Bottom Modules 2 ?>
 <?php if ( is_active_sidebar( 'sidebar-home-4' ) ) { ?>
