@@ -65,7 +65,6 @@ class Assets {
 		wp_enqueue_style( 'n1-styles', get_stylesheet_uri(), array(), $styles_version );
 	}
 
-
 	function setup_admin_style() {
 		$admin_style_version = filemtime( get_stylesheet_directory() . '/css/admin-style.css' ) ?? null;
 

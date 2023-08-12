@@ -56,7 +56,7 @@ EOD;
             <span>{$renew_text}</span>
         </a>
         <a class="link-my-account" href="{$home_url}/your-account/">
-            <span class="arrow"></span>
+            <span  class="arrow"></span>
             <span>{$account_text}</span>
         </a>
         <a class="link-gift-subscription" href="https://shop.nplusonemag.com/products/gift-subscription">

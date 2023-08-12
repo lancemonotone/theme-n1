@@ -105,6 +105,7 @@
 
                             $the_content = '<div class="post-wrapper">' . $the_content . '</div>';
 
+                            $app = '';
                             if ( $appendix = get_field( 'article_appendix', $post->ID ) ) {
                                 $app = '<div class="appendix">' . $appendix . '</div>';
                             }

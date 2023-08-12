@@ -9,15 +9,25 @@
     --home-margin-end: 0;
     --home-width: clamp(60px, 28vw, 140px);
 
-    @media screen and (min-width: 600px) {
+    @media screen and (min-width: 900px) {
         --font-size: clamp(.75rem, 3.5vw, 1rem);
-        --grid-template-columns: minmax(65px, 1.4fr) 1fr 1fr 1fr;
+        --grid-template-columns: repeat(3, 1fr);
         --grid-template-rows: repeat(2, 1fr);
         --home-grid-row: 1 / span 2;
         --home-width: clamp(100px, 16vw, 150px);
         --row-gap: .5rem;
         --column-gap: 3rem;
+
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: var(--grid-template-columns);
+        grid-template-rows: var(--grid-template-rows);
+        column-gap: var(--column-gap);
+        row-gap: var(--row-gap);
+        align-items: center;
+        height: 70%;
     }
+
     @media screen and (min-width: 1100px) {
         --font-size: clamp(.7rem, 1.5vw, 1rem);
         --grid-template-columns: auto;
@@ -31,14 +41,9 @@
     }
 
     grid-area: nav;
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: var(--grid-template-columns);
-    grid-template-rows: var(--grid-template-rows);
-    column-gap: var(--column-gap);
-    row-gap: var(--row-gap);
-    align-items: center;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
     a {
         color: var(--white);
@@ -57,6 +62,7 @@
 
     .subscribe a {
         color: var(--orange);
+
         &:hover {
             color: var(--light-blue);
         }
@@ -72,11 +78,12 @@
         text-wrap: nowrap;
         height: 100%;
 
-        &:not(.logo){
+        &:not(.logo) {
             max-height: 45px;
         }
 
         &.logo {
+            display: none;
             grid-row: var(--home-grid-row);
             height: 100%;
             width: var(--home-width);

@@ -4,9 +4,13 @@
     --font-size: .85rem;
     --actions-height: 45px;
 
-    grid-area: actions;
+    @media screen and (min-width: 768px) {
+        grid-area: actions;
+    }
+
     @include accordion(var(--white));
 
+    align-self: center;
     height: var(--actions-height);
     max-height: 100%;
 
