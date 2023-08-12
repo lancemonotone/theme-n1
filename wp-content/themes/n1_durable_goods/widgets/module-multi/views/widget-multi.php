@@ -50,7 +50,7 @@ if ( count( $the_posts ) ) {
             }
             break;
         case 'featured-author':
-        case 'home-featured':
+        case 'home-hero':
         default:
             break;
     } ?><? //= $flavor ?>

@@ -7,8 +7,8 @@
 
 <div class="featured">
     <?php // Home Hero Module
-    if ( is_active_sidebar( 'sidebar-home-featured-article' ) ) { ?>
-        <?php dynamic_sidebar( 'sidebar-home-featured-article' ); ?>
+    if ( is_active_sidebar( 'sidebar-home-hero-article' ) ) { ?>
+        <?php dynamic_sidebar( 'sidebar-home-hero-article' ); ?>
     <?php } ?>
 </div>
 

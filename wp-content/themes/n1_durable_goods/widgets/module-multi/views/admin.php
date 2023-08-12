@@ -44,7 +44,9 @@ $infinite = strip_tags($instance['infinite']);
 	<label for="<?php echo $this->get_field_id('flavor'); ?>"><?php _e( 'Flavor:' ); ?></label>
 	<select class="widefat"  name="<?php echo $this->get_field_name('flavor'); ?>" id="<?php echo $this->get_field_id('flavor'); ?>">
 		<option value="home-flow" <?php selected( $instance['flavor'],  'home-flow', true); ?>><?php _e('Home Flow')?></option>
-		<option value="home-featured" <?php selected( $instance['flavor'],  'home-featured', true); ?>><?php _e('Home Featured')?></option>
+		<option value="home-hero" <?php selected( $instance['flavor'],  'home-hero', true); ?>><?php _e('Home Hero')?></option>
+		<option value="home-feature-1" <?php selected( $instance['flavor'],  'home-feature-1', true); ?>><?php _e('Home Feature 1')?></option>
+		<option value="home-feature-2" <?php selected( $instance['flavor'],  'home-feature-2', true); ?>><?php _e('Home Feature 2')?></option>
         <option value="featured-default" <?php selected( $instance['flavor'],  'featured-default', true); ?>><?php _e('Featured (default)')?></option>
 		<option value="featured-author" <?php selected( $instance['flavor'],  'featured-author', true); ?>><?php _e('Featured (by author)')?></option>
 		<option value="online-only" <?php selected( $instance['flavor'],  'online-only', true); ?>><?php _e('Online Only')?></option>

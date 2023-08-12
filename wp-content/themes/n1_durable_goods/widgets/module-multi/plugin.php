@@ -243,11 +243,13 @@ class Module_Multi extends \WP_Widget {
 
         $flavor_args = [];
         switch ( $flavor ) {
+            case 'home-feature-1':
+            case 'home-feature-2':
             case 'home-flow':
-                $flavor_args = $this->get_home_flow_args();
+                $flavor_args = $this->get_home_flow_args( $flavor );
                 break;
-            case 'home-featured':
-                $flavor_args = $this->get_home_featured_args();
+            case 'home-hero':
+                $flavor_args = $this->get_home_hero_args();
                 break;
             case 'featured-default':
                 $flavor_args = $this->get_featured_default_args();
@@ -358,7 +360,7 @@ class Module_Multi extends \WP_Widget {
         $flags = $this->get_flags( $flavor, $the_p, $section );
 
         // get the teaser style
-        if ( $flavor == 'home-featured' ) {
+        if ( $flavor == 'home-hero' ) {
             $format = 'with_image';
         } else {
             $format = get_field( 'article_teaser_format', $the_p->ID );
@@ -371,8 +373,8 @@ class Module_Multi extends \WP_Widget {
         $featured = ! is_search() && get_field( 'article_featured', $the_p->ID ) ? 'article-featured' : '';
         $subhead  = get_field( 'article_subhead', $the_p->ID );
         switch ( $flavor ) {
-            case 'home-featured':
-                include( plugin_dir_path( __FILE__ ) . '/views/cards/home-featured.php' );
+            case 'home-hero':
+                include( plugin_dir_path( __FILE__ ) . '/views/cards/home-hero.php' );
                 break;
             case 'archive':
             case 'sticky':
@@ -404,7 +406,7 @@ class Module_Multi extends \WP_Widget {
         switch ( $flavor ) {
             case 'archive':
             case 'online-only-home':
-            case 'home-featured':
+            case 'home-hero':
             case 'sticky':
                 $img_size = 'content-full';
                 break;
@@ -711,19 +713,20 @@ EOD;
     }
 
     /**
-     * Returns post selected in Site Settings Home Featured.
+     * Returns post selected in Site Settings Home Hero.
      */
-    function get_home_featured_args(): array {
-        // query wordpress database for 'home_featured' option
+    function get_home_hero_args(): array {
+        // query wordpress database for 'home_hero' option
         return [
-            'post__in' => [ get_field( 'home_featured', 'options' ) ]
+            'post__in' => [ get_field( 'home_hero', 'options' ) ]
         ];
     }
 
     /**
      * Returns posts selected in Site Settings Home Flow.
      */
-    function get_home_flow_args(): array {
+    function get_home_flow_args( $flavor ): array {
+        $flavor = str_replace( '-', '_', $flavor );
         $scroll_args     = $this->get_scroll_args();
         $query_args      = array_merge( (array)$this->default_args, (array)$scroll_args );
         $the_query       = new \WP_Query( $query_args );
@@ -735,7 +738,7 @@ EOD;
 
 
         // First, get the post IDs in order from the ACF field
-        $flow_posts = get_field( 'home_flow', 'option' );
+        $flow_posts = get_field( $flavor, 'option' );
 
         $flow_post_ids = [];
 

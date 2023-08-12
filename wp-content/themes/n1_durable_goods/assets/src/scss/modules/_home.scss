@@ -61,7 +61,7 @@ body.home {
 
     .featured {
         grid-area: featured;
-        @extend .flavor-home-featured;
+        @extend .flavor-home-hero;
     }
 
     .flow {

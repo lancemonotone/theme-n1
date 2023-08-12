@@ -1,11 +1,12 @@
 <?php namespace N1_Durable_Goods;
 
 $sidebars = [
-    'sidebar-home-featured-article' => __( 'Home Featured Article Module' ),
+    'sidebar-home-hero-article' => __( 'Home Hero Article Module' ),
     'sidebar-home-0'                => __( 'Home Left Modules' ),
     'sidebar-home-1'                => __( 'Home Center Modules' ),
     'sidebar-home-2'                => __( 'Home Right Modules' ),
-    'sidebar-home-3'                => __( 'Home Bottom Modules' ),
+    'sidebar-home-3'                => __( 'Home Featured 1' ),
+    'sidebar-home-4'                => __( 'Home Featured 2' ),
     'sidebar-hero'                  => __( 'Hero Modules' ),
     'sidebar-online-only-0'         => __( 'Single Online Only Left Modules' ),
     'sidebar-online-only-1'         => __( 'Single Online Only Bottom Modules' ),

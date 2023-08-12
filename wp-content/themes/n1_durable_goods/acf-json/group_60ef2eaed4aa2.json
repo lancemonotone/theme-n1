@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_64b47b72c6df0",
-            "label": "Home Featured Article",
+            "label": "Home Page",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -21,9 +21,28 @@
             "endpoint": 0
         },
         {
+            "key": "field_64d7d5181bafe",
+            "label": "Featured Article",
+            "name": "",
+            "aria-label": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 1,
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
             "key": "field_64b47b8bc6df1",
-            "label": "Home Featured Article",
-            "name": "home_featured",
+            "label": "Home Hero",
+            "name": "home_hero",
             "aria-label": "",
             "type": "post_object",
             "instructions": "",
@@ -48,6 +67,25 @@
             "ui": 1
         },
         {
+            "key": "field_64d7d5521baff",
+            "label": "Flow",
+            "name": "",
+            "aria-label": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 1,
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
             "key": "field_64c2fc89d5170",
             "label": "Home Flow",
             "name": "home_flow",
@@ -67,7 +105,7 @@
             "min": 0,
             "max": 0,
             "collapsed": "",
-            "button_label": "Add Row",
+            "button_label": "Add Article",
             "rows_per_page": 20,
             "sub_fields": [
                 {
@@ -99,6 +137,169 @@
                     "parent_repeater": "field_64c2fc89d5170"
                 }
             ]
+        },
+        {
+            "key": "field_64d7dd6220203",
+            "label": "Feature Section 1",
+            "name": "",
+            "aria-label": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 1,
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_64d7da5f170b9",
+            "label": "Articles",
+            "name": "home_feature_1",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 1,
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Article",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_64d7da5f170bd",
+                    "label": "Article",
+                    "name": "article",
+                    "aria-label": "",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "relevanssi_exclude": 0,
+                    "post_type": [
+                        "article"
+                    ],
+                    "post_status": [
+                        "publish"
+                    ],
+                    "taxonomy": "",
+                    "return_format": "",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 1,
+                    "parent_repeater": "field_64d7da5f170b9"
+                }
+            ]
+        },
+        {
+            "key": "field_64d7dd7120204",
+            "label": "Feature Section 2",
+            "name": "",
+            "aria-label": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 1,
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_64d7daad170be",
+            "label": "Articles",
+            "name": "home_feature_2",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 1,
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Article",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_64d7daad170c2",
+                    "label": "Article",
+                    "name": "article",
+                    "aria-label": "",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "relevanssi_exclude": 0,
+                    "post_type": [
+                        "article"
+                    ],
+                    "post_status": [
+                        "publish"
+                    ],
+                    "taxonomy": "",
+                    "return_format": "id",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 1,
+                    "parent_repeater": "field_64d7daad170be"
+                }
+            ]
+        },
+        {
+            "key": "field_64d7d5a1cedaa",
+            "label": "End",
+            "name": "",
+            "aria-label": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
         },
         {
             "key": "field_64bc3b4cf3a3d",
@@ -430,5 +631,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1691268484
+    "modified": 1691869026
 }

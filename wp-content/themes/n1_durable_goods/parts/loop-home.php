@@ -10,9 +10,18 @@
 
 <?php Adrotate::display( 3 ) ?>
 
-<?php // Home Bottom Modules ?>
-<?php if ( is_active_sidebar( 'sidebar-home-0' ) ) { ?>
+<?php // Home Bottom Modules 1 ?>
+<?php if ( is_active_sidebar( 'sidebar-home-3' ) ) { ?>
     <div id="supplementary" class="supp">
         <?php dynamic_sidebar( 'sidebar-home-3' ); ?>
+    </div><!-- #supplementary -->
+<?php } ?>
+
+<?php Adrotate::display( 5 ) ?>
+
+<?php // Home Bottom Modules 2 ?>
+<?php if ( is_active_sidebar( 'sidebar-home-4' ) ) { ?>
+    <div id="supplementary" class="supp">
+        <?php dynamic_sidebar( 'sidebar-home-4' ); ?>
     </div><!-- #supplementary -->
 <?php } ?>
