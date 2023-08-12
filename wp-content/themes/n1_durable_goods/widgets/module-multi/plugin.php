@@ -417,7 +417,11 @@ class Module_Multi extends \WP_Widget {
                 $img_id   = get_post_thumbnail_id( $the_p->ID );
                 $img_meta = wp_prepare_attachment_for_js( $img_id );
                 $img_url  = $img_meta[ 'url' ] ?? '';
-                $content  = '<figure class="article-image" style="background-image: url(' . $img_url . ');" /></figure>';
+                $content  = <<<EOD
+<figure class="article-image" style="" />
+<img src="{$img_url}" alt="{$img_meta['alt']}" height="{$img_meta['height']}" width="{$img_meta['width']}" />
+</figure>
+EOD;
                 break;
             case 'no_image':
                 $content = '';

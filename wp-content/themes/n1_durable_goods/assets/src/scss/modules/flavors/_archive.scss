@@ -114,6 +114,7 @@
             .article-image {
                 // unset the styles from _articles .article-image
                 position: relative;
+                height: auto;
                 margin-block-end: 1rem;
                 background: none;
             }
@@ -218,7 +219,7 @@
             @media only screen and (min-width: 640px) {
                 --position: absolute;
                 --top: 74px;
-                --right: 12px;
+                --right: 4px;
                 width: 224px;
                 text-align: right;
             }
@@ -271,10 +272,10 @@
             margin: var(--title-margin);
 
             a {
-                color: var(--title-color);
+                color: var(--dark-grey);
 
                 &:hover {
-                    color: var(--title-hover-color);
+                    color: var(--orange);
                 }
             }
         }
@@ -316,7 +317,7 @@
 
     a.jump {
         font-size: clamp(1rem, 2vw, 1.3rem);
-        background-color: var(--dark-tan);
+        background-color: var(--light-grey);
         color: var(--tan);
         margin-block-start: 1.5rem;
         text-wrap: wrap;
