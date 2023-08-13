@@ -403,6 +403,14 @@ class N1_Magazine {
      * This must be called before any output is sent to the browser.
      */
     static function set_is_metered() {
+        if ( session_status() === PHP_SESSION_DISABLED ) {
+            // Sessions are not available, set a default message
+            self::$is_metered      = false;
+            self::$metered_message = "Sessions are not enabled, so metering is unavailable.";
+
+            return;
+        }
+
         if ( session_status() === PHP_SESSION_NONE ) {
             ini_set( 'session.cookie_lifetime', 30 * 24 * 60 * 60 );
             session_start();
@@ -528,7 +536,7 @@ class N1_Magazine {
             $paywall = false;
         }
         // If a member is logged in
-        if ( mm_member_decision( [ "isMember" => "true", "status" => "active|pending_cancel" ] ) && ! $force_paywall) {
+        if ( mm_member_decision( [ "isMember" => "true", "status" => "active|pending_cancel" ] ) && ! $force_paywall ) {
             $paywall = false;
         }
         // If a member is a Gift Sub Giver or Free Membership, paywall is true.
