@@ -429,6 +429,24 @@
             "append": ""
         },
         {
+            "key": "field_64d938535aec9",
+            "label": "Paywall and Meter",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_531cd9b961327",
             "label": "Force Paywall",
             "name": "options_force_paywall",
@@ -447,6 +465,71 @@
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_64d917cebb12c",
+            "label": "Meter Limit",
+            "name": "meter_limit",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Check this to view the site as a paywalled visitor in order to see adverts and article roadblocks.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 1,
+            "default_value": 3,
+            "min": "",
+            "max": "",
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_64d9386c5aeca",
+            "label": "Pre-Meter Message",
+            "name": "pre_meter_message",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "This message will be shown to visitors before they hit the meter limit. {count} = current number of visits to paywalled articles. {limit} = meter limit defined above.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 1,
+            "default_value": "You have read {count} of {limit} free articles.",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_64d939295aecb",
+            "label": "Post-Meter Message (copy)",
+            "name": "post_meter_message",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "This message will be shown to visitors before they hit the meter limit. {count} = current number of visits to paywalled articles. {limit} = meter limit defined above.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 1,
+            "default_value": "You have reached the limit of {limit} visits to different articles.",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_64038ab6305b5",
@@ -631,5 +714,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1691869026
+    "modified": 1691958606
 }

@@ -3,7 +3,7 @@
     margin-inline: auto;
     text-align: center;
 
-    .supp & {
+    .supp &:not(:empty) {
         padding-block: 72px;
         padding-inline: var(--inner-padding);
     }

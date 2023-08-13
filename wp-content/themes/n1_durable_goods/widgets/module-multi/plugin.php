@@ -403,6 +403,7 @@ class Module_Multi extends \WP_Widget {
     }
 
     function get_content( $the_p, $flavor, $format ) {
+        $content = '';
         switch ( $flavor ) {
             case 'archive':
             case 'online-only-home':
@@ -726,7 +727,7 @@ EOD;
      * Returns posts selected in Site Settings Home Flow.
      */
     function get_home_flow_args( $flavor ): array {
-        $flavor = str_replace( '-', '_', $flavor );
+        $flavor          = str_replace( '-', '_', $flavor );
         $scroll_args     = $this->get_scroll_args();
         $query_args      = array_merge( (array)$this->default_args, (array)$scroll_args );
         $the_query       = new \WP_Query( $query_args );

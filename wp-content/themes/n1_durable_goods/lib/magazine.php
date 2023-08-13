@@ -16,12 +16,11 @@ class N1_Magazine {
     static \WP_Post $context_issue;
     static string $page_type;
     static string $page_class;
+    static bool $is_metered;
+    static string $metered_message = '';
+    private static array $is_paywalled = [];
 
     private function __construct() {
-        // $this->set_issues();
-        // $this->set_current_issue();
-        // $this->set_context_issue();
-        // $this->set_page_type();
         $this->add_shortcodes();
     }
 
@@ -99,6 +98,7 @@ class N1_Magazine {
             self::$page_class = 'archive';
         } elseif ( is_single() ) {
             if ( ! empty( $wp_query->query[ 'issue' ] ) ) {
+                self::set_is_metered();
                 self::$page_type  = 'magazine';
                 self::$page_class = 'magazine';
             } elseif ( is_preview() && ! empty( wp_get_post_terms( $_REQUEST[ 'preview_id' ], 'category' ) ) ) {
@@ -395,8 +395,118 @@ class N1_Magazine {
         return ( 1 === count( $query_array ) && array_key_exists( 'issue', $query_array ) );
     }
 
-    static function is_paywalled( $post_id = null ): bool {
+    static function is_metered(): bool {
+        return self::$is_metered;
+    }
+
+    /**
+     * This must be called before any output is sent to the browser.
+     */
+    static function set_is_metered() {
+        if ( session_status() === PHP_SESSION_NONE ) {
+            ini_set( 'session.cookie_lifetime', 30 * 24 * 60 * 60 );
+            session_start();
+        }
+
+        global $post;
+
+        if ( ! self::is_paywalled( $post->ID ) ) {
+            return false;
+        }
+
+        // Set a secret string to make the session more obscure
+        $secret = __NAMESPACE__;
+
+        // Determine the expiration time
+        if ( ! isset( $_SESSION[ 'expiration_time' ] ) ) {
+            $_SESSION[ 'expiration_time' ] = time() + ( 30 * 24 * 60 * 60 ); // 30 days from now
+        }
+
+        // Check if the session has expired
+        if ( time() > $_SESSION[ 'expiration_time' ] ) {
+            session_destroy();
+            session_start();
+            $_SESSION[ 'expiration_time' ] = time() + ( 30 * 24 * 60 * 60 );
+        }
+
+        // Validate IP and User-Agent
+        if ( ! isset( $_SESSION[ 'ip' ] ) || $_SESSION[ 'ip' ] !== $_SERVER[ 'REMOTE_ADDR' ] ||
+             ! isset( $_SESSION[ 'user_agent' ] ) || $_SESSION[ 'user_agent' ] !== $_SERVER[ 'HTTP_USER_AGENT' ] ) {
+            session_destroy();
+            session_start();
+            $_SESSION[ 'ip' ]              = $_SERVER[ 'REMOTE_ADDR' ];
+            $_SESSION[ 'user_agent' ]      = $_SERVER[ 'HTTP_USER_AGENT' ];
+            $_SESSION[ 'expiration_time' ] = time() + ( 30 * 24 * 60 * 60 );
+        }
+
+        // Get the visited articles from the session, or initialize an empty array
+        $visited_articles_key = md5( $secret );
+        $visited_articles     = $_SESSION[ $visited_articles_key ] ?? [];
+
+        // Check if the current article has been visited
+        if ( ! in_array( $post->ID, $visited_articles ) ) {
+            $visited_articles[]                = $post->ID; // Add the current article to the visited list
+            $_SESSION[ $visited_articles_key ] = $visited_articles;
+        }
+
+        // Check if the visitor has reached the limit of visits
+        $visit_count = count( $visited_articles );
+        // Determine the meter limit
+        $limit = intval( get_field( 'meter_limit', 'option' ) );
+        // Determine the plural suffix
+        $s = ( $visit_count === 1 ) ? '' : 's';
+
+        // Replace the placeholders in the template
+        $replacements = [
+            '{count}' => $visit_count,
+            '{limit}' => $limit,
+            '{s}'     => $s,
+        ];
+
+        if ( $visit_count > $limit ) {
+            self::$is_metered = true;
+            $message          = get_field( 'post_meter_message', 'option' );
+        } else {
+            self::$is_metered = false;
+            $message          = get_field( 'pre_meter_message', 'option' );
+        }
+
+        self::$metered_message = str_replace( array_keys( $replacements ), array_values( $replacements ), $message );
+    }
+
+    static function reset_session_for_testing() {
+        // Unset all session variables
+        $_SESSION = [];
+
+        // If a session cookie exists, destroy it
+        if ( ini_get( "session.use_cookies" ) ) {
+            $params = session_get_cookie_params();
+            setcookie( session_name(), '', time() - 42000,
+                $params[ "path" ], $params[ "domain" ],
+                $params[ "secure" ], $params[ "httponly" ]
+            );
+        }
+
+        // Finally, destroy the session
+        session_destroy();
+
+        // Optionally, you might want to start a new session immediately
+        session_start();
+    }
+
+
+    static function is_paywalled( $postid = null ): bool {
+        global $post;
+        $post_id = $post->ID;
+
+        if ( isset( self::$is_paywalled[ $post_id ] ) ) {
+            return self::$is_paywalled[ $post_id ];
+        }
+
         $paywall = true;
+
+        $force_paywall = get_field( 'options_force_paywall', 'options' );
+
         // If the article doesn't have a post ID, it's coming from the Multi Module
         if ( ! $post_id ) {
             $paywall = true;
@@ -410,15 +520,15 @@ class N1_Magazine {
             $paywall = false;
         }
         // If the user can edit posts.
-        if ( current_user_can( 'edit_posts' ) ) {
+        if ( current_user_can( 'edit_posts' ) && ! $force_paywall ) {
             $paywall = false;
         }
-        // If this is a MM Core page.
+        // If this is an MM Core page.
         if ( $post_id && \MM_CorePage::getCorePageInfo( $post_id ) ) {
             $paywall = false;
         }
         // If a member is logged in
-        if ( mm_member_decision( [ "isMember" => "true", "status" => "active|pending_cancel" ] ) ) {
+        if ( mm_member_decision( [ "isMember" => "true", "status" => "active|pending_cancel" ] ) && ! $force_paywall) {
             $paywall = false;
         }
         // If a member is a Gift Sub Giver or Free Membership, paywall is true.
@@ -443,8 +553,12 @@ class N1_Magazine {
             $paywall = true;
         }
         // If the site settings force a paywall.
-        if ( current_user_can( 'edit_posts' ) && get_field( 'options_force_paywall', 'options' ) ) {
-            $paywall = true;
+        // if ( current_user_can( 'edit_posts' ) && $force_paywall ) {
+        //     $paywall = true;
+        // }
+
+        if ( $post_id ) {
+            self::$is_paywalled[ $post_id ] = $paywall;
         }
 
         return $paywall;

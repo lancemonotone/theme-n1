@@ -4,6 +4,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+// Used for determining template and checking for
+// metered paywall if this is a magazine article.
+// N1_Magazine::reset_session_for_testing();
+$page_type = N1_Magazine::get_page_type();
+
 get_header();
 
 if ( is_plugin_active( 'lj-maintenance-mode/lj-maintenance-mode.php' ) ) {
@@ -24,8 +29,6 @@ if ( is_plugin_active( 'lj-maintenance-mode/lj-maintenance-mode.php' ) ) {
         </section> <!-- #content -->
     </div><!-- #main -->
 <?php } else {
-    $page_type = N1_Magazine::get_page_type();
-
     switch ( $page_type ) {
         case 'home':
             //echo 'Home Page';

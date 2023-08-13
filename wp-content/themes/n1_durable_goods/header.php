@@ -35,15 +35,6 @@
 	<![endif]-->
     <?php wp_head(); ?>
 
-<!--  <style>-->
-<!--    #pwbox-7830, #pwbox-10059 {-->
-<!--      margin-bottom: 1em;-->
-<!--    }-->
-<!---->
-<!--    .post-password-form input[type="submit"]:hover {-->
-<!--      background-color: #ce4f25;-->
-<!--    }-->
-<!--  </style>-->
   <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push( ['_setAccount', 'UA-8175093-1'] );

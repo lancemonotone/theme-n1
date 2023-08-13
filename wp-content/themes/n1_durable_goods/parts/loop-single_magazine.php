@@ -12,6 +12,10 @@
             $issue_obj = N1_Magazine::get_issue_by_slug( $issue );
             ?>
             <section id="content" class="content-post issue-content<?php echo N1_Magazine::is_paywalled( $post->ID ) ? ' unlogged' : '' ?>">
+                <?php if ( N1_Magazine::is_paywalled( $post->ID ) ) { ?>
+                    <h3 class="issue-title text-center"><?= N1_Magazine::$metered_message ?></h3>
+                <?php } ?>
+
                 <!-- includes POST and PREV-NEXT -->
                 <article id="post-<?php the_ID(); ?>" <?php post_class( 'post issue-content-post' ); ?>>
                     <div class="post-header issue-content-post-header">
@@ -84,7 +88,7 @@
 
                     <div class="post-body issue-content-post-body">
                         <?php
-                        if ( N1_Magazine::is_paywalled( $post->ID ) ) {
+                        if ( N1_Magazine::is_paywalled( $post->ID ) && N1_Magazine::is_metered() ) {
                             $the_content = apply_filters( 'the_content', get_field( 'article_long_excerpt', $post->ID ) );
 
                             echo Utility::insert_advertisement( $the_content, 2, 2 );
@@ -133,8 +137,7 @@
                                 <br>
                                 <br>
                                 <div id="container" style="max-width: 600px; margin: 0 auto;"><!-- Begin Give Lively Fundraising Widget -->
-                                    <script>gl = document.createElement(
-                                            'script')
+                                    <script>gl = document.createElement('script')
                                         gl.src = 'https://secure.givelively.org/widgets/simple_donation/n1-foundation-inc.js?show_suggested_amount_buttons=false&show_in_honor_of=false&address_required=false&has_required_custom_question=false&suggested_donation_amounts[]=25&suggested_donation_amounts[]=100&suggested_donation_amounts[]=250&suggested_donation_amounts[]=1000'
                                         document.getElementsByTagName(
                                             'head')[0].appendChild(
@@ -148,7 +151,7 @@
 
                     </div><!-- .post-body -->
                 </article><!-- #post -->
-                <?php if ( N1_Magazine::is_paywalled( $post->ID ) ) { ?>
+                <?php if ( N1_Magazine::is_paywalled( $post->ID ) && N1_Magazine::is_metered() ) { ?>
 
                     <div class="roadblock">
                         <!-- subscribe -->
