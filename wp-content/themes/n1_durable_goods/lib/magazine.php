@@ -17,7 +17,7 @@ class N1_Magazine {
     static string $page_type;
     static string $page_class;
     static bool $is_metered;
-    static string $metered_message = '';
+    static string $metered_message = 'Init metering.';
     private static array $is_paywalled = [];
 
     private function __construct() {
