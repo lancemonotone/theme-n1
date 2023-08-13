@@ -13,7 +13,7 @@
             ?>
             <section id="content" class="content-post issue-content<?php echo N1_Magazine::is_paywalled( $post->ID ) ? ' unlogged' : '' ?>">
                 <?php if ( N1_Magazine::is_paywalled( $post->ID ) ) { ?>
-                    <h3 class="issue-title text-center"><?= N1_Magazine::$metered_message ?></h3>
+                    <h3 class="issue-title text-center"><?= Metered_Paywall::$metered_message ?></h3>
                 <?php } ?>
 
                 <!-- includes POST and PREV-NEXT -->
@@ -88,7 +88,7 @@
 
                     <div class="post-body issue-content-post-body">
                         <?php
-                        if ( N1_Magazine::is_paywalled( $post->ID ) && N1_Magazine::is_metered() ) {
+                        if ( N1_Magazine::is_paywalled( $post->ID ) && Metered_Paywall::is_metered() ) {
                             $the_content = apply_filters( 'the_content', get_field( 'article_long_excerpt', $post->ID ) );
 
                             echo Utility::insert_advertisement( $the_content, 2, 2 );
@@ -151,7 +151,7 @@
 
                     </div><!-- .post-body -->
                 </article><!-- #post -->
-                <?php if ( N1_Magazine::is_paywalled( $post->ID ) && N1_Magazine::is_metered() ) { ?>
+                <?php if ( N1_Magazine::is_paywalled( $post->ID ) && Metered_Paywall::is_metered() ) { ?>
 
                     <div class="roadblock">
                         <!-- subscribe -->

@@ -37,6 +37,7 @@ class N1 {
         include_once( 'lib/class.login.php' );
         include_once( 'lib/custom_post_types.php' );
         include_once( 'lib/custom_taxonomies.php' );
+        include_once( 'lib/class.metered_paywall.php' );
         include_once( 'lib/magazine.php' );
         include_once( 'lib/class.assets.php' );
         include_once( 'lib/class.search.php' );
