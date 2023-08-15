@@ -26,6 +26,10 @@
     --light-blue: #56b3e6;
 }
 
+* {
+    transition: var(--transition);
+}
+
 .widget {
     //outline: 1px solid green;
 }

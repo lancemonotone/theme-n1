@@ -29,15 +29,16 @@
     --sections-max-height: auto;
     --column-gap: 1rem;
     --row-gap: 0.5rem;
-    --logo-height: auto;
-    --sections-align-items: unset;
+    --logo-height: 45px;
+    --sections-align-items: center;
 
     .header-collapsed & {
-        --logo-height: 45px;
+        --logo-height: 45px !important;
         --sections-align-items: center;
     }
 
     @media screen and (min-width: 900px) {
+        --logo-height: 59px;
         --header-max-height: 8.7rem;
         --header-min-height: 8.7rem;
         --header-align-items: top;
