@@ -8,7 +8,7 @@
     </section><!-- /#content -->
 </main><!-- /#main -->
 
-<?php Adrotate::display( 3 ) ?>
+<?php //Adrotate::display( 3 ) ?>
 
 <?php // Home Bottom Modules 1 ?>
 <?php if ( is_active_sidebar( 'sidebar-home-3' ) ) { ?>
@@ -17,7 +17,9 @@
     </div><!-- #supplementary -->
 <?php } ?>
 
-<?php Adrotate::display( 3 ) ?>
+<div class="home-nurble-end">
+    <?php Adrotate::display( 3 ) ?>
+</div>
 
 <?php // Home Bottom Modules 2 ?>
 <?php if ( is_active_sidebar( 'sidebar-home-4' ) ) { ?>

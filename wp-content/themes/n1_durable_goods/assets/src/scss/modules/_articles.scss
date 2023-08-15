@@ -1,10 +1,10 @@
 .articles {
-    --article-columns: repeat(auto-fill, minmax(260px, 1fr));
+    --article-columns: repeat(auto-fill, minmax(240px, 1fr));
 
     display: grid;
     grid-template-columns: var(--article-columns);
     grid-auto-rows: auto;
-    grid-gap: 2rem;
+    grid-gap: 3rem;
     //container-type: inline-size;
 
     article {
