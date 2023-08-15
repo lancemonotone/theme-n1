@@ -4,9 +4,9 @@
 
     <span class="debug">home-hero <?= $article_type ?? '' ?> <?= $format ?? '' ?> <?= $featured ?? '' ?></span>
 
-    <div class="ribbon ribbon-top-left">
-        <span>Featured</span>
-    </div>
+<!--    <div class="ribbon ribbon-top-left">-->
+<!--        <span>Featured</span>-->
+<!--    </div>-->
 
     <a href="<?= get_permalink( $the_p->ID ) ?>">
 
