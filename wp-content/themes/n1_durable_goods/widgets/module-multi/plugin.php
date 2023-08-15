@@ -310,6 +310,7 @@ class Module_Multi extends \WP_Widget {
     /** START HERE **/
 
     function print_multi_posts( $the_posts, $ad_after = 0, $flavor = 'archive', $newsletter_after = 0, $social_after = 0, $bookstore_after = 0 ) {
+        $did_ad = false;
         $ad_after         = $ad_after == 0 ? false : intval( $ad_after );
         $newsletter_after = $newsletter_after == 0 ? false : intval( $newsletter_after );
         $social_after     = $social_after == 0 ? false : intval( $social_after );
@@ -318,6 +319,7 @@ class Module_Multi extends \WP_Widget {
         foreach ( $the_posts as $the_p ) {
             if ( $post_counter === $ad_after ) {
                 Adrotate::display( 1 );
+                $did_ad = true;
             }
             if ( $post_counter === $newsletter_after ) {
                 the_widget( '\N1_Durable_Goods\Module_Newsletter' );
@@ -331,6 +333,10 @@ class Module_Multi extends \WP_Widget {
             $this->print_post( $flavor, $the_p );
 
             $post_counter++;
+        }
+
+        if(!$did_ad && $ad_after > 0) {
+            Adrotate::display( 1 );
         }
     }
 
