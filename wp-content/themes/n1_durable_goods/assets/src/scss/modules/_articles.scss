@@ -234,6 +234,14 @@
         font-size: .8rem;
         font-weight: 600;
         text-align: left;
+        @media screen and (max-width: 1152px) {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
 
         &, a {
             color: var(--author-color);
@@ -252,11 +260,19 @@
         color: var(--flags-color);
     }
 
+    &:not(.flavor-home-flow),
+    &:not(.toc) {
+        .flags {
+            font-size: 0.65rem;
+        }
+    }
+
     &.flavor-issue {
         .flags {
             display: none;
         }
     }
+
 }
 
 
