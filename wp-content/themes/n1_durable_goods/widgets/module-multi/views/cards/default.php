@@ -13,7 +13,6 @@ $authors = N1_Magazine::get_authors( $the_p->ID, true, false );
         <?= $flags; ?>
 
         <ul class="meta">
-<!--            <li class="category">--><?//= $section->name ?><!--</li>-->
             <li class="title"><?= $the_p->post_title ?></li>
             <?php if ( $authors ) { ?>
                 <li class="author"><?= $authors ?></li>

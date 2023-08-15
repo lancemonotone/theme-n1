@@ -79,6 +79,95 @@
                 --flags-color: var(--dark-grey);
                 --title-color: var(--dark-grey);
                 --author-color: var(--light-blue);
+
+                &.term-events {
+                    position: relative;
+                    //padding: 10px; // To make space for the custom border
+
+                    &:before,
+                    &:after,
+                    .article-link:before,
+                    .article-link:after {
+                        content: "EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS ";
+                        font-family: sans-serif;
+                        font-weight: 700;
+                        color: var(--light-blue);
+                        font-size: 12px;
+                        padding: 1px 2px;
+                        position: absolute;
+                        overflow: hidden;
+                        text-align: start;
+                        white-space: nowrap;
+                        background-color: var(--dark-grey);
+                        line-height: 17px;
+                        letter-spacing: .02rem;
+                    }
+
+                    &:before,
+                    &:after {
+                        height: 17px;
+                        z-index: 1;
+                        left: 0;
+                        right: 0;
+                        width: calc(100% - 3px);
+                    }
+
+                    &:before {
+                        top: 0;
+                    }
+
+                    &:after {
+                        bottom: 0;
+                    }
+
+                    .article-link {
+                        position: relative;
+
+                        &:before,
+                        &:after {
+                            top: 0;
+                            bottom: 0;
+                            width: 17px;
+                            writing-mode: vertical-rl;
+                            text-orientation: mixed;
+                        }
+
+                        &:before {
+                            left: 0;
+                        }
+
+                        &:after {
+                            right: 0;
+                            line-height: 12px;
+                            width: 15px;
+                        }
+                    }
+
+                    .meta {
+                        display: grid;
+                        grid-template-columns: 4rem 1fr;
+                        grid-gap: 1rem;
+                        align-items: center;
+                    }
+
+                    .date-container {
+                        text-align: center;
+                        background-color: var(--dark-grey);
+                        color: var(--white);
+                        padding: .5rem 0;
+                    }
+
+                    .month-day {
+                        font-size: 15px;
+                        font-weight: 700;
+                        white-space: nowrap;
+                    }
+
+                    .year {
+                        font-size: 12px;
+                    }
+
+                }
             }
         }
 
@@ -94,6 +183,7 @@
 
         &:hover {
             outline: 4px solid var(--border-color);
+            box-shadow: 0 0 8px 5px #0000003b;
         }
     }
 
@@ -103,16 +193,6 @@
     }
 
     .article-image {
-        //position: absolute;
-        //inset: 0;
-        //margin: 0;
-        //background-size: var(--background-size);
-        //background-repeat: no-repeat;
-        //background-position: center center;
-        ///* aspect-ratio: 16/9; */
-        //width: 100%;
-        //height: auto;
-        //margin-inline: auto;
         height: 100%;
 
         img {

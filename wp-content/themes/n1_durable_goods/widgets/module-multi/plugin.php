@@ -357,6 +357,11 @@ class Module_Multi extends \WP_Widget {
         if ( empty( $section ) ) {
             $article_type = 'page';
         }
+
+        $is_event       = $section->slug === 'events';
+        $is_online_only = $section->taxonomy === 'online-only';
+        $is_issue       = $section->taxonomy === 'issue';
+
         $flags = $this->get_flags( $flavor, $the_p, $section );
 
         // get the teaser style
@@ -397,7 +402,11 @@ class Module_Multi extends \WP_Widget {
             case 'featured-default':
             default:
                 $the_tax = $section->taxonomy == 'category' ? 'magazine' : $section->taxonomy;
-                include( plugin_dir_path( __FILE__ ) . '/views/cards/default.php' );
+                if ( $is_event ) {
+                    include( plugin_dir_path( __FILE__ ) . '/views/cards/event.php' );
+                } else {
+                    include( plugin_dir_path( __FILE__ ) . '/views/cards/default.php' );
+                }
                 break;
         }
     }

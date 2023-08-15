@@ -44,6 +44,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 800;
+    z-index: 999;
 
     article:hover & {
         display: block;
