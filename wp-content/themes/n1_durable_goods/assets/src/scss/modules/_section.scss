@@ -26,6 +26,10 @@ section {
   }
 
   .magazine-archive {
+    max-width: var(--max-width-content);
+    margin-inline: auto;
+    text-align: center;
+
     ol.meta {
       position: absolute;
       bottom: 0;
