@@ -3,6 +3,10 @@
     margin-inline: auto;
     text-align: center;
 
+    .current-posts & {
+        margin-block-end: 72px;
+    }
+
     .supp &:not(:empty) {
         padding-block: 72px;
         padding-inline: var(--inner-padding);
