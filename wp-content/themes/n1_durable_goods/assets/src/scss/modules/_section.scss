@@ -25,7 +25,7 @@ section {
     }
   }
 
-  .magazine-archive {
+  &.magazine-archive {
     max-width: var(--max-width-content);
     margin-inline: auto;
     text-align: center;
