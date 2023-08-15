@@ -234,13 +234,16 @@
         font-size: .8rem;
         font-weight: 600;
         text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+
         @media screen and (max-width: 1152px) {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
             -webkit-line-clamp: 1;
             line-clamp: 1;
-            -webkit-box-orient: vertical;
         }
 
         &, a {
