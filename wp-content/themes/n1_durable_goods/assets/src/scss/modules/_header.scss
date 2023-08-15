@@ -167,13 +167,15 @@
 
             .overlay {
                 all: unset;
+                height: 100%;
                 display: grid;
                 grid-template-rows: 1fr;
                 grid-template-columns: 2fr 1fr;
                 grid-template-areas: "nav search";
                 column-gap: 1rem;
-                align-items: center;
+                //align-items: center;
                 position: relative;
+                align-items: stretch;
             }
         }
     }

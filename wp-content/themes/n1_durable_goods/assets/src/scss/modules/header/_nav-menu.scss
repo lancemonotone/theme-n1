@@ -28,7 +28,7 @@
         --grid-template-columns: auto;
         --grid-template-rows: 1fr;
         --row-gap: clamp(1rem, 2vw, 2rem);
-        --column-gap: 1rem;
+        --column-gap: .0;
         --nav-justify: space-between;
     }
 
@@ -41,7 +41,7 @@
         color: var(--white);
         font-size: var(--font-size);
         font-weight: 600;
-        padding: .5rem;
+        padding: .5rem 1rem;
         height: 100%;
         width: 100%;
         display: grid;
@@ -69,9 +69,6 @@
     .menu-item {
         text-wrap: nowrap;
         height: 100%;
-
-        &:not(.logo) {
-            max-height: 45px;
-        }
+        max-height: 45px;
     }
 }
