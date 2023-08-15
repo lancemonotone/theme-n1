@@ -29,6 +29,13 @@
     --sections-max-height: auto;
     --column-gap: 1rem;
     --row-gap: 0.5rem;
+    --logo-height: auto;
+    --sections-align-items: unset;
+
+    .header-collapsed & {
+        --logo-height: 45px;
+        --sections-align-items: center;
+    }
 
     @media screen and (min-width: 900px) {
         --header-max-height: 8.7rem;
@@ -81,6 +88,7 @@
         grid-template-areas: "logo hamburger actions";
         grid-template-columns: 110px 1fr auto;
         align-content: center;
+        align-items: var(--sections-align-items);
 
         #nav-actions {
             grid-area: actions;
@@ -91,7 +99,7 @@
             grid-area: logo;
             //grid-column: 1 / span 2;
             display: block;
-            height: auto;
+            height: var(--logo-height);
             width: 100%;
             background-image: url('../images/logo-trans-750-white.png');
             background-repeat: no-repeat;
