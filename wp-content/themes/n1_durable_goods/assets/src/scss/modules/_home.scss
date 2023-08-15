@@ -14,7 +14,7 @@ body.home {
         margin-inline: auto;
         display: grid;
         row-gap: 1rem;
-        column-gap: clamp(0rem, 4vw, 3rem);
+        column-gap: clamp(1rem, 3vw, 2rem);
         grid-template-columns: var(--content-columns);
         grid-template-rows: var(--content-rows);
         grid-template-areas: var(--content-template-areas);

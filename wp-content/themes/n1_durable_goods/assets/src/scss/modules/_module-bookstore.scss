@@ -1,8 +1,9 @@
 .module-bookstore {
     text-align: center;
     border: 10px solid var(--orange);
-    padding: 4%;
+    padding: 3rem clamp(0rem, 0.8vw, 4%) 1rem;
     container-type: inline-size;
+    background-color: var(--tan);
 
     .module-title {
         font-weight: 700;
@@ -33,6 +34,10 @@
         }
 
         @container (min-width: 400px) {
+            --columns: repeat(4, 1fr);
+        }
+
+        @container (min-width: 600px) {
             --columns: repeat(2, 1fr);
         }
 
@@ -79,5 +84,6 @@
     .jump {
         text-align: center !important;
         margin-inline: 0;
+        //padding-top: clamp(2rem, 6vw, 4rem);
     }
 }

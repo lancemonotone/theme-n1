@@ -13,7 +13,7 @@
 
     --black: #000000;
     --white: #ffffff;
-    --tan: #f2ece2;
+    --tan: #f6f2eb;
     --dark-tan: #bcb5a7;
     --dark-grey: #242424;
     --light-grey: #333333;
@@ -32,6 +32,13 @@
 
 .widget {
     //outline: 1px solid green;
+}
+
+a.button,
+input[type=submit] {
+    @media screen and (min-width: 768px) {
+        font-size: clamp(1rem, 2vw, 1.3rem);
+    }
 }
 
 a.button:hover,
