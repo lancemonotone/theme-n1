@@ -40,7 +40,7 @@
             .pullquote {
                 color: var(--quote-color);
                 text-align: center;
-                font-size: 1rem;
+                font-size: clamp(0.8rem, 1.1vw, 1rem);
                 margin-top: -3rem;
                 max-width: 80%;
                 line-height: 1.4;
@@ -101,6 +101,7 @@
                         background-color: var(--dark-grey);
                         line-height: 17px;
                         letter-spacing: .02rem;
+                        pointer-events: none;
                     }
 
                     &:before,
@@ -183,7 +184,7 @@
 
         &:hover {
             outline: 4px solid var(--border-color);
-            box-shadow: 0 0 8px 5px #0000003b;
+            box-shadow: 0 0 8px 5px #00000017;
         }
     }
 
@@ -216,6 +217,12 @@
         font-size: 1rem;
         font-weight: 700;
         text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
 
         &, a {
             color: var(--title-color);

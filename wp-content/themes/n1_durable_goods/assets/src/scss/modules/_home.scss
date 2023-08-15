@@ -31,7 +31,8 @@ body.home {
 
             .widget-title {
                 color: var(--orange);
-                margin-block-end: 1.6rem
+                margin-block-end: 1.6rem;
+                font-size: clamp(1.5rem, 1.5vw, 2rem);
             }
 
             .articles {
@@ -72,6 +73,7 @@ body.home {
 
     .home-nurble-end {
         background-color: var(--tan);
+
         .nurble {
             margin-block: 0;
             padding-block: 3rem;
