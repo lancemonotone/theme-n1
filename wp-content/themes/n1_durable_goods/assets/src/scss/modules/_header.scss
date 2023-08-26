@@ -90,6 +90,8 @@
         grid-template-columns: 110px 1fr auto;
         align-content: center;
         align-items: var(--sections-align-items);
+        // prevent jumping when menu is open
+        transition: none;
 
         #nav-actions {
             grid-area: actions;
