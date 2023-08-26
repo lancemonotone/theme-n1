@@ -6,34 +6,42 @@ $footer_copy = get_field( 'options_footer_copy', 'options' );
 ?>
 <footer>
     <div class="footer-wrapper">
-        <section id="about" class="footer-about">
-            <a href="<?php echo home_url() ?>">
-                <h5 class="footer-about-title">n+1</h5>
+        <section class="footer-about">
+            <a class="footer-logo" href="<?php echo home_url() ?>" aria-label="Visit n+1 homepage">
+                n+1
             </a>
             <?php echo str_replace( [ '{{issue-number}}', '{{issue-name}}' ], [ $issue_title, $issue_name ], $footer_copy ) ?>
         </section><!-- /#about -->
-        <nav class="footer-nav">
-            <h6 class="footer-nav-title">Magazine</h6>
-            <ul class="footer-nav-list">
-                <li class="footer-nav-entry">
-                    <a href="<?php echo N1_Magazine::get_current_issue_url() ?>">Current Issue</a>
-                </li>
-            </ul>
-            <?php wp_nav_menu( [ 'menu' => 'the-magazine', 'menu_class' => 'footer-nav-list', 'container' => false ] ); ?>
-        </nav>
-        <nav class="footer-nav">
-            <h6 class="footer-nav-title">About n+1</h6>
-            <?php wp_nav_menu( [ 'menu' => 'about-n+1', 'menu_class' => 'footer-nav-list', 'container' => false ] ); ?>
-        </nav>
-        <p class="footer-button top">
-            <a class="button" href="#">Back to Top</a>
-        </p>
-        <p class="footer-copyright">Copyright &copy; <?php echo date( 'Y' ) ?> n+1 Foundation, Inc.</p>
-        <p class="footer-legal">
-            <a href="/about/terms/">Terms &amp; Conditions</a>
-            |
-            <a href="/about/privacy/">Privacy Policy</a>
-        </p>
+        <section class="footer-nav">
+            <nav>
+                <h6 class="footer-nav-title">About n+1</h6>
+                <?php wp_nav_menu( [ 'menu' => 'about-n+1', 'menu_class' => 'footer-nav-list', 'container' => false ] ); ?>
+            </nav>
+            <nav>
+                <h6 class="footer-nav-title">Magazine</h6>
+                <ul class="footer-nav-list">
+                    <li class="footer-nav-entry">
+                        <a href="<?php echo N1_Magazine::get_current_issue_url() ?>">Current Issue</a>
+                    </li>
+                </ul>
+                <?php wp_nav_menu( [ 'menu' => 'the-magazine', 'menu_class' => 'footer-nav-list', 'container' => false ] ); ?>
+            </nav>
+            <div class="footer-social">
+                <?php the_widget( '\N1_Durable_Goods\Module_Newsletter' ) ?>
+                <?php the_widget( '\N1_Durable_Goods\Module_Social' ) ?>
+            </div>
+        </section>
+        <section class="footer-bottom">
+            <p class="footer-button top">
+                <a class="button" href="#">Back to Top</a>
+            </p>
+            <p class="footer-copyright">Copyright &copy; <?php echo date( 'Y' ) ?> n+1 Foundation, Inc.</p>
+            <p class="footer-legal">
+                <a href="/about/terms/">Terms &amp; Conditions</a>
+                |
+                <a href="/about/privacy/">Privacy Policy</a>
+            </p>
+        </section>
     </div>
 </footer>
 

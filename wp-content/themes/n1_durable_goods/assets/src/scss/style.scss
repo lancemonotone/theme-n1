@@ -289,7 +289,7 @@ h3.offline.category {
     text-align: center;
 }
 
-span.section-hed, body.magazine.issue-landing .supp-more-by-title, span.module-hed, body.magazine.issue-landing h2.post-category, .static-page article h2, footer h6 {
+span.section-hed, body.magazine.issue-landing .supp-more-by-title, span.module-hed, body.magazine.issue-landing h2.post-category, .static-page article h2 {
     display: inline-block;
     font-size: 1.1rem;
     font-weight: 600;
@@ -299,7 +299,7 @@ span.section-hed, body.magazine.issue-landing .supp-more-by-title, span.module-h
 }
 
 @media only screen and (min-width: 640px) and (max-width: 1023px) {
-    span.section-hed, body.magazine.issue-landing .supp-more-by-title, span.module-hed, body.magazine.issue-landing h2.post-category, .static-page article h2, footer h6 {
+    span.section-hed, body.magazine.issue-landing .supp-more-by-title, span.module-hed, body.magazine.issue-landing h2.post-category, .static-page article h2 {
         padding-top: .5em;
     }
 }
@@ -5060,10 +5060,6 @@ div {
     padding: 0 16px;
 }
 
-.footer-wrapper {
-    padding: 0 8px;
-}
-
 div {
     &.entry-meta {
         background-color: transparent;
@@ -5909,10 +5905,6 @@ h6.footer {
     }
 }
 
-div.footer-wrapper {
-    position: static;
-}
-
 @media only screen and (max-width: 639px) {
     body.single-article {
         div.post-header {
@@ -6322,48 +6314,6 @@ div.footer-wrapper {
     .featured-online-only {
         padding-top: 48px;
         border-left: 1px solid #ede4d5;
-    }
-
-    footer {
-        padding: 16px 0;
-
-        div.footer-wrapper {
-            max-width: 768px;
-            margin: 0 auto;
-        }
-
-        section.footer-about {
-            width: 50%;
-            float: left;
-            clear: none;
-            padding: 0 16px;
-            text-align: left;
-        }
-
-        h5 {
-            position: relative;
-            left: -18px;
-            width: 300px;
-        }
-
-        h6 {
-            text-align: left;
-        }
-
-        ul {
-            border-top: none;
-            overflow: auto;
-        }
-
-        .footer-about p {
-            padding: 0;
-            margin: 0;
-            text-align: left;
-        }
-
-        p.top {
-            padding-top: 4em;
-        }
     }
 
     section.hero {
