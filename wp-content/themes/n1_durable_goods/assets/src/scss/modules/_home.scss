@@ -23,6 +23,7 @@ body.home {
 
     .toc {
         grid-area: toc;
+        //background-color: var(--light-grey);
 
         .module-issue-toc:first-child {
             background-color: var(--light-grey);
