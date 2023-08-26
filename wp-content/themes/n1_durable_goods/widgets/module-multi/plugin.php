@@ -367,34 +367,37 @@ class Module_Multi extends \WP_Widget {
         $is_event       = $section->slug === 'events';
         $is_online_only = $section->taxonomy === 'online-only';
         $is_issue       = $section->taxonomy === 'issue';
+        $is_search      = N1_Magazine::get_page_type() == 'search';
 
         $flags = $this->get_flags( $flavor, $the_p, $section );
 
-        // get the teaser style
-        if ( $flavor == 'home-hero' ) {
-            $format = 'with_image';
+        $format = get_field( 'article_teaser_format', $the_p->ID );
+        if ( $is_event || $is_search ) {
+            $format = 'pullquote';
         } else {
-            $format = get_field( 'article_teaser_format', $the_p->ID );
-            $format = $format === 'no_image' ? 'default' : $format;
+            $format = $format ? $format : 'default';
         }
 
         // cache content for use later
-        $content  = $this->get_content( $the_p, $flavor, $format );
+        $content  = $this->get_content( $the_p, $flavor, $format, $is_event );
         $authors  = N1_Magazine::get_authors( $the_p->ID );
         $featured = ! is_search() && get_field( 'article_featured', $the_p->ID ) ? 'article-featured' : '';
         $subhead  = get_field( 'article_subhead', $the_p->ID );
         switch ( $flavor ) {
-            case 'home-hero':
-                include( plugin_dir_path( __FILE__ ) . '/views/cards/home-hero.php' );
-                break;
             case 'archive':
             case 'sticky':
                 // Force excerpt display on search results page.
-                if ( N1_Magazine::get_page_type() == 'search' ) {
-                    $format = '';
-                }
+                // if ( N1_Magazine::get_page_type() == 'search' ) {
+                //     $format = 'pullquote';
+                // }
+                // if ( $is_event ) {
+                //     $format = 'pullquote';
+                // }
                 switch ( $format ) {
                     case 'pullquote':
+                        if ( $is_event ) {
+                            $title = $this->get_pullquote( $the_p );
+                        }
                         include( plugin_dir_path( __FILE__ ) . '/views/cards/pullquote.php' );
                         break;
                     case 'with_image':
@@ -409,6 +412,7 @@ class Module_Multi extends \WP_Widget {
             default:
                 $the_tax = $section->taxonomy == 'category' ? 'magazine' : $section->taxonomy;
                 if ( $is_event ) {
+                    $title = $this->get_pullquote( $the_p );
                     include( plugin_dir_path( __FILE__ ) . '/views/cards/event.php' );
                 } else {
                     include( plugin_dir_path( __FILE__ ) . '/views/cards/default.php' );
@@ -417,8 +421,13 @@ class Module_Multi extends \WP_Widget {
         }
     }
 
-    function get_content( $the_p, $flavor, $format ) {
+    function get_content( $the_p, $flavor, $format, $is_event = false ) {
         $content = '';
+
+        if ( $is_event ) {
+            $format = 'pullquote';
+        }
+
         switch ( $flavor ) {
             case 'archive':
             case 'online-only-home':
@@ -430,6 +439,7 @@ class Module_Multi extends \WP_Widget {
                 $img_size = 'multi-module';
                 break;
         }
+
         switch ( $format ) {
             case 'with_image':
                 $img_id   = get_post_thumbnail_id( $the_p->ID );
@@ -445,20 +455,11 @@ EOD;
                 $content = '';
                 break;
             case 'pullquote':
-                $found = false;
-                if ( $pullquotes = get_field( 'article_pullquote_repeater', $the_p->ID ) ) {
-                    foreach ( $pullquotes as $pullquote ) {
-                        if ( $pullquote[ 'article_pullquote_featured' ] ) {
-                            $quote = $pullquote[ 'article_pullquote' ];
-                            $found = true;
-                            break;
-                        }
-                    }
-                    if ( ! $found ) {
-                        $quote = $pullquotes[ 0 ][ 'article_pullquote' ];
-                    }
+                if ( $is_event && $flavor !== 'archive' ) {
+                    $quote = $the_p->post_title;
+                } else {
+                    $quote = $this->get_pullquote( $the_p );
                 }
-                $quote   = $quote != '' ? $quote : $the_p->post_excerpt;
                 $content = '<p class="pullquote">' . $this->shorten_str_by_word( $quote, 130 ) . '</p>';
                 $content = apply_filters( 'the_excerpt', $content );
                 break;
@@ -466,6 +467,24 @@ EOD;
         }
 
         return $content;
+    }
+
+    function get_pullquote( $the_p ) {
+        $found = false;
+        if ( $pullquotes = get_field( 'article_pullquote_repeater', $the_p->ID ) ) {
+            foreach ( $pullquotes as $pullquote ) {
+                if ( $pullquote[ 'article_pullquote_featured' ] ) {
+                    $quote = $pullquote[ 'article_pullquote' ];
+                    $found = true;
+                    break;
+                }
+            }
+            if ( ! $found ) {
+                $quote = $pullquotes[ 0 ][ 'article_pullquote' ];
+            }
+        }
+
+        return $quote != '' ? $quote : $the_p->post_excerpt;
     }
 
     function print_post_head( $the_p, $article_type, $section, $authors ) {

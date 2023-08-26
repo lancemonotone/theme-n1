@@ -1,14 +1,14 @@
 <?php namespace N1_Durable_Goods; ?>
 
-<article class="type-<?= $article_type ?? '' ?> format-<?= $format ?? '' ?> tax-<?= $the_tax ?? '' ?> term-<?= $section->slug ?? '' ?>">
+<article class="card-home-hero flavor-<?= $flavor ?? '' ?> type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? ''?> tax-<?= $the_tax ?? '' ?> featured-<?= $featured ?? '' ?>">
 
-    <span class="debug">home-hero <?= $article_type ?? '' ?> <?= $format ?? '' ?> <?= $featured ?? '' ?></span>
+    <span class="debug">card-home-hero flavor-<?= $flavor ?? '' ?> type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? ''?> tax-<?= $the_tax ?? '' ?> featured-<?= $featured ?? '' ?></span>
 
 <!--    <div class="ribbon ribbon-top-left">-->
 <!--        <span>Featured</span>-->
 <!--    </div>-->
 
-    <a href="<?= get_permalink( $the_p->ID ) ?>">
+    <a class="article-link" href="<?= get_permalink( $the_p->ID ) ?>">
 
         <?= $content; ?>
 

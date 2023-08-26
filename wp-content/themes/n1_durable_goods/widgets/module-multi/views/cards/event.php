@@ -10,25 +10,22 @@ if ( $date = get_field( 'event_date', $the_p->ID ) ?? '' ) {
 
 ?>
 
-<article class="type-<?= $article_type ?? '' ?> format-<?= $format ?? '' ?> tax-<?= $the_tax ?? '' ?> term-<?= $section->slug ?? '' ?>">
+<article class="card-event flavor-<?= $flavor ?? '' ?> type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? ''?> tax-<?= $the_tax ?? '' ?> featured-<?= $featured ?? '' ?>">
 
-    <span class="debug">default <?= $article_type ?? '' ?> <?= $format ?? '' ?> <?= $featured ?? '' ?></span>
+    <span class="debug">card-event flavor-<?= $flavor ?? '' ?> type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? ''?> tax-<?= $the_tax ?? '' ?> featured-<?= $featured ?? '' ?></span>
 
     <a class="article-link" href="<?= get_permalink( $the_p->ID ) ?>">
 
         <?= $content; ?>
 
-        <? //= $flags;
-        ?>
-
-        <ul class="meta">
+        <ul class="meta<?= $date ? '': ' no-date'?>">
             <?php if ( $date ) { ?>
                 <li class="date-container">
                     <div class="month-day"><?= $month . ' ' . $day; ?></div>
                     <div class="year"><?= $year; ?></div>
                 </li>
             <?php } ?>
-            <li class="title"><?= $the_p->post_title ?></li>
+            <li class="title"><?= $title ?></li>
         </ul>
 
     </a>

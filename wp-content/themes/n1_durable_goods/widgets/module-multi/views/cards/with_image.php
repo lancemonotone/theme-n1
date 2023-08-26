@@ -1,8 +1,8 @@
 <?php namespace N1_Durable_Goods; ?>
 
-<article class="type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? '' ?> <?= $featured ?? '' ?>">
+<article class="card-with_image flavor-<?= $flavor ?? '' ?> type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? ''?> tax-<?= $the_tax ?? '' ?> featured-<?= $featured ?? '' ?>">
 
-    <span class="debug">with_image <?= $article_type ?? '' ?> <?= $format ?? '' ?> <?= $featured ?? '' ?></span>
+    <span class="debug">card-with_image flavor-<?= $flavor ?? '' ?> type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? ''?> tax-<?= $the_tax ?? '' ?> featured-<?= $featured ?? '' ?></span>
 
     <?php $this->print_post_head( $the_p, $article_type, $section, $authors ) ?>
 

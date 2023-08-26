@@ -63,12 +63,12 @@ body.home {
 
     .featured {
         grid-area: featured;
-        @extend .flavor-home-hero;
+        //@extend .flavor-home-hero;
     }
 
     .flow {
         grid-area: flow;
-        @extend .flavor-home-flow;
+        //@extend .flavor-home-flow;
     }
 
     .home-nurble-end {

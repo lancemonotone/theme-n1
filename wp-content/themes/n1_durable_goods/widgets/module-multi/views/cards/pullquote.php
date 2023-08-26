@@ -1,8 +1,8 @@
 <?php namespace N1_Durable_Goods; ?>
 
-<article class="type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? '' ?> <?= $featured ?? '' ?>">
+<article class="card-pullquote flavor-<?= $flavor ?? '' ?> type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? ''?> tax-<?= $the_tax ?? '' ?> featured-<?= $featured ?? '' ?>">
 
-    <span class="debug">pullquote <?= $article_type ?? '' ?> <?= $format ?? '' ?> <?= $featured ?? '' ?></span>
+    <span class="debug">card-pullquote flavor-<?= $flavor ?? '' ?> type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? ''?> tax-<?= $the_tax ?? '' ?> featured-<?= $featured ?? '' ?></span>
 
     <?php $this->print_post_head( $the_p, $article_type, $section, $authors ) ?>
 
@@ -17,8 +17,6 @@
     </h3>
 
     <?= $authors ? '<p class="author">' . $authors . '</p>' : '' ?>
-
-<!--    <a href="--><?//= get_permalink( $the_p->ID ) ?><!--" class="jump">--><?php //_e( 'Read More' ) ?><!--</a>-->
 
     <?php edit_post_link( __( 'Edit' ), null, null, $the_p->ID ); ?>
 

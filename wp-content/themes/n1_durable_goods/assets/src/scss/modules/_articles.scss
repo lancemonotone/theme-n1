@@ -82,47 +82,52 @@
 
                 &.term-events {
                     position: relative;
-                    //padding: 10px; // To make space for the custom border
 
-                    &:before,
-                    &:after,
-                    .article-link:before,
-                    .article-link:after {
-                        content: "EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS ";
-                        font-family: sans-serif;
-                        font-weight: 700;
-                        color: var(--light-blue);
-                        font-size: 12px;
-                        padding: 1px 2px;
-                        position: absolute;
-                        overflow: hidden;
-                        text-align: start;
-                        white-space: nowrap;
-                        background-color: var(--dark-grey);
-                        line-height: 17px;
-                        letter-spacing: .02rem;
-                        pointer-events: none;
-                    }
+                    --shadow: none;
 
-                    &:before,
-                    &:after {
-                        height: 17px;
-                        z-index: 1;
-                        left: 0;
-                        right: 0;
-                        width: calc(100% - 3px);
-                    }
+                    &:not(.flavor-archive) {
+                        --shadow: 0 0 8px 5px #00000017;
 
-                    &:before {
-                        top: 0;
-                    }
+                        &:before,
+                        &:after,
+                        .article-link:before,
+                        .article-link:after {
+                            content: "EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS EVENTS ";
+                            font-family: sans-serif;
+                            font-weight: 700;
+                            color: var(--light-blue);
+                            font-size: 12px;
+                            padding: 1px 2px;
+                            position: absolute;
+                            overflow: hidden;
+                            text-align: start;
+                            white-space: nowrap;
+                            background-color: var(--dark-grey);
+                            line-height: 17px;
+                            letter-spacing: .02rem;
+                            pointer-events: none;
+                        }
 
-                    &:after {
-                        bottom: 0;
+                        &:before,
+                        &:after {
+                            height: 17px;
+                            z-index: 1;
+                            left: 0;
+                            right: 0;
+                            width: calc(100% - 3px);
+                        }
+
+                        &:before {
+                            top: 0;
+                        }
+
+                        &:after {
+                            bottom: 0;
+                        }
                     }
 
                     .article-link {
-                        position: relative;
+                        //position: relative;
 
                         &:before,
                         &:after {
@@ -149,6 +154,10 @@
                         grid-template-columns: 4rem 1fr;
                         grid-gap: 1rem;
                         align-items: center;
+
+                        &.no-date {
+                            grid-template-columns: 1fr;
+                        }
                     }
 
                     .date-container {
@@ -184,17 +193,19 @@
 
         &:hover {
             outline: 4px solid var(--border-color);
-            box-shadow: 0 0 8px 5px #00000017;
+            box-shadow: var(--shadow);
         }
     }
 
     .article-link {
-        display: block;
+        width: 100%;
         height: 100%;
     }
 
     .article-image {
         height: 100%;
+        width: 100%;
+        position: absolute;
 
         img {
             width: 100%;
@@ -223,6 +234,7 @@
         -webkit-line-clamp: 3;
         line-clamp: 3;
         -webkit-box-orient: vertical;
+        line-height: 1.3;
 
         &, a {
             color: var(--title-color);

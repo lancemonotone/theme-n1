@@ -2,9 +2,9 @@
 $authors = N1_Magazine::get_authors( $the_p->ID, true, false );
 ?>
 
-<article class="type-<?= $article_type ?? '' ?> format-<?= $format  ?? ''?> tax-<?= $the_tax ?? '' ?> term-<?= $section->slug ?? '' ?>">
+<article class="card-default flavor-<?= $flavor ?? '' ?> type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? ''?> tax-<?= $the_tax ?? '' ?> featured-<?= $featured ?? '' ?>">
 
-    <span class="debug">default <?= $article_type ?? '' ?> <?= $format ?? '' ?> <?= $featured ?? '' ?></span>
+    <span class="debug">card-default flavor-<?= $flavor ?? '' ?> type-<?= $article_type ?? '' ?> term-<?= $section->slug ?? '' ?> format-<?= $format ?? ''?> tax-<?= $the_tax ?? '' ?> featured-<?= $featured ?? '' ?></span>
 
     <a class="article-link" href="<?= get_permalink( $the_p->ID ) ?>">
 
