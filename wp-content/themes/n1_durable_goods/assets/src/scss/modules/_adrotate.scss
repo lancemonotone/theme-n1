@@ -3,7 +3,11 @@
     max-width: var(--max-width-content);
     padding-inline: var(--inner-padding);
 
-    & > div {
+    .g {
+        overflow: visible;
+    }
+
+    img {
         outline: 4px solid transparent;
 
         &:hover {
