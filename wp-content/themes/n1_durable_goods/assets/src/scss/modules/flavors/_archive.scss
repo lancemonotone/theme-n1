@@ -164,6 +164,14 @@
             font-weight: var(--author-font-weight);
             margin: var(--author-margin);
 
+            max-width: unset;
+            overflow: unset;
+            text-overflow: unset;
+            display: block;
+            -webkit-line-clamp: unset;
+            line-clamp: unset;
+            -webkit-box-orient: unset;
+
             a {
                 color: var(--author-color);
                 border-bottom: none;

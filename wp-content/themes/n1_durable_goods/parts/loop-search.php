@@ -13,7 +13,7 @@ $multi = new Module_Multi();
 		</section>
 		<div class="main content cf">
 			<?php //get_template_part( 'sidebars/sidebar', 'archive' ); ?>
-			<section id="content" class="content-post">
+			<section id="content" class="flavor-archive articles">
 				<?php if(count($the_posts)){
 					$multi->print_multi_posts($the_posts);
 				}else{?>
