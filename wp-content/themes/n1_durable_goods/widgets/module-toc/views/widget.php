@@ -99,7 +99,7 @@ switch ( $type ) {
                 <?php the_widget( '\N1_Durable_Goods\Module_Issue_TOC', [ 'type' => 'article' ] ) ?>
                 <?php
                 $multi_args = [
-                    'title'   => '',
+                    'title'   => 'Featured',
                     'flavor'  => 'featured-default',
                     'number'  => '2',
                     'orderby' => 'menu_order',
