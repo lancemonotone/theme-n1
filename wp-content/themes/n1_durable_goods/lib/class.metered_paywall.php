@@ -17,7 +17,7 @@ class Metered_Paywall {
                 'id'     => 'reset-metered-paywall',
                 'title'  => '<a href="#" class="reset-metered-paywall-button">Reset Meter</a>',
                 'parent' => false,
-                'meta'   => [ 'html' => true ], // Allow HTML in the title
+                'meta'   => [ 'html' => false ], // Allow HTML in the title
             ];
             $wp_admin_bar->add_node( $args );
         }
@@ -29,7 +29,7 @@ class Metered_Paywall {
         ?>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function () {
-                var resetButton = document.querySelector('.reset-metered-paywall-button')
+                const resetButton = document.querySelector('.reset-metered-paywall-button')
                 if (resetButton) {
                     resetButton.addEventListener('click', function (e) {
                         e.preventDefault()
