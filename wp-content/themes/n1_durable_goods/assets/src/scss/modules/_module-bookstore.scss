@@ -1,49 +1,43 @@
 .module-bookstore {
-    text-align: center;
-    border: 10px solid var(--orange);
-    padding: 3rem clamp(0rem, 0.8vw, 4%) 1rem;
-    container-type: inline-size;
-    background-color: var(--tan);
+    & > aside {
+        padding: 2rem;
+        text-align: center;
+        border: 10px solid var(--orange);
+        container-type: inline-size;
+        background-color: var(--tan);
+    }
 
     .module-title {
         font-weight: 700;
         line-height: .95;
-        font-size: clamp(1.5rem,1vw,2.2rem);
+        font-size: clamp(1.5rem, 1vw, 2.2rem);
         text-decoration: underline;
         margin-block-end: 1rem;
     }
 
     .module-subheading {
-        font-size: clamp(1rem,1vw,1.3rem);
+        font-size: clamp(1rem, 1vw, 1.3rem);
         line-height: 1.1;
         font-weight: 200;
         margin-block-end: 2rem;
     }
 
     .module-dek {
-        font-size: clamp(1.2rem,1.5vw,1.9rem);
+        font-size: clamp(1.2rem, 1.5vw, 1.9rem);
         line-height: 1.1;
         font-weight: 200;
         margin-block-end: 2rem;
     }
 
     .books {
-        --columns: 1fr;
-        @media screen and (min-width: 600px) {
-            --columns: repeat(2, 1fr);
-        }
+        --columns: repeat(2, 1fr);
 
-        @container (min-width: 400px) {
+        @media screen and (min-width: 500px) {
             --columns: repeat(4, 1fr);
         }
 
-        @container (min-width: 600px) {
+        @media screen and (min-width: 1035px) {
             --columns: repeat(2, 1fr);
-        }
-
-        @container (min-width: 600px) {
-            grid-column: 2;
-            grid-row: 3 / span 2;
         }
 
         display: grid;
