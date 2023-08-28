@@ -73,6 +73,16 @@
     }
 
     .article-toc {
+        //.articles {
+        //    .title {
+        //        font-size: 1rem;
+        //    }
+        //
+        //    .author {
+        //        font-size: 0.8rem;
+        //    }
+        //}
+
         article {
             &:hover {
                 border-color: var(--orange);
@@ -84,6 +94,7 @@
 
             position: relative;
             border-top: 1px solid var(--inactive-light);
+
         }
 
         .article-link {

@@ -1,5 +1,5 @@
 .articles {
-    --article-columns: repeat(auto-fill, minmax(240px, 1fr));
+    --article-columns: repeat(auto-fill, minmax(260px, 1fr));
 
     display: grid;
     grid-template-columns: var(--article-columns);
@@ -226,6 +226,7 @@
 
     .title {
         font-size: 1rem;
+        //font-size: .8rem;
         font-weight: 700;
         text-align: left;
         overflow: hidden;
@@ -244,6 +245,8 @@
     .author {
         margin-block-start: .5rem;
         font-size: .8rem;
+        //font-size: .7rem;
+        line-height: 1.2;
         font-weight: 600;
         text-align: left;
         overflow: hidden;
@@ -270,8 +273,7 @@
         color: var(--flags-color);
     }
 
-    &:not(.flavor-home-flow),
-    &:not(.toc) {
+    &:not(.flavor-home-flow) {
         .flags {
             font-size: 0.65rem;
         }
