@@ -1,4 +1,29 @@
 .module-bookstore {
+    .books {
+        --columns: repeat(2, 1fr);
+
+        @media screen and (min-width: 500px) {
+            --columns: repeat(4, 1fr);
+        }
+
+        @media screen and (min-width: 768px) {
+            --columns: repeat(2, 1fr);
+        }
+
+        @media screen and (min-width: 900px) {
+            --columns: repeat(4, 1fr);
+        }
+
+        @media screen and (min-width: 1035px) {
+            --columns: repeat(2, 1fr);
+        }
+
+        display: grid;
+        grid-gap: 30px;
+        grid-template-columns: var(--columns);
+        grid-template-rows: auto;
+    }
+
     & > aside {
         padding: 2rem;
         text-align: center;
@@ -27,23 +52,6 @@
         line-height: 1.1;
         font-weight: 200;
         margin-block-end: 2rem;
-    }
-
-    .books {
-        --columns: repeat(2, 1fr);
-
-        @media screen and (min-width: 500px) {
-            --columns: repeat(4, 1fr);
-        }
-
-        @media screen and (min-width: 1035px) {
-            --columns: repeat(2, 1fr);
-        }
-
-        display: grid;
-        grid-gap: 30px;
-        grid-template-columns: var(--columns);
-        grid-template-rows: auto;
     }
 
     .book {
