@@ -60,8 +60,7 @@ if ( count( $the_posts ) ) {
 
     <section class="articles flavor-<?php echo $flavor; ?>">
 
-        <?php
-        $this->print_multi_posts( $the_posts, $ad_after, $flavor, $newsletter_after, $social_after, $bookstore_after, $taxonomy, $term );
+        <?php $this->print_multi_posts( $the_posts, $ad_after, $flavor, $newsletter_after, $social_after, $bookstore_after, $taxonomy, $term );
 
         if ( $infinite ) {
             $totalpages = floor( $this->multi_query->found_posts / $number );
