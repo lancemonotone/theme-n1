@@ -29,7 +29,7 @@
             }
 
             .author {
-                font-size: .8rem;
+                font-size: clamp(.8rem, 1.5vw, 1rem);
             }
         }
     }
