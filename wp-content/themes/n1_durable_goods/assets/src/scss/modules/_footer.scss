@@ -8,6 +8,7 @@ footer {
         max-width: var(--max-width-content);
         margin: 0 auto;
         display: grid;
+        padding-inline: var(--inner-padding);
 
         & > section:not(:last-child) {
             padding-block: 1.5rem;
@@ -50,7 +51,7 @@ footer {
         --footer-nav-columns: 1fr;
 
         @media screen and (min-width: 600px) {
-            --footer-nav-columns: minmax(20%, 180px) 1fr 1fr;
+            --footer-nav-columns: minmax(20%, 130px) minmax(20%, 130px) repeat(6, 1fr);
         }
 
         display: grid;
@@ -73,10 +74,11 @@ footer {
     }
 
     .footer-social {
-        --justify-self: start;
+        --justify-self: center;
 
         @media screen and (min-width: 600px) {
             --justify-self: center;
+            grid-column: 4/span 4;
         }
 
         justify-self: var(--justify-self);
