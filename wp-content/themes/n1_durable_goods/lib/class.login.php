@@ -52,7 +52,7 @@ EOD;
         ];
 
         // instead of using $redirect_to we're redirecting back to $request
-        if ( ! N1_Magazine::is_paywalled() && user_can( $user->ID, 'edit_posts' ) ) {
+        if ( ! Metered_Paywall::is_paywalled() && user_can( $user->ID, 'edit_posts' ) ) {
             $where = $redirect_to;
         } elseif ( $member->getMembershipId() === "1" ) {
             // Push free members to renew when they log in.

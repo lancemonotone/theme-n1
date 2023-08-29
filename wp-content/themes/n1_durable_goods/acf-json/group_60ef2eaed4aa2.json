@@ -467,6 +467,27 @@
             "ui_off_text": ""
         },
         {
+            "key": "field_64ee598bfe32c",
+            "label": "Enable Metered Paywall",
+            "name": "enable_metered_paywall",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Check this to view the site as a paywalled visitor in order to see adverts and article roadblocks.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_64d917cebb12c",
             "label": "Meter Limit",
             "name": "meter_limit",
@@ -714,5 +735,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1691958606
+    "modified": 1693342128
 }

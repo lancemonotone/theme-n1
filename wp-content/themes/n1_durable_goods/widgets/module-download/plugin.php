@@ -100,11 +100,11 @@ class Module_Offline extends \WP_Widget {
     static function has_download() {
         global $userdata;
         //$member = new MM_User($userdata->ID);
-        echo N1_Magazine::is_paywalled() ? "<!-- Yes -->" : " <!-- No -->";
+        echo Metered_Paywall::is_paywalled() ? "<!-- Yes -->" : " <!-- No -->";
         return is_user_logged_in()
             && N1_Magazine::is_current_issue()
             && file_exists(self::get_current_filepath())
-            && !N1_Magazine::is_paywalled();
+            && !Metered_Paywall::is_paywalled();
     }
 
     /**

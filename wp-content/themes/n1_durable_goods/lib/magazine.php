@@ -16,7 +16,6 @@ class N1_Magazine {
     static \WP_Post $context_issue;
     static string $page_type;
     static string $page_class;
-    private static array $is_paywalled = [];
 
     private function __construct() {
         $this->add_shortcodes();
@@ -96,7 +95,7 @@ class N1_Magazine {
             self::$page_class = 'archive';
         } elseif ( is_single() ) {
             if ( ! empty( $wp_query->query[ 'issue' ] ) ) {
-                Metered_Paywall::set_is_metered();
+                Metered_Paywall::set_meter_reached();
                 self::$page_type  = 'magazine';
                 self::$page_class = 'magazine';
             } elseif ( is_preview() && ! empty( wp_get_post_terms( $_REQUEST[ 'preview_id' ], 'category' ) ) ) {
@@ -391,75 +390,6 @@ class N1_Magazine {
         $query_array = $wp_query->query;
 
         return ( 1 === count( $query_array ) && array_key_exists( 'issue', $query_array ) );
-    }
-
-    static function is_paywalled( $postid = null ): bool {
-        global $post;
-        $post_id = $post->ID ?? null;
-
-        if ( isset( self::$is_paywalled[ $post_id ] ) ) {
-            return self::$is_paywalled[ $post_id ];
-        }
-
-        $paywall = true;
-
-        $force_paywall = get_field( 'options_force_paywall', 'options' );
-
-        // If the article doesn't have a post ID, it's coming from the Multi Module
-        if ( ! $post_id ) {
-            $paywall = true;
-        }
-        // If the article has a term in the default category taxonomy (these are protected).
-        if ( $post_id && count( wp_get_post_terms( $post_id, 'category' ) ) ) {
-            $paywall = true;
-        }
-        // If the member is an institution
-        if ( self::is_institution() ) {
-            $paywall = false;
-        }
-        // If the user can edit posts.
-        if ( current_user_can( 'edit_posts' ) && ! $force_paywall ) {
-            $paywall = false;
-        }
-        // If this is an MM Core page.
-        if ( $post_id && \MM_CorePage::getCorePageInfo( $post_id ) ) {
-            $paywall = false;
-        }
-        // If a member is logged in
-        if ( mm_member_decision( [ "isMember" => "true", "status" => "active|pending_cancel" ] ) && ! $force_paywall ) {
-            $paywall = false;
-        }
-        // If a member is a Gift Sub Giver or Free Membership, paywall is true.
-        if ( mm_member_decision( [
-            'isMember'     => 'true',
-            'status'       => 'active|pending_cancel',
-            'membershipID' => "1|29"
-        ] ) ) {
-            $paywall = true;
-        }
-        // If the article has been tagged publicly viewable.
-        if ( $post_id && get_field( 'article_free', $post_id ) ) {
-            $paywall = false;
-        }
-        // If an article is also in an Online Only category it is not protected.
-        if ( $post_id && count( wp_get_post_terms( $post_id, 'online-only' ) ) ) {
-            $paywall = true;
-        }
-        // If an article is also in an Online Only category it is not protected.
-        global $pagename;
-        if ( $pagename == 'online-only' ) {
-            $paywall = true;
-        }
-        // If the site settings force a paywall.
-        // if ( current_user_can( 'edit_posts' ) && $force_paywall ) {
-        //     $paywall = true;
-        // }
-
-        if ( $post_id ) {
-            self::$is_paywalled[ $post_id ] = $paywall;
-        }
-
-        return $paywall;
     }
 
     /**

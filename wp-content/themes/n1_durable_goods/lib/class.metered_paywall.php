@@ -1,8 +1,10 @@
 <?php namespace N1_Durable_Goods;
 
 class Metered_Paywall {
-    static bool $is_metered = false;
+    static bool $meter_enabled = false;
+    static bool $meter_reached = false;
     static string $metered_message = 'Init metering.';
+    private static array $is_paywalled = [];
 
     public function __construct() {
         add_action( 'admin_bar_menu', [ $this, 'add_reset_metered_paywall_button' ], 999 );
@@ -22,7 +24,6 @@ class Metered_Paywall {
             $wp_admin_bar->add_node( $args );
         }
     }
-
 
     public function print_inline_script() {
         $nonce = wp_create_nonce( 'reset-metered-paywall' ); // Create nonce for security
@@ -78,17 +79,38 @@ class Metered_Paywall {
         session_start();
     }
 
-    static function is_metered(): bool {
-        return self::$is_metered;
+    static function get_meter_reached(): bool {
+        return self::$meter_reached;
+    }
+
+    static function get_metered_message(): string {
+        return self::$metered_message;
     }
 
     /**
      * This must be called before any output is sent to the browser.
      */
-    static function set_is_metered() {
+    static function set_meter_reached(): void {
+        global $post;
+
+        if ( ! Metered_Paywall::is_paywalled( $post->ID ) ) {
+            self::$meter_reached   = false;
+            self::$metered_message = "Article is not paywalled.";
+
+            return;
+        }
+
+        // get ACF option enable_metered_paywall
+        if ( ! self::$meter_enabled = get_field( 'enable_metered_paywall', 'option' ) ) {
+            self::$meter_reached   = true;
+            self::$metered_message = "Metered paywall is disabled.";
+
+            return;
+        }
+
         if ( session_status() === PHP_SESSION_DISABLED ) {
             // Sessions are not available, set a default message
-            self::$is_metered      = false;
+            self::$meter_reached   = false;
             self::$metered_message = "Sessions are not enabled, so metering is unavailable.";
 
             return;
@@ -97,12 +119,6 @@ class Metered_Paywall {
         if ( session_status() === PHP_SESSION_NONE ) {
             ini_set( 'session.cookie_lifetime', 30 * 24 * 60 * 60 );
             session_start();
-        }
-
-        global $post;
-
-        if ( ! N1_Magazine::is_paywalled( $post->ID ) ) {
-            return false;
         }
 
         // Set a secret string to make the session more obscure
@@ -155,16 +171,87 @@ class Metered_Paywall {
         ];
 
         if ( $visit_count > $limit ) {
-            self::$is_metered = true;
-            $message          = get_field( 'post_meter_message', 'option' );
+            self::$meter_reached = true;
+            $message             = get_field( 'post_meter_message', 'option' );
         } else {
-            self::$is_metered = false;
-            $message          = get_field( 'pre_meter_message', 'option' );
+            self::$meter_reached = false;
+            $message             = get_field( 'pre_meter_message', 'option' );
         }
 
         self::$metered_message = str_replace( array_keys( $replacements ), array_values( $replacements ), $message );
     }
 
+    static function is_paywalled( $post_id = null ): bool {
+        // global $post;
+        // $post_id = $post->ID ?? null;
+
+        if ( isset( self::$is_paywalled[ $post_id ] ) ) {
+            return self::$is_paywalled[ $post_id ];
+        }
+
+        $paywall = true;
+
+        $force_paywall = get_field( 'options_force_paywall', 'options' );
+
+        // If the article doesn't have a post ID, it's coming from the Multi Module
+        if ( ! $post_id ) {
+            $paywall = true;
+        }
+        // If the article has a term in the default category taxonomy (these are protected).
+        if ( $post_id && count( wp_get_post_terms( $post_id, 'category' ) ) ) {
+            $paywall = true;
+        }
+        // If the member is an institution
+        if ( N1_Magazine::is_institution() ) {
+            $paywall = false;
+        }
+        // If the user can edit posts.
+        if ( current_user_can( 'edit_posts' ) && ! $force_paywall ) {
+            $paywall = false;
+        }
+        // If this is an MM Core page.
+        if ( $post_id && \MM_CorePage::getCorePageInfo( $post_id ) ) {
+            $paywall = false;
+        }
+        // If a member is logged in
+        if ( mm_member_decision( [ "isMember" => "true", "status" => "active|pending_cancel" ] ) && ! $force_paywall ) {
+            $paywall = false;
+        }
+        // If a member is a Gift Sub Giver or Free Membership, paywall is true.
+        if ( mm_member_decision( [
+            'isMember'     => 'true',
+            'status'       => 'active|pending_cancel',
+            'membershipID' => "1|29"
+        ] ) ) {
+            $paywall = true;
+        }
+
+        // If the article has been tagged publicly viewable.
+        if ( $post_id && get_field( 'article_free', $post_id ) ) {
+            $paywall = false;
+        }
+
+        // If an article is also in an Online Only category it is not protected.
+        if ( $post_id && count( wp_get_post_terms( $post_id, 'online-only' ) ) ) {
+            $paywall = true;
+        }
+
+        // If an article is also in an Online Only category it is not protected.
+        global $pagename;
+        if ( $pagename == 'online-only' ) {
+            $paywall = true;
+        }
+
+        if ( $post_id ) {
+            self::$is_paywalled[ $post_id ] = $paywall;
+        }
+
+        return $paywall;
+    }
+
+    public static function paywall_meter_reached( $post_id ): bool {
+        return self::is_paywalled( $post_id ) && self::get_meter_reached();
+    }
 }
 
 new Metered_Paywall();

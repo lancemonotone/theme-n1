@@ -3,7 +3,7 @@ $context_issue = N1_Magazine::get_context_issue();
 $current_issue = N1_Magazine::get_current_issue();
 ?>
 
-<?php if ( N1_Magazine::is_paywalled() ) { ?>
+<?php if ( Metered_Paywall::is_paywalled() ) { ?>
     <section>
         <span class="module-hed"><?php _e( 'Available Now' ) ?></span>
         <h3 class="issuetitle"><?= $current_issue->post_title ?>: <?= get_field( 'issue_name', $context_issue->ID ) ?></h3>

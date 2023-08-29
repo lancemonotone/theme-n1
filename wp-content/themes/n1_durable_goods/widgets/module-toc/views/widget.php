@@ -26,7 +26,7 @@ switch ( $type ) {
 
             <?php the_widget( '\N1_Durable_Goods\Module_Issue_TOC', [ 'type' => 'article' ] ) ?>
 
-            <?php if ( N1_Magazine::is_paywalled() ) { ?>
+            <?php if ( Metered_Paywall::is_paywalled() ) { ?>
                 <a class="subscribe-link button" href="<?= home_url( 'subscribe' ) ?>" class="jump"><?php _e( 'Subscribe' ) ?></a>
             <?php } ?>
 

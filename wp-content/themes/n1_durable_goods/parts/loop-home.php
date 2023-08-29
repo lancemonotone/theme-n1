@@ -1,6 +1,6 @@
 <?php namespace N1_Durable_Goods; ?>
 
-<?php Adrotate::display( 4, true ) ?>
+<?php Adrotate::display( 4 ) ?>
 
 <main>
     <section class="content">
