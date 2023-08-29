@@ -472,7 +472,7 @@
             "name": "enable_metered_paywall",
             "aria-label": "",
             "type": "true_false",
-            "instructions": "Check this to view the site as a paywalled visitor in order to see adverts and article roadblocks.",
+            "instructions": "Check this to enable the paywall meter. Unchecked means that visitors will be paywalled immediately.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -735,5 +735,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1693342128
+    "modified": 1693351271
 }
