@@ -12,9 +12,9 @@
             $issue_obj = N1_Magazine::get_issue_by_slug( $issue );
             ?>
             <section id="content" class="content-post issue-content<?php echo Metered_Paywall::paywall_meter_reached( $post->ID ) ? ' unlogged' : '' ?>">
-                <?php //if ( Metered_Paywall::is_metered( $post->ID ) ) { ?>
-                <h3 class="issue-title text-center"><?= Metered_Paywall::get_metered_message() ?></h3>
-                <?php //} ?>
+                <?php if ( Metered_Paywall::get_meter_enabled() ) { ?>
+                    <h3 class="issue-title text-center"><?= Metered_Paywall::get_metered_message() ?></h3>
+                <?php } ?>
 
                 <!-- includes POST and PREV-NEXT -->
                 <article id="post-<?php the_ID(); ?>" <?php post_class( 'post issue-content-post' ); ?>>
@@ -97,9 +97,9 @@
 
                             // Is this check necessary? Should we bypass shortcodes for everyone who passes the paywall test?
                             // if ( N1_Magazine::is_institution() ) {
-                                $regex       = '/' . get_shortcode_regex( ['MM_Access_Decision access=\'true\'','MM_Access_Decision access=\'false\''] ) . '/s';
-                                $the_content = preg_replace( $regex, '', $the_content );  # strip shortcodes, keep shortcode content
-                                $the_content = str_replace( '[/MM_Access_Decision]', '', $the_content );
+                            $regex       = '/' . get_shortcode_regex( [ 'MM_Access_Decision access=\'true\'', 'MM_Access_Decision access=\'false\'' ] ) . '/s';
+                            $the_content = preg_replace( $regex, '', $the_content );  # strip shortcodes, keep shortcode content
+                            $the_content = str_replace( '[/MM_Access_Decision]', '', $the_content );
                             // }
                             // else {
                             //     $the_content = apply_filters( 'the_content', $the_content );
