@@ -43,6 +43,7 @@ class N1 {
         include_once( 'lib/class.search.php' );
         include_once( 'lib/class.adrotate.php' );
         include_once( 'lib/class.navigation.php' );
+        include_once( 'lib/class.home_banner.php' );
     }
 
     function setup_plugins() {

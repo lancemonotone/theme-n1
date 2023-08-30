@@ -1,6 +1,6 @@
 <?php namespace N1_Durable_Goods; ?>
 
-<?php Adrotate::display( 4 ) ?>
+<?php Home_Banner::get_home_banner(); ?>
 
 <main>
     <section class="content">

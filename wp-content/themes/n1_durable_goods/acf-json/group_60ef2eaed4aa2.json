@@ -21,6 +21,186 @@
             "endpoint": 0
         },
         {
+            "key": "field_64ee7def02d79",
+            "label": "Hero Banner",
+            "name": "",
+            "aria-label": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 1,
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_64ee903d3ff82",
+            "label": "Instructions",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "message": "The full size image is required. If there are no smaller images, each will fall back to the next largest image available.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_64ee7e1702d7a",
+            "label": "Min Width 1024px",
+            "name": "hero_banner_full",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Upload or choose the Hero Banner image here. The file should be a JPG or PNG and should be wider than the indicated size.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "return_format": "url",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "thumbnail"
+        },
+        {
+            "key": "field_64ee82f502d7c",
+            "label": "Min Width 768px",
+            "name": "hero_banner_lg",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Upload or choose the Hero Banner image here. The file should be a JPG or PNG and should be wider than the indicated size.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "return_format": "url",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "thumbnail"
+        },
+        {
+            "key": "field_64ee832202d7d",
+            "label": "Min Width 440px",
+            "name": "hero_banner_md",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Upload or choose the Hero Banner image here. The file should be a JPG or PNG and should be wider than the indicated size.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "return_format": "url",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "thumbnail"
+        },
+        {
+            "key": "field_64ee85ff79469",
+            "label": "Min Width 300px",
+            "name": "hero_banner_sm",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Upload or choose the Hero Banner image here. The file should be a JPG or PNG and should be wider than the indicated size.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "return_format": "url",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "thumbnail"
+        },
+        {
+            "key": "field_64ee86667946a",
+            "label": "Hero Link",
+            "name": "hero_banner_link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "return_format": "url"
+        },
+        {
+            "key": "field_64ee8b782da2a",
+            "label": "Hero Title",
+            "name": "hero_banner_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Will be shown to screen readers and other assistive devices",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_64d7d5181bafe",
             "label": "Featured Article",
             "name": "",
@@ -735,5 +915,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1693351271
+    "modified": 1693356179
 }

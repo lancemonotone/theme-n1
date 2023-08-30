@@ -1,0 +1,16 @@
+.home-hero-banner {
+    max-width: var(--max-width-banner-ads);
+    display: block;
+    margin-inline: auto;
+    margin-block-end: 3rem;
+    padding: var(--inner-padding);
+
+    img {
+        outline: 4px solid transparent;
+
+        &:hover {
+            outline: 4px solid var(--white);
+            box-shadow: 0 0 8px 5px #00000017;
+        }
+    }
+}
