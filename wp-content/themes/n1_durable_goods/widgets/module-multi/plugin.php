@@ -372,7 +372,7 @@ class Module_Multi extends \WP_Widget {
         $flags = $this->get_flags( $flavor, $the_p, $section );
 
         $format = get_field( 'article_teaser_format', $the_p->ID );
-        if ( $is_event || $is_search ) {
+        if ( $is_event/* || $is_search*/ ) {
             $format = 'pullquote';
         } else {
             $format = $format ? $format : 'default';
