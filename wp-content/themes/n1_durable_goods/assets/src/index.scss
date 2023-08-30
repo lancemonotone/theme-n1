@@ -16,7 +16,6 @@
 @import './scss/modules/flavors/home-flow';
 @import './scss/modules/flavors/archive';
 
-@import './scss/modules/home';
 @import './scss/modules/module-home-hero-banner';
 @import './scss/modules/module-multi';
 @import './scss/modules/module-subscribe';
@@ -26,6 +25,7 @@
 
 @import './scss/modules/articles';
 
+@import 'scss/modules/pages/home';
 @import './scss/modules/pages/landing-magazine';
 
 @import './scss/modules/footer';

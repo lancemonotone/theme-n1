@@ -23,7 +23,7 @@
 
 <?php // Home Bottom Modules 2 ?>
 <?php if ( is_active_sidebar( 'sidebar-home-4' ) ) { ?>
-    <div id="supplementary" class="supp">
+    <div id="supplementary" class="supp supp-end">
         <?php dynamic_sidebar( 'sidebar-home-4' ); ?>
     </div><!-- #supplementary -->
 <?php } ?>
