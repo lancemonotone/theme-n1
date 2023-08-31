@@ -50,7 +50,7 @@ footer {
 
     .footer-nav {
         --footer-nav-columns: 1fr;
-        --justify-items: start;
+        --justify-items: center;
         --social-width: 100%;
 
         @media screen and (min-width: 600px) {
@@ -74,6 +74,11 @@ footer {
         nav {
             font-size: 0.9rem;
             line-height: 1.7;
+            text-align: center;
+
+            @media screen and (min-width: 600px){
+                text-align: left;
+            }
         }
 
         .footer-nav-title {
