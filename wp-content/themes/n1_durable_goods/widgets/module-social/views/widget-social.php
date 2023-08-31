@@ -8,7 +8,6 @@ $fb_href = 'https://www.facebook.com/nplusonemag';
         <h3 class="social category">
             <span class="module-hed"><?php _e( 'Follow Us' ) ?></span>
         </h3>
-        <p class="social dek"><?php _e( 'Keep your eyes on your devices.' ) ?></p>
         <ul class="social">
             <li class="social twitter">
                 <a title="Twitter" href="<?php echo $tw_href ?>" class="social icon twitter"><?php _e( 'Twitter' ) ?></a>

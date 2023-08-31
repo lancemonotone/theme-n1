@@ -7,14 +7,14 @@
         overflow: visible;
     }
 
-    img {
-        outline: 4px solid transparent;
-
-        &:hover {
-            outline: 4px solid var(--white);
-            box-shadow: 0 0 8px 5px #00000017;
-        }
-    }
+    //img {
+    //    outline: 4px solid transparent;
+    //
+    //    &:hover {
+    //        outline: 4px solid var(--white);
+    //        box-shadow: 0 0 8px 5px #00000017;
+    //    }
+    //}
 }
 
 .module-multi {

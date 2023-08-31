@@ -32,10 +32,10 @@ $footer_copy = get_field( 'options_footer_copy', 'options' );
             </div>
         </section>
         <section class="footer-bottom">
-            <p class="footer-button top">
-                <a class="button" href="#">Back to Top</a>
-            </p>
-            <p class="footer-copyright">Copyright &copy; <?php echo date( 'Y' ) ?> n+1 Foundation, Inc.</p>
+<!--            <p class="footer-button top">-->
+<!--                <a class="button" href="#">Back to Top</a>-->
+<!--            </p>-->
+            <p class="footer-copyright">Copyright &copy; <?php echo date( 'Y' ) ?> n+1 Foundation</p>
             <p class="footer-legal">
                 <a href="/about/terms/">Terms &amp; Conditions</a>
                 |

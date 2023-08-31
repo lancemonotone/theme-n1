@@ -332,13 +332,6 @@ class N1_Magazine {
                        onclick="return popitup('<?= $fb_href ?>')">Facebook
                     </a>
                 </li>
-                <li class="post meta social">
-                    <a title="Google Plus"
-                       class="social icon google"
-                       href="<?= $g_href ?>"
-                       onclick="return popitup('<?= $g_href ?>')">Google Plus
-                    </a>
-                </li>
                 <li class="post meta social"
                     title="Pocket">
                     <a data-pocket-label="pocket"
