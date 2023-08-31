@@ -314,7 +314,6 @@ class N1_Magazine {
                 $url     = urlencode( get_permalink( $post_id ) );
                 $tw_href = 'https://twitter.com/share?via=nplusonemag&lang=en&url=' . $url;
                 $fb_href = 'https://www.facebook.com/sharer/sharer.php?u=' . $url;
-                $g_href  = 'https://plus.google.com/share?url=' . $url;
                 $p_href  = 'https://getpocket.com/v3/add?url=' . $url;
                 $i_href  = 'https://www.instapaper.com/hello2?url=' . $url;
                 ?>
