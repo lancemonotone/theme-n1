@@ -49,15 +49,19 @@ footer {
 
     .footer-nav {
         --footer-nav-columns: 1fr;
-        --justify-items: center;
+        --justify-items: start;
+        --social-width: 100%;
 
         @media screen and (min-width: 600px) {
             --footer-nav-columns: 1fr 1fr;
+            --justify-items: center;
+            --social-width: 55%;
         }
 
         @media screen and (min-width: 900px) {
             --footer-nav-columns: 20% 20% 10% 10% 10% 10%;
             --justify-items: center;
+            --social-width: 100%;
         }
 
         display: grid;
@@ -101,14 +105,13 @@ footer {
             --justify-self: center;
             --grid-column: 4/span 2;
             --grid-row: 1;
-            width: 100%;
             margin-block-start: 1.7rem;
         }
 
         justify-self: var(--justify-self);
         grid-column: var(--grid-column);
         grid-row: var(--grid-row);
-        width: 75%;
+        width: var(--social-width);
 
         .widget {
             display: block !important;
