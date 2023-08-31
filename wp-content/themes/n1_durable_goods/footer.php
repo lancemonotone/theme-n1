@@ -26,15 +26,13 @@ $footer_copy = get_field( 'options_footer_copy', 'options' );
                 </ul>
                 <?php wp_nav_menu( [ 'menu' => 'the-magazine', 'menu_class' => 'footer-nav-list', 'container' => false ] ); ?>
             </nav>
+            <div class="footer-divider"></div>
             <div class="footer-social">
                 <?php the_widget( '\N1_Durable_Goods\Module_Newsletter' ) ?>
                 <?php the_widget( '\N1_Durable_Goods\Module_Social' ) ?>
             </div>
         </section>
         <section class="footer-bottom">
-<!--            <p class="footer-button top">-->
-<!--                <a class="button" href="#">Back to Top</a>-->
-<!--            </p>-->
             <p class="footer-copyright">Copyright &copy; <?php echo date( 'Y' ) ?> n+1 Foundation</p>
             <p class="footer-legal">
                 <a href="/about/terms/">Terms &amp; Conditions</a>

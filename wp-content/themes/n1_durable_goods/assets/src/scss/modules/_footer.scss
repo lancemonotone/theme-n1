@@ -49,16 +49,22 @@ footer {
 
     .footer-nav {
         --footer-nav-columns: 1fr;
+        --justify-items: start;
 
         @media screen and (min-width: 600px) {
+            --footer-nav-columns: 1fr 1fr;
+        }
+
+        @media screen and (min-width: 900px) {
             --footer-nav-columns: 20% 20% 10% 10% 10% 10%;
+            --justify-items: center;
         }
 
         display: grid;
         grid-template-columns: var(--footer-nav-columns);
         gap: 2rem;
         justify-content: space-between;
-        justify-items: center;
+        justify-items: var(--justify-items);
 
         nav {
             font-size: 0.9rem;
@@ -74,17 +80,34 @@ footer {
         }
     }
 
+    .footer-divider {
+        --display: none;
+        @media screen and (min-width: 900px) {
+            --display: block;
+        }
+        display: var(--display);
+        height: 100%;
+        width: 1px;
+        border-right: 1px solid var(--light-grey);
+        justify-self: center;
+    }
+
     .footer-social {
         --justify-self: center;
+        --grid-column: 1/-1;
+        --grid-row: 3;
 
-        @media screen and (min-width: 600px) {
+        @media screen and (min-width: 900px) {
             --justify-self: center;
-            grid-column: 4/span 2;
+            --grid-column: 4/span 2;
+            --grid-row: 1;
             width: 100%;
             margin-block-start: 1.7rem;
         }
 
         justify-self: var(--justify-self);
+        grid-column: var(--grid-column);
+        grid-row: var(--grid-row);
 
         .widget {
             display: block !important;
