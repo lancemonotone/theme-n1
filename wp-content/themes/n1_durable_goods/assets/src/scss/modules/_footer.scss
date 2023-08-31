@@ -51,14 +51,14 @@ footer {
         --footer-nav-columns: 1fr;
 
         @media screen and (min-width: 600px) {
-            --footer-nav-columns: 20% 20% 20% 20%;
+            --footer-nav-columns: 20% 20% 10% 10% 10% 10%;
         }
 
         display: grid;
         grid-template-columns: var(--footer-nav-columns);
         gap: 2rem;
         justify-content: space-between;
-        justify-items: start;
+        justify-items: center;
 
         nav {
             font-size: 0.9rem;
@@ -79,8 +79,9 @@ footer {
 
         @media screen and (min-width: 600px) {
             --justify-self: center;
-            grid-column: 3/span 1;
+            grid-column: 4/span 2;
             width: 100%;
+            margin-block-start: 1.7rem;
         }
 
         justify-self: var(--justify-self);
