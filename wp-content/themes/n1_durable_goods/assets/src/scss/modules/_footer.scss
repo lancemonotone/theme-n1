@@ -49,7 +49,7 @@ footer {
 
     .footer-nav {
         --footer-nav-columns: 1fr;
-        --justify-items: start;
+        --justify-items: center;
 
         @media screen and (min-width: 600px) {
             --footer-nav-columns: 1fr 1fr;
@@ -108,6 +108,7 @@ footer {
         justify-self: var(--justify-self);
         grid-column: var(--grid-column);
         grid-row: var(--grid-row);
+        width: 75%;
 
         .widget {
             display: block !important;
