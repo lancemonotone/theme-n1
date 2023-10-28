@@ -19,7 +19,7 @@
         }
 
         display: grid;
-        grid-gap: 30px;
+        grid-gap: 1rem;
         grid-template-columns: var(--columns);
         grid-template-rows: auto;
     }
@@ -56,6 +56,11 @@
 
     .book {
         text-align: center;
+        padding: .5rem;
+
+        &:hover {
+            box-shadow: 0 0 6px 1px #00000036;
+        }
 
         a {
             height: 100%;
@@ -87,5 +92,8 @@
         text-align: center !important;
         margin-inline: 0;
         //padding-top: clamp(2rem, 6vw, 4rem);
+        & a.button:hover {
+            background-color: var(--orange);
+        }
     }
 }
