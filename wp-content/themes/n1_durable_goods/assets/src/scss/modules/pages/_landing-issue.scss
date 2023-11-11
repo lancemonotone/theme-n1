@@ -152,31 +152,24 @@ body.magazine.issue-landing {
         padding-top: .6em;
     }
 
-    div {
-        &.main-content {
-            overflow: auto;
-            margin: 0;
-            padding-left: 72px;
-            padding-right: 72px;
-            padding-bottom: 48px;
+    .main-content {
+        overflow: auto;
+        background-color: #ede4d5;
+        width: auto;
+        margin: 0 0 0 320px;
+        padding: 32px 72px 48px;
+    }
+
+    .sharing {
+        + div.main-content {
             padding-top: 0;
-            background-color: #ede4d5;
-            width: auto;
-            margin-left: 320px;
-            padding-top: 32px;
+            padding-bottom: 32px;
         }
 
-        &.sharing {
-            + div.main-content {
-                padding-top: 0;
-                padding-bottom: 32px;
-            }
-
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 320px;
-        }
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 320px;
     }
 
     section {
@@ -191,30 +184,26 @@ body.magazine.issue-landing {
     }
 
     @media only screen and (min-width: 1400px) {
-        div.main-content {
+        .main-content {
             //width: 560px;
             width: 57%;
         }
 
-        section.supp {
+        #supplementary {
             position: absolute;
             top: 0;
             right: 0;
             width: 320px;
-            padding-left: 16px;
-            padding-right: 16px;
-        }
 
-        #supplementary div.module.article {
-            display: block;
-            width: 100%;
-            margin-left: 0;
-            margin-right: 0;
-        }
+            @media only screen and (min-width: 1400px) {
+                padding: 0;
+            }
 
-        section.supp {
-            border-top: none;
-            padding-top: 48px;
+            .module-multi {
+                .widget-title {
+                    font-size: 1.1rem;
+                }
+            }
         }
 
         /*h3.supp-more-by-title {
