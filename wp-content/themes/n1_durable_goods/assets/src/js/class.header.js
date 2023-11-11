@@ -1,6 +1,7 @@
 (function () {
-    const element = document.getElementById('site-header')
-    if (!element) {
+    const $siteHeader = document.getElementById('site-header')
+
+    if (!$siteHeader) {
         console.error('Element with ID \'site-header\' not found.')
         return
     }
@@ -8,22 +9,22 @@
     const body = document.body
     const documentElement = document.documentElement
 
-    const style = getComputedStyle(element)
+    const headerStyle = getComputedStyle($siteHeader)
 
-    let initialHeight = style.getPropertyValue('--header-max-height').trim()
-    if (initialHeight === 'auto') {
-        initialHeight = element.clientHeight
-    } else if (initialHeight.endsWith('rem')) {
-        initialHeight = parseFloat(initialHeight) * parseFloat(getComputedStyle(document.documentElement).fontSize)
+    let headerInitialHeight = headerStyle.getPropertyValue('--header-max-height').trim()
+    if (headerInitialHeight === 'auto') {
+        headerInitialHeight = $siteHeader.clientHeight
+    } else if (headerInitialHeight.endsWith('rem')) {
+        headerInitialHeight = parseFloat(headerInitialHeight) * parseFloat(getComputedStyle(document.documentElement).fontSize)
     } else {
-        console.error('Unsupported value for --header-max-height: ', initialHeight)
+        console.error('Unsupported value for --header-max-height: ', headerInitialHeight)
         return
     }
 
     // Define a buffer zone around initialHeight
     const bufferZone = 10  // 10 pixels as an example, you can adjust this value
 
-    element.style.paddingBlock = 'var(--header-max-padding-block)'
+    $siteHeader.style.paddingBlock = 'var(--header-max-padding-block)'
 
     let lastScrollTop = 0
     let throttleTimeout
@@ -39,14 +40,16 @@
             const scrollTop = body.scrollTop > documentElement.scrollTop ? body.scrollTop : documentElement.scrollTop
 
             // Check if scrollTop is within the buffer zone
-            if (Math.abs(scrollTop - initialHeight) <= bufferZone) {
+            if (Math.abs(scrollTop - headerInitialHeight) <= bufferZone) {
                 return
             }
 
-            if (scrollTop > initialHeight) {
-                element.style.paddingBlock = 'var(--header-min-padding-block)'
+            if (scrollTop > headerInitialHeight) {
+                $siteHeader.style.paddingBlock = 'var(--header-min-padding-block)'
+                $siteHeader.classList.add('header-collapsed')
             } else {
-                element.style.paddingBlock = 'var(--header-max-padding-block)'
+                $siteHeader.style.paddingBlock = 'var(--header-max-padding-block)'
+                $siteHeader.classList.remove('header-collapsed')
             }
         }, 100)
     })

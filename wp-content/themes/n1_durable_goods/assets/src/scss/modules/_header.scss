@@ -34,17 +34,17 @@
     --logo-height: 45px;
     --sections-align-items: center;
 
-    .header-collapsed & {
-        --logo-height: 45px !important;
-        --sections-align-items: center;
-    }
-
     @media screen and (min-width: 900px) {
-        --logo-height: 59px;
         --header-max-height: 8.7rem;
         --header-min-height: 8.7rem;
         --header-align-items: top;
         --row-gap: 0.6rem;
+        --logo-height: 59px;
+
+        &.header-collapsed {
+            --logo-height: 45px !important;
+            //--sections-align-items: center;
+        }
     }
 
     @media screen and (min-width: 1100px) {
@@ -89,7 +89,7 @@
         height: 100%;
         max-height: var(--sections-max-height);
         width: 100%;
-        padding-block: var(--padding-block);
+        //padding-block: var(--padding-block);
 
         display: grid;
         grid-template-areas: "logo hamburger actions";
