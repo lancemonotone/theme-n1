@@ -51,7 +51,7 @@
                 $siteHeader.style.paddingBlock = 'var(--header-max-padding-block)'
                 $siteHeader.classList.remove('header-collapsed')
             }
-        }, 100)
+        }, 200)
     })
 })()
 
