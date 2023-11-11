@@ -12,7 +12,7 @@ switch ( $type ) {
             $issue_art = get_field( 'issue_art', $current_issue_obj->ID ); ?>
             <section class="inner">
                 <figure class="bug">
-                    <a href="<?= home_url() ?>/magazine/">
+                    <a href="<?= home_url() ?>/magazine/<?= $current_issue->post_name ?>">
                         <img src="<?= $issue_art[ 'sizes' ][ 'issue-art' ] ?>" alt="<?php _e( 'Art for' ) ?> <?= $current_issue->post_title ?>">
                     </a>
                 </figure>
@@ -20,7 +20,7 @@ switch ( $type ) {
                 <span class="hed"><?php _e( 'Current Issue' ) ?></span>
 
                 <h2 class="issue-name">
-                    <a href="<?= home_url() ?>/magazine/"><?= get_field( 'issue_name', $current_issue->ID ) ?></a>
+                    <a href="<?= home_url() ?>/magazine/<?= $current_issue->post_name ?>"><?= get_field( 'issue_name', $current_issue->ID ) ?></a>
                 </h2>
             </section>
 
