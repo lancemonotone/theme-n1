@@ -22,7 +22,7 @@
     }
 
     // Define a buffer zone around initialHeight
-    const bufferZone = 10  // 10 pixels as an example, you can adjust this value
+    const bufferZone = 50  // 10 pixels as an example, you can adjust this value
 
     $siteHeader.style.paddingBlock = 'var(--header-max-padding-block)'
 
