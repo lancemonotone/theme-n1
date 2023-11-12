@@ -14,12 +14,16 @@
 
     & > .widget-title {
         font-size: 1.9rem;
-        display: inline-block;
+        //display: inline-block;
         font-weight: 600;
         //padding-block-end: 0.6rem;
         margin-block-end: 2rem;
         border-block-end: 4px solid;
         //white-space: nowrap;
+        width: max-content;
+        left: 50%;
+        position: relative;
+        transform: translateX(-50%);
 
         @media screen and (min-width: 640px) {
             font-size: 2.5rem;
