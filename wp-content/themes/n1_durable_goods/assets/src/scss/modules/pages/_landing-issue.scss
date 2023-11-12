@@ -143,33 +143,35 @@ body.magazine.issue-landing {
         padding: 0 8px 16px 8px;
     }
 
-    h3.supplementary.more.title .section-hed {
+    /*h3.supplementary.more.title .section-hed {
         font-size: 2.5rem;
-    }
+    }*/
 
-    p.online-only-archive.dek {
+    /*p.online-only-archive.dek {
         font-size: 1.9rem;
         padding-top: .6em;
-    }
+    }*/
 
     .main-content {
-        overflow: auto;
-        background-color: #ede4d5;
-        width: auto;
-        margin: 0 0 0 320px;
-        padding: 32px 72px 48px;
+        padding-top: 0;
+        padding-bottom: 32px;
+
+        @media only screen and (min-width: 1024px) {
+            overflow: auto;
+            background-color: #ede4d5;
+            width: auto;
+            margin: 0 0 0 300px;
+            padding: 32px 72px 48px;
+        }
     }
 
     .sharing {
-        + div.main-content {
-            padding-top: 0;
-            padding-bottom: 32px;
+        @media only screen and (min-width: 1024px) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 320px;
         }
-
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 320px;
     }
 
     section {
@@ -186,7 +188,7 @@ body.magazine.issue-landing {
     @media only screen and (min-width: 1400px) {
         .main-content {
             //width: 560px;
-            width: 57%;
+            width: 56%;
         }
 
         #supplementary {
@@ -194,13 +196,14 @@ body.magazine.issue-landing {
             top: 0;
             right: 0;
             width: 320px;
-
-            @media only screen and (min-width: 1400px) {
-                padding: 0;
-            }
+            padding: 0;
 
             .module-multi {
                 .widget-title {
+                    font-size: 1.1rem;
+                }
+
+                .dek {
                     font-size: 1.1rem;
                 }
             }
@@ -230,7 +233,7 @@ body.magazine.issue-landing {
 }*/
 
 ////////////////////////////
-/*body.magazine.issue-landing {
+body.magazine.issue-landing {
     .figure {
         background-image: none;
     }
@@ -239,11 +242,16 @@ body.magazine.issue-landing {
         margin: 0 auto;
     }
 
-    div.content-wrapper {
+    /*div.content-wrapper {
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
-    }
+    }*/
+    /*div.content-wrapper {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }*/
 
     .main-content {
         text-align: center;
@@ -274,12 +282,14 @@ body.magazine.issue-landing {
                 text-align: center;
             }
 
-            p {
+            .post-summary p {
                 text-align: center;
+                font-size: 100%;
+            }
 
-                &.post-author {
-                    font-size: 1.1rem;
-                }
+            p.post-author {
+                font-size: 1.1rem;
+                text-align: center;
             }
 
             h1 {
@@ -315,17 +325,18 @@ body.magazine.issue-landing {
         text-align: center;
         top: inherit;
         width: auto;
+        margin-block-start: 1.5rem;
     }
 
     li.post-meta-tags-item {
         display: inline-block;
     }
 
-    section {
+    /*section {
         &.subscribe, &.newsletter, &.social {
             width: auto;
         }
-    }
+    }*/
 
     div.subscribe.category, h3.subscribe.issuetitle {
         display: none;
@@ -335,21 +346,18 @@ body.magazine.issue-landing {
         text-align: center;
     }
 
-    section.supp {
+    /*#supplementary {
+        padding: 48px 16px 0;
         border-top: 72px solid rgba(0, 0, 0, 0.015);
         margin-top: 32px;
-    }
 
-    #supplementary {
-        padding: 48px 16px 0;
-    }
+        .articles {
+            margin-top: 32px;
+            padding: 0;
+        }
+    }*/
 
-    section.articles {
-        margin-top: 32px;
-        padding: 0;
-    }
-
-    h3.supplementary.more.title {
+    /*h3.supplementary.more.title {
         border-bottom: 4px solid #333;
         display: inline-block;
         font-size: 1.1rem;
@@ -361,14 +369,14 @@ body.magazine.issue-landing {
             font-size: 1.1rem;
             padding-bottom: 0px;
         }
-    }
+    }*/
 
-    p.online-only-archive.dek {
+    /*p.online-only-archive.dek {
         font-size: 1.1rem;
-    }
+    }*/
 
-    section.articles p.module.article.tweetquote {
+    /*section.articles p.module.article.tweetquote {
         font-size: 22px;
         padding-right: 0;
-    }
-}*/
+    }*/
+}
