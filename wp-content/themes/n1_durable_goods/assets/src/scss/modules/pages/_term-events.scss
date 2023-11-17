@@ -1,9 +1,9 @@
-body.search {
+body.term-events {
     .flavor-archive.articles {
         article.type-online-only.term-events {
             &:hover {
-                background-color: transparent;
-                border-color: var(--white);
+                border-color: var(--border-hover-color);
+                background: var(--white);
             }
         }
     }

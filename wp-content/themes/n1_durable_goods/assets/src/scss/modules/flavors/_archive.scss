@@ -209,10 +209,11 @@
                 --pullquote-hover-color: var(--dark-blue);
                 --dek-color: var(--dark-grey);
 
-                &:hover {
-                    border-color: var(--border-hover-color);
-                    background: var(--white);
-                }
+                // This should only happen on the events archive page
+                //&:hover {
+                //    border-color: var(--border-hover-color);
+                //    background: var(--white);
+                //}
 
             }
         }
