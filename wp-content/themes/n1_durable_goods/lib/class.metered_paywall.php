@@ -213,21 +213,24 @@ class Metered_Paywall {
         if ( current_user_can( 'edit_posts' ) && ! $force_paywall ) {
             $paywall = false;
         }
-        // If this is an MM Core page.
-        if ( $post_id && \MM_CorePage::getCorePageInfo( $post_id ) ) {
-            $paywall = false;
-        }
-        // If a member is logged in
-        if ( mm_member_decision( [ "isMember" => "true", "status" => "active|pending_cancel" ] ) && ! $force_paywall ) {
-            $paywall = false;
-        }
-        // If a member is a Gift Sub Giver or Free Membership, paywall is true.
-        if ( mm_member_decision( [
-            'isMember'     => 'true',
-            'status'       => 'active|pending_cancel',
-            'membershipID' => "1|29"
-        ] ) ) {
-            $paywall = true;
+
+        if ( function_exists( 'mm_member_decision' ) ) {
+            // If this is an MM Core page.
+            if ( $post_id && \MM_CorePage::getCorePageInfo( $post_id ) ) {
+                $paywall = false;
+            }
+            // If a member is logged in
+            if ( mm_member_decision( [ "isMember" => "true", "status" => "active|pending_cancel" ] ) && ! $force_paywall ) {
+                $paywall = false;
+            }
+            // If a member is a Gift Sub Giver or Free Membership, paywall is true.
+            if ( mm_member_decision( [
+                'isMember'     => 'true',
+                'status'       => 'active|pending_cancel',
+                'membershipID' => "1|29"
+            ] ) ) {
+                $paywall = true;
+            }
         }
 
         // If the article has been tagged publicly viewable.

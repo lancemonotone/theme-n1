@@ -26,7 +26,7 @@ EOD;
 function get_status(): string {
     $home_url     = home_url();
     $user_name    = wp_get_current_user()->display_name;
-    $user_status  = __( mm_member_data( [ "name" => "statusName" ] ) );
+    $user_status  = __( function_exists('mm_member_data') ? mm_member_data( [ "name" => "statusName" ] ) : 'Active' );
     $status_class = $user_status === 'Active' ? 'status-active' : 'status-inactive';
     $status_text  = _( 'Subscription Status' );
     $renew_text   = _( 'Renew Subscription' );
