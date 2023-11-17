@@ -49,8 +49,8 @@ class Admin {
 		);
 
 		foreach ( $this->subpages as $id => $title ) {
-			$subpage_ids[] = 'sg-security_page_' . $id . '';
-			$subpage_ids[] = 'sg-security_page_' . $id . '-network';
+			$subpage_ids[] = 'security-optimizer_page_' . $id . '';
+			$subpage_ids[] = 'security-optimizer_page_' . $id . '-network';
 		}
 
 		return $subpage_ids;
@@ -166,8 +166,8 @@ class Admin {
 	 */
 	public function add_plugin_pages() {
 		$page = \add_menu_page(
-			__( 'SiteGround Security', 'sg-security' ), // Page title.
-			__( 'SG Security', 'sg-security' ), // Menu item title.
+			__( 'Security Optimizer by SiteGround', 'sg-security' ), // Page title.
+			__( 'Security Optimizer', 'sg-security' ), // Menu item title.
 			'manage_options',
 			\SG_Security\PLUGIN_SLUG,   // Page slug.
 			array( $this, 'render' ),
@@ -177,7 +177,7 @@ class Admin {
 		foreach ( $this->subpages as $id => $title ) {
 			add_submenu_page(
 				\SG_Security\PLUGIN_SLUG,   // Parent slug.
-				$title,
+				'Security Optimizer - ' . $title,
 				$title,
 				'manage_options',
 				$id,
@@ -200,16 +200,17 @@ class Admin {
 		}
 
 		$current_screen = \get_current_screen();
-
 		echo '<style>.notice { display:none!important; } </style>';
 
 		$id = strtoupper( str_replace(
 			array(
 				'sg-security_page_',
+				'security-optimizer_page_',
 				'_network',
 				'-',
 			),
 			array(
+				'',
 				'',
 				'',
 				'_',
@@ -289,26 +290,31 @@ class Admin {
 		}
 
 		if ( Helper_Service::is_siteground() ) {
-			if ( 1 === $data_consent ) {
-				return array(
-					'show_data_field'  => 0,
-					'show_email_field' => 0,
-				);
-			}
-
 			return array(
-				'show_data_field'  => 1,
+				'show_data_field' => 0,
 				'show_email_field' => 0,
 			);
 		}
 
+		return array(
+			'show_data_field'  => 0,
+			'show_email_field' => 1,
+		);
+
 
 		$settings = array();
 
-		$settings['show_data_field'] = 0 === $data_consent ? 1 : 0;
+		$settings['show_data_field'] = 0;
 		$settings['show_email_field'] = 0 === $email_consent ? 1 : 0;
 
 		return $settings;
+	}
+
+	public function show_privacy_policy ( $text ) {
+		if ( false === $this->is_plugin_page() ) {
+			return $text;
+		}
+		return __( 'By installing and using this plugin you acknowledge that you have read and understood <a href="//siteground.com/viewtos/siteground_plugins_privacy_notice"> SiteGround Plugins Privacy Notice </a> and you give your consent for your personal data to be collected, processed and used as described in the Plugins Privacy Notice.', 'sg-security' );
 	}
 
 }

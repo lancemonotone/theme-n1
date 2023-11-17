@@ -11,6 +11,7 @@ use SG_Security\Install_Service\Install_1_3_6;
 use SG_Security\Install_Service\Install_1_3_7;
 use SG_Security\Install_Service\Install_1_4_2;
 use SG_Security\Install_Service\Install_1_4_4;
+use SG_Security\Install_Service\Install_1_4_7;
 
 /**
  * Define the Install interface.
@@ -43,6 +44,7 @@ class Install_Service {
 			new Install_1_3_7(),
 			new Install_1_4_2(),
 			new Install_1_4_4(),
+			new Install_1_4_7(),
 		);
 	}
 

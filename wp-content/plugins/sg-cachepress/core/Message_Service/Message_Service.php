@@ -51,7 +51,7 @@ class Message_Service {
 			'dns_prefetch'                                 => __( 'DNS Prefetching', 'sg-cachepress' ),
 			'preload_combined_css'                         => __( 'Preload Combined CSS', 'sg-cachepress' ),
 			'enable_ssl_no_certificate'                    => __( 'Please, install an SSL certificate first!', 'sg-cachepress' ),
-			'enable_memcache_empty_port'                   => __( 'SiteGround Optimizer was unable to connect to the Memcached server and it was disabled. Please, check your SiteGround control panel and turn it on if disabled.', 'sg-cachepress' ),
+			'enable_memcache_empty_port'                   => __( 'Speed Optimizer by SiteGround was unable to connect to the Memcached server and it was disabled. Please, check your SiteGround control panel and turn it on if disabled.', 'sg-cachepress' ),
 			'excluded_urls'                                => __( 'List of excluded urls is updated', 'sg-cachepress' ),
 			'dns_prefetch_urls'                            => __( 'List of external URLs is updated', 'sg-cachepress' ),
 			'minify_html_exclude'                          => __( 'List of excluded urls is updated', 'sg-cachepress' ),

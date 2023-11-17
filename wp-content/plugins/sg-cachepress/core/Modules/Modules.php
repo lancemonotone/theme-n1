@@ -6,7 +6,7 @@ use SiteGround_Optimizer\Options\Options;
 use SiteGround_Helper\Helper_Service;
 
 /**
- * Provide list of SiteGround Optimizer modules.
+ * Provide list of Speed Optimizer by SiteGround modules.
  */
 class Modules {
 	/**
@@ -58,7 +58,7 @@ class Modules {
 		),
 		'hearbeat_control' => array(
 			'title'   => 'WordPress Heartbeat Optimization',
-			'text'    => 'Enable this option to allow SiteGround Optimizer to control the WordPress Heartbeat API.',
+			'text'    => 'Enable this option to allow Speed Optimizer by SiteGround to control the WordPress Heartbeat API.',
 			'weight'  => 80,
 			'tab'     => 'environment',
 			'options' => array(
@@ -539,7 +539,7 @@ class Modules {
 		}
 
 		$message = sprintf(
-			__( '<strong>Important message from SiteGround Optimizer plugin</strong>: We have detected that there is duplicate functionality with other plugins installed on your site: <strong>%1$s</strong> and have deactivated the following functions from our plugin: <strong>%2$s</strong>. If you wish to enable them, please do that from the SiteGround Optimizer config page.', 'sg-cachepress' ),
+			__( '<strong>Important message from Speed Optimizer by SiteGround plugin</strong>: We have detected that there is duplicate functionality with other plugins installed on your site: <strong>%1$s</strong> and have deactivated the following functions from our plugin: <strong>%2$s</strong>. If you wish to enable them, please do that from the Speed Optimizer by SiteGround config page.', 'sg-cachepress' ),
 			implode( ', ', $excluded['conflicting_plugins'] ),
 			implode( ', ', $this->get_modules_pretty_names( $excluded['excluded_modules'] ) )
 		);
@@ -574,7 +574,7 @@ class Modules {
 		}
 
 		$message = sprintf(
-			__( '<strong>Important warning from SiteGround Optimizer plugin</strong>: We have detected that there is duplicate functionality with other plugins installed on your site: <strong>%s</strong>. Please note that having two plugins with the same functionality may actually decrease your site\'s performance and hurt your pages loading times so we recommend you to leave only one of the plugins active.', 'sg-cachepress' ),
+			__( '<strong>Important warning from Speed Optimizer by SiteGround plugin</strong>: We have detected that there is duplicate functionality with other plugins installed on your site: <strong>%s</strong>. Please note that having two plugins with the same functionality may actually decrease your site\'s performance and hurt your pages loading times so we recommend you to leave only one of the plugins active.', 'sg-cachepress' ),
 			implode( ', ', $excluded['conflicting_plugins'] )
 		);
 
@@ -774,8 +774,8 @@ class Modules {
 					array(
 						array(
 							'type'       => 'default',
-							'title'      => __( 'Welcome to SiteGround Optimizer', 'sg-cachepress' ),
-							'text'       => __( 'Get the best performance for your WordPress website with our optimization plugin. It handles caching, system settings, and all the necessary configurations for a blazing-fast website. With the SiteGround Optimizer enabled, you’re getting the very best from your hosting environment!', 'sg-cachepress' ),
+							'title'      => __( 'Welcome to Speed Optimizer by SiteGround', 'sg-cachepress' ),
+							'text'       => __( 'Get the best performance for your WordPress website with our optimization plugin. It handles caching, system settings, and all the necessary configurations for a blazing-fast website. With the Speed Optimizer by SiteGround enabled, you’re getting the very best from your hosting environment!', 'sg-cachepress' ),
 							'icon'       => 'presentational-speed-caching',
 							'icon_color' => 'salmon',
 						),

@@ -217,11 +217,11 @@ class Heartbeat_Control {
 	 * @return int 1/0
 	 */
 	public function is_enabled() {
-		foreach ( $this->options as $location => $value ) {
-			if ( false === $value || 0 === intval( $value ) ) {
-				continue;
-			}
-
+		if (
+			in_array( intval( get_option( 'siteground_optimizer_heartbeat_post_interval', 120 ) ), array( 0, 120 ) ) &&
+			0 === intval( get_option( 'siteground_optimizer_heartbeat_dashboard_interval', false ) ) &&
+			0 === intval( get_option( 'siteground_optimizer_heartbeat_frontend_interval', false ) )
+		) {
 			return 1;
 		}
 

@@ -264,9 +264,9 @@ if ( ! class_exists( 'SiteGround_Data/Settings' ) ) {
 			$data = array(
 				'url'                     => home_url(),
 				'email_consent'           => intval( get_option( 'siteground_email_consent', 0 ) ),
-				'data_consent'            => intval( get_option( 'siteground_data_consent', 0 ) ),
-				'email_consent_timestamp' => get_option( 'siteground_data_consent_timestamp', 0 ),
-				'data_consent_timestamp'  => get_option( 'siteground_email_consent_timestamp', 0 ),
+				'data_consent'            => intval( get_option( 'siteground_email_consent', 0 ) ),
+				'email_consent_timestamp' => get_option( 'siteground_email_consent_timestamp', 0 ),
+				'data_consent_timestamp'  => get_option( 'siteground_data_consent_timestamp', 0 ),
 				'admin_email'             => get_option( 'admin_email' ),
 				'php_version'             => PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION,
 				'php_max_exec_time'       => ini_get( 'max_execution_time' ),
@@ -305,7 +305,7 @@ if ( ! class_exists( 'SiteGround_Data/Settings' ) ) {
 		 */
 		public function get_hosting_provider() {
 
-			if ( $this->is_siteground() ) {
+			if ( self::is_siteground() ) {
 				return 'SiteGround';
 			}
 
@@ -507,7 +507,7 @@ if ( ! class_exists( 'SiteGround_Data/Settings' ) ) {
 		 *
 		 * @return boolean True/False.
 		 */
-		public function is_siteground() {
+		public static function is_siteground() {
 			// Bail if open_basedir restrictions are set, and we are not able to check certain directories.
 			if ( ! empty( ini_get( 'open_basedir' ) ) ) {
 				return 0;

@@ -1,4 +1,4 @@
-if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
+if ( typeof fcaPcOptions === 'object' && fcaPcOptions.video_enabled ) {
 
 	class EventEmitter {
 
@@ -94,7 +94,7 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 		}
 
 		revoke( message ) {
-			if ( fcaPcCAPI.debug ) {
+			if ( fcaPcOptions.debug ) {
 				console.log( message )
 				console.log( 'pixel cat video: revoked ')
 			}
@@ -117,14 +117,14 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 					this.api_vimeo_ready()
 				} )
 			} catch ( e ) {
-				if ( fcaPcCAPI.debug)
+				if ( fcaPcOptions.debug)
 					console.log( e.message )
 				return
 			}
 		}
 
 		api_vimeo_ready() {
-			if (fcaPcCAPI.debug) {
+			if (fcaPcOptions.debug) {
 				console.log( 'Pixel Cat video: Vimeo video ready' )
 			}
 
@@ -192,11 +192,9 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 
 			let match = video_src.match(pattern)
 
-			console.log(match)
-
 			if (match === null) {
 
-				if (fcaPcCAPI) {
+				if ( fcaPcOptions.debug ) {
 					console.log('no video id match')
 				}
 
@@ -208,7 +206,7 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 			let video_id = match[2]
 
 			if ( typeof video_id === 'undefined' ) {
-				if ( fcaPcCAPI.debug ) {
+				if ( fcaPcOptions.debug ) {
 					console.log ( 'pixel cat video: wistia video_id not found.' )
 				}
 				return
@@ -226,7 +224,7 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 
 		api_wistia_ready( video ) {
 
-			if ( fcaPcCAPI.debug ) {
+			if ( fcaPcOptions.debug ) {
 				console.log ( 'pixel cat video: wistia video ready.' )
 			}
 
@@ -276,7 +274,7 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 
 		api_youtube_ready( event ) {
 
-			if ( fcaPcCAPI.debug ) {
+			if ( fcaPcOptions.debug ) {
 				console.log( 'pixel cat video: youtube video ready')
 			}
 
@@ -291,7 +289,7 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 		}
 
 		api_youtube_state_change( event ) {
-			if ( fcaPcCAPI.debug ) {
+			if ( fcaPcOptions.debug ) {
 				console.log( event )
 			}
 
@@ -319,7 +317,7 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 		}
 
 		video_youtube_end() {
-			if ( fcaPcCAPI ) {
+			if ( fcaPcOptions.debug ) {
 				console.log( 'end' )
 			}
 		}
@@ -332,7 +330,7 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 
 	        first_script.parentNode.insertBefore(new_script, first_script)
 
-			if ( fcaPcCAPI.debug ) {
+			if ( fcaPcOptions.debug ) {
 				console.log('pixel cat video: ' + url + ' has been loaded.')
 			}
 		}
@@ -352,7 +350,7 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 		video_track_progress() {
 			let percent = this.percentage_watched()
 
-			if ( fcaPcCAPI.debug ) {
+			if ( fcaPcOptions.debug ) {
 				console.log( this.percentage_watched() )
 			}
 
@@ -474,7 +472,7 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 
 		if (videos.length === 0) {
 
-			if (fcaPcCAPI) {
+			if ( fcaPcOptions.debug ) {
 				console.log('No videos detected')	
 			}
 

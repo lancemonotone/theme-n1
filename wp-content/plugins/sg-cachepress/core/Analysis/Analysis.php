@@ -108,10 +108,6 @@ class Analysis {
 		foreach ( $result['lighthouseResult']['categories'] as $group ) {
 			foreach ( $group['auditRefs'] as $ref ) {
 
-				if ( 'server-response-time' === $ref['id'] ) {
-					$items['scores']['ttfb'] = round( $result['lighthouseResult']['audits'][ $ref['id'] ]['numericValue'] );
-				}
-
 				if ( 'first-contentful-paint' === $ref['id'] ) {
 					$items['scores']['fcp'] = $result['lighthouseResult']['audits'][ $ref['id'] ]['numericValue'];
 				}
@@ -163,13 +159,14 @@ class Analysis {
 							break;
 					}
 				} else {
-					$items['data'][ $ref['group'] ]['info'] = $result['lighthouseResult']['categoryGroups'][ $ref['group'] ];
+					if ( ! empty( $items['data'][ $ref['group'] ]['info'] ) ) {
+						$items['data'][ $ref['group'] ]['info'] = $result['lighthouseResult']['categoryGroups'][ $ref['group'] ];
+					}
 					// The optimization group may have to be left empty.
 					$items['data'][ $ref['group'] ]['data'][ $optimization_group ][] = $audit;
 				}
 			}
 		}
-
 
 		unset( $items['data']['budgets'] );
 		unset( $items['data']['diagnostics'] );
@@ -242,7 +239,6 @@ class Analysis {
 						break;
 				}
 			}
-
 
 			if ( ! empty( $resources['css'] ) ) {
 				if ( ! isset( $items['data']['load-opportunities']['data']['css_optimizations'] ) ) {
@@ -339,8 +335,8 @@ class Analysis {
 			}
 
 			// Show human readable timestamp with local timezone.
-			$date = new \DateTime( '@'.$test_data['timeStamp'] );
-			$date->setTimezone( new \DateTimeZone( \wp_timezone_string() ));
+			$date = new \DateTime( '@' . $test_data['timeStamp'] );
+			$date->setTimezone( new \DateTimeZone( \wp_timezone_string() ) );
 			$test_data['human_readable_timestamp'] = $date->format( 'd M Y, G:i e' );
 
 			$data[] = array(
@@ -451,7 +447,6 @@ class Analysis {
 	public function get_messages( $scores ) {
 		$data = array();
 		$descriptions = array(
-			'ttfb'  => __( 'Time to First Byte identifies the time for which your server sends a response.', 'sg-cachepress' ),
 			'score' => __( 'Summarizes the page\'s performance.', 'sg-cachpress' ),
 			'fcp'   => __( 'Speed Index shows how quickly the contents of a page are visibly populated.', 'sg-cachepress' ),
 		);
@@ -460,24 +455,6 @@ class Analysis {
 			'fcp'   => array(
 				'low' => 2000,
 				'medium' => 4000,
-				'colors' => array(
-					'low' => array(
-						'class_name'       => 'placeholder-without-svg placeholder-top',
-						'class_name_table' => 'success',
-					),
-					'medium' => array(
-						'class_name'       => 'placeholder-without-svg placeholder-meduim',
-						'class_name_table' => 'warning',
-					),
-					'high' => array(
-						'class_name'       => 'placeholder-without-svg placeholder-low',
-						'class_name_table' => 'error',
-					),
-				),
-			),
-			'ttfb'  => array(
-				'low' => 100,
-				'medium' => 600,
 				'colors' => array(
 					'low' => array(
 						'class_name'       => 'placeholder-without-svg placeholder-top',

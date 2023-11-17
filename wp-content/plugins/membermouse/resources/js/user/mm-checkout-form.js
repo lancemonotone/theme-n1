@@ -94,6 +94,8 @@ var MM_CheckoutView = MM_Core.extend({
     checkout: function(doSubmit, ignoreFields) {
 		
 		document.charset = 'UTF-8';
+		var isFree = (parseInt(jQuery("#mm_is_free").val()) == 1) ? true : false;
+		
     	if (isFree) 
     	{ 
             jQuery.blockUI({ message: MemberMouseGlobal.checkoutProcessingFreeMessage });
@@ -224,7 +226,6 @@ var MM_CheckoutView = MM_Core.extend({
         var isAdmin = (parseInt(jQuery("#mm_is_admin").val()) == 1) ? true : false;
         var isCustomerSupportOrder = (parseInt(jQuery("#mm_is_customer_support_order").val()) == 1) ? true : false;
         var isMember = (parseInt(jQuery("#mm_is_member").val()) == 1) ? true : false;
-        var isFree = (parseInt(jQuery("#mm_is_free").val()) == 1) ? true : false;
         var doComp = (parseInt(jQuery("#mm_do_comp").val()) == 1) ? true : false;
         
         var shippingSame = jQuery("#mm_field_billing_equals_shipping").val(); 

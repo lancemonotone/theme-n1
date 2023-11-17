@@ -1,13 +1,13 @@
 <?php
 /**
  * @package MemberMouse
- * @version 2.4.4
+ * @version 2.4.6
  *
  * Plugin Name: MemberMouse Platform
  * Plugin URI: http://membermouse.com
  * Description: MemberMouse is an enterprise-level membership platform that allows you to quickly and easily manage a membership site or subscription business. MemberMouse is designed to deliver digital content, automate customer self-service and provide you with advanced marketing tools to maximize the profitability of your continuity business.
  * Author: MemberMouse, LLC
- * Version: 2.4.4
+ * Version: 2.4.6
  * Author URI: http://membermouse.com
  * Text Domain: membermouse
  * Domain Path: /languages/
@@ -49,7 +49,7 @@ if(!class_exists('MemberMouse',false))
  		private static $menus=""; 
 		private $option_name = 'membermouse-settings';
 		private $installerRan = false;
-		private static $pluginVersion = "2.4.4";
+		private static $pluginVersion = "2.4.6";
 
 		public function __construct() 
 		{
@@ -467,7 +467,13 @@ if(!class_exists('MemberMouse',false))
 					{
 						echo MM_Session::generateDelayedCreateJavascript();
 					}
-				}); 
+				});
+				
+				$file   = basename( __FILE__ );
+				$folder = basename( dirname( __FILE__ ) );
+				$hook = "in_plugin_update_message-{$folder}/{$file}";
+				add_action( $hook, 'MemberMouse::majorVersionUpdateCheck', 10, 2 );
+				
 
 				add_action( 'admin_init', 'MM_AuthenticatorService::clear_connection_data' );
 			    add_action( 'init', 'MM_AuthenticatorService::process_connect' );
@@ -482,6 +488,25 @@ if(!class_exists('MemberMouse',false))
 			    add_action( 'wp_ajax_mm_stripe_connect_save_settings', 'MM_StripeConnect::stripe_connect_save_settings' );
 			}
 		} 
+		
+		public static function majorVersionUpdateCheck($plugin_data, $r)
+		{
+		    if ($plugin_data["new_version"] ?? false)
+		    {
+		        if (version_compare(self::getPluginVersion(),"3.0.0","<") && version_compare($plugin_data["new_version"],"3.0.0",">="))
+		        {
+		            $moreInfoUrl = "https://membermouse.com/docs/important-changes-for-membermouse-3-0-read-this-first/";
+		            ?>
+		            <br>
+		            <br>
+		            <strong>Version 3.0 and above includes significant changes affecting many different aspects of the plugin, many of which cannot be rolled back after this upgrade. <br>
+		            		We strongly advise you to do <a href="<?php echo $moreInfoUrl; ?>" target="_blank">a full site backup (including the database)</a> prior to upgrading and ensure that your initial update is conducted in a staging environment. <br>
+		            		<a href="<?php echo $moreInfoUrl; ?>" target="_blank">Learn more</a>
+            		</strong>
+		            <?php 
+		        }
+		    }
+		}
 		
 		public function filterTranslation($translatedText, $text, $domain)
 		{
@@ -1180,25 +1205,6 @@ if(!class_exists('MemberMouse',false))
 						}
 					}
 				} 
-				
-				// check if plugin needs to be upgraded
-				global $wpdb;
-				
-				$sql = "SELECT count(u.wp_user_id) as total FROM ".MM_TABLE_USER_DATA." u, ".MM_TABLE_MEMBERSHIP_LEVELS." m WHERE ";
-				$sql .= "u.membership_level_id = m.id AND (u.status = '".MM_Status::$ACTIVE."' OR u.status = '".MM_Status::$PENDING_CANCELLATION."') ";
-				
-				$result = $wpdb->get_row($sql);
-				
-				if($result)
-				{
-					$activeMembers = intval($result->total);
-					$memberLimit = intval(MM_MemberMouseService::getMemberLimit());
-					$upgradeUrl = MM_MemberMouseService::getUpgradeUrl();
-					if($memberLimit != -1 && $activeMembers > $memberLimit)
-					{
-						MM_Messages::addMessage("MemberMouse is currently over the limit of ".number_format($memberLimit)." members and will be deactivated within a week of going over the limit. Please <a href='{$upgradeUrl}' target='_blank'>upgrade your account</a> to avoid any service interruptions.");
-					}
-				}
 				
 				// check to see if in Safe Mode
 				$safeMode = MM_SafeMode::getMode();

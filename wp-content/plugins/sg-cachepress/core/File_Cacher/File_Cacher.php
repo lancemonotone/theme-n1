@@ -956,7 +956,7 @@ class File_Cacher extends Supercacher {
 		$config_content = $this->wp_filesystem->get_contents( $this->config_file );
 
 		// The constant.
-		$constant = "define( 'WP_CACHE', $enable ); // By SiteGround Optimizer";
+		$constant = "define( 'WP_CACHE', $enable ); // By Speed Optimizer by SiteGround";
 
 		$search = '/(<\?php)/i';
 		$replace = "<?php\r\n{$constant}\r\n";

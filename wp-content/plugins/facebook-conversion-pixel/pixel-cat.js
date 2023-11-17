@@ -65,14 +65,426 @@ jQuery( document ).ready(function($) {
 
 		}
 	})()
+	
+	if ( fcaPcOptions.debug ) {
+		console.log ( 'pixel cat events:' )
+		console.log ( fcaPcEvents )
+		console.log ( 'pixel cat post:' )
+		console.log ( fcaPcPost )
+		console.log ( 'pixel cat options:' )
+		console.log ( fcaPcOptions )
+	}
 
-	// fb initial pageview
-	fca_pc_trigger_event( 'track', 'PageView' )
-
-	//SEARCH INTEGRATION
+	//FB INITIAL PAGEVIEW
+	if( fca_pc_pixel_type_enabled( 'Facebook' ) ||  fca_pc_pixel_type_enabled( 'Conversions API' ) ) {
+		fca_pc_trigger_event( 'track', 'PageView' )		
+	}
+	
+	//REMOVE ADVANCED MATCHING COOKIE IF APPLICABLE
+	if ( get_cookie( 'fca_pc_advanced_matching' ) ) {
+		set_cookie( 'fca_pc_advanced_matching', '' )
+	}
+	
+	//FB SEARCH INTEGRATION
 	if ( typeof fcaPcSearchQuery !== 'undefined' ) {
 		fca_pc_trigger_event( 'track', 'Search', fcaPcSearchQuery )
 	}
+	
+	if( fcaPcOptions.woo_enabled ) {
+		
+		//WOOCOMMERCE
+		if( fcaPcOptions.debug ) {
+			console.log( 'adding woo events' )
+		}
+		
+		//WOOCOMMERCE AJAX
+		$( 'body' ).on( 'added_to_cart', function(){
+
+			$.ajax({
+				url: fcaPcOptions.ajax_url,
+				type: "POST",
+				data: {
+					'action': 'fca_pc_woo_ajax_add_to_cart',
+					'product_id': fcaPcPost.id
+				},
+				success: ( function( data ){
+					if( data.success ) {
+						if( fca_pc_pixel_type_enabled( 'Facebook' ) || fca_pc_pixel_type_enabled( 'Conversions API' ) ) {							
+							fca_pc_trigger_event( 'track', 'AddToCart', data.facebook )
+						}
+						
+						if( fca_pc_pixel_type_enabled( 'Snapchat' ) ) {
+							fca_pc_trigger_event( 'track', 'AddToCartSnapchat', data.snapchat )
+						}
+						if( fca_pc_pixel_type_enabled( 'Pinterest' ) ) {
+							fca_pc_trigger_event( 'track', 'AddToCartPinterest', data.pinterest )
+						}
+						if( fca_pc_pixel_type_enabled( 'GA3' ) || fca_pc_pixel_type_enabled( 'GA4' ) || fca_pc_pixel_type_enabled( 'Adwords' ) ) {
+							fca_pc_trigger_event( 'track', 'AddToCartGA', data.ga )
+						}
+					}
+				})
+			})
+
+		})
+
+		//WOO FB INTEGRATION
+		if ( get_cookie( 'fca_pc_woo_add_to_cart' ) ) {
+			fca_pc_trigger_event( 'track', 'AddToCart', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_woo_add_to_cart' ).replace(/\+/g, '%20' ) ) ) )
+			set_cookie( 'fca_pc_woo_add_to_cart', '' )
+		}
+
+		if ( typeof fcaPcWooCheckoutCart !== 'undefined' ) {
+			fca_pc_trigger_event( 'track', 'InitiateCheckout', fcaPcWooCheckoutCart)
+
+			$( 'form.checkout' ).on( 'checkout_place_order', function( e ){
+				fca_pc_trigger_event( 'track', 'AddPaymentInfo', fcaPcWooCheckoutCart )
+				return true
+			})
+		}
+
+		if ( typeof fcaPcWooPurchase !== 'undefined' ) {
+			fca_pc_trigger_event( 'track', 'Purchase', fcaPcWooPurchase )
+		}
+
+		if ( typeof fcaPcWooProduct !== 'undefined' ) {
+			if( fcaPcOptions.woo_delay ) {
+				setTimeout( fca_pc_trigger_event, fcaPcOptions.woo_delay * 1000, 'track', 'ViewContent', fcaPcWooProduct  )
+			} else {
+				fca_pc_trigger_event( 'track', 'ViewContent', fcaPcWooProduct )
+			}
+
+			//WISHLIST
+			$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
+				fca_pc_trigger_event( 'track', 'AddToWishlist', fcaPcWooProduct )
+			})
+		}
+		
+		//WOO PINTEREST INTEGRATION
+		if ( get_cookie( 'fca_pc_woo_add_to_cart_pinterest' ) ) {
+			fca_pc_trigger_event( 'track', 'AddToCartPinterest', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_woo_add_to_cart_pinterest' ).replace(/\+/g, '%20' ) ) ) )
+			set_cookie( 'fca_pc_woo_add_to_cart_pinterest', '' )
+		}
+
+		if ( typeof fcaPcWooPurchasePinterest !== 'undefined' ) {
+			fca_pc_trigger_event( 'track', 'PurchasePinterest', fcaPcWooPurchasePinterest )
+		}
+
+		if ( typeof fcaPcWooProductPinterest !== 'undefined' ) {
+			if( fcaPcOptions.woo_delay ) {
+				setTimeout( fca_pc_trigger_event, fcaPcOptions.woo_delay * 1000, 'track', 'ViewContentPinterest', fcaPcWooProductPinterest  )
+			} else {
+				fca_pc_trigger_event( 'track', 'ViewContentPinterest', fcaPcWooProductPinterest )
+			}
+
+		}
+		
+		//WOO SNAPCHAT INTEGRATION
+		if ( get_cookie( 'fca_pc_woo_add_to_cart_snapchat' ) ) {
+			fca_pc_trigger_event( 'track', 'AddToCartSnapchat', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_woo_add_to_cart_snapchat' ).replace(/\+/g, '%20' ) ) ) )
+			set_cookie( 'fca_pc_woo_add_to_cart_snapchat', '' )
+		}
+
+		if ( typeof fcaPcWooCheckoutCartSnapchat !== 'undefined' ) {
+			fca_pc_trigger_event( 'track', 'InitiateCheckoutSnapchat', fcaPcWooCheckoutCartSnapchat )
+
+			$( 'form.checkout' ).on( 'checkout_place_order', function( e ){
+				fca_pc_trigger_event( 'track', 'AddPaymentInfoSnapchat', fcaPcWooCheckoutCartSnapchat )
+				return true
+			})
+		}
+
+		if ( typeof fcaPcWooPurchaseSnapchat !== 'undefined' ) {
+			fca_pc_trigger_event( 'track', 'PurchaseSnapchat', fcaPcWooPurchaseSnapchat )
+		}
+
+		if ( typeof fcaPcWooProductSnapchat !== 'undefined' ) {
+			if( fcaPcOptions.woo_delay ) {
+				setTimeout( fca_pc_trigger_event, fcaPcOptions.woo_delay * 1000, 'track', 'ViewContentSnapchat', fcaPcWooProductSnapchat  )
+			} else {
+				fca_pc_trigger_event( 'track', 'ViewContentSnapchat', fcaPcWooProductSnapchat )
+			}
+
+			//WISHLIST
+			$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
+				fca_pc_trigger_event( 'track', 'AddToWishlistSnapchat', fcaPcWooProductSnapchat )
+			})
+		}
+		
+		//WOO GOOGLE ANALYTICS INTEGRATION
+		if ( get_cookie( 'fca_pc_woo_add_to_cart_ga' ) ) {
+			fca_pc_trigger_event( 'track', 'AddToCartGA', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_woo_add_to_cart_ga' ).replace(/\+/g, '%20' ) ) ) )
+			set_cookie( 'fca_pc_woo_add_to_cart_ga', '' )
+		}
+
+		if ( typeof fcaPcWooCheckoutCartGA !== 'undefined' ) {
+			fca_pc_trigger_event( 'track', 'InitiateCheckoutGA', fcaPcWooCheckoutCartGA )
+
+			$( 'form.checkout' ).on( 'checkout_place_order', function( e ){
+				fca_pc_trigger_event( 'track', 'AddPaymentInfoGA', fcaPcWooCheckoutCartGA )
+				return true
+			})
+		}
+
+		if ( typeof fcaPcWooPurchaseGA !== 'undefined' ) {
+			fca_pc_trigger_event( 'track', 'PurchaseGA', fcaPcWooPurchaseGA )
+		}
+
+		if ( typeof fcaPcWooProductGA !== 'undefined' ) {
+			if( fcaPcOptions.woo_delay ) {
+				setTimeout( fca_pc_trigger_event, fcaPcOptions.woo_delay * 1000, 'track', 'ViewContentGA', fcaPcWooProductGA  )
+			} else {
+				fca_pc_trigger_event( 'track', 'ViewContentGA', fcaPcWooProductGA )
+			}
+
+			//WISHLIST
+			$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
+				fca_pc_trigger_event( 'track', 'AddToWishlistGA', fcaPcWooProductGA )
+			})
+		}
+	} 
+	
+	//EDD INTEGRATION
+	if( fcaPcOptions.edd_enabled ) {
+		
+		if( fcaPcOptions.debug ) {
+			console.log( 'adding edd events' )
+		}
+		
+		//ADD TO CART
+		$( '.edd-add-to-cart' ).on( 'click', function( e ){
+			if( fca_pc_pixel_type_enabled( 'Facebook' ) || fca_pc_pixel_type_enabled( 'Conversions API' ) ) {
+				
+				if ( typeof fcaPcEddProduct !== 'undefined' ) {
+					fca_pc_trigger_event( 'track', 'AddToCart', fcaPcEddProduct )
+					
+				} else {
+					var product = {			
+						value: $(this).data( 'price' ),
+						currency: fcaPcOptions.edd_currency,
+						content_name: "Easy Digital Download ID " + $(this).data( 'download-id' ),
+						content_ids: $(this).data( 'download-id' ),
+						content_type: $(this).data( 'variable-price' ) == 'no' ? 'product' : 'product_group',			
+					}
+					fca_pc_trigger_event( 'track', 'AddToCart', product )
+				}
+			}
+			
+			if( fca_pc_pixel_type_enabled( 'GA3' ) || fca_pc_pixel_type_enabled( 'GA4' ) || fca_pc_pixel_type_enabled( 'Adwords' ) ) {
+			
+				if ( typeof fcaPcEddProductGA !== 'undefined' ) {
+					fca_pc_trigger_event( 'track', 'AddToCartGA', fcaPcEddProductGA )
+				} else {
+					var product = {			
+						value: $(this).data( 'price' ),
+						currency: fcaPcOptions.edd_currency,
+						items: [{	
+							item_id: $(this).data( 'download-id' ),
+							item_name: "Easy Digital Download ID " + $(this).data( 'download-id' )
+						}]									
+					}
+					fca_pc_trigger_event( 'track', 'AddToCartGA', product )
+				}
+			}
+			
+			if( fca_pc_pixel_type_enabled( 'Pinterest' ) ) {
+			
+				if ( typeof fcaPcEddProductPinterest !== 'undefined' ) {
+					fca_pc_trigger_event( 'track', 'AddToCartPinterest', fcaPcEddProductPinterest )
+					
+				} else {
+					var product = {			
+						value: $(this).data( 'price' ),
+						currency: fcaPcOptions.edd_currency,
+						product_name: "Easy Digital Download ID " + $(this).data( 'download-id' ),
+						product_id: $(this).data( 'download-id' ),		
+					}
+					fca_pc_trigger_event( 'track', 'AddToCartPinterest', product )
+				}
+			}
+			
+			if( fca_pc_pixel_type_enabled( 'Snapchat' ) ) {
+			
+				if ( typeof fcaPcEddProductSnapchat !== 'undefined' ) {
+					fca_pc_trigger_event( 'track', 'AddToCartSnapchat', fcaPcEddProductSnapchat )
+			
+				} else {
+					var product = {			
+						price: $(this).data( 'price' ),
+						currency: fcaPcOptions.edd_currency,
+						description: "Easy Digital Download ID " + $(this).data( 'download-id' ),
+						item_ids: [ $(this).data( 'download-id' ) ],		
+					}
+					fca_pc_trigger_event( 'track', 'AddToCartSnapchat', product )
+				}
+			}
+		})
+		
+		//WISHLIST
+		$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
+			if( fca_pc_pixel_type_enabled( 'Facebook' ) || fca_pc_pixel_type_enabled( 'Conversions API' ) ) {
+				
+				if ( typeof fcaPcEddProduct !== 'undefined' ) {
+					fca_pc_trigger_event( 'track', 'AddToWishlist', fcaPcEddProduct )
+				} else {
+					var product = {			
+						value: $(this).data( 'price' ),
+						currency: fcaPcOptions.edd_currency,
+						content_name: "Easy Digital Download ID " + $(this).data( 'download-id' ),
+						content_ids: $(this).data( 'download-id' ),
+						content_type: $(this).data( 'variable-price' ) == 'no' ? 'product' : 'product_group',			
+					}
+					fca_pc_trigger_event( 'track', 'AddToWishlist', product )
+				}
+			}
+			
+			if( fca_pc_pixel_type_enabled( 'GA3' ) || fca_pc_pixel_type_enabled( 'GA4' ) || fca_pc_pixel_type_enabled( 'Adwords' ) ) {
+			
+				if ( typeof fcaPcEddProductGA !== 'undefined' ) {
+					fca_pc_trigger_event( 'track', 'AddToWishlistGA', fcaPcEddProductGA )
+				} else {
+					var product = {			
+						value: $(this).data( 'price' ),
+						currency: fcaPcOptions.edd_currency,
+						items: [{	
+							item_id: $(this).data( 'download-id' ),
+							item_name: "Easy Digital Download ID " + $(this).data( 'download-id' )
+						}]									
+					}
+					fca_pc_trigger_event( 'track', 'AddToWishlistGA', product )
+				}
+			}
+			
+			if( fca_pc_pixel_type_enabled( 'Snapchat' ) ) {
+			
+				if ( typeof fcaPcEddProductSnapchat !== 'undefined' ) {
+					fca_pc_trigger_event( 'track', 'AddToWishlistSnapchat', fcaPcEddProductSnapchat )
+			
+				} else {
+					var product = {			
+						price: $(this).data( 'price' ),
+						currency: fcaPcOptions.edd_currency,
+						description: "Easy Digital Download ID " + $(this).data( 'download-id' ),
+						item_ids: [ $(this).data( 'download-id' ) ],		
+					}
+					fca_pc_trigger_event( 'track', 'AddToWishlistSnapchat', product )
+				}
+			}
+		})
+		
+		//EDD FACEBOOK INTEGRATION
+		if ( typeof fcaPcEddProduct !== 'undefined' ) {
+			//VIEWCONTENT
+			if( fcaPcPost.edd_delay ) {
+				setTimeout( fca_pc_trigger_event, fcaPcPost.edd_delay * 1000, 'track', 'ViewContent', fcaPcEddProduct  )
+			} else {
+				fca_pc_trigger_event( 'track', 'ViewContent', fcaPcEddProduct )
+			}
+		}
+		
+		if ( typeof fcaPcEddCheckoutCart !== 'undefined' ) {
+			fca_pc_trigger_event( 'track', 'InitiateCheckout', fcaPcEddCheckoutCart )
+
+			//ADDPAYMENTINFO
+			$( '#edd_purchase_form' ).on( 'submit', function( e ){
+				fca_pc_trigger_event( 'track', 'AddPaymentInfo', fcaPcEddCheckoutCart )
+				return true
+			})
+		}
+		
+		//PURCHASE
+		if ( get_cookie( 'fca_pc_edd_purchase' ) ) {
+			fca_pc_trigger_event( 'track', 'Purchase', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_edd_purchase' ).replace(/\+/g, '%20' ) ) ) )
+			set_cookie( 'fca_pc_edd_purchase', '' )
+		}
+		
+		//EDD GOOGLE ANALYTICS INTEGRATION
+		if ( typeof fcaPcEddCheckoutCartGA !== 'undefined' ) {
+			fca_pc_trigger_event( 'track', 'InitiateCheckoutGA', fcaPcEddCheckoutCartGA )
+
+			//ADDPAYMENTINFO
+			$( '#edd_purchase_form' ).on( 'submit', function( e ){
+				fca_pc_trigger_event( 'track', 'AddPaymentInfoGA', fcaPcEddCheckoutCartGA )
+				return true
+			})
+		}
+
+		if ( typeof fcaPcEddProductGA !== 'undefined' ) {
+			//VIEWCONTENT
+			if( fcaPcOptions.edd_delay ) {
+				setTimeout( fca_pc_trigger_event, fcaPcOptions.edd_delay * 1000, 'track', 'ViewContent', fcaPcEddProductGA )
+			} else {
+				fca_pc_trigger_event( 'track', 'ViewContentGA', fcaPcEddProductGA )
+			}
+
+		}
+
+		//PURCHASE
+		if ( get_cookie( 'fca_pc_edd_purchase_ga' ) ) {
+			fca_pc_trigger_event( 'track', 'PurchaseGA', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_edd_purchase_ga' ).replace(/\+/g, '%20' ) ) ) )
+			set_cookie( 'fca_pc_edd_purchase_ga', '' )
+		}
+		
+		//EDD PINTEREST INTEGRATION
+		
+		if ( typeof fcaPcEddProductPinterest !== 'undefined' ) {
+			//VIEWCONTENT
+			if( fcaPcOptions.edd_delay ) {
+				setTimeout( fca_pc_trigger_event, fcaPcOptions.edd_delay * 1000, 'track', 'ViewContentPinterest', fcaPcEddProductPinterest )
+			} else {
+				fca_pc_trigger_event( 'track', 'ViewContentPinterest', fcaPcEddProductPinterest )
+			}
+
+		}
+
+		//PURCHASE 
+		if ( get_cookie( 'fca_pc_edd_purchase_pinterest' ) ) {
+			fca_pc_trigger_event( 'track', 'PurchasePinterest', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_edd_purchase_pinterest' ).replace(/\+/g, '%20' ) ) ) )
+			set_cookie( 'fca_pc_edd_purchase_pinterest', '' )
+		}
+		
+		//SNAPCHAT
+		if ( typeof fcaPcEddCheckoutCartSnapchat !== 'undefined' ) {
+			fca_pc_trigger_event( 'track', 'InitiateCheckoutSnapchat', fcaPcEddCheckoutCartSnapchat )
+
+			//ADDPAYMENTINFO
+			$( '#edd_purchase_form' ).on( 'submit', function( e ){
+				fca_pc_trigger_event( 'track', 'AddPaymentInfoSnapchat', fcaPcEddCheckoutCartSnapchat )
+				return true
+			})
+		}
+		
+		if ( typeof fcaPcEddProductSnapchat !== 'undefined' ) {
+			//VIEWCONTENT
+			if( fcaPcOptions.edd_delay ) {
+				setTimeout( fca_pc_trigger_event, fcaPcOptions.edd_delay * 1000, 'track', 'ViewContentSnapchat', fcaPcEddProductSnapchat )
+			} else {
+				fca_pc_trigger_event( 'track', 'ViewContentSnapchat', fcaPcEddProductSnapchat )
+			}
+		}
+
+		//PURCHASE 
+		if ( get_cookie( 'fca_pc_edd_purchase_snapchat' ) ) {
+			fca_pc_trigger_event( 'track', 'PurchaseSnapchat', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_edd_purchase_snapchat' ).replace(/\+/g, '%20' ) ) ) )
+			set_cookie( 'fca_pc_edd_purchase_snapchat', '' )
+		}
+	}
+	
+	//VIDEO EVENTS INTEGRATION
+
+	if ( typeof fcaPcVideos !== 'undefined' ) {
+
+		fcaPcVideos.forEach(function (video) {
+			video.on( 'pixel_event', function( name, action, params ) {
+				fca_pc_trigger_event( name, action, params )
+			} )
+		})
+		if( fcaPcOptions.debug ) {			
+			console.log( 'fcaPcVideos:'	)
+			console.log( fcaPcVideos )
+		}
+	}
+		
 	//LANDING PAGE CAT INTEGRATION
 	if ( typeof fcaPcLandingPageCatEnabled !== 'undefined' ) {
 
@@ -140,10 +552,10 @@ jQuery( document ).ready(function($) {
 		$( '.ptp-checkout-button, .ptp-button, .fca-ept-button' ).on( 'click', function( e ){
 
 			//THIS IS HANDLED BY THE 1-CLICK INTEGRATION, DONT FIRE THIS EVENT
-			if (  $(this).attr( 'href' ).indexOf( '?edd_action=add_to_cart&download_id' ) !== -1 && fcaPcPost.edd_enabled ) {
+			if (  $(this).attr( 'href' ).indexOf( '?edd_action=add_to_cart&download_id' ) !== -1 && fcaPcOptions.edd_enabled ) {
 				return
 			}
-			if (  $(this).attr( 'href' ).indexOf( 'add-to-cart=' ) !== -1 && fcaPcPost.woo_enabled ) {
+			if (  $(this).attr( 'href' ).indexOf( 'add-to-cart=' ) !== -1 && fcaPcOptions.woo_enabled ) {
 				return
 			}
 
@@ -212,270 +624,156 @@ jQuery( document ).ready(function($) {
 			return true
 		})
 	}
-
-	//EDD INTEGRATION
-	if ( typeof fcaPcEddCheckoutCart !== 'undefined' ) {
-		fca_pc_trigger_event( 'track', 'InitiateCheckout', fcaPcEddCheckoutCart)
-
-		//ADDPAYMENTINFO
-		$( '#edd_purchase_form' ).on( 'submit', function( e ){
-			fca_pc_trigger_event( 'track', 'AddPaymentInfo', fcaPcEddCheckoutCart )
-			return true
-		})
-	}
-
-	if ( typeof fcaPcEddProduct !== 'undefined' ) {
-		//VIEWCONTENT
-		if( fcaPcPost.edd_delay ) {
-			setTimeout( fca_pc_trigger_event, fcaPcPost.edd_delay * 1000, 'track', 'ViewContent', fcaPcEddProduct  )
-		} else {
-			fca_pc_trigger_event( 'track', 'ViewContent', fcaPcEddProduct )
-		}
-
-		//ADD TO CART
-		$( '.edd-add-to-cart' ).on( 'click', function( e ){
-			fca_pc_trigger_event( 'track', 'AddToCart', fcaPcEddProduct )
-		})
-		//WISHLIST ( TODO )
-		$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
-			fca_pc_trigger_event( 'track', 'AddToWishlist', fcaPcEddProduct )
-		})
-	}
-
-	//PURCHASE
-	if ( get_cookie( 'fca_pc_edd_purchase' ) ) {
-		fca_pc_trigger_event( 'track', 'Purchase', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_edd_purchase' ).replace(/\+/g, '%20' ) ) ) )
-		set_cookie( 'fca_pc_edd_purchase', '' )
-	}
 	
-	//EDD GOOGLE ANALYTICS INTEGRATION
-	if ( typeof fcaPcEddCheckoutCartGA !== 'undefined' ) {
-		fca_pc_trigger_event( 'track', 'InitiateCheckoutGA', fcaPcEddCheckoutCartGA )
-
-		//ADDPAYMENTINFO
-		$( '#edd_purchase_form' ).on( 'submit', function( e ){
-			fca_pc_trigger_event( 'track', 'AddPaymentInfoGA', fcaPcEddCheckoutCartGA )
-			return true
-		})
-	}
-
-	if ( typeof fcaPcEddProductGA !== 'undefined' ) {
-		//VIEWCONTENT
-		if( fcaPcPost.edd_delay ) {
-			setTimeout( fca_pc_trigger_event, fcaPcPost.edd_delay * 1000, 'track', 'ViewContent', fcaPcEddProductGA )
-		} else {
-			fca_pc_trigger_event( 'track', 'ViewContentGA', fcaPcEddProductGA )
-		}
-
-		//ADD TO CART
-		$( '.edd-add-to-cart' ).on( 'click', function( e ){
-			fca_pc_trigger_event( 'track', 'AddToCartGA', fcaPcEddProductGA )
-		})
-		//WISHLIST ( TODO )
-		$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
-			fca_pc_trigger_event( 'track', 'AddToWishlistGA', fcaPcEddProductGA )
-		})
-	}
-
-	//PURCHASE
-	if ( get_cookie( 'fca_pc_edd_purchase_ga' ) ) {
-		fca_pc_trigger_event( 'track', 'PurchaseGA', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_edd_purchase_ga' ).replace(/\+/g, '%20' ) ) ) )
-		set_cookie( 'fca_pc_edd_purchase_ga', '' )
-	}
 	
-	if ( typeof fcaPcEddProductPinterest !== 'undefined' ) {
-		//VIEWCONTENT
-		if( fcaPcPost.edd_delay ) {
-			setTimeout( fca_pc_trigger_event, fcaPcPost.edd_delay * 1000, 'track', 'ViewContentPinterest', fcaPcEddProductPinterest )
-		} else {
-			fca_pc_trigger_event( 'track', 'ViewContentPinterest', fcaPcEddProductPinterest )
+	function fca_pc_trigger_event( name, action, params ) {
+
+		var event_params = params ? add_auto_event_params( params ) : null
+		
+		if( typeof( fbq ) !== 'undefined' ){
+									
+			var eventID = fca_pc_generate_id()
+			var externalID = fca_pc_check_cookie()
+			var currentTime = new Date($.now()).toUTCString()
+			var GMT_time = new Date(currentTime).valueOf() / 1000
+					
+			if ( name === 'trackCustom' ) {				
+				fbq( name, action, event_params, { event_id: eventID, external_id: externalID }  )
+				
+				if( fca_pc_pixel_type_enabled( 'Conversions API' ) ){
+					
+					$.ajax({
+						url: fcaPcOptions.ajax_url,
+						type: "POST",
+						data: {
+							action: 'fca_pc_capi_event',
+							event_name: action,
+							event_time: GMT_time,
+							event_id: eventID,
+							external_id: externalID,
+							client_user_agent: navigator.userAgent,
+							event_source_url: window.location.origin + window.location.pathname,
+							custom_data: JSON.stringify( event_params ),
+							nonce: fcaPcOptions.nonce
+						}
+					})
+				}
+				
+			} else {
+				
+				var events_map = new Map([
+					[ "PageView", "PageView" ],
+					[ "ViewContent", "ViewContent" ],
+					[ "Search", "Search" ],	
+					[ "AddToCart", "AddToCart" ],				
+					[ "AddToWishlist", "AddToWishlist" ],			
+					[ "InitiateCheckout", "InitiateCheckout" ],	
+					[ "AddPaymentInfo", "AddPaymentInfo" ],
+					[ "Purchase", "Purchase" ],
+					[ "Lead", "Lead" ],
+					[ "CompleteRegistration", "CompleteRegistration" ],
+					
+				])
+				var fb_action = events_map.get( action )
+				
+				if ( fb_action ) {
+					fbq( name, fb_action, event_params, { event_id: eventID, external_id: externalID }  )	
+
+					if( fca_pc_pixel_type_enabled( 'Conversions API' ) ){
+						$.ajax({
+							url: fcaPcOptions.ajax_url,
+							type: "POST",
+							data: {
+								action: 'fca_pc_capi_event',
+								event_name: fb_action,
+								event_time: GMT_time,
+								event_id: eventID,
+								external_id: externalID,
+								client_user_agent: navigator.userAgent,
+								event_source_url: window.location.origin + window.location.pathname,
+								custom_data: JSON.stringify( event_params ),
+								nonce: fcaPcOptions.nonce
+							}
+						})
+					}					
+				}				
+			}
 		}
-
-		//ADD TO CART
-		$( '.edd-add-to-cart' ).on( 'click', function( e ){
-			fca_pc_trigger_event( 'track', 'AddToCartPinterest', fcaPcEddProductPinterest )
-		})
-		//WISHLIST ( TODO )
-		$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
-			fca_pc_trigger_event( 'track', 'AddToWishlistPinterest', fcaPcEddProductPinterest )
-		})
-	}
-
-	//PURCHASE 
-	if ( get_cookie( 'fca_pc_edd_purchase_pinterest' ) ) {
-		fca_pc_trigger_event( 'track', 'PurchaseGA', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_edd_purchase_ga' ).replace(/\+/g, '%20' ) ) ) )
-		set_cookie( 'fca_pc_edd_purchase_ga', '' )
-	}
-
-	//REMOVE ADVANCED MATCHING COOKIE IF APPLICABLE
-	if ( get_cookie( 'fca_pc_advanced_matching' ) ) {
-		set_cookie( 'fca_pc_advanced_matching', '' )
-	}
-
-	// in case ajax add to cart is active
-	$( 'body' ).on( 'added_to_cart', function(){
-
-		var ajax_data = {
-			'action': 'fca_pc_woo_ajax_add_to_cart',
-			'product_id': fcaPcPost.id
+		
+		if( typeof( snaptr ) !== 'undefined' ){
+						
+			var eventID = fca_pc_generate_id()
+			var externalID = fca_pc_check_cookie()
+			
+			if ( name === 'trackCustom' ) {
+				//NOT SUPPOSED FOR THIS PIXEL
+			} else {
+				
+				var events_map = new Map([
+					[ "PageViewSnapchat", "PAGE_VIEW" ],
+					[ "ViewContentSnapchat", "VIEW_CONTENT" ],
+					[ "PurchaseSnapchat", "PURCHASE" ],
+					[ "AddToCartSnapchat", "ADD_CART" ],				
+					[ "InitiateCheckoutSnapchat", "START_CHECKOUT" ],	
+					[ "AddToWishlistSnapchat", "ADD_TO_WISHLIST" ],			
+					[ "AddPaymentInfoSnapchat", "ADD_BILLING" ],
+					
+				])
+				var snapchat_action = events_map.get( action )
+				
+				if ( snapchat_action ) {
+					
+					snaptr( name, snapchat_action, event_params, { event_id: eventID, external_id: externalID }  )				
+				}				
+			}
 		}
+		
+		if( typeof( pintrk ) !== 'undefined' ){
+		
+			var events_map = new Map([
+				[ "AddToCartPinterest", "AddToCart" ],
+				[ "PurchasePinterest", "Checkout" ],	
+				[ "LeadPinterest", "Lead" ],				
+				[ "ViewContentPinterest", "PageVisit" ],			
+				[ "CompleteRegistrationPinterest", "Signup" ],
+				
+				//[ "Lead", "generate_lead" ], TO DO?
+				//[ "Search", "search" ], TO DO?
+			])
+			
+			var pinterest_action = events_map.get( action )
 
-		$.ajax({
-			url: fcaPcCAPI.ajax_url,
-			type: "POST",
-			data: ajax_data,
-			success: ( function( data ){
-				fca_pc_trigger_event( 'track', 'AddToCart', data )
-			})
-		})
-
-	})
-
-
-	//WOO INTEGRATION
-	if ( get_cookie( 'fca_pc_woo_add_to_cart' ) ) {
-		fca_pc_trigger_event( 'track', 'AddToCart', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_woo_add_to_cart' ).replace(/\+/g, '%20' ) ) ) )
-		set_cookie( 'fca_pc_woo_add_to_cart', '' )
-	}
-
-	if ( typeof fcaPcWooCheckoutCart !== 'undefined' ) {
-		fca_pc_trigger_event( 'track', 'InitiateCheckout', fcaPcWooCheckoutCart)
-
-		$( 'form.checkout' ).on( 'checkout_place_order', function( e ){
-			fca_pc_trigger_event( 'track', 'AddPaymentInfo', fcaPcWooCheckoutCart )
-			return true
-		})
-	}
-
-	if ( typeof fcaPcWooPurchase !== 'undefined' ) {
-		fca_pc_trigger_event( 'track', 'Purchase', fcaPcWooPurchase)
-	}
-
-	if ( typeof fcaPcWooProduct !== 'undefined' ) {
-		if( fcaPcPost.woo_delay ) {
-			setTimeout( fca_pc_trigger_event, fcaPcPost.woo_delay * 1000, 'track', 'ViewContent', fcaPcWooProduct  )
-		} else {
-			fca_pc_trigger_event( 'track', 'ViewContent', fcaPcWooProduct )
+			if ( pinterest_action ) {
+				pintrk( 'track', pinterest_action, event_params  )				
+			}
 		}
-
-		//WISHLIST
-		$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
-			fca_pc_trigger_event( 'track', 'AddToWishlist', fcaPcWooProduct )
-		})
-	}
-	
-	//WOO PINTEREST INTEGRATION
-	if ( get_cookie( 'fca_pc_woo_add_to_cart_pinterest' ) ) {
-		fca_pc_trigger_event( 'track', 'AddToCartPinterest', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_woo_add_to_cart_pinterest' ).replace(/\+/g, '%20' ) ) ) )
-		set_cookie( 'fca_pc_woo_add_to_cart_pinterest', '' )
-	}
-
-	if ( typeof fcaPcWooCheckoutCartPinterest !== 'undefined' ) {
-		fca_pc_trigger_event( 'track', 'InitiateCheckoutPinterest', fcaPcWooCheckoutCartPinterest)
-
-		$( 'form.checkout' ).on( 'checkout_place_order', function( e ){
-			fca_pc_trigger_event( 'track', 'AddPaymentInfoPinterest', fcaPcWooCheckoutCartPinterest )
-			return true
-		})
-	}
-
-	if ( typeof fcaPcWooPurchasePinterest !== 'undefined' ) {
-		fca_pc_trigger_event( 'track', 'PurchasePinterest', fcaPcWooPurchasePinterest )
-	}
-
-	if ( typeof fcaPcWooProductPinterest !== 'undefined' ) {
-		if( fcaPcPost.woo_delay ) {
-			setTimeout( fca_pc_trigger_event, fcaPcPost.woo_delay * 1000, 'track', 'ViewContentPinterest', fcaPcWooProductPinterest  )
-		} else {
-			fca_pc_trigger_event( 'track', 'ViewContentPinterest', fcaPcWooProductPinterest )
+		
+		if( typeof( gtag ) !== 'undefined' ) {
+		
+			if( name === 'track' ) { //STANDARD/AUTOMATIC EVENTS
+				var events_map = new Map([
+					[ "AddToCartGA", "add_to_cart" ],
+					[ "AddPaymentInfoGA", "add_payment_info" ],
+					[ "AddToWishlistGA", "add_to_wishlist" ],
+					[ "PurchaseGA", "purchase" ],
+					[ "InitiateCheckoutGA", "begin_checkout" ],
+					[ "ViewContentGA", "view_item" ],
+					//[ "Lead", "generate_lead" ], TO DO?
+					//[ "Search", "search" ], TO DO?
+					//[ "CompleteRegistration", "sign_up" ], TO DO?
+				])
+				
+				var gtag_action = events_map.get( action )
+				
+				if ( gtag_action ) {
+					gtag( 'event', gtag_action, event_params  )				
+				}
+			} 
+			if ( name === 'trackCustom' ) {
+				gtag( 'event', action, event_params  )
+			}
 		}
-
-		//WISHLIST
-		$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
-			fca_pc_trigger_event( 'track', 'AddToWishlistPinterest', fcaPcWooProductPinterest )
-		})
-	}
-	
-	//WOO SNAPCHAT INTEGRATION
-	if ( get_cookie( 'fca_pc_woo_add_to_cart_snapchat' ) ) {
-		fca_pc_trigger_event( 'track', 'AddToCartSnapchat', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_woo_add_to_cart_snapchat' ).replace(/\+/g, '%20' ) ) ) )
-		set_cookie( 'fca_pc_woo_add_to_cart_snapchat', '' )
-	}
-
-	if ( typeof fcaPcWooCheckoutCartSnapchat !== 'undefined' ) {
-		fca_pc_trigger_event( 'track', 'InitiateCheckoutSnapchat', fcaPcWooCheckoutCartSnapchat )
-
-		$( 'form.checkout' ).on( 'checkout_place_order', function( e ){
-			fca_pc_trigger_event( 'track', 'AddPaymentInfoSnapchat', fcaPcWooCheckoutCartSnapchat )
-			return true
-		})
-	}
-
-	if ( typeof fcaPcWooPurchaseSnapchat !== 'undefined' ) {
-		fca_pc_trigger_event( 'track', 'PurchaseSnapchat', fcaPcWooPurchaseSnapchat )
-	}
-
-	if ( typeof fcaPcWooProductSnapchat !== 'undefined' ) {
-		if( fcaPcPost.woo_delay ) {
-			setTimeout( fca_pc_trigger_event, fcaPcPost.woo_delay * 1000, 'track', 'ViewContentSnapchat', fcaPcWooProductSnapchat  )
-		} else {
-			fca_pc_trigger_event( 'track', 'ViewContentSnapchat', fcaPcWooProductSnapchat )
-		}
-
-		//WISHLIST
-		$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
-			fca_pc_trigger_event( 'track', 'AddToWishlistSnapchat', fcaPcWooProductSnapchat )
-		})
-	}
-	
-	//WOO GOOGLE ANALYTICS INTEGRATION
-	if ( get_cookie( 'fca_pc_woo_add_to_cart_ga' ) ) {
-		fca_pc_trigger_event( 'track', 'AddToCartGA', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_woo_add_to_cart_ga' ).replace(/\+/g, '%20' ) ) ) )
-		set_cookie( 'fca_pc_woo_add_to_cart_ga', '' )
-	}
-
-	if ( typeof fcaPcWooCheckoutCartGA !== 'undefined' ) {
-		fca_pc_trigger_event( 'track', 'InitiateCheckoutGA', fcaPcWooCheckoutCartGA )
-
-		$( 'form.checkout' ).on( 'checkout_place_order', function( e ){
-			fca_pc_trigger_event( 'track', 'AddPaymentInfoGA', fcaPcWooCheckoutCartGA )
-			return true
-		})
-	}
-
-	if ( typeof fcaPcWooPurchaseGA !== 'undefined' ) {
-		fca_pc_trigger_event( 'track', 'PurchaseGA', fcaPcWooPurchaseGA )
-	}
-
-	if ( typeof fcaPcWooProductGA !== 'undefined' ) {
-		if( fcaPcPost.woo_delay ) {
-			setTimeout( fca_pc_trigger_event, fcaPcPost.woo_delay * 1000, 'track', 'ViewContentGA', fcaPcWooProductGA  )
-		} else {
-			fca_pc_trigger_event( 'track', 'ViewContentGA', fcaPcWooProductGA )
-		}
-
-		//WISHLIST
-		$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
-			fca_pc_trigger_event( 'track', 'AddToWishlistGA', fcaPcWooProductGA )
-		})
-	}
-
-	//VIDEO EVENTS INTEGRATION
-
-	if ( typeof fcaPcVideos !== 'undefined' ) {
-
-		fcaPcVideos.forEach(function (video) {
-			video.on( 'pixel_event', function( name, action, params ) {
-				fca_pc_trigger_event( name, action, params )
-			} )
-		})
-	}
-
-	if ( fcaPcCAPI.debug ) {
-		console.log ( 'pixel cat events:' )
-		console.log ( fcaPcEvents )
-		console.log ( 'pixel cat post:' )
-		console.log ( fcaPcPost )
+		
 	}
 
 	function fca_pc_generate_id() {
@@ -510,7 +808,7 @@ jQuery( document ).ready(function($) {
 
 	function fca_pc_check_cookie() {
 		var user = fca_pc_get_cookie("pixelcat_id");
-		if (user == "") {
+		if ( user == "" ) {
 			user = fca_pc_generate_id();
 			if (user != "" && user != null) {
 				fca_pc_set_cookie("pixelcat_id", user, 365);
@@ -518,167 +816,11 @@ jQuery( document ).ready(function($) {
 		}
 		return user
 	}
-
-	function fca_pc_fb_conversions_api( action, params, eventID ){
-
-		var currentTime = new Date($.now()).toUTCString()
-		var GMT_time = new Date(currentTime).valueOf() / 1000
-		var url = window.location.origin + window.location.pathname
-
-		var ajax_data = {
-			'action': 'fca_pc_capi_event',
-			'event_name': action,
-			'event_time': GMT_time,
-			'event_id': eventID,
-			'external_id': fca_pc_check_cookie(),
-			'client_user_agent': navigator.userAgent,
-			'event_source_url': url,
-			'custom_data': params,
-			'nonce': fcaPcCAPI.nonce
-		}
-
-		$.ajax({
-			url: fcaPcCAPI.ajax_url,
-			type: "POST",
-			data: ajax_data
-		})
-
+	
+	function fca_pc_pixel_type_enabled( pixel_type ){
+		return ( fcaPcOptions.pixel_types.indexOf( pixel_type ) !== -1 )		
 	}
 
-	function fca_pc_capi_enabled(){
-
-		var active_pixels = fcaPcCAPI.pixels
-		for( i=0; i<active_pixels.length; i++ ){
-			var pixel = active_pixels[i]
-			if( pixel.type === 'Conversions API' && !pixel.paused ){
-				return true
-			}
-		}
-		return false
-	}
-
-	function fca_pc_trigger_event( name, action, params ) {
-
-		var event_params = params ? add_auto_event_params( params ) : null
-		
-		if( typeof( fbq ) !== 'undefined' ){
-			var eventID = fca_pc_generate_id()
-			var externalID = fca_pc_check_cookie()
-			
-			if( fca_pc_capi_enabled() ){
-				fca_pc_fb_conversions_api( action, event_params, eventID )
-			}
-			
-			if ( name === 'trackCustom' ) {
-				console.log( 'fbTrackCustom:' + action )
-				
-				fbq( name, action, event_params, { event_id: eventID, external_id: externalID }  )
-				
-			} else {
-				
-				var events_map = new Map([
-					[ "ViewContent", "ViewContent" ],
-					[ "Search", "Search" ],	
-					[ "AddToCart", "AddToCart" ],				
-					[ "AddToWishlist", "AddToWishlist" ],			
-					[ "InitiateCheckout", "InitiateCheckout" ],	
-					[ "AddPaymentInfo", "AddPaymentInfo" ],
-					[ "Purchase", "Purchase" ],
-					[ "Lead", "Lead" ],
-					[ "CompleteRegistration", "CompleteRegistration" ],
-					
-				])
-				var fb_action = events_map.get( action )
-				
-				if ( fb_action ) {
-					console.log( 'fb:' + fb_action )
-					console.log( event_params )
-					fbq( name, action, event_params, { event_id: eventID, external_id: externalID }  )				
-				}				
-			}
-		}
-		
-		if( typeof( snaptr ) !== 'undefined' ){
-			var eventID = fca_pc_generate_id()
-			var externalID = fca_pc_check_cookie()
-			
-			if( fca_pc_capi_enabled() ){
-				fca_pc_fb_conversions_api( action, event_params, eventID )
-			}
-			
-			if ( name === 'trackCustom' ) {
-				//console.log( 'fbTrackCustom:' + action )
-				
-			} else {
-				
-				var events_map = new Map([
-					[ "PageViewSnapchat", "PAGE_VIEW" ],
-					[ "ViewContentSnapchat", "VIEW_CONTENT" ],
-					[ "PurchaseSnapchat", "PURCHASE" ],
-					[ "AddToCartSnapchat", "ADD_CART" ],				
-						
-					//[ "AddToWishlistSnapchat", "AddToWishlist" ],			
-					//[ "InitiateCheckoutSnapchat", "InitiateCheckout" ],	
-					//[ "AddPaymentInfoSnapchat", "AddPaymentInfo" ],
-					
-				])
-				var snapchat_action = events_map.get( action )
-				
-				if ( snapchat_action ) {
-					console.log( 'snap:' + snapchat_action )
-					console.log( event_params )
-					snaptr( name, snapchat_action, event_params, { event_id: eventID, external_id: externalID }  )				
-				}				
-			}
-		}
-		
-		if( typeof( pintrk ) !== 'undefined' ){
-				var events_map = new Map([
-					[ "AddToCartPinterest", "AddToCart" ],
-					[ "PurchasePinterest", "Checkout" ],	
-					[ "LeadPinterest", "Lead" ],				
-					[ "ViewContentPinterest", "PageVisit" ],			
-					[ "CompleteRegistrationPinterest", "Signup" ],
-					
-					//[ "Lead", "generate_lead" ], TO DO?
-					//[ "Search", "search" ], TO DO?
-				])
-				var pinterest_action = events_map.get( action )
-
-				if ( pinterest_action ) {
-					console.log( 'pinterest:' + pinterest_action )
-					console.log( event_params )
-					pintrk( 'track', pinterest_action, event_params  )				
-				}
-		}
-		
-		if( typeof( gtag ) !== 'undefined' ) {
-			if( name === 'track' ) { //STANDARD/AUTOMATIC EVENTS
-				var events_map = new Map([
-					[ "AddToCartGA", "add_to_cart" ],
-					[ "AddPaymentInfoGA", "add_payment_info" ],
-					[ "AddToWishlistGA", "add_to_wishlist" ],
-					[ "PurchaseGA", "purchase" ],
-					[ "InitiateCheckoutGA", "begin_checkout" ],
-					//[ "Lead", "generate_lead" ], TO DO?
-					[ "ViewContentGA", "view_item" ],
-					//[ "Search", "search" ], TO DO?
-					//[ "CompleteRegistration", "sign_up" ], TO DO?
-				])
-				
-				var gtag_action = events_map.get( action )
-				
-				if ( gtag_action ) {
-					console.log( gtag_action )
-					gtag( 'event', gtag_action, event_params  )				
-				}
-			} 
-			if ( name === 'trackCustom' ) {
-				gtag( 'event', action, event_params  )
-			}
-		}
-		
-	}
 
 	function set_cookie( name, value ) {
 		document.cookie = name + "=" + value + ";path=/"
@@ -720,11 +862,11 @@ jQuery( document ).ready(function($) {
 			}
 		}
 
-		if ( fcaPcPost.utm_support ) {
+		if ( fcaPcOptions.utm_support ) {
 			parameters = add_utm_params( parameters )
 		}
 
-		if ( fcaPcPost.user_parameters ) {
+		if ( fcaPcOptions.user_parameters ) {
 			parameters = add_user_params( parameters )
 		}
 

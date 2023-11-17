@@ -373,33 +373,45 @@ if ( ! class_exists( 'PostmanViewController' ) ) {
 						<h3 class="ps-ib ps-vm"><?php esc_html_e( 'Extensions', 'post-smtp' ); ?></h3>
 					</div> 
 					<div>
-						<a href="<?php echo esc_url( 'https://postmansmtp.com/extensions/office-365-for-post-smtp-extension/' ); ?>" target="_blank">
+						<a href="<?php echo esc_url( 'https://postmansmtp.com/extensions/office-365-extension-for-post-smtp/?utm_source=plugin&utm_medium=dashboard' ); ?>" target="_blank">
 							<img src="<?php echo esc_url( POST_SMTP_ASSETS . 'images/icons/finger.png' ) ?>" width="15" />
-							<?php echo esc_html( 'Office 365' ); ?>
+							<?php echo esc_html( 'Microsoft 365/ Office 365' ); ?>
 						</a>
 					</div>
 					<div>
-						<a href="<?php echo esc_url( 'https://postmansmtp.com/extensions/post-smtp-extension-for-amazon-ses/' ); ?>" target="_blank">
+						<a href="<?php echo esc_url( 'https://postmansmtp.com/extensions/post-smtp-extension-for-amazon-ses/?utm_source=plugin&utm_medium=dashboard' ); ?>" target="_blank">
 							<img src="<?php echo esc_url( POST_SMTP_ASSETS . 'images/icons/finger.png' ) ?>" width="15" />	
 							<?php echo esc_html( 'Amazon SES' ); ?>
 						</a>
 					</div>
 					<div>
-						<a href="<?php echo esc_url( 'https://postmansmtp.com/extensions/the-better-email/' ); ?>" target="_blank">
+						<a href="<?php echo esc_url( 'https://postmansmtp.com/extensions/email-log-attachment/?utm_source=plugin&utm_medium=dashboard' ); ?>" target="_blank">
 							<img src="<?php echo esc_url( POST_SMTP_ASSETS . 'images/icons/finger.png' ) ?>" width="15" />	
-							<?php echo esc_html( 'Better Email Logger' ); ?>
+							<?php echo esc_html( 'Email Log attachment support' ); ?>
 						</a>
 					</div>
 					<div>
-						<a href="<?php echo esc_url( 'https://postmansmtp.com/extensions/twilio-extension-pro/' ); ?>" target="_blank">
+						<a href="<?php echo esc_url( 'https://postmansmtp.com/extensions/reporting-and-tracking-extension/?utm_source=plugin&utm_medium=dashboard' ); ?>" target="_blank">
 							<img src="<?php echo esc_url( POST_SMTP_ASSETS . 'images/icons/finger.png' ) ?>" width="15" />	
-							<?php echo esc_html( 'Twilio Notifications' ); ?>
+							<?php echo esc_html( 'Report & Tracking' ); ?>
 						</a>
 					</div>
 					<div>
-						<a href="<?php echo esc_url( 'https://postmansmtp.com/extensions/post-smtp-mail-control/' ); ?>" target="_blank">
+						<a href="<?php echo esc_url( 'https://postmansmtp.com/extensions/advanced-email-delivery/?utm_source=plugin&utm_medium=dashboard' ); ?>" target="_blank">
 							<img src="<?php echo esc_url( POST_SMTP_ASSETS . 'images/icons/finger.png' ) ?>" width="15" />	
-							<?php echo esc_html( 'Mail Control' ); ?>
+							<?php echo esc_html( 'Advanced Email Delivery and Logs' ); ?>
+						</a>
+					</div>
+					<div>
+						<a href="<?php echo esc_url( 'https://postmansmtp.com/extensions/twilio-extension-pro/?utm_source=plugin&utm_medium=dashboard' ); ?>" target="_blank">
+							<img src="<?php echo esc_url( POST_SMTP_ASSETS . 'images/icons/finger.png' ) ?>" width="15" />	
+							<?php echo esc_html( 'Twilio' ); ?>
+						</a>
+					</div>
+					<div>
+						<a href="<?php echo esc_url( 'https://postmansmtp.com/extensions/zoho-mail-pro-extension/?utm_source=plugin&utm_medium=dashboard' ); ?>" target="_blank">
+							<img src="<?php echo esc_url( POST_SMTP_ASSETS . 'images/icons/finger.png' ) ?>" width="15" />	
+							<?php echo esc_html( 'Zoho Mail' ); ?>
 						</a>
 					</div>
 				</div>
@@ -453,6 +465,14 @@ if ( ! class_exists( 'PostmanViewController' ) ) {
 				</div>
 				<div class="clear"></div>
 			</div>
+			<?php 
+				/**
+				 * Fires after the Postman SMTP dashboard configuration.
+				 * 
+				 * @since 2.5.9.3
+				 */
+				do_action( 'post_smtp_dashboard_after_config' ); 
+			?>
 			<div class="ps-home-middle">
 				<?php
 
@@ -688,6 +708,11 @@ if ( ! class_exists( 'PostmanViewController' ) ) {
 				'<p><span>%s</span></p><p><span>%s</span></p>',
 				esc_html__( 'This will purge all of Postman\'s settings, including account credentials and the email log.', 'post-smtp' ), 
 				esc_html__( 'Are you sure?', 'post-smtp' ) 
+			);
+
+			printf(
+				'<input type="checkbox" name="ps_preserve_email_logs" value="1" checked /> %s',
+				esc_html__( 'Preserve my email logs', 'post-smtp' )
 			);
 
 			submit_button( $resetTitle, 'delete button button-secondary', 'submit', true );

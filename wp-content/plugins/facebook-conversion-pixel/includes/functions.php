@@ -60,6 +60,51 @@ function fca_pc_get_active_pixels( $options ) {
 	return $active_pixels;
 }
 
+function fca_pc_get_active_pixel_types( $options = array() ) {
+	
+	$parsed_pixels = fca_pc_parse_pixels( $options );
+	$active_pixel_types = array();
+	
+	if ( empty( $parsed_pixels ) ) {
+		return $active_pixel_types;
+	}
+		
+	$post_id = get_the_ID();
+	$categories = wp_get_post_categories( $post_id );
+	$tags = wp_get_post_tags( $post_id );
+
+	
+	forEach ( $parsed_pixels as $pixel ) {
+		$type = empty( $pixel['type'] ) ? '' : $pixel['type'];
+		$paused = empty( $pixel['paused'] ) ? false : true;
+		$excludes = empty( $pixel['excludes'] ) ? array() : $pixel['excludes'];
+		
+		if ( $paused ) {
+			//skip this one
+			continue;
+		}
+
+		if ( !empty( $excludes ) ) {
+			$post_id_match = in_array( $post_id, $excludes );
+			//CHECK CATEGORIES & TAGS
+			$category_match = count( array_intersect( array_map( 'fca_pc_cat_id_fiter', $categories ), $excludes ) ) > 0;
+			$tag_match = count( array_intersect( array_map( 'fca_pc_tag_id_fiter', $tags ), $excludes ) ) > 0;
+			$front_page_match = is_front_page() && in_array( 'front', $excludes );
+			$blog_page_match = is_home() && in_array( 'blog', $excludes );
+			if ( in_array( 'all', $excludes ) OR $post_id_match OR $category_match OR $front_page_match OR $blog_page_match OR $tag_match ) {
+				continue;
+			}
+		}
+		
+		$active_pixel_types[] = $type;
+		
+
+	}
+	
+
+	return array_values( array_unique( $active_pixel_types ) );
+}
+
 function fca_pc_maybe_add_pixel() {
 
 	$options = get_option( 'fca_pc', array() );
@@ -74,15 +119,10 @@ function fca_pc_maybe_add_pixel() {
 
 		wp_enqueue_script( 'fca_pc_video_js', FCA_PC_PLUGINS_URL . '/video.js', array(), false, true );
 
-		wp_localize_script( 'fca_pc_client_js', 'fcaPcEvents', fca_pc_get_active_events() );
-		wp_localize_script( 'fca_pc_client_js', 'fcaPcPost', fca_pc_post_parameters() );
-		wp_localize_script( 'fca_pc_client_js', 'fcaPcCAPI', array( 
-			'pixels' => fca_pc_get_active_pixels( $options ),
-			'ajax_url' => admin_url( 'admin-ajax.php' ),
-			'nonce' => wp_create_nonce( 'fca_pc_capi_nonce' ),
-			'debug' => FCA_PC_DEBUG,
-		));
-
+		wp_localize_script( 'fca_pc_client_js', 'fcaPcEvents', fca_pc_get_active_events( $options ) );
+		wp_localize_script( 'fca_pc_client_js', 'fcaPcPost', fca_pc_post_parameters( $options ) );
+		wp_localize_script( 'fca_pc_client_js', 'fcaPcOptions', fca_pc_localize_pixel_options( $options ) );
+		
 		//ONLY USE DEFAULT SEARCH IF WE DIDNT USE WOO OR EDD SPECIFIC
 		if ( is_search() && $options['search_integration'] == 'on' ) {
 			wp_localize_script( 'fca_pc_client_js', 'fcaPcSearchQuery', array( 'search_string' => get_search_query() ) );
@@ -111,6 +151,7 @@ function fca_pc_add_pixels( $options ) {
 	$facebook_pixels = array();
 	$ga3_pixels = array();
 	$ga4_pixels = array();
+	$adwords_pixels = array();
 	$pinterest_pixels = array();
 	$snapchat_pixels = array();
 	
@@ -124,6 +165,10 @@ function fca_pc_add_pixels( $options ) {
 				
 			case 'GA4':
 				$ga4_pixels[] = $pixel;
+				break;
+				
+			case 'Adwords':
+				$adwords_pixels[] = $pixel;
 				break;
 				
 			case 'Custom Header Script':
@@ -144,13 +189,9 @@ function fca_pc_add_pixels( $options ) {
 		
 	};
 	
-	if ( !empty( $ga4_pixels ) OR !empty( $ga3_pixels ) ) {
-		fca_pc_add_google_pixels( array_merge( $ga3_pixels, $ga4_pixels ), $options );
-		wp_localize_script( 'fca_pc_client_js', 'fcaPcGA', array(			
-			'debug' => FCA_PC_DEBUG,
-		));
-	}
-	
+	if ( !empty( $ga4_pixels ) OR !empty( $ga3_pixels ) OR !empty( $adwords_pixels ) ) {
+		fca_pc_add_google_pixels( array_merge( $ga3_pixels, $ga4_pixels, $adwords_pixels ), $options );
+	}	
 	if ( !empty( $pinterest_pixels ) ) {		
 		fca_pc_add_pinterest_pixels( $pinterest_pixels, $options );
 	}
@@ -232,18 +273,13 @@ function fca_pc_add_google_pixels( $google_pixels ) {
 
 function fca_pc_add_pinterest_pixels( $pinterest_pixels, $options ) {
 	
-	$advanced_matching = empty( $options['advanced_matching'] ) ? false : true;
 	$code = ''; //INIT CODE FOR PIXEL
 	
 	forEach ( $pinterest_pixels as $pixel ) {		
 		$pixel_id = empty( $pixel['pixel'] ) ? '' : $pixel['pixel'];
 		
-		if( $pixel_id ){
-			if ( $advanced_matching ) {
-				$code .= "pintrk( 'load', '$pixel_id', " . fca_pc_advanced_matching() . " );";
-			} else {
-				$code .= "pintrk( 'load', '$pixel_id' );";
-			}
+		if( $pixel_id ){			
+			$code .= "pintrk( 'load', '$pixel_id' );";			
 		}
 	}
 	ob_start(); ?>
@@ -298,34 +334,54 @@ snaptr( 'track', 'PAGE_VIEW' );
 	
 }
 
-function fca_pc_post_parameters() {
+function fca_pc_post_parameters( $options ) {
 	global $post;
 
 	$post_id = empty ( $post->ID ) ? 0 : $post->ID;
-	$options = get_option( 'fca_pc', array() );
-
+	$edd_active = fca_pc_is_edd_active();
+	$edd_currency = $edd_active ? edd_get_option( 'currency', 'USD' ) : 'USD';
+	
 	return array(
 		'title' => empty ( $post->post_title ) ? '' : $post->post_title,
 		'type' => empty ( $post->post_type ) ? '' : $post->post_type,
 		'id' => $post_id,
 		'categories' => fca_pc_get_category_names( $post_id ),
+	);
+}
+
+function fca_pc_localize_pixel_options( $options ) {
+	global $post;
+
+	$edd_active = fca_pc_is_edd_active();
+	$edd_currency = $edd_active ? edd_get_option( 'currency', 'USD' ) : 'USD';
+	
+	return array(
+		'pixel_types' => fca_pc_get_active_pixel_types( $options ),
+		'ajax_url' => admin_url( 'admin-ajax.php' ),
+		'debug' => FCA_PC_DEBUG,
+		'edd_currency' => $edd_currency,		
+		'nonce' => wp_create_nonce( 'fca_pc_capi_nonce' ),
 		'utm_support' => empty( $options['utm_support'] ) ? false : true,
 		'user_parameters' => empty( $options['user_parameters'] ) ? false : true,
+		'edd_enabled' => fca_pc_edd_auto_events_enabled( $options ),
 		'edd_delay' => empty( $options['edd_delay'] ) ? 0 : intVal($options['edd_delay']),
+		'woo_enabled' => fca_pc_woo_auto_events_enabled( $options ),
 		'woo_delay' => empty( $options['woo_delay'] ) ? 0 : intVal($options['woo_delay']),
-		'edd_enabled' => empty( $options['edd_integration'] ) ? false : true,
-		'woo_enabled' => empty( $options['woo_integration'] ) ? false : true,
 		'video_enabled' => empty( $options['video_events'] ) ? false : true,
 	);
 }
 
-function fca_pc_get_active_events( $id = '' ) {
+function fca_pc_edd_auto_events_enabled( $options ) {
+	return ( !empty( $options['edd_integration'] )OR !empty( $options['edd_integration_ga'] ) OR !empty( $options['edd_integration_pinterest'] ) OR !empty( $options['edd_integration_snapchat'] ) );
+}
 
-	if ( !$id ) {
-		$id = get_the_id();
-	}
+function fca_pc_woo_auto_events_enabled( $options ) {
+	return ( !empty( $options['woo_integration'] )OR !empty( $options['woo_integration_ga'] ) OR !empty( $options['woo_integration_pinterest'] ) OR !empty( $options['woo_integration_snapchat'] ) );
+}
 
-	$options = get_option( 'fca_pc', array() );
+function fca_pc_get_active_events( $options ) {
+
+	$id = get_the_id();
 	$events = empty( $options['events'] ) ? array() : stripslashes_deep( $options['events'] );
 
 	$categories = wp_get_post_categories( $id );
@@ -363,7 +419,7 @@ function fca_pc_get_active_events( $id = '' ) {
 
 }
 
-function fca_pc_advanced_matching() {
+function fca_pc_advanced_matching( $hashed = false ) {
 
 	if ( !empty( $_COOKIE['fca_pc_advanced_matching'] ) ) {
 		return stripslashes_deep( $_COOKIE['fca_pc_advanced_matching'] );
@@ -374,15 +430,26 @@ function fca_pc_advanced_matching() {
 		$fn = empty( $user->first_name ) ? $user->billing_first_name : $user->first_name;
 		$ln = empty( $user->last_name ) ? $user->billing_last_name : $user->last_name;
 		$user_data = array (
-			'em' => esc_attr( $user->user_email ),
-			'fn' 	=> esc_attr( $fn ),
-			'ln' 	=> esc_attr( $ln ),
-			'ph' 	=> esc_attr( $user->billing_phone ),
-			'ct' 	=> esc_attr( $user->billing_city ),
-			'st' 	=> esc_attr( $user->billing_state ),
-			'zp' 	=> esc_attr( $user->billing_postcode )
+			'em' => $user->user_email,
+			'fn' => $fn,
+			'ln' => $ln,
+			'ph' => $user->billing_phone,
+			'ct' => $user->billing_city,
+			'st' => $user->billing_state,
+			'zp' => $user->billing_postcode,
 		);
-
+		
+		if( $hashed ) {
+			return  array (
+				'em' => hash( 'sha256', $user->user_email ),
+				'fn' => hash( 'sha256', $fn ),
+				'ln' => hash( 'sha256', $ln ),
+				'ph' => hash( 'sha256', $user->billing_phone ),
+				'ct' => hash( 'sha256', $user->billing_city ),
+				'st' => hash( 'sha256', $user->billing_state ),
+				'zp' => hash( 'sha256', $user->billing_postcode ),
+			);
+		}
 		return json_encode( array_map( 'strtolower', array_filter( $user_data ) ) );
 
 	} else if ( function_exists( 'is_order_received_page' ) && is_order_received_page() ) {
@@ -393,13 +460,23 @@ function fca_pc_advanced_matching() {
 
 		$user_data = array (
 			'em' => $order->get_billing_email(),
-			'fn' 	=> esc_attr( $order->get_billing_first_name() ),
-			'ln' 	=> esc_attr( $order->get_billing_last_name() ),
-			'ct' 	=> esc_attr( $order->get_billing_city() ),
-			'st' 	=> esc_attr( $order->get_billing_state() ),
-			'zp' 	=> esc_attr( $order->get_billing_postcode() ),
+			'fn' => $order->get_billing_first_name(),
+			'ln' => $order->get_billing_last_name(),
+			'ct' => $order->get_billing_city(),
+			'st' => $order->get_billing_state(),
+			'zp' => $order->get_billing_postcode(),
 		);
-
+		
+		if( $hashed ) {
+			return  array (
+				'em' => hash( 'sha256', $order->get_billing_email() ),
+				'fn' => hash( 'sha256', $order->get_billing_first_name() ),
+				'ln' => hash( 'sha256', $order->get_billing_last_name() ),
+				'ct' => hash( 'sha256', $order->get_billing_city() ),
+				'st' => hash( 'sha256', $order->get_billing_state() ),
+				'zp' => hash( 'sha256', $order->get_billing_postcode() ),
+			);
+		}
 		return json_encode( array_map( 'strtolower', array_filter( $user_data ) ) );
 
 	}
@@ -737,4 +814,12 @@ function fca_pc_admin_header_nav(){
 <?php 
 	echo ob_get_clean();
 
+}
+
+function fca_pc_is_edd_active() {	
+	return ( fca_pc_is_plugin_active( 'easy-digital-downloads/easy-digital-downloads.php' ) OR fca_pc_is_plugin_active( 'easy-digital-downloads-pro/easy-digital-downloads.php' ) );
+}
+
+function fca_pc_is_plugin_active( $plugin ) {
+	return in_array( $plugin, (array) get_option( 'active_plugins', array() ) );
 }

@@ -39,7 +39,7 @@ class Cli_Memcache {
 			$port = $memcache->is_connection_working();
 
 			if ( empty( $port ) ) {
-				return \WP_CLI::error( 'SiteGround Optimizer was unable to connect to the Memcached server and it was disabled. Please, check your SiteGround control panel and turn it on if disabled.' );
+				return \WP_CLI::error( 'Speed Optimizer by SiteGround was unable to connect to the Memcached server and it was disabled. Please, check your SiteGround control panel and turn it on if disabled.' );
 			}
 
 			// First enable the option.

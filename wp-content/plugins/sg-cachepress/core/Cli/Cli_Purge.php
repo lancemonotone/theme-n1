@@ -53,7 +53,7 @@ class Cli_Purge {
 		// Purge the assets dir.
 		$this->supercacher->delete_assets();
 		// Print successful assets dir cleanup.
-		\WP_CLI::success( 'SiteGround Optimizer assets folder purged successfully.' );
+		\WP_CLI::success( 'Speed Optimizer by SiteGround assets folder purged successfully.' );
 
 		// Check if the File caching is enabled and purge file cache.
 		if ( Options::is_enabled( 'siteground_optimizer_file_caching' ) ) {

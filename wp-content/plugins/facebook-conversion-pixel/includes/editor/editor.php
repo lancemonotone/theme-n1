@@ -47,7 +47,7 @@ function fca_pc_admin_enqueue() {
 		'pixelTemplate' => fca_pc_pixel_row_html(),
 		'eventTemplate' => fca_pc_event_row_html(),
 		'premium' => function_exists ( 'fca_pc_editor_premium_data' ),
-		'edd_active' => is_plugin_active( 'easy-digital-downloads/easy-digital-downloads.php' ),
+		'edd_active' => fca_pc_is_edd_active(),
 		'woo_active' => is_plugin_active( 'woocommerce/woocommerce.php' ),
 		'code_editor' => wp_enqueue_code_editor( [ 'type' => 'application/javascript', 'codemirror' => [ 'autoRefresh' => true, 'lineWrapping' => true ] ] ),
 		'debug' => FCA_PC_DEBUG,
@@ -128,9 +128,12 @@ function fca_pc_add_event_form() {
 		'Purchase' => 'Purchase',
 		'CompleteRegistration' => 'CompleteRegistration',
 		
-		'ViewContentSnapchat' => 'ViewContent',
-		'AddToCartSnapchat' => 'AddToCart',
-		'PurchaseSnapchat' => 'Checkout',
+		'ViewContentSnapchat' => 'VIEW_CONTENT',
+		'AddToCartSnapchat' => 'ADD_CART',
+		'InitiateCheckoutSnapchat' => 'START_CHECKOUT',
+		'AddPaymentInfoSnapchat' => 'ADD_BILLING',
+		'AddToWishlistSnapchat' => 'ADD_TO_WISHLIST',
+		'PurchaseSnapchat' => 'PURCHASE',
 		
 		'ViewContentPinterest' => 'PageVisit',
 		'AddToCartPinterest' => 'AddToCart',
@@ -138,12 +141,12 @@ function fca_pc_add_event_form() {
 		'CompleteRegistrationPinterest' => 'Signup',
 		'LeadPinterest' => 'Lead',
 		
-		'ViewContentGA' => 'ViewContent',
-		'AddToCartGA' => 'AddToCart',
-		'AddToWishlistGA' => 'AddToWishlist',
-		'InitiateCheckoutGA' => 'InitiateCheckout',
-		'AddPaymentInfoGA' => 'AddPaymentInfo',
-		'PurchaseGA' => 'Purchase',
+		'ViewContentGA' => 'view_item',
+		'AddToCartGA' => 'add_to_cart',
+		'AddToWishlistGA' => 'add_to_wishlist',
+		'InitiateCheckoutGA' => 'begin_checkout',
+		'AddPaymentInfoGA' => 'add_payment_info',
+		'PurchaseGA' => 'purchase',
 	);
 
 	$triggers = fca_pc_get_post_triggers();
@@ -337,6 +340,7 @@ function fca_pc_add_pixel_form() {
 		'Conversions API' => 'Facebook Conversions API',
 		'GA3' => 'Google Universal Analytics (GA3)',
 		'GA4' => 'Google Analytics (GA4)',
+		'Adwords' => 'Google Ads',
 		'Pinterest' => 'Pinterest Conversions',
 		'Snapchat' => 'Snapchat Pixel',
 		'Custom Header Script' => 'Custom Header Script',
@@ -350,6 +354,7 @@ function fca_pc_add_pixel_form() {
 			'GA3' => 'Google Universal Analytics (GA3)',
 			'GA4' => 'Google Analytics (GA4)',
 			'Custom Header Script' => 'Custom Header Script',
+			'Adwords' => 'Google Ads (Premium Only)',
 			'Pinterest' => 'Pinterest Conversions (Premium Only)',
 			'Snapchat' => 'Snapchat Pixel (Premium Only)',
 			
@@ -371,7 +376,7 @@ function fca_pc_add_pixel_form() {
 						<?php
 							forEach ( $types as $key => $value ) {
 								$atts = '';
-								if( FCA_PC_PLUGIN_PACKAGE === 'Lite' && in_array( $key, array( 'Pinterest', 'Snapchat' ) ) ) {
+								if( FCA_PC_PLUGIN_PACKAGE === 'Lite' && in_array( $key, array( 'Pinterest', 'Snapchat', 'Adwords' ) ) ) {
 									$atts = 'disabled';
 								}
 								echo "<option $atts value='" . esc_attr( $key ) . "'>$value</option>";
@@ -418,6 +423,15 @@ function fca_pc_add_pixel_form() {
 				
 				<td id="fca-pc-ga4-helptext" class="fca-pc-validation-helptext"  title="<?php echo esc_attr__('Your GA4 Property ID should start with "G-" and contain a series of numbers and/or letters, like this: G-JJJKKKLLLL.', 'facebook-conversion-pixel' ) ?>">
 					<input id='fca-pc-modal-ga4-input' type='text' placeholder='e.g. G-JJJKKKLLLL' class='fca-pc-input-text' style='width: 100%'>
+				</td>
+			</tr>
+			<tr id='fca-pc-adwords-input-tr'>
+				<th style="top: 0;"><?php esc_attr_e( 'Property ID', 'facebook-conversion-pixel' ); echo fca_pc_tooltip( esc_attr__( 'Enter your Google Ads Property ID here', 'facebook-conversion-pixel' ) ) ?>
+					<br><a class="fca_pc_hint" href="https://support.google.com/google-ads/answer/6331314" target="_blank"> <?php echo esc_attr__( 'How do I get a Google Ads Property ID?', 'facebook-conversion-pixel' ) ?></a>
+				</th>
+				
+				<td id="fca-pc-adwords-helptext" class="fca-pc-validation-helptext"  title="<?php echo esc_attr__('Your Google Ads tag ID should start with "AW-" and contain a series of numbers and/or letters, like this: AW-123456789.', 'facebook-conversion-pixel' ) ?>">
+					<input id='fca-pc-modal-adwords-input' type='text' placeholder='e.g. AW-123456789' class='fca-pc-input-text' style='width: 100%'>
 				</td>
 			</tr>
 			<tr class='fca-pc-header-input-tr'>
@@ -555,7 +569,7 @@ function fca_pc_event_panel( $options ) {
 		
 		<button type="button" id="fca_pc_new_snapchat_event" class="button button-secondary"><span class="dashicons dashicons-plus" style="vertical-align: middle;"></span><?php esc_attr_e( 'Add Snapchat Event', 'facebook-conversion-pixel' ) ?></button>
 		
-		<button type="button" id="fca_pc_new_ga_event" class="button button-secondary"><span class="dashicons dashicons-plus" style="vertical-align: middle;"></span><?php esc_attr_e( 'Add Google Analytics Event', 'facebook-conversion-pixel' ) ?></button>
+		<button type="button" id="fca_pc_new_ga_event" class="button button-secondary"><span class="dashicons dashicons-plus" style="vertical-align: middle;"></span><?php esc_attr_e( 'Add Google Event', 'facebook-conversion-pixel' ) ?></button>
 		<br>
 	</div>
 	<?php
@@ -649,8 +663,7 @@ function fca_pc_add_settings_table( $options ) {
 
 	$eoi_active = class_exists( 'DhEasyOptIns' );
 
-	$ept_active = ( is_plugin_active( 'easy-pricing-tables-premium/easy-pricing-tables-premium.php' ) OR
-					is_plugin_active( 'easy-pricing-tables/pricing-table-plugin.php' ) );
+	$ept_active = fca_pc_is_edd_active();
 
 	
 	$quizcat_integration_on = empty( $options['quizcat_integration'] ) ? '' : 'on';
@@ -928,7 +941,7 @@ function fca_pc_add_woo_integrations( $options ) {
 
 function fca_pc_add_edd_integrations( $options ) {
 
-	$edd_active = is_plugin_active( 'easy-digital-downloads/easy-digital-downloads.php' );
+	$edd_active = fca_pc_is_edd_active();
 	$edd_integration_on = empty( $options['edd_integration'] ) ? '' : 'on';
 	$edd_ga_integration_on = empty( $options['edd_integration_ga'] ) ? '' : 'on';
 	$edd_pinterest_integration_on = empty( $options['edd_integration_pinterest'] ) ? '' : 'on';
@@ -1034,6 +1047,7 @@ function fca_pc_marketing_metabox() {
 			<li><div class="dashicons dashicons-yes"></div> <?php _e( '1-Click WooCommerce & Easy Digital Downloads integration', 'facebook-conversion-pixel' ); ?></li>
 			<li><div class="dashicons dashicons-yes"></div> <?php esc_attr_e( 'Pinterest Pixel', 'facebook-conversion-pixel' ); ?></li>
 			<li><div class="dashicons dashicons-yes"></div> <?php esc_attr_e( 'Snapschat Pixel', 'facebook-conversion-pixel' ); ?></li>
+			<li><div class="dashicons dashicons-yes"></div> <?php esc_attr_e( 'Google Ads', 'facebook-conversion-pixel' ); ?></li>
 			<li><div class="dashicons dashicons-yes"></div> <?php esc_attr_e( 'Trigger events after time delay or if user scrolls', 'facebook-conversion-pixel' ); ?></li>
 			<li><div class="dashicons dashicons-yes"></div> <?php esc_attr_e( 'Boost Meta conversions using Advanced Matching & more', 'facebook-conversion-pixel' ); ?></li>
 			<li><div class="dashicons dashicons-yes"></div> <?php esc_attr_e( 'Exclude Pixel from specific pages (instead of displaying it site-wide)', 'facebook-conversion-pixel' ); ?></li>

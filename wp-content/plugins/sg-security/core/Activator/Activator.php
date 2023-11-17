@@ -54,7 +54,26 @@ class Activator {
 			$xml_rpc_service->toggle_rules( 1 );
 		}
 
+		$this->maybe_set_data_consent_default();
+
 		$install_service = new Install_Service();
 		$install_service->install();
+	}
+
+	/**
+	 * Set the default data consent.
+	 *
+	 * @since 1.4.7
+	 */
+	public function maybe_set_data_consent_default() {
+		// Check if we have a new installation and bail if we do not meet the new user criteria or the user has modified its consent settings.
+		if ( ! empty( get_option( 'siteground_data_consent_timestamp', '' ) ) ) {
+			return;
+		}
+
+		if ( '0.0.0' === get_option( 'sg_security_version', '0.0.0' ) ) {
+			// Update the consent option.
+			update_option( 'siteground_data_consent', 1 );
+		}
 	}
 }

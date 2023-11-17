@@ -1,223 +1,131 @@
-=== All-inclusive Security Solution by SiteGround ===
+=== Security Optimizer - The All-In-One WordPress Protection Plugin ===
 Contributors: Hristo Sg, siteground, sstoqnov, stoyangeorgiev, elenachavdarova, ignatggeorgiev
 Tags: security, firewall, malware scanner, web application firewall, two factor authentication, block hackers, country blocking, clean hacked site, blocklist, waf, login security
 Requires at least: 4.7
-Tested up to: 6.2
+Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 1.4.5
+Stable tag: 1.4.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Cover all WordPress weak spots with just one plugin! Easily limit login attempts, enable 2FA, switch XSS vulnerability protection on, disable XML-RPC, RSS & Atom feeds, and more!
+Secure your WordPress site from brute-force attacks, threats, malware, and bots. Free to use and easy to set up.
 
 == Description ==
 
-This all-inclusive security plugin, made by SiteGround web hosting company, gives you easy control over your website security. It’s packed with features that allow you in 1 click to enable or disable WordPress settings and prevent a number of threats such as brute-forcing, compromised login, code vulnerability attacks, data theft and leaks, and more.
-
-* Hides your WordPress Version out of the box
-* Enables advanced XSS Vulnerability Protection
-* Disables XML-RPC protocol to prevent many vulnerabilities and attacks
-* 1-click setting to Disable RSS and ATOM Feeds
-* Option to Lock and Protect System Folders by default
-* Disables “Admin” Username
-* Disables Themes & Plugins Editor
-* Option to enable Two-Factor Authentication
-* Limit Login Attempts setting
-
-On top, [SiteGround Security](https://www.siteground.com/wordpress-plugins/siteground-security) experts have curated a list of “Recommended Vulnerabilities Protection Settings”, which are featured on the plugin’s dashboard for your convenience. Prioritise those and you’re good to go!
-
-== Login Settings ==
-
-Here you can use the tools we've developed to protect your login page from unauthorized visitors, bots, and other malicious behavior.
-
-= Custom Login URL =
-Change the default login url to prevent attacks and have an easily memorisable login URL. You can also change the default sign-up url if you have that option enabled for your website.
-
-**Important!**
-You can revert to the default login type by using the following snippet.
-
-`
-add_action( 'init', 'remove_custom_login_url' );
-function remove_custom_login_url() {
-    update_option( 'sg_security_login_type', 'default' );
-}
-`
-
-= Login Access =
-Login Access allows you to limit the access of the login page to a specific IP’s or a range of IP’s to prevent malicious login attempts or brute-force attacks.
-
-**Important!**
-If you lock yourself out of your admin panel, you can add the following option to your theme’s function.php, reload the site and then remove it once you have gained access. Keep in mind that this will also remove all IP's that are allowed to access the login page and a re-configuration will be needed:
-
-`
-add_action( 'init', 'remove_login_access_data' );
-function remove_login_access_data() {
-    update_option( 'sg_login_access', array() );
-}
-`
-
-= Two-factor Authentication =
-Two-factor Authentication for Admin User will force all admins to provide a token, generated from the Google Authentication application when logging in. 
-
-**Important!**
-You can force other roles to use the Two-Factor authentication as well. Once enabled, you can add your filter as the following.
-
-`
-add_filter( 'sg_security_2fa_roles', 'add_user_roles_to_2fa' );
-function add_user_roles_to_2fa( $roles ) {
-    $roles[] = 'your_role';
-    return $roles;
-}
-`
-
-You can change the location of the 2FA encryption key file using SGS_ENCRYPTION_KEY_FILE_PATH constant defined in wp-config.php file. Make sure to use the full path to the file. Example:
-
-`
-// Custom path to SG Security Encryption key file.
-define ( 'SGS_ENCRYPTION_KEY_FILE_PATH', '/home/fullpathtofile/sgs_encrypt_key.php');
-`
-
-= Disable Common Usernames =
-Using common usernames like 'admin' is a security threat that often results in unauthorised access. By enabling this option we will disable the creation of common usernames and if you already have one more users with a weak username, we'll ask you to provide new one(s).
-
-= Limit Login Attempts =
-With Limit Login Attempts you can specify the number of times users can try to log in with incorrect credentials. If they reach a specific limit, the IP they are attempting to log from will be blocked for an hour. If they continue with unsuccessful attempts, they will be restricted for 24 hours and 7 days after that.
-
-**Important!**
-If you lock yourself out of your admin panel, you can add the following option to your theme’s function.php, reload the site and then remove it once you have gained access. Keep in mind that this will also remove the unsuccessful attempts block for all IP's:
-
-`
-add_action( 'init', 'remove_unsuccessfull_attempts_block' );
-function remove_unsuccessfull_attempts_block() {
-    update_option( 'sg_security_unsuccessful_login', array() );
-}
-`
+**Secure your WordPress site from brute-force attacks, threats, malware, and bots. Free to use and easy to set up. Bulletproof your WordPress security in a few clicks against a range of security breaches, including brute-force attacks, malware threats, bots, etc.**
+Proactively monitor your site’s security to detect any suspicious activity and take immediate actions to safeguard your site and prevent further damage with these essential features:
 
 
-== Site Security ==
+* Enable **Two-Factor Authentication** for an extra layer of security
+* Set **Limit Login Attempts** to deter malicious login attempts and brute-force attacks
+* Change your default login URL to **Custom Login URL** to avoid attacks
+* Activate **Advanced XSS Protection** to fortify your website against malicious attacks
+* **Lock and Protect System Folders** to ensure no unauthorized or malicious scripts can be executed in your system folders
+* **Disable Themes & Plugins Editor** to safeguard your website from unauthorized access via the WordPress editor
+* **Hide WordPress Version** effortlessly, keeping it hidden from prying eyes
+* Use **Activity Log** to monitor your site and quickly prevent malicious actions
+* **Post-Hack Actions** to take immediate actions and prevent further damages
 
-With this toolset you can harden your WordPress аpplication and keep it safe from malware, exploits and other malicious actions.
+Developed by the security experts at [SiteGround](https://www.siteground.com/wordpress-plugins/siteground-security) and trusted by over 900,000 webmasters, for its robust security shield and ease of use to secure WordPress applications from possible attacks on any hosting platform.
+
+= AWARDS: =
+
+[Monster Awards 2022](https://www.templatemonster.com/awards/winners-2022/): Best WordPress Security Plugin 🥇
+[Monster Awards 2021](https://www.templatemonster.com/awards/winners-2021/): Best WordPress Security Plugin 🥇
+
+= Plugin Video = 
+[youtube https://www.youtube.com/watch?v=FOheCz7sm9A]
+
+= Plugin Tutorial =
+
+All-inclusive Security Plugin by SiteGround for Every WordPress Site
+Unveil the vast array of features and unleash the full potential of our plugin in our [Security Optimizer Tutorial](https://www.siteground.com/tutorials/wordpress/sg-security/).
+
+
+== SITE PROTECTION FEATURES ==
+
+Safeguard your WordPress application using our powerful site security toolset. Our comprehensive features are specifically designed to strengthen your website's defenses against malware, exploits, and various malicious activities. With these tools at your disposal, you can ensure the utmost protection for your website:
+
+
 
 = Lock and Protect System Folders =
-Lock and Protect System Folders allows you to block any malicious or unauthorized scripts to be executed in your applications system folders. 
-If the Lock and Protect System Folders option blocks a specific script used by another plugin on the website, you can easily whitelist the specific script by using the snippets provided below.
 
-Use this one to whitelist a file in the wp_includes folder:
-`
-add_filter( 'sgs_whitelist_wp_includes' , 'whitelist_file_in_wp_includes' );
-function whitelist_file_in_wp_includes( $whitelist ) {
-
-    $whitelist[] = 'file_name.php';
-    $whitelist[] = 'another_file_name.php';
-
-    return $whitelist;
-}
-`
-
-Use this one to whitelist a file in the wp_uploads folder:
-`
-add_filter( 'sgs_whitelist_wp_uploads' , 'whitelist_file_in_wp_uploads' );
-function whitelist_file_in_wp_uploads( $whitelist ) {
-    $whitelist[] = 'file_name.php';
-    $whitelist[] = 'another_file_name.php';
-
-    return $whitelist;
-}
-`
-
-Use this one the whitelist a file in the wp_content folder:
-`
-add_filter( 'sgs_whitelist_wp_content' , 'whitelist_file_in_wp_content' );
-function whitelist_file_in_wp_content( $whitelist ) {
-    $whitelist[] = 'file_name.php';
-    $whitelist[] = 'another_file_name.php';
-
-    return $whitelist;
-}
-`
+Ensure the maximum security for your application's system folders by preventing the execution of any unauthorized or malicious scripts. The Lock and Protect System Folders feature acts as a powerful shield against potential threats.
 
 = Hide WordPress Version =
-When using Hide WordPress Version you can avoid being marked for mass attacks due to version specific vulnerabilities. 
+Protect your website from mass attacks by hiding the WordPress version, which helps to mitigate version-specific vulnerabilities.
 
 = Disable Themes & Plugins Editor =
-Disable Themes & Plugins Editor in the WordPress admin to prevent potential coding errors or unauthorized access through the WordPress editor.
+
+Enhance the security of your WordPress admin area by disabling the Themes & Plugins Editor, preventing potential coding errors and unauthorized access through the editor.
 
 = Disable XML-RPC =
-You can Disable XML-RPC protocol which was recently used in a number of exploits. Keep in mind that when disabled, it will prevent WordPress from communicating with third-party systems. We recommend using this, unless you specifically need it.
+
+Mitigate potential security risks by disabling the XML-RPC protocol, which has been exploited in various attacks. Please note that disabling XML-RPC will restrict WordPress from communicating with third-party systems. We recommend enabling this feature unless you have a specific need for it.
 
 = Disable RSS and ATOM Feeds =
-Disable RSS and ATOM Feeds to prevent content scraping and specific attacks against your site. It’s recommended to use this at all times, unless you have readers using your site via RSS readers.
+
+Prevent content scraping and specific attacks on your site by disabling RSS and ATOM feeds. Unless you have readers accessing your site via RSS readers, it is recommended to keep this feature enabled.
 
 = Advanced XSS Protection =
-By enabling Advanced XSS Protection you can add an additional layer of protection against XSS attacks.
 
-= Delete the Default Readme.txt =
-When you Delete the Default Readme.txt which contains information about your website, you reduce the chances of it ending in a potentially vulnerable sites list, used by hackers.
+Add an extra layer of security against cross-site scripting (XSS) attacks by enabling Advanced XSS Protection, bolstering the overall security of your website.
 
-== Activity Log ==
+= Delete Default Readme.html =
 
-Here you can monitor in detail the activity of registered, unknown and blocked visitors. If your site is being hacked, a user or a plugin was compromised, you can always use the quick tools to block their future actions.
+Eliminate potential vulnerabilities by deleting the default readme.txt file, which contains information about your website. By removing this file, you reduce the risk of your site being listed in vulnerable sites targeted by hackers.
 
-**Important!**
-You can set a custom log lifetime ( in days ), using the following filter we have provided for that purpose.
+== Login Security ==
 
-`
-add_filter( 'sgs_set_activity_log_lifetime', 'set_custom_log_lifetime' );
-function set_custom_log_lifetime() {
-    return 'your-custom-log-lifetime-in-days';
-}
-`
+= Custom Login Url =
 
-If you need to disable the activity log, you can use the following filter. Keep in mind that this will also disable the Weekly Activity Log Emails.
+Personalize your login URL to thwart potential attacks and create a strong entry point. Bid farewell to the default login URL and embrace a bespoke path of your choosing. Additionally, you have the freedom to modify the default sign-up URL as well.
 
-`
-add_action( 'init', 'deactivate_activity_log' );
-function deactivate_activity_log() {
-    update_option( 'sg_security_disable_activity_log', 1 );
-}
-`
+= Login Access =
 
-In case you have disabled the native WordPress Cron Job, and using UNIX cron setup instead, you can add the following rule to your website wp-config.php file in order to have the logs cleared on time:
+Restrict login page access to specific IP addresses or IP ranges, effectively thwarting malicious login attempts and deterring brute-force attacks.
 
-`
-define( 'SG_UNIX_CRON', true );
-`
+= Two-Factor Authentication =
 
-== Post-Hack Actions ==
+Immerse your website in an impenetrable shield of security with Two-Factor Authentication. This formidable feature demands that all admin users furnish a unique token, generated exclusively through the Google Authentication application, during the login process.
+
+= Disable Common Usernames =
+
+Don't fall victim to predictable security breaches! The use of common usernames, such as
+'admin,' poses a significant threat to the integrity of your website. Activate this option to disable the creation of common usernames. If any weak usernames already exist, we'll prompt you to provide new, stronger alternatives.
+
+= Limit Login Attempts =
+
+Maintain control over unauthorized access attempts with Limit Login Attempts. Set a specific threshold for the number of login failures users can endure before consequences arise. After reaching the limit, the IP address associated with the unsuccessful login attempts will be blocked for one hour. Persistent failures will result in longer restrictions, starting with 24 hours and escalating to a week.
+
+== ACTIVITY MONITORING ==
+
+Monitor your website and login page for unauthorized visitors and brute-force attempts to prevent malicious actions.
+
+= Activity Log =
+
+The Activity Log page provides you with a comprehensive view of the activities performed by registered, unknown, and blocked visitors. It allows you to closely monitor any suspicious behavior and take appropriate actions in case of a compromised user, plugin, or hacking attempt. You can leverage the quick tools available to swiftly block future attempts.
+
+= Weekly Security Reports =
+
+Receive a weekly traffic summary of your website directly to your inbox through Weekly Security Reports. This report compiles data on both bot and human traffic, along with details about blocked login and visit attempts to proactively monitor traffic and promptly identify suspicious activity.
+
+== POST-HACK ACTIONS ==
+Take immediate measures to safeguard your website if you suspect a compromise and prevent further damage. Here, you'll find convenient solutions to address the situation effectively:
 
 = Reinstall All Free Plugins =
-If your website was hacked, you can always try to reduce the harm by using Reinstall All Free Plugins. This will reinstall all of your free plugins, reducing the chance of another exploit or the re-use of malicious code.
+
+In the event of a hack, utilizing the Reinstall All Free Plugins feature can help mitigate potential harm. This action reinstalls all of your free plugins, reducing the likelihood of additional exploits or the reuse of malicious code.
 
 = Log Out All Users =
-You can Log Out All Users to prevent any further actions done by them or use.
+
+To prevent any further unauthorized activities by users or attackers, you can choose to log out all users instantly using the Log Out All Users feature.
 
 = Force Password Reset =
-Force Password Reset to force all users to change their password upon their next login. This will also log-out all current users instantly.
 
-= WP-CLI Support =
+By enforcing a password reset, you can ensure that all users are prompted to change their passwords during their next login. This not only strengthens the security of their accounts but also immediately logs out all currently logged-in users.
 
-In version 1.0.2 we've added full WP-CLI support for all plugin options and functionalities.
-
-* `wp sg limit-login-attempts 0|3|5` - limits the login attempts to 3, 5, or 0 in order to disable it
-* `wp sg login-access add IP` - allows only specific IP(s) to access the backend of the website
-* `wp sg login-access list all` - lists the whitelisted IP addresses
-* `wp sg login-access remove IP` - removes IP from the whitelisted ones
-* `wp sg login-access remove all` - removes all of the whitelisted IP addresses
-* `wp sg secure protect-system-folders enable|disable` - enables or disables protects system folders option
-* `wp sg secure hide-wordpress-version enable|disable` - enables or disables hide WordPress version option
-* `wp sg secure plugins-themes-editor enable|disable` - enables or disables plugin and theme editor
-* `wp sg secure xml-rpc enable|disable` - enables or disables XML-RPC
-* `wp sg secure rss-atom-feed enable|disable` - enables or disables RSS and ATOM feeds
-* `wp sg secure xss-protection enable|disable` - enables or disables XSS protection
-* `wp sg secure 2fa enable|disable` - enables or disables two-factor authentication
-* `wp sg secure disable-admin-user enable|disable` - enables or disables usage of "admin" as username
-* `wp sg log ip add|remove|list <name> --ip=<ip>` - add/list/remove user defined pingbots listed in the activity log by ip
-* `wp sg log ua add|remove|list <name> ` - add/list/remove user defined bots listed in the activity log by user agent
-* `wp sg list log-unknown|log-registered|log-blocked --days=<days>` - List specific access log for a specific period
-* `wp sg 2fa reset id|username|all ID|username` - Resets the 2fa setup for the user ID, username or all users.
-* `wp sg custom-login status|disable` - Shows the status or disables the Custom Login URL functionality.
-
-= Requirements =
+## Requirements ##
 * WordPress 4.7
 * PHP 7.0
 * Working .htaccess file
@@ -227,19 +135,34 @@ In version 1.0.2 we've added full WP-CLI support for all plugin options and func
 = Automatic Installation =
 
 1. Go to Plugins -> Add New
-1. Search for "SiteGround Security"
-1. Click on the Install button under the SiteGround Security plugin
+1. Search for "Security Optimizer by SiteGround"
+1. Click on the Install button under the Security Optimizer by SiteGround plugin
 1. Once the plugin is installed, click on the Activate plugin link
 
 = Manual Installation =
 
 1. Login to the WordPress admin panel and go to Plugins -> Add New
-1. Select the 'Upload' menu 
+1. Select the 'Upload' menu
 1. Click the 'Choose File' button and point your browser to the sg-security.zip file you've downloaded
 1. Click the 'Install Now' button
-1. Go to Plugins -> Installed Plugins and click the 'Activate' link under the WordPress SiteGround Security listing
+1. Go to Plugins -> Installed Plugins and click the 'Activate' link under the WordPress Security Optimizer by SiteGround listing
 
 == Changelog ==
+
+= Version 1.4.7 =
+Release Date: Oct 24th, 2023
+
+* Data collection opt out option
+* Readme file formatting improvements
+* Plugin name formatting improvements
+* Weekly Activity Report Sending Schedule Randomisation
+
+
+= Version 1.4.6 =
+Release Date: Sept 26th, 2023
+
+* Changing the name we use inside the plugin from SiteGround Security to Security Optimizer
+* Updating data collection process and Introducing a link in the plugin interface to the Plugin Privacy notice
 
 = Version 1.4.5 =
 Release Date: May 4th, 2023
@@ -465,3 +388,6 @@ Release Date: July 27th, 2021
 = Version 0.1 =
 * Initial release.
 
+## Data Collection ##
+
+By default the plugin collects the information [listed here](https://www.siteground.com/kb/what-information-wp-plugins-collect). This data is collected only for technical analysis, improvements and the possibility to contact the plugin user in case urgent issues need to be fixed (for example a critical security release that needs to be communicated to site owners). The plugin user may opt out from the WP admin from the collection of this data, but we do not recommend this, as it may negatively impact the plugin performance. You may find more information on data collection in our [Plugins Privacy Notice](https://www.siteground.com/viewtos/siteground_plugins_privacy_notice).

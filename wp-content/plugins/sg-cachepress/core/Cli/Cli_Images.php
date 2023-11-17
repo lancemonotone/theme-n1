@@ -19,7 +19,7 @@ use SiteGround_Optimizer\Images_Optimizer\Images_Optimizer;
  */
 class Cli_Images {
 	/**
-	 * Enable specific setting for SiteGround Optimizer plugin.
+	 * Enable specific setting for Speed Optimizer by SiteGround plugin.
 	 *
 	 * ## OPTIONS
 	 *

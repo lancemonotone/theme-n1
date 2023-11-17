@@ -239,6 +239,46 @@ var supported_params = {
 		'custom': 1
 	},
 	
+		
+	'AddToWishlistSnapchat': {
+		'value': 0,
+		'currency': 1,
+		'content_name': 0,
+		'content_type': 0,
+		'content_ids': 0,
+		'content_category': 0,
+		'search_string': 0,
+		'num_items': 0,
+		'status': 0,
+		'custom': 1
+	},
+	
+	'InitiateCheckoutSnapchat': {
+		'value': 0,
+		'currency': 1,
+		'content_name': 0,
+		'content_type': 0,
+		'content_ids': 0,
+		'content_category': 0,
+		'search_string': 0,
+		'num_items': 0,
+		'status': 0,
+		'custom': 1
+	},
+	
+	'AddPaymentInfoSnapchat': {
+		'value': 0,
+		'currency': 1,
+		'content_name': 0,
+		'content_type': 0,
+		'content_ids': 0,
+		'content_category': 0,
+		'search_string': 0,
+		'num_items': 0,
+		'status': 0,
+		'custom': 1
+	},
+
 	'AddPaymentInfoGA': {
 		'value': 1,
 		'currency': 1,
@@ -445,6 +485,16 @@ jQuery(document).ready(function($){
 			$('#fca-pc-ga4-helptext').tooltipster('open')
 		}
 	})
+	
+	//ADWORDS ID VALIDATION
+	$('#fca-pc-modal-adwords-input').on( 'input', function(e){
+		var value = $(this).val()
+		$('#fca-pc-adwords-helptext').tooltipster('hide')
+		
+		if ( (/^([G-])+(([a-zA-Z0-9]){2,})$/.test(value) ) === false ) {
+			$('#fca-pc-adwords-helptext').tooltipster('open')
+		}
+	})
 
 	//NAV
 	$('.fca-pc-nav a').on( 'click', function(){
@@ -638,6 +688,9 @@ jQuery(document).ready(function($){
 				supported_events = [
 					'ViewContentSnapchat',
 					'AddToCartSnapchat',
+					'AddToWishlistSnapchat',
+					'InitiateCheckoutSnapchat',
+					'AddPaymentInfoSnapchat',
 					'PurchaseSnapchat',
 					'custom'
 				]
@@ -672,6 +725,7 @@ jQuery(document).ready(function($){
 		$('#fca-pc-modal-test-input').val( '' )
 		$('#fca-pc-modal-ga3-input').val( '' )
 		$('#fca-pc-modal-ga4-input').val( '' )
+		$('#fca-pc-modal-adwords-input').val( '' )
 		$('#fca-pc-modal-pinterest-input').val( '' )
 		$('#fca-pc-modal-header-code').val( '' )
 		$('#fca-pc-pixel-excluded-pages').val( '' ).trigger('change')
@@ -693,6 +747,7 @@ jQuery(document).ready(function($){
 		$('#fca-pc-pixel-input-tr').hide()
 		$('#fca-pc-ga3-input-tr').hide()
 		$('#fca-pc-ga4-input-tr').hide()
+		$('#fca-pc-adwords-input-tr').hide()
 		$('.fca-pc-header-input-tr').hide()
 		$('#fca_pc_capi_info').hide()
 		$('#fca-pc-pinterest-input-tr').hide()
@@ -716,6 +771,10 @@ jQuery(document).ready(function($){
 				
 			case 'GA4':
 				$('#fca-pc-ga4-input-tr').show()
+				break
+				
+			case 'Adwords':
+				$('#fca-pc-adwords-input-tr').show()
 				break
 				
 			case 'Pinterest':
@@ -781,7 +840,7 @@ jQuery(document).ready(function($){
 	//MAKE SURE WE HAVE A GA SETUP
 	$('.fca-pc-edd_integration_ga').on( 'click', function(){
 		var active_pixels = fca_pc_get_active_pixel_types()
-		if( active_pixels.indexOf("GA3") !== -1 || active_pixels.indexOf("GA4") !== -1 ) {
+		if( active_pixels.indexOf("GA3") !== -1 || active_pixels.indexOf("GA4") !== -1 || active_pixels.indexOf("Adwords") !== -1 ) {
 			//OK
 		} else {
 			alert("Please set up a Google Analytics pixel to use this feature")
@@ -791,7 +850,7 @@ jQuery(document).ready(function($){
 	//MAKE SURE WE HAVE A GA SETUP
 	$('.fca-pc-woo_integration_ga').on( 'click', function(){
 		var active_pixels = fca_pc_get_active_pixel_types()
-		if( active_pixels.indexOf("GA3") !== -1 || active_pixels.indexOf("GA4") !== -1 ) {
+		if( active_pixels.indexOf("GA3") !== -1 || active_pixels.indexOf("GA4") !== -1 || active_pixels.indexOf("Adwords") !== -1 ) {
 			//OK
 		} else {
 			alert("Please set up a Google Analytics pixel to use this feature")
@@ -859,6 +918,10 @@ jQuery(document).ready(function($){
 			alert( 'Google Analytics Property ID is required for this pixel type' )
 			return
 		}
+		if ( pixelType === 'Adwords' && $('#fca-pc-modal-adwords-input').val() == '' ) {
+			alert( 'Google Ads Property ID is required for this pixel type' )
+			return
+		}
 				
 		if ( pixelType === 'Custom Header Script' && $('#fca-pc-modal-header-code').val() == '' ) {
 			alert( 'Please enter a value for header script' )
@@ -884,6 +947,10 @@ jQuery(document).ready(function($){
 				
 			case 'GA4':
 				newPixel.pixel = $('#fca-pc-modal-ga4-input').val()
+				break
+				
+			case 'Adwords':
+				newPixel.pixel = $('#fca-pc-modal-adwords-input').val()
 				break
 				
 			case 'Pinterest':
@@ -1294,7 +1361,8 @@ jQuery(document).ready(function($){
 			
 			switch( pixel.type ) {
 				
-				case 'Conversions API':
+				case 'Conversions API': 
+					$('#fca-pc-modal-pixel-input').val( pixel.pixel )
 					$('#fca-pc-modal-capi-input').val( pixel.capi )
 					$('#fca-pc-modal-test-input').val( pixel.test )
 					break
@@ -1305,6 +1373,10 @@ jQuery(document).ready(function($){
 					
 				case 'GA4':
 					$('#fca-pc-modal-ga4-input').val( pixel.pixel )
+					break
+					
+				case 'Adwords':
+					$('#fca-pc-modal-adwords-input').val( pixel.pixel )
 					break
 					
 				case 'Pinterest':
@@ -1386,7 +1458,7 @@ jQuery(document).ready(function($){
 			pixel_types.push( pixel.type )
 		})
 		
-		if ( pixel_types.indexOf("GA3") !== -1 || pixel_types.indexOf("GA4") !== -1 ) {
+		if ( pixel_types.indexOf("GA3") !== -1 || pixel_types.indexOf("GA4") !== -1 || pixel_types.indexOf("Adwords") !== -1 ) {
 			$('#fca_pc_new_ga_event').show()
 		}
 		if ( pixel_types.indexOf("Pinterest") !== -1 ) {
@@ -1418,6 +1490,9 @@ jQuery(document).ready(function($){
 			}
 			if( pixel.type === 'GA4' ) {
 				type = "Google Analytics (GA4)"
+			}			
+			if( pixel.type === 'Adwords' ) {
+				type = "Google Ads"
 			}
 			
 			$target.find('.fca-pc-type-td').text( type )

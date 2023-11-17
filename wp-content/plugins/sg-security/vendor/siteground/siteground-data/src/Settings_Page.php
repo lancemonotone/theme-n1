@@ -1,6 +1,8 @@
 <?php
 namespace SiteGround_Data;
 
+use SiteGround_Data\Settings;
+
 if ( ! class_exists( 'SiteGround_Data/Settings_Page' ) ) {
 	/**
 	 * Plugin Settings main class
@@ -8,6 +10,13 @@ if ( ! class_exists( 'SiteGround_Data/Settings_Page' ) ) {
 	class Settings_Page {
 
 		const REST_NAMESPACE = 'siteground-settings/v1';
+
+		/**
+		 * The data collector cron.
+		 *
+		 * @var string
+		 */
+		public $data_cron = 'siteground_data_collector_cron';
 
 		/**
 		 * The settings classes and their hooks and options.
@@ -20,6 +29,7 @@ if ( ! class_exists( 'SiteGround_Data/Settings_Page' ) ) {
 			'siteground_settings_optimizer',
 			'siteground_settings_security',
 		);
+
 		/**
 		 * The options that could be changed in the settings page.
 		 *
@@ -42,6 +52,10 @@ if ( ! class_exists( 'SiteGround_Data/Settings_Page' ) ) {
 				// Record timestamp of when the option was updated.
 				add_action( "update_option_$option", array( $this, 'update_option_change_timestamp' ), 10, 3 );
 			}
+
+			$settings = ! method_exists( 'Siteground_Data\\Settings', 'get_instance' ) ? new Settings() : Settings::get_instance();
+			// Add the data interval, since the hook from the plugin is not available here.
+			add_action( 'cron_schedules', array( $settings, 'add_siteground_data_interval' ) );
 		}
 
 		/**
@@ -53,7 +67,7 @@ if ( ! class_exists( 'SiteGround_Data/Settings_Page' ) ) {
 		 * @param string $value  The option value.
 		*/
 		public function add_option_change_timestamp( $option, $value ) {
-		       update_option( $option . '_timestamp', time() );
+			update_option( $option . '_timestamp', time() );
 		}
 
 		/**
@@ -61,12 +75,33 @@ if ( ! class_exists( 'SiteGround_Data/Settings_Page' ) ) {
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  mixed  $new    The new value of the option.
 		 * @param  mixed  $old    The old value of the option.
+		 * @param  mixed  $new    The new value of the option.
 		 * @param  string $option The option name.
 		 */
-		public function update_option_change_timestamp( $new, $old, $option ) {
+		public function update_option_change_timestamp( $old, $new, $option ) {
 			update_option( $option . '_timestamp', time() );
+
+			// Setup cron if data consent is enabled.
+			if ( 'siteground_data_consent' === $option  ) {
+				$this->manage_cronjobs( intval( $new ) );
+			}
+		}
+
+		/**
+		 * Modify the cronjob based on user consent selection
+		 *
+		 * @param  int $value The user selected option.
+		 */
+		public function manage_cronjobs( $value ) {
+			if ( 0 === $value ) {
+				wp_unschedule_event( wp_next_scheduled( $this->data_cron ), $this->data_cron );
+				return;
+			}
+
+			if ( ! wp_next_scheduled( $this->data_cron ) ) {
+				wp_schedule_event( time(), 'siteground_monthly', $this->data_cron );
+			}
 		}
 
 		/**
@@ -76,7 +111,7 @@ if ( ! class_exists( 'SiteGround_Data/Settings_Page' ) ) {
 		 *
 		 * @param  array $options Array of allowed options.
 		 *
-		 * @return array          Array fo allowed options.
+		 * @return array          Array for allowed options.
 		 */
 		public function change_allowed_options( $options ) {
 			$options[ self::get_page_name() ] = $this->allowed_options;
@@ -92,9 +127,9 @@ if ( ! class_exists( 'SiteGround_Data/Settings_Page' ) ) {
 
 			$settings = array(
 				'siteground_data_consent' => array(
-					'field'       => 'siteground_data_consent',
-					'title'       => __( 'Manage consent', 'siteground_settings' ),
-					'description' => 'Collect technical data about my installation. The data will be used to make sure that the plugin works seamlessly on the widest possible range of WordPress sites. (A full list of the data to be collected can be found <a href="https://www.siteground.com/kb/what-information-wp-plugins-collect" target="_blank">here</a>).',
+					'field' => 'siteground_data_consent',
+					'title' => __( 'Manage consent', 'siteground_settings' ),
+					'description' => __( 'Collect technical data about my installation. The data will be used for technical analysis, plugin compatibility improvements and rarely for contacting the site admin in case of critical security releases or other issues related with the plugin proper functioning. We do not recommend opting out, as it may negatively impact the plugin performance. (A full list of the data to be collected can be found <a href="https://www.siteground.com/kb/what-information-wp-plugins-collect">here</a>)', 'siteground_settings' ),
 				),
 			);
 
@@ -105,7 +140,7 @@ if ( ! class_exists( 'SiteGround_Data/Settings_Page' ) ) {
 				$settings['siteground_email_consent'] = array(
 					'field'       => 'siteground_email_consent',
 					'title'       => '',
-					'description' => __( 'Send me occasional emails about updates, special offers and new features from SiteGround.', 'siteground_settings' ),
+					'description' => __( 'Send occasional emails with tips on improving my site performance, information about new plugin features and exclusive offers by SiteGround. You can always opt-out from these.', 'siteground_settings' ),
 				);
 			}
 
@@ -129,7 +164,6 @@ if ( ! class_exists( 'SiteGround_Data/Settings_Page' ) ) {
 		 * @since  1.0.0
 		 */
 		public function register_settings_page() {
-
 			global $submenu;
 
 			if (
@@ -253,7 +287,7 @@ if ( ! class_exists( 'SiteGround_Data/Settings_Page' ) ) {
 				$response[ $option ] = $value;
 			}
 
-			wp_schedule_single_event( time(), 'siteground_data_collector_cron' );
+			wp_schedule_single_event( time(), $this->data_cron );
 
 			if ( ! headers_sent() ) {
 				header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );

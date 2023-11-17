@@ -50,7 +50,6 @@ function fca_pc_edd_event_initiate_checkout() {
 }
 add_action( 'fca_pc_start_pixel_output', 'fca_pc_edd_event_initiate_checkout' );
 
-
 function fca_pc_edd_purchase( $payment_id ) {
 	$options = get_option( 'fca_pc', array() );
 	$edd_extra_params = empty( $options['edd_extra_params'] ) ? false : true;

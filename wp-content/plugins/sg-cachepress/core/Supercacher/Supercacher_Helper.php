@@ -44,6 +44,10 @@ class Supercacher_Helper {
 			return;
 		}
 
+		if( ! Helper_Service::is_siteground() )  {
+			return $headers;
+		}
+
 		$is_cache_enabled   = (int) get_option( 'siteground_optimizer_enable_cache', 0 );
 		$file_cache_enabled = (int) get_option( 'siteground_optimizer_file_caching', 0 );
 		$vary_user_agent    = (int) get_option( 'siteground_optimizer_user_agent_header', 0 );

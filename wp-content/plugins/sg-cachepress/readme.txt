@@ -1,443 +1,94 @@
-=== SiteGround Optimizer ===
+=== Speed Optimizer - The All-In-One WordPress Performance-Boosting Plugin ===
 Contributors: Hristo Sg, siteground, sstoqnov, stoyangeorgiev, elenachavdarova, ignatggeorgiev
 Tags: nginx, caching, speed, memcache, memcached, performance, siteground, nginx, supercacher
 Requires at least: 4.7
 Requires PHP: 7.0
-Tested up to: 6.2
-Stable tag: 7.3.3
+Tested up to: 6.4
+Stable tag: 7.4.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-
 == Description ==
 
-The [SiteGround Optimizer](https://www.siteground.com/wordpress-plugins/siteground-optimizer) plugin is developed by SiteGround to dramatically improve WordPress website performance on any hosting environment.
-
-Initially designed for SiteGround’s servers and already used by almost 2 Million SiteGround clients, with the release of SiteGround Optimizer 7.0.0 the plugin will work on any hosting platform. All WordPress users, regardless  of their hosting provider, can take advantage of its unmatched WordPress speed-boosting features, no tech knowledge required.
-
-Even though some of its features will still only work on SiteGround’s hosting platform, due to the specific server optimizations that other hosting providers might not support, the SiteGround Optimizer plugin is the most powerful all-in-one WordPress performance plugin, free and available for all.
-
-The SiteGround Optimizer plugin has few different parts handling specific performance optimizations:
-
-== Configuration ==
-
-For detailed information on our plugin and how it works, please check out our [SiteGround Optimizer Tutorial](https://www.siteground.com/tutorials/wordpress/sg-optimizer/ "SiteGround Optimizer Tutorial").
-
-= SiteGround Optimizer Dashboard Page =
-
-The Dashboard offers a quick look at the current optimization status of your website and shortcuts to the relevant optimization pages. In addition to that, since keeping your WordPress application, plugins, and themes up to date is important for your website speed and security, we’ve made sure to add a notification in the Dashboard in case your WordPress and/or plugins need an update.
-
-= SiteGround Optimizer Caching Page =
-
-On this page, you can control your website cache.
-
-Dynamic Caching:
-	With our Dynamic Caching enabled all non-static resources of your website are cached to prevent unnecessary database queries and page loading, effectively decreasing the loading speed and TTFB (time to first byte) of your website. Dynamic Caching runs by default on all SiteGround servers and available only for them.
-
-File-Based Caching:
-	With file-based caching enabled we will create static HTML versions of your website which will be served to future visitors. The files are stored in the browser memory.
-	Included in version 7.0.0, the File-Based Caching is available both for SiteGround and non SiteGround users.
-
-	File-Based Caching configuration:
-		- Clean up interval - this allows you to manage the interval File-Based cache will be automatically purged on.
-		- Preheat cache - When Preheating is enabled, our system will reload the cache once it is purged after content update in order to serve the fastest possible results to your real visitors. Preheating is using the website sitemap and being executed via cron.
-		- Logged-in users cache - By default, we do not cache content for logged in users. Once Logged In Cache is enabled, we will store separate caches for each user. Note, that if you have many users, the size of the stored cache may be increased.
-
-Memcached:
-	Powerful object caching for your site. Memcached stores frequently executed queries to your databases and then reuses them for better performance. It is available only on SiteGround Environment.
-
-You can also enable Automatic Purge which will clear the cache when needed. You can use the WordPress API Cache Control checkbox if you need the WP API cache purged too.
-Enabling the Browser-specific caching will create different cache versions based on the user agent used.
-From Exclude Post Types you can exclude the ones you don’t want to be cached by Dynamic Caching. Feature is not available for File-Based Caching.
-You can also exclude specific URLs or use a wildcard to exclude any sub-pages of a specific “parent-page”. The feature applies both for Dynamic and File-Based Caching.
-We have also provided a test tool where you can check if a specific URL has Dynamic caching actually running.
-
-We have a filter that allows you to control which user roles have access to flush the cache using the Purge SG Cache button.
-
-Here's an example of the code, you can add to your functions.php file:
-
-	add_filter( 'sgo_purge_button_capabilities', 'sgo_add_new_role' );
-	function sgo_add_new_role( $default_capabilities ) {
-		// Allow new user role to flush cache.
-		$default_capabilities[] = 'delete_others_posts'; // For Editors.
-		$default_capabilities[] = 'edit_published_posts'; // For Authors.
-
-		return $default_capabilities;
-	}
-
-Another filter is created in order to manage the number of URLs your website will be preheating. The default value is 200.
-
-Here's an example of the code, you can add to your functions.php file:
-
-	add_filter( 'sg_file_caching_preheat_url_limit', 'sgo_preheat_limit' );
-	function sgo_preheat_limit( $xml_urls ) {
-		// Define custom limit for XML URL preheat.
-		$xml_urls = 300;
-
-		return $xml_urls;
-	}
-
-Keep in mind that when modifying the file-cache related filters below, you need to flush the cache, so the sgo-config is re-generated and the filters are added to it.
-
-If you need to add a cache bypass cookie to the default ones, you can use the following filter:
-
-	add_filter( 'sgo_bypass_cookies', 'add_sgo_bypass_cookies');
-	function add_sgo_bypass_cookies( $bypass_cookies ) {
-		// Add the cookies, that you need to bypass the cache.
-		$bypass_cookies[] = 'cookie_name';
-		$bypass_cookies[] = 'cookie_name_2';
-
-		return $bypass_cookies;
-	}
-
-If you need to skip the cache for a specific query parameter, you can use the following filter:
-
-	add_filter( 'sgo_bypass_query_params', 'add_sgo_bypass_query_params');
-	function add_sgo_bypass_query_params( $bypass_query_params ) {
-		// Add custom query params, that will skip the cache.
-		$bypass_query_params[] = 'query_param';
-		$bypass_query_params[] = 'query_param2';
-
-		return $bypass_query_params;
-	}
-
-If you need to add a specific query parameter which will be ignored in the cache-creation and cache-spawn processes you can do it using this filter:
-
-	add_filter( 'sgo_ignored_query_params', 'add_sgo_ignored_query_params');
-	function add_sgo_ignored_query_params( $ignored_query_params ) {
-		// The query parameters which will be ignored.
-		$ignored_query_params[] = 'query_param';
-		$ignored_query_params[] = 'query_param2';
-
-		return $ignored_query_params;
-	}
-
-If you need to exclude certain URLs from your website being cached you can use the filter we have designed for that purpose. Make sure to surround the url part with forward slashes. Wildcards can be used as well. You can check the below example:
-
-	add_filter( 'sgo_exclude_urls_from_cache', 'sgo_add_excluded_urls_from_cache');
-	function sgo_add_excluded_urls_from_cache( $excluded_urls ) {
-		// The part of the URL which needs to be excluded from cache.
-		$excluded_urls[] = '/excluded_url/';
-		$excluded_urls[] = '/wildcard/exclude/*';
-
-		return $excluded_urls;
-	}
-
-= SiteGround Optimizer Environment Page =
-
-Here, you can force HTTPS for your site and fix insecure content errors. You can activate Database Optimization which will remove all unnecessary items from your database and optimize its tables. If you are using the InnoDB storage engine, the optimization of tables is done automatically by the engine. Use DNS-Prefetching to increase load speeds for external resources. It works by resolving the domain name, before a resource is requested. You can also manage Heartbeat Control to modify the frequency of the WP Heartbeat for different locations. By default, the WordPress Heartbeat API checks every 15 seconds on your post edit pages and every 60 seconds on your dashboard and front end whether there are scheduled tasks to be executed. With this option, you can make the checks run less frequently or completely disable them.
-
-We have a filter that allows you to exclude specific tables from being optimized. You need to specify the table name without the database prefix.
-
-Here's an example of the code, you can add to your functions.php file:
-
-	add_filter( 'sgo_db_optimization_exclude', 'sgo_db_optimization_exclude_table' );
-	function sgo_db_optimization_exclude_table( $excluded_tables ) {
-		// Add tables that you need to exclude without the wpdb prefix.
-		$excluded_tables[] = 'table_name';
-		$excluded_tables[] = 'another_table_name';
-
-		return $excluded_tables;
-	}
-
-= SiteGround Optimizer Frontend Optimization Page =
-
-The page is split into three tabs - CSS, JAVASCRIPT and GENERAL. In the CSS tab, you can enable/disable Minification of CSS files, activate/deactivate CSS combinations to reduce the numbers of requests to the server, and also Preload Combined CSS. Here you can also exclude styles from being combined/minified.
-In the JAVASCRIPT tab, you can activate/deactivate JS minification and combination so you can reduce the script sizes as well as the number of requests made to the server. You can also Defer Render-blocking JavaScript for faster initial site load. You can also exclude specific scripts from the different types of optimizations.
-The GENERAL tab offers you the possibility to Minify the HTML Output, which will remove unnecessary characters and reduce data size. With the Web Fonts Optimization we’re changing the default way we load Google fonts. A preconnect link for Google's font repository will be added in your head tag. This informs the browser that your page intends to establish a connection to another origin, and that you'd like the process to start as soon as possible. In addition, all other local fonts will be preloaded so browsers can cache and render them faster. Also when combined with CSS Combination, we will change the font-display property to swap or add it if it's missing, so we ensure faster rendering. You can Disable Emojis support in your pages to prevent WordPress from detecting and generating emojis on your pages. You can also Remove Query Strings from static resources to improve their caching.
-
-= SiteGround Optimizer Media Optimization Page =
-
-Image Compression:
-	Here, you can configure the Image compression in order to resize your existing images and decrease the space they are occupying. The dimension of the images will not change. You can fine-tune the compression level as well as choose either original images backups are created. It is available only on SiteGround Environment.
-
-Use WebP Images:
-	WebP is a next generation image format supported by modern browsers which greatly reduces the size of your images. If the browser does not support WebP, the original images will be loaded. It is available only on SiteGround Environment.
-
-You can also enable or disable Lazy Load for various assets. You can also exclude specific assets such as iframes, videos, thumbnails, widgets, shortcodes and more from the dropdown menu. You have an option to exclude specific images from Lazy Loading. This is done by adding the class of the image in the tab. Enable the Maximum Image Width if you often upload large images on your website. Enabling this will resize your existing and future images whose width exceeds 2560 px.
-
-You can modify the max image width setting using the filter we've designed for that purpose. Here's an example of the code, you can add to your functions.php file:
-
-	add_filter( 'sgo_set_max_image_width', 'max_image_width' );
-	function max_image_width( $max_allowed_width ) {
-		// Add the value you want to adjust as max image width.
-		$max_allowed_width = 1250;
-
-		return $max_allowed_width;
-	}
-
-You can modify the default Webp quality setting using the filter we've designed for that purpose. The default setting is 80, you can use values between 0 and 100:
-
-	add_filter( 'sgo_webp_quality', 'webp_quality' );
-	function webp_quality( $quality ) {
-		// Add the value you want to adjust as Webp image quality.
-		$quality = 100;
-
-		return $quality;
-	}
-
-You can modify the default Webp quality type setting using the filter we've designed for that purpose. The default quality type is lossy which equals to 0, if you want to set it to lossless - adjust the type to 1 as follows:
-
-	add_filter( 'sgo_webp_quality_type', 'reset_webp_quality_type' );
-	function reset_webp_quality_type( $quality_type ) {
-		// Add the value you want to adjust as max image width.
-		$quality_type = 1;
-
-		return $quality_type;
-	}
-
-= SiteGround Optimizer Speed Test Page =
-
-Our performance check is powered by Google PageSpeed. Here you can check how well your website is optimized. The detailed test results  will provide you with additional information on what can be optimized more.
-
-= Plugin Compatibility =
-
-If your plugin does not trigger standard WordPress hooks or you need us to purge the cache, you can use this public function in your code:
-
-	if (function_exists('sg_cachepress_purge_cache')) {
-		sg_cachepress_purge_cache();
-	}
-
-Preferably, you can pass an URL to the function to clear the cache just for it instead of purging the entire cache. For example:
-
-	if (function_exists('sg_cachepress_purge_cache')) {
-		sg_cachepress_purge_cache('https://yoursite.com/pluginpage');
-	}
-
-You can exclude styles from being combined and minified using the filters we’ve designed for that purpose. Here’s an example of the code, you can add to your functions.php file:
-
-	add_filter( 'sgo_css_combine_exclude', 'css_combine_exclude' );
-	function css_combine_exclude( $exclude_list ) {
-		// Add the style handle to exclude list.
-		$exclude_list[] = 'style-handle';
-		$exclude_list[] = 'style-handle-2';
-
-		return $exclude_list;
-	}
-
-	add_filter( 'sgo_css_minify_exclude', 'css_minify_exclude' );
-	function css_minify_exclude( $exclude_list ) {
-		// Add the style handle to exclude list.
-		$exclude_list[] = 'style-handle';
-		$exclude_list[] = 'style-handle-2';
-
-		return $exclude_list;
-	}
-
-You can exclude script from being minified using the filter we’ve designed for that purpose. Here’s an example of the code, you can add to your functions.php file:
-
-	add_filter( 'sgo_js_minify_exclude', 'js_minify_exclude' );
-	function js_minify_exclude( $exclude_list ) {
-		$exclude_list[] = 'script-handle';
-		$exclude_list[] = 'script-handle-2';
-
-		return $exclude_list;
-	}
-
-You can exclude script from being combined using the filter we’ve designed for that purpose. Here’s an example of the code, you can add to your functions.php file:
-
-	add_filter( 'sgo_javascript_combine_exclude', 'js_combine_exclude' );
-	function js_combine_exclude( $exclude_list ) {
-		$exclude_list[] = 'script-handle';
-		$exclude_list[] = 'script-handle-2';
-
-		return $exclude_list;
-	}
-
-You can exclude an external script from being combined using the filter we’ve designed for that purpose. Here’s an example of the code, you can add to your functions.php file:
-
-	add_filter( 'sgo_javascript_combine_excluded_external_paths', 'js_combine_exclude_external_script' );
-	function js_combine_exclude_external_script( $exclude_list ) {
-		$exclude_list[] = 'script-host.com';
-		$exclude_list[] = 'script-host-2.com';
-
-		return $exclude_list;
-	}
-
-You can exclude inline script from being combined using the filter we’ve designed for that purpose. Here’s an example of the code, you can add to your functions.php file:
-
-	add_filter( 'sgo_javascript_combine_excluded_inline_content', 'js_combine_exclude_inline_script' );
-	function js_combine_exclude_inline_script( $exclude_list ) {
-		$exclude_list[] = 'first few symbols of inline content script';
-
-		return $exclude_list;
-	}
-
-You can exclude all inline scripts from being combined using the filter we’ve designed for that purpose. Here’s an example of the code, you can add to your functions.php file:
-
-	add_filter( 'sgo_javascript_combine_exclude_all_inline', '__return_true' );
-
-You can exclude all inline scripts from being combined using the filter we’ve designed for that purpose. Here’s an example of the code, you can add to your functions.php file:
-
-	add_filter( 'sgo_javascript_combine_exclude_all_inline_modules', '__return_true' );
-
-You can exclude script from being loaded asynchronously  using the filter we’ve designed for that purpose. Here’s an example of the code, you can add to your functions.php file:
-
-	add_filter( 'sgo_js_async_exclude', 'js_async_exclude' );
-	function js_async_exclude( $exclude_list ) {
-		$exclude_list[] = 'script-handle';
-		$exclude_list[] = 'script-handle-2';
-
-		return $exclude_list;
-	}
-
-You can exclude url or url that contain specific query param using the following filters:
-
-	add_filter( 'sgo_html_minify_exclude_params', 'html_minify_exclude_params' );
-	function html_minify_exclude_params( $exclude_params ) {
-		// Add the query params that you want to exclude.
-		$exclude_params[] = 'test';
-
-		return $exclude_params;
-	}
-
-	add_filter( 'sgo_html_minify_exclude_urls', 'html_minify_exclude' );
-	function html_minify_exclude( $exclude_urls ) {
-		// Add the url that you want to exclude.
-		$exclude_urls[] = 'http://mydomain.com/page-slug';
-
-		return $exclude_urls;
-	}
-
-You can exclude static resources from the removal of their query strings using the filter we’ve designed for that purpose. Here’s an example of the code, you can add to your functions.php file:
-
-	add_filter( 'sgo_rqs_exclude', 'sgo_rqs_exclude_scripts' );
-	function sgo_rqs_exclude_scripts( $exclude_list ) {
-		$exclude_list[] = 'part-of-the-resource-path.js';
-		return $exclude_list;
-	}
-
-You can exclude images from Lazy Load using the following filter:
-
-	add_filter( 'sgo_lazy_load_exclude_classes', 'exclude_images_with_specific_class' );
-	function exclude_images_with_specific_class( $classes ) {
-		// Add the class name that you want to exclude from lazy load.
-		$classes[] = 'test-class';
-
-		return $classes;
-	}
-
-You can exclude specific post type from Lazy Load using the following filter:
-
-	add_filter( 'sgo_lazy_load_exclude_post_types', 'exclude_lazy_load_from_post_type' );
-	function exclude_lazy_load_from_post_type( $post_types ) {
-		// Add the post type that you want to exclude from using lazy load.
-		$post_types[] = 'post-type';
-
-		return $post_types;
-	}
-
-You can exclude a specific url from Lazy Load using the following filter:
-
-	add_filter( 'sgo_lazy_load_exclude_urls', 'exclude_lazy_load_for_url' );
-	function exclude_lazy_load_for_url( $excluded_urls ) {
-		// Add the url that you want to exclude from using lazy load.
-		$excluded_urls[] = 'http://mydomain.com/page-slug';
-
-		return $excluded_urls;
-	}
-
-With these new filters you can exclude specific assets from being lazy loaded. Keep in mind that using those filters can reduce perfomance in some cases.
-
-You can use this filter for excluding specific images by adding their source url:
-
-	add_filter( 'sgo_lazy_load_exclude_images', 'exclude_images_from_lazy_load' );
-	function exclude_images_from_lazy_load( $excluded_images ) {
-		// Add the src url of the image that you want to exclude from using lazy load.
-		$excluded_images[] = 'http://mydomain.com/wp-content/uploads/your-image.jpeg';
-
-		return $excluded_images;
-	}
-
-You can use this filter for excluding specific videos by adding their source url:
-
-	add_filter( 'sgo_lazy_load_exclude_videos', 'exclude_videos_from_lazy_load );
-	function exclude_videos_from_lazy_load( $excluded_videos ) {
-		// Add the src url of the video that you want to exclude from using lazy load.
-		$excluded_videos[] = 'http://mydomain.com/wp-content/uploads/your-video.mp4';
-
-		return $excluded_videos;
-	}
-
-You can use this filter for excluding specific iframe by adding their source url:
-
-	add_filter( 'sgo_lazy_load_exclude_iframe', 'exclude_iframe_from_lazy_load );
-	function exclude_iframe_from_lazy_load( $excluded_iframe ) {
-		// Add the src url of the iframe that you want to exclude from using lazy load.
-		$excluded_iframe[] = 'http://mydomain.com/wp-content/uploads/iframe-src.mp4';
-
-		return $excluded_iframe;
-	}
-
-= WP-CLI Support = 
-
-In version 5.0 we've added full WP-CLI support for all plugin options and functionalities. 
-
-Caching:
-* `wp sg optimize dynamic-cache enable|disable` - enables or disables Dynamic caching rules
-* `wp sg optimize file-cache enable|disable` - enables or disables File caching rules
-* `wp sg memcached enable|disable` - enables or disables Memcached
-* `wp sg optimize autoflush-cache enable|disable` - enables or disables Automatic Purge cache option
-* `wp sg optimize purge-rest-cache enable|disable` - enables or disables Automatic Purge for WordPress API cache
-* `wp sg purge (url)` - purges the Dynamic, File-based and Object caches for the site or a single url (if passed)
-* `wp sg optimize mobile-cache enable|disable` - enables or disables Browser caching rules
-
-Environment:
-* `wp sg forcehttps enable|disable` - enables or disables HTTPS for your site
-* `wp sg optimize fix-insecure-content enable|disable` - enables or disables Insecure Content Fix
-* `wp sg heartbeat frontend|dashboard|post --frequency=<frequency>` - Adjust Heartbeat control frequency for a specific location
-* `wp sg dns-prefetch add|remove|urls <value>` - add, remove or list urls in the DNS Prefetch list.
-* `wp sg database-optimization enable|disable|update|status --options=<database_optimization>` - enables or disables the DB Optimization, update for specific options only, show a full list of enabled options.
-
-= Available for the database-optimization options: =
-
-* delete_auto_drafts
-* delete_revisions
-* delete_trashed_posts
-* delete_spam_comments
-* delete_trash_comments
-* expired_transients
-* optimize_tables
-
-Frontend:
-* `wp sg optimize css enable|disable` - enables or disables CSS minification
-* `wp sg optimize combine-css enable|disable` - enables or disables CSS combination
-* `wp sg optimize preload-combined-css enable|disable` - enables or disables Preload Combined CSS
-* `wp sg optimize js enable|disable` - enables or disables JS minification
-* `wp sg optimize combine-js enable|disable` - enables or disables JS combination
-* `wp sg optimize js-async enable|disable` - enables or disables Defer Render-blocking JavaScript option
-* `wp sg optimize html enable|disable` - enables or disables HTML minification
-* `wp sg optimize web-fonts enable|disable` - enables or disables Web Fonts Optimization
-* `wp sg optimize querystring enable|disable` - enables or disables query strings removal
-* `wp sg optimize emojis enable|disable` - enables or disables stripping of the Emoji scripts
-
-Media:
-* `wp sg images --compression-level=<int>` - adjusts images optimization compression level - <value> should be set as follows: 0 for Disabled, 1 for Low(25%), 2 for Medium(60%), 3 for High(85%)
-* `wp sg optimize backup-media enable|disable` - enables or disables Backup Media option
-* `wp sg optimize webp enable|disable` - enables or disables WebP image optimization
-* `wp sg optimize lazyload enable|disable` - enables or disables Lazy loading of images
-* `wp sg optimize resize-images enable|disable` - enables or disables Maximum Image Width optimization
-
-Others:
-* `wp sg settings export` - exports the current plugin settings
-* `wp sg settings import --hash=<string>` - imports plugin settings and applies them
-* `wp sg status (optimization option)` - returns optimization current status (enabled|disabled)
-
-= Available wp sg status options =
-
-* dynamic-cache|autoflush|browser-caching|file-cache
-* memcache
-* ssl|ssl-fix
-* database-optimization
-* html|js|css
-* combine-css|combine-js
-* js-async
-* google-fonts
-* querystring
-* emojis
-* webp
-* lazyload-images
-
-= Requirements =
+**The award-winning Speed Optimizer plugin is a free WordPress performance-boosting solution to improve user experience, increase conversion rates and drive more traffic. Achieve better SEO rankings, improve Core Web Vitals, and your Google Page Speed Insights.**
+
+Developed by the WordPress speed experts at [SiteGround](https://www.siteground.com/wordpress-plugins/siteground-optimizer), our free plugin is actively used and trusted by more than 2 million website owners. It’s specially designed to be easy to use, allowing users of all skill levels to make complex speed optimizations in a few clicks.
+
+Install our plugin now to dramatically improve your WordPress performance on any hosting platform:
+
+= Essential Speed-boosting Features: =
+
+* **Powerful Caching**  for up to 20% website loading speed increase
+* **Frontend Optimizations** to reduce wait time due to the number of scripts and characters in your code
+* **Media Optimizations** for up to 85% image size compression without sacrificing quality
+* **WordPress Environment Optimizations** to optimize the usage and efficiency of your WordPress site resources
+* **Speed Test** & tips to get on-demand optimization tips to help your site get even faster
+
+Don't let a slow website compromise your online success. Join the millions of satisfied website owners and see the difference with the free Speed Optimizer plugin.
+
+= AWARDS: =
+[Monster Awards 2022](https://www.templatemonster.com/awards/winners-2022/): Best WordPress Optimization Plugin 🥈
+
+= Plugin Video =
+[youtube https://www.youtube.com/watch?v=8grmZSkStak]
+
+= Plugin Tutorial =
+To gain in-depth knowledge about our plugin and its functionalities, check our [Speed Optimizer Tutorial](https://www.siteground.com/tutorials/wordpress/sg-optimizer/). It provides detailed information on how each aspect works and maximizes your website's performance.
+
+== CACHING ==
+The Caching page gives you full control of your website’s cache, allowing you to enhance its performance significantly. Take advantage of the powerful caching options available to boost your website’s speed:
+= DYNAMIC CACHING: =
+By enabling Dynamic Caching, all non-static resources of your website are intelligently cached, eliminating the need for repetitive database queries and enhancing page loading speed and TTFB (time to first byte). This default feature is available exclusively for SiteGround servers, ensuring optimal performance.
+= FILE-BASED CACHING: =
+By activating file-based caching, your website generates and stores static HTML versions, ensuring faster loading times and an improved user experience. This efficient caching method stores the cached files conveniently in the browser's memory, allowing future visitors to access your site swiftly and seamlessly.
+= MEMCACHED: =
+Unleash the power of object caching for your WordPress website. Memcached revolutionizes website performance by storing frequently executed queries in your databases and reusing them for lightning-fast results. This powerful feature is exclusively available in the SiteGround environment.
+= CACHING SETTINGS: =
+* Automatic Cache Purge: ensure the cache is cleared whenever necessary
+* Manual Cache Purge: purge cache manually if you are editing new material and do not have automatic purge activated.
+* Browser-specific Caching: generate caching separately for different browsers
+* Exclude Post Types from Caching: exclude specific post types from being cached
+* Exclude URLs from Caching: exclude specific URLs or utilize wildcards to exclude any sub-pages of a designated "parent-page."
+* Test URL Caching Status: verify if dynamic caching is actively running on specific URLs
+
+
+== ENVIRONMENT OPTIMIZATIONS ==
+Optimize and fine-tune your website's environment for optimal performance:
+= HTTPS Enforce: =
+Ensure a secure browsing experience for your visitors by effortlessly enabling HTTPS for your site. Say goodbye to insecure content errors and build trust with your audience.
+= Scheduled Database Maintenance: =
+Take control of your database by activating the Database Optimization feature. This functionality removes unnecessary items and optimizes your database tables, leading to improved efficiency and performance. If you're using the InnoDB storage engine, table optimization is automatically handled by the engine itself.
+= Heartbeat Control: =
+Manage the frequency of the WP Heartbeat for different areas of your website. By default, the WordPress Heartbeat API checks for scheduled tasks every 15 seconds on post edit pages and every 60 seconds on the dashboard and front end. With Heartbeat Control, you can adjust the frequency of these checks or even disable them entirely, providing you with greater control over resource allocation.
+== FRONTEND OPTIMIZATIONS ==
+Enhance and fine-tune the performance of your website's front end:
+= CSS Tab: =
+Enable CSS file minification, activate or deactivate CSS combinations to reduce server requests, and even preload combined CSS for optimized performance. Additionally, you can exclude specific styles from being combined or minified, giving you complete control over your CSS optimization.
+= JavaScript Tab: =
+Activate or deactivate JS minification and combination to reduce script sizes and a lower number of server requests. You can also defer render-blocking JavaScript to expedite the initial site load. Furthermore, you have the ability to exclude specific scripts from various optimization processes, providing flexibility in optimizing your JavaScript resources.
+= General Tab: =
+Further optimization options include:
+
+* Web Fonts Optimization: Enhance the loading of Google fonts by adding a preconnect link in your head tag. This informs the browser to establish a connection to Google's font repository as quickly as possible. Additionally, all other local fonts will be preloaded, resulting in faster caching and rendering. When combined with CSS Combination, we also modify the font-display property to improve rendering speed.
+* Fonts Preloading: With locally hosted fonts being preloaded, you’re allowing browsers to cache and render them at an accelerated pace.
+* Remove Query Strings from Static Resources: Improve caching efficiency by removing query strings from static resources, optimizing their caching capabilities.
+* Disable Emojis:  Prevent WordPress from detecting and generating emojis on your pages by disabling emojis support. This helps streamline your pages and improve performance.
+* DNS Pre-fetch for External Domains: Enabling the DNS Pre-fetch for a domain will resolve it before resources from it get requested making those resources load faster.
+== MEDIA OPTIMIZATIONS ==
+Optimize your website media by reducing image size by up to 85% times while maintaining top-notch quality.
+= Image Compression: =
+Effortlessly configure image compression to resize your existing images and reduce the space they occupy on your server. The dimensions of the images will remain unchanged, allowing for optimized storage. Fine-tune the compression level and choose whether to create backups of the original images. Please note that this feature is exclusive to the SiteGround Environment.
+= WebP Images: =
+Leverage the power of WebP, a cutting-edge image format supported by modern browsers, to significantly reduce the size of your images. If a browser doesn't support WebP, the original images will be loaded.
+= Lazy Load Media: =
+Take control of your website's asset loading with the ability to enable or disable Lazy Load for various assets. You can exclude specific assets such as iframes, videos, thumbnails, widgets, and shortcodes from the dropdown menu. Additionally, you have the option to exclude specific images from Lazy Loading by adding their respective class in the dedicated tab.
+= Maximum Image Width: =
+If you frequently upload large images to your website, you can enable the Maximum Image Width option that automatically resizes existing and future images whose width exceeds 2560 pixels. By optimizing image sizes, you can enhance performance and reduce bandwidth usage.
+You can customize your media optimization to your specific needs using the filters, we’ve designed for this purpose - link to tutorial.
+== SPEED TEST ==
+Evaluate the optimization level of your website with Speed Optimizer’s Speed test tool. Our performance check utilizes the robust capabilities of Google PageSpeed to provide comprehensive insights into your site's optimization.
+By conducting the speed test, you will receive detailed results highlighting areas that can be further optimized for enhanced performance. These insights will empower you to fine-tune your website and unlock its maximum potential and increase conversions.
+
+## Requirements ##
 
 In order to work correctly, this plugin requires that your server meets the following criteria:
 
@@ -458,12 +109,43 @@ Our plugin uses a cookie in order to function properly. It does not store person
 = Manual Installation =
 
 1. Login to the WordPress admin panel and go to Plugins -> Add New
-1. Select the 'Upload' menu 
+1. Select the 'Upload' menu
 1. Click the 'Choose File' button and point your browser to the sg-cachepress.zip file you've downloaded
 1. Click the 'Install Now' button
 1. Go to Plugins -> Installed Plugins and click the 'Activate' link under the WordPress SiteGround Optimizer listing
 
 == Changelog ==
+= Version 7.4.3 =
+Release Date: Oct 24th , 2023
+
+* Data collection opt out option
+* Readme file formatting improvements
+* Plugin name formatting improvements
+* Exclude from Deferral compatibility issue with themes twentytwentytwo and twentytwentythree is fixed
+
+= Version 7.4.2 =
+Release Date: Sept 26th, 2023
+
+* Changing the name we use inside the plugin from SiteGround Optimizer to Speed Optimizer
+* Updating data collection process and introducing a link in the plugin interface to the Plugin Privacy notice
+
+= Version 7.4.1 =
+Release Date: Sept 12th, 2023
+
+* Improved performance reports.
+
+= Version 7.4.0 =
+Release Date: August 22nd, 2023
+
+* Improved default enabled features.
+* Campaign templates update.
+* Performance reports for non SiteGround users.
+
+= Version 7.3.4 =
+Release Date: July 27th, 2023
+
+* Improved Dynamic Caching handling.
+* Improved Speed Test results.
 
 = Version 7.3.3 =
 Release Date: June 8th, 2023
@@ -728,7 +410,7 @@ Release Date: November 8th, 2021
 * NEW - Backup Original Images when Optimizing
 * NEW - WordPress API Cache Control
 * Improved WordPress Heartbeat Optimization
-* Improved Image Compression Control 
+* Improved Image Compression Control
 
 = Version 5.9.7 =
 * Improved cache busting for themes utilizing custom post types
@@ -803,7 +485,7 @@ Release Date: November 8th, 2021
 * Improved support for sites with custom wp-content dir
 
 = Version 5.7.15 =
-* Improved Contact Form 7 support  
+* Improved Contact Form 7 support
 
 = Version 5.7.14 =
 * Improved Vary:User-Agent handling
@@ -975,7 +657,7 @@ Release Date: November 8th, 2021
 * Interface revamp for better accessability
 * Improved compatibility with page builders
 * Improved compatibility with latest Elementor
-* Added support for popular AMP plugins 
+* Added support for popular AMP plugins
 * Better WebP optiomization status reporting
 
 = Version 5.4.5 =
@@ -1002,7 +684,7 @@ Release Date: November 8th, 2021
 
 = Version 5.4.0 =
 * Added WebP Support on All Accounts on Site Tools
-* Added Google PageSpeed Test 
+* Added Google PageSpeed Test
 * Improved Image Optimization Process
 * Improved SSL Certificate check
 
@@ -1170,7 +852,7 @@ Release Date: November 8th, 2021
 = Version 5.0.7 =
 * Fixed bug with notifications removal
 * Fixed bug with modifying wrong .htaccess file for installations in subdirectory
-* Flush redux cache when updating to new version 
+* Flush redux cache when updating to new version
 * Improved check for existing SSL rules in your .htaccess file
 * Added check and removal of duplicate Gzip rules in your .htaccess file
 * Added check and removal of duplicate Browser caching  rules in your .htaccess file
@@ -1226,7 +908,7 @@ Release Date: November 8th, 2021
 = Version 4.0.0 =
 * Added proper Multisite support
 * Quick optimizations - Gzip and Browser cache config settings for the Network Admin
-* Network admin can purge the cache per site 
+* Network admin can purge the cache per site
 * Network admin can disallow Cache and HTTPS configuration pages per site
 * WPML support when Memcached is enabled
 * Cache is being purged per site and not for the entire network
@@ -1409,9 +1091,6 @@ Release Date: November 8th, 2021
 = 1.0 =
 * Plugin created.
 
-== Credits ==
-Photo credits to Anna Shvets https://www.pexels.com/@shvetsa
-
 == Screenshots ==
 
 1. The SiteGround Optimizer Dashboard Page offers a quick look at the current optimization status of your website, along with shortcuts to the relevant optimization pages.
@@ -1420,3 +1099,11 @@ Photo credits to Anna Shvets https://www.pexels.com/@shvetsa
 4. The SiteGround Optimizer Frontend Optimization Page allows you to Minify HTML, CSS & JS, as well as to remove query strings from your static resources and disable the Emoji support.
 5. The SiteGround Optimizer Media Page allows you to optimize your Media Library images, as well as adds Lazy Loading functionality for your site.
 6. The SiteGround Optimizer Speed Test Page, allows you to test your site loading speed, as well as additional tips on improving your site performance.
+
+## Data Collection ##
+
+By default the plugin collects the information [listed here](https://www.siteground.com/kb/what-information-wp-plugins-collect). This data is collected only for technical analysis, improvements and the possibility to contact the plugin user in case urgent issues need to be fixed (for example a critical security release that needs to be communicated to site owners). The plugin user may opt out from the WP admin from the collection of this data, but we do not recommend this, as it may negatively impact the plugin performance. You may find more information on data collection in our [Plugins Privacy Notice](https://www.siteground.com/viewtos/siteground_plugins_privacy_notice).
+
+## Credits ##
+
+Photo credits to Anna Shvets https://www.pexels.com/@shvetsa

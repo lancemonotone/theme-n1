@@ -535,6 +535,22 @@ class Rest {
 				),
 			)
 		);
+
+		register_rest_route(
+			self::REST_NAMESPACE, '/performance-report/', array(
+				'methods'             => 'GET',
+				'callback'            => array( $this->rest_helper_misc, 'get_performance_report_recipient' ),
+				'permission_callback' => array( $this, 'check_permissions' ),
+			)
+		);
+
+		register_rest_route(
+			self::REST_NAMESPACE, '/perf-notification-email/', array(
+				'methods'             => 'POST',
+				'callback'            => array( $this->rest_helper_misc, 'manage_notification_email' ),
+				'permission_callback' => array( $this, 'check_permissions' ),
+			)
+		);
 	}
 
 	/**

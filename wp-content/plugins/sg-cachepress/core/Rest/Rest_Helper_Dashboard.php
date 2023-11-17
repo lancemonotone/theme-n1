@@ -224,7 +224,7 @@ class Rest_Helper_Dashboard extends Rest_Helper {
 
 		// Get the body of the response.
 		$body = wp_remote_retrieve_body( $response );
-		
+
 		// Decode the json response.
 		$banners = json_decode( $body, true );
 

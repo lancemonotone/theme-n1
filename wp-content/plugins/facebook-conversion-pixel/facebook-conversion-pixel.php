@@ -8,7 +8,7 @@
 	Author: Fatcat Apps
 	Author URI: https://fatcatapps.com/
 	License: GPLv2
-	Version: 3.0.0
+	Version: 3.0.3
 */
 
 
@@ -31,7 +31,7 @@ if ( !defined( 'FCA_PC_PLUGIN_DIR' ) ) {
 	if ( FCA_PC_DEBUG ) {
 		define( 'FCA_PC_PLUGIN_VER', '3.0.' . time() );
 	} else {
-		define( 'FCA_PC_PLUGIN_VER', '3.0.0' );
+		define( 'FCA_PC_PLUGIN_VER', '3.0.3' );
 	}
 
 	//LOAD CORE
@@ -193,11 +193,7 @@ if ( !defined( 'FCA_PC_PLUGIN_DIR' ) ) {
 			$options['woo_integration'] = false;
 			$options['woo_feed'] = false;
 		}
-		if ( $plugin == 'easy-digital-downloads/easy-digital-downloads.php' ) {
-			$options['edd_integration'] = false;
-			$options['edd_feed'] = false;
-		}
-
+	
 		update_option( 'fca_pc', $options );
 
 	}

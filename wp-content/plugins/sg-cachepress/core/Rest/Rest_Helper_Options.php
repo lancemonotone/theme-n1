@@ -336,23 +336,23 @@ class Rest_Helper_Options extends Rest_Helper {
 					),
 					'minify_css_exclude' => array(
 						'default'  => $assets['styles']['non_minified'],
-						'selected' => array_values( get_option( $this->option_prefix . 'minify_css_exclude', array() ) ),
+						'selected' => $this->prepare_selected_values( $assets['styles']['non_minified'], 'minify_css_exclude' ),
 					),
 					'combine_css_exclude' => array(
 						'default'  => $assets['styles']['default'],
-						'selected' => array_values( get_option( $this->option_prefix . 'combine_css_exclude', array() ) ),
+						'selected' => $this->prepare_selected_values( $assets['styles']['default'], 'combine_css_exclude' ),
 					),
 					'minify_javascript_exclude' => array(
 						'default'  => $assets['scripts']['non_minified'],
-						'selected' => array_values( get_option( $this->option_prefix . 'minify_javascript_exclude', array() ) ),
+						'selected' => $this->prepare_selected_values( $assets['scripts']['non_minified'], 'minify_javascript_exclude' ),
 					),
 					'combine_javascript_exclude' => array(
 						'default'  => $assets['scripts']['default'],
-						'selected' => array_values( get_option( $this->option_prefix . 'combine_javascript_exclude', array() ) ),
+						'selected' => $this->prepare_selected_values( $assets['scripts']['default'], 'combine_javascript_exclude' ),
 					),
 					'async_javascript_exclude' => array(
 						'default'  => $assets['scripts']['default'],
-						'selected' => array_values( get_option( $this->option_prefix . 'async_javascript_exclude', array() ) ),
+						'selected' => $this->prepare_selected_values( $assets['scripts']['default'], 'async_javascript_exclude' ),
 					),
 					'dns_prefetch_urls' => array(
 						'default'  => array(),
@@ -386,6 +386,26 @@ class Rest_Helper_Options extends Rest_Helper {
 
 		// Send the options to react app.
 		self::send_json_success( '', array_merge( $this->prepare_options( $params['page_id'] ), $page_data ) );
+	}
+
+	/**
+	 * Prepare the selected values for the FE, if default values are present.
+	 *
+	 * @since 7.4.3
+	 *
+	 * @param  array $defaults The default assets used in optimizations.
+	 * @param  array $exclude  The excludes, selected by user or added by default.
+	 *
+	 * @return array           Empty array if no defaults are found, indexed array if values are present.
+	 */
+	public function prepare_selected_values( $defaults, $exclude ) {
+		// Return empty array if no default values are set.
+		if ( empty( $defaults ) ) {
+			return array();
+		}
+
+		// Prepare the selected values.
+		return array_values( get_option( $this->option_prefix . $exclude, array() ) );
 	}
 
 	/**

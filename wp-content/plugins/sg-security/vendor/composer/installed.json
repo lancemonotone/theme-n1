@@ -463,12 +463,12 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.siteground.com:wordpress/siteground-data.git",
-                "reference": "fa35e01366de57ea9c597b73073af7c32ccbd0a0"
+                "reference": "7a74a612208636dd6f489c5f663ae3659819f3ce"
             },
             "require": {
                 "siteground/siteground-helper": "master@dev"
             },
-            "time": "2022-12-05T07:40:40+00:00",
+            "time": "2023-10-23T10:09:21+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "source",
@@ -512,9 +512,9 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.siteground.com:wordpress/siteground-helper.git",
-                "reference": "0533134e6c06c45ae4c5f12911ce9e18d3d6a2ff"
+                "reference": "5601ba384a643e54359b8249e2be591e90161a7d"
             },
-            "time": "2023-04-26T06:53:22+00:00",
+            "time": "2023-09-07T11:49:29+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "source",
@@ -523,6 +523,11 @@
                     "SiteGround_Helper\\": "src/"
                 }
             },
+            "license": [
+                "MIT"
+            ],
+            "description": "Helper package used for Siteground wordpress plugins",
+            "homepage": "https://github.com/SiteGround/siteground-i18n",
             "install-path": "../siteground/siteground-helper"
         },
         {

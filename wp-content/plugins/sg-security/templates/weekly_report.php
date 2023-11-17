@@ -10,7 +10,7 @@
     <meta name="color-scheme" content="light dark"/>
     <meta name="supported-color-schemes" content="light dark"/>
     <meta name="description" content="SiteGround Newsletter"/>
-    <title>SiteGround Security</title>
+    <title>Security Optimizer by SiteGround</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto:400,700" rel="stylesheet"/>
     <style type="text/css">
         :root {

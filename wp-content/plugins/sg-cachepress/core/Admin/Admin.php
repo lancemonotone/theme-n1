@@ -27,7 +27,7 @@ class Admin {
 		'sgo_environment' => 'Environment',
 		'sgo_frontend'    => 'Frontend',
 		'sgo_media'       => 'Media',
-		'sgo_analysis'    => 'Speed Test',
+		'sgo_analysis'    => 'Site Performance',
 	);
 
 	public $multisite_permissions = array(
@@ -59,8 +59,8 @@ class Admin {
 
 		foreach ( $this->subpages as $id => $title ) {
 
-			$subpage_ids[] = 'sg-optimizer_page_' . $id . '';
-			$subpage_ids[] = 'sg-optimizer_page_' . $id . '-network';
+			$subpage_ids[] = 'speed-optimizer_page_' . $id . '';
+			$subpage_ids[] = 'speed-optimizer_page_' . $id . '-network';
 		}
 
 		return $subpage_ids;
@@ -220,7 +220,7 @@ class Admin {
 		$memcache_crashed = (int) get_site_option( 'siteground_optimizer_memcache_crashed', 0 );
 
 		$class   = 'notice notice-error';
-		$message = __( 'SiteGround Optimizer has detected that Memcached was turned off. If you want to use it, please enable it from your SiteGround control panel first.', 'sg-cachepress' );
+		$message = __( 'Speed Optimizer by SiteGround has detected that Memcached was turned off. If you want to use it, please enable it from your SiteGround control panel first.', 'sg-cachepress' );
 
 		if ( 1 === $memcache_crashed ) {
 			$message = __( 'Your site tried to store a single object above 1MB in Memcached which is above the limitation and will actually slow your site rather than speed it up. Please, check your Options table for obsolete data before enabling it again. Note that the service will be automatically disabled if such error occurs again.', 'sg-cachepress' );
@@ -245,8 +245,8 @@ class Admin {
 		}
 
 		\add_menu_page(
-			__( 'SiteGround Optimizer', 'sg-optimizer' ), // Page title.
-			__( 'SG Optimizer', 'sg-cachepress' ), // Menu item title.
+			__( 'Speed Optimizer', 'sg-cachepress' ), // Page title.
+			__( 'Speed Optimizer', 'sg-cachepress' ), // Menu item title.
 			'manage_options',
 			\SiteGround_Optimizer\PLUGIN_SLUG,   // Page slug.
 			array( $this, 'render' ),
@@ -299,6 +299,7 @@ class Admin {
 		$id = str_replace( ' ', '', ucwords( str_replace(
 			array(
 				'sg-optimizer_page_',
+				'speed-optimizer_page_',
 				'_network',
 				'sgo_',
 				'-',
@@ -436,24 +437,30 @@ class Admin {
 		}
 
 		if ( Helper_Service::is_siteground() ) {
-			if ( 1 === $data_consent ) {
-				return array(
-					'show_data_field'  => 0,
-					'show_email_field' => 0,
-				);
-			}
-
 			return array(
-				'show_data_field'  => 1,
+				'show_data_field' => 0,
 				'show_email_field' => 0,
 			);
 		}
 
+		return array(
+			'show_data_field'  => 0,
+			'show_email_field' => 1,
+		);
+
+
 		$settings = array();
 
-		$settings['show_data_field'] = 0 === $data_consent ? 1 : 0;
+		$settings['show_data_field'] = 0;
 		$settings['show_email_field'] = 0 === $email_consent ? 1 : 0;
 
 		return $settings;
+	}
+
+	public function show_privacy_policy ( $text ) {
+		if ( false === $this->is_plugin_page() ) {
+			return $text;
+		}
+		return __( 'By installing and using this plugin you acknowledge that you have read and understood <a href="//siteground.com/viewtos/siteground_plugins_privacy_notice"> SiteGround Plugins Privacy Notice </a> and you give your consent for your personal data to be collected, processed and used as described in the Plugins Privacy Notice.', 'sg-cachepress' );
 	}
 }

@@ -91,16 +91,19 @@ function fca_pc_initiate_checkout_ga( $options ) {
 		$woo_id_mode = empty( $options['woo_product_id'] ) ? 'post_id' : $options['woo_product_id'];
 				
 		forEach ( WC()->cart->get_cart() as $item ) {
+			$product_id = empty( $item['product_id'] ) ? '' : $item['product_id'];
+			$line_total = empty( $item['line_total'] ) ? 0 : $item['line_total'];
+			$line_tax = empty( $item['line_tax'] ) ? 0 : $item['line_tax'];
 			
-			$value = $value + $item['line_total'] + $item['line_tax'];
-			$id = $woo_id_mode === 'post_id' ? $item['product_id'] : wc_get_product( $item['product_id'] )->get_sku();
+			$value = $value + $line_total + $line_tax;
+			$id = $woo_id_mode === 'post_id' ? $product_id : wc_get_product( $product_id )->get_sku();
 			
 			$item = array(
 				'item_id' => $id,
-				'item_name' => get_the_title( $item['product_id'] ),
+				'item_name' => get_the_title( $product_id ),
 			);
 			
-			$category = get_the_terms( $item['product_id'], 'product_cat' );
+			$category = get_the_terms( $product_id, 'product_cat' );
 			
 			if ( $category ) {
 				$max_product_categories = 5;

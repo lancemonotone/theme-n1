@@ -23,7 +23,7 @@ use SiteGround_Optimizer\File_Cacher\File_Cacher;
  */
 class Cli_Optimizer {
 	/**
-	 * Enable specific optimization for SiteGround Optimizer plugin.
+	 * Enable specific optimization for Speed Optimizer by SiteGround plugin.
 	 *
 	 * ## OPTIONS
 	 *

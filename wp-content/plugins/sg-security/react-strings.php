@@ -1,20 +1,19 @@
 <?php
 /* THIS IS A GENERATED FILE. DO NOT EDIT DIRECTLY. */
 $security_i18n_strings = array(
-__( "Get the Most of This Plugin" ), // src/components/consent-dialog/consent-dialog.js:24
-__( "Collect technical data about my installation. The data will be used to make sure that the plugin(s) works seamlessly on the widest possible range of WordPress sites. (A full list of the data to be collected can be found {{link}}here{{/link}})." ), // src/components/consent-dialog/consent-dialog.js:68
-__( "Send me occasional emails about updates, special offers and new features from SiteGround." ), // src/components/consent-dialog/consent-dialog.js:95
+__( "Get the Most of This Plugin" ), // src/components/consent-dialog/consent-dialog.js:21
+__( "Send occasional emails with tips on improving my site performance, information about new plugin features and exclusive offers by SiteGround. You can always opt-out from these." ), // src/components/consent-dialog/consent-dialog.js:64
 __( "Cancel" ), // src/components/sg-dialog/dialog-cancel-button.jsx:12
 __( "Confirm" ), // src/components/sg-dialog/dialog-submit-button.jsx:11
-__( "SiteGround Security" ), // src/constants/page-info.js:15
-__( "SiteGround Security is the all-in-one security solution for your WordPress website. With the carefully selected and easy to configure functions the plugin provides everything you need to secure your website and prevent a number of threats such as brute-force attacks, compromised login, data leaks and more." ), // src/constants/page-info.js:16
-__( "SiteGround Security - Login Security" ), // src/constants/page-info.js:23
+__( "Security Optimizer by SiteGround" ), // src/constants/page-info.js:15
+__( "Security Optimizer by SiteGround is the all-in-one security solution for your WordPress website. With the carefully selected and easy to configure functions the plugin provides everything you need to secure your website and prevent a number of threats such as brute-force attacks, compromised login, data leaks and more." ), // src/constants/page-info.js:16
+__( "Security Optimizer - Login Security" ), // src/constants/page-info.js:23
 __( "Login security is paramount for keeping your site and data secure. Use the tools we have compiled to protect your WordPress wp-admin from unauthorised visitors, bots and other human or automated attacks." ), // src/constants/page-info.js:24
-__( "SiteGround Security - Site Security" ), // src/constants/page-info.js:31
+__( "Security Optimizer - Site Security" ), // src/constants/page-info.js:31
 __( "We have created a list of tools to help you harden your WordPress site's security and keep it safe from malware, exploits and other malicious actions. The options tagged as recommended are essential for your site security." ), // src/constants/page-info.js:32
-__( "SiteGround Security - Activity Log" ), // src/constants/page-info.js:39
+__( "Security Optimizer - Activity Log" ), // src/constants/page-info.js:39
 __( "The activity log can help you monitor your site and login page for unauthorised visitors or brute force attempts. You can easily block and unblock IPs or visitors that look suspicious and prevent them from malicious actions." ), // src/constants/page-info.js:40
-__( "SiteGround Security - Post-hack Actions" ), // src/constants/page-info.js:47
+__( "Security Optimizer - Post-hack Actions" ), // src/constants/page-info.js:47
 __( "If you believe that your website was hacked, you have installed a compromised plugin or one of your users login has been compromised, you can use the tools in our post-hack actions for a quick remedy." ), // src/constants/page-info.js:48
 __( "Unknown Visitors Activity" ), // src/pages/activity-log/activity-log.jsx:26
 __( "Registered Users Activity" ), // src/pages/activity-log/activity-log.jsx:28
@@ -71,14 +70,14 @@ __( "Create" ), // src/pages/activity-log/weekly-reports.jsx:97
 __( "Manage Notification Emails" ), // src/pages/activity-log/weekly-reports.jsx:106
 __( "Email" ), // src/pages/activity-log/weekly-reports.jsx:111
 __( "Actions" ), // src/pages/activity-log/weekly-reports.jsx:116
-__( "Error" ), // src/pages/app/app.jsx:62
-__( "Success" ), // src/pages/app/app.jsx:63
+__( "Error" ), // src/pages/app/app.jsx:60
+__( "Success" ), // src/pages/app/app.jsx:61
 __( "Recent Activity" ), // src/pages/dashboard/activity/activity.jsx:19
 __( "View all logs" ), // src/pages/dashboard/activity/activity.jsx:47
 __( "Security Hardening" ), // src/pages/dashboard/hardening/hardening.jsx:26
 __( "Important Notifications" ), // src/pages/dashboard/notifications/notifications.jsx:24
 __( "Rate Us" ), // src/pages/dashboard/rate/rate.jsx:44
-__( "Thank you for using SiteGround Security!" ), // src/pages/dashboard/rate/rate.jsx:63
+__( "Thank you for using Security Optimizer by SiteGround!" ), // src/pages/dashboard/rate/rate.jsx:63
 __( "Help other people secure their WordPress website by rating our plugin." ), // src/pages/dashboard/rate/rate.jsx:67
 __( "Specific Period" ), // src/pages/login-settings/dialogs/away-mode.jsx:28
 __( "Weekly" ), // src/pages/login-settings/dialogs/away-mode.jsx:32
@@ -116,7 +115,7 @@ __( "Reset 2-factor Authentication" ), // src/pages/login-settings/dialogs/two-f
 __( "Resetting the 2FA authentication will enable them to set up their Authentication app anew on their next login. Use this functionality when a user no longer has access to their Authenticator app or backup codes and cannot log in." ), // src/pages/login-settings/dialogs/two-factor.jsx:23
 __( "Select User" ), // src/pages/login-settings/dialogs/two-factor.jsx:50
 __( "Two-factor authentication forces admin users to login only after providing a token, generated from the Google Authenticator application. When you enable this option, {{strong}}all admin & editor users will be asked to configure their two-factor authentication in the Authenticator app on their next login.{{/strong}}" ), // src/pages/login-settings/login-settings.jsx:47
-__( "Two-factor authentication forces admin users to login only after providing a token, generated from the Google Authenticator application. You can find the backup codes for your 2-factor authentication in the WordPress Profile page. If one of your users no longer have access to their Authenticator app and cannot log in to get their backup codes, {{link}}click here{{/link}} to reset their 2-factor authentication." ), // src/pages/login-settings/login-settings.jsx:51
+__( "Two-factor authentication forces admin users to login only after providing a token, generated from the Google Authenticator application. If one of your users no longer has access to their Authenticator app and cannot log in to get their backup codes, {{link}}click here{{/link}} to reset their 2-factor authentication." ), // src/pages/login-settings/login-settings.jsx:51
 __( "Login Settings" ), // src/pages/login-settings/login-settings.jsx:59
 __( "recommended" ), // src/pages/login-settings/login-settings.jsx:63
 __( "Custom Login URL" ), // src/pages/login-settings/login-settings.jsx:64

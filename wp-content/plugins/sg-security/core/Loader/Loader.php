@@ -119,6 +119,7 @@ class Loader {
 	 * @since 1.3.0
 	 */
 	public function add_settings_hooks() {
+		// Bail if we do not have users consent.
 		if ( 0 === intval( get_option( 'siteground_data_consent', 0 ) ) ) {
 			return;
 		}
@@ -225,7 +226,7 @@ class Loader {
 		add_action( 'upgrader_process_complete', array( $this->install_service, 'install' ) );
 
 		// Force the installation process if it is not completed.
-		if ( false === get_option( 'sgs_install_1_4_4', false ) ) {
+		if ( false === get_option( 'sgs_install_1_4_7', false ) ) {
 			add_action( 'init', array( $this->install_service, 'install' ) );
 		}
 	}
@@ -243,6 +244,7 @@ class Loader {
 		add_action( 'admin_enqueue_scripts', array( $this->admin, 'enqueue_scripts' ) );
 		add_action( 'admin_print_styles', array( $this->admin, 'admin_print_styles' ) );
 		add_action( 'admin_init', array( $this->admin, 'hide_errors_and_notices' ), PHP_INT_MAX );
+		add_filter( 'admin_footer_text', array( $this->admin, 'show_privacy_policy' ) );
 	}
 
 	/**

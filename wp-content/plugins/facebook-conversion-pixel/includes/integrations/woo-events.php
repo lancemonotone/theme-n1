@@ -49,34 +49,6 @@ function fca_pc_woo_add_to_cart( $cart_item_key, $product_id, $quantity, $variat
 }
 add_action( 'woocommerce_add_to_cart', 'fca_pc_woo_add_to_cart', 10, 6 );
 
-
-function fca_pc_woo_ajax_add_to_cart( ) {
-
-	$p = fca_pc_get_woo_product( sanitize_text_field( $_POST['product_id'] ) );
-
-	if ( $p ) {
-		
-		$options = get_option( 'fca_pc', array() );
-		$woo_id_mode = empty( $options['woo_product_id'] ) ? 'post_id' : $options['woo_product_id'];
-		$id = $woo_id_mode === 'post_id' ? $p->get_id() : $p->get_sku();
-		$content_type = $p->get_type() === 'variable' ? 'product_group' : 'product';
-		
-		$data = array(
-			'value' => wc_get_price_to_display( $p ),
-			'currency' => get_woocommerce_currency(),
-			'content_name' => $p->get_title(),
-			'content_ids' => array( $id ),
-			'content_type' => $content_type,
-		);
-		wp_send_json_success( $data );
-		
-	}
-
-}
-add_action( 'wp_ajax_fca_pc_woo_ajax_add_to_cart', 'fca_pc_woo_ajax_add_to_cart' );
-add_action( 'wp_ajax_nopriv_fca_pc_woo_ajax_add_to_cart', 'fca_pc_woo_ajax_add_to_cart' );
-
-
 function fca_pc_initiate_checkout( $options ) {
 	if ( function_exists( 'is_checkout' ) && is_checkout() && !is_order_received_page() ) {
 		$num_items = 0;
@@ -89,17 +61,21 @@ function fca_pc_initiate_checkout( $options ) {
 				
 		forEach ( WC()->cart->get_cart() as $item ) {
 			
-			$num_items = $num_items + $item['quantity'];
-			$value = $value + $item['line_total'] + $item['line_tax'];
-			$content_name[] = get_the_title( $item['product_id'] );
-			$content_ids[] = $woo_id_mode === 'post_id' ? $item['product_id'] : wc_get_product( $item['product_id'] )->get_sku();
-			$category = get_the_terms( $item['product_id'], 'product_cat' );
+			$product_id = empty( $item['product_id'] ) ? '' : $item['product_id'];
+			$line_total = empty( $item['line_total'] ) ? 0 : $item['line_total'];
+			$line_tax = empty( $item['line_tax'] ) ? 0 : $item['line_tax'];
+			$quantity = empty( $item['quantity'] ) ? 0 : $item['quantity'];
+			
+			$num_items = $num_items + $quantity;
+			$value = $value + $line_total + $line_tax;
+			$content_name[] = get_the_title( $product_id );
+			$content_ids[] = $woo_id_mode === 'post_id' ? $product_id : wc_get_product( $product_id )->get_sku();
+			$category = get_the_terms( $product_id, 'product_cat' );
 			if ( $category ) {
 				forEach ( $category as $term  ) {
 					$content_category[] = $term->name;
 				}
 			}
-
 		}
 		
 		$cart_data = array(

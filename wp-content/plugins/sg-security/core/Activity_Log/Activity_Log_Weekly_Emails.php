@@ -28,7 +28,7 @@ class Activity_Log_Weekly_Emails extends Activity_Log_Helper {
 		$this->weekly_report_email = new Email_Service(
 			'sgs_email_cron',
 			'weekly',
-			strtotime( 'next monday' ),
+			strtotime( 'next monday + ' . rand( 1, 360 ) . ' minutes' ),
 			array(
 				'recipients_option' => 'sg_security_notification_emails',
 				'subject'           => __( 'Weekly Activity for ', 'sg-security' ) . Helper_Service::get_site_url(),

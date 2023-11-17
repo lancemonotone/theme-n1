@@ -19,7 +19,7 @@ use SiteGround_Optimizer\Options\Options;
  */
 class Cli_DNS_Prefetch {
 	/**
-	 * Enable specific setting for SiteGround Optimizer plugin.
+	 * Enable specific setting for Speed Optimizer by SiteGround plugin.
 	 *
 	 * ## OPTIONS
 	 *

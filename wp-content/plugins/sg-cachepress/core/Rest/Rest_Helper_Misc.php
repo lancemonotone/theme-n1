@@ -7,6 +7,8 @@ use SiteGround_Optimizer\Rest\Rest;
 use SiteGround_Optimizer\Message_Service\Message_Service;
 use SiteGround_Optimizer\File_Cacher\File_Cacher;
 use SiteGround_Optimizer\Options\Options;
+use SiteGround_Optimizer\Performance_Reports\Performance_Reports;
+
 /**
  * Rest Helper class that manages misc rest routes  settings.
  */
@@ -115,10 +117,57 @@ class Rest_Helper_Misc extends Rest_Helper {
 
 		$data = json_decode( str_replace( '{{FEATURE_NAME}}', Rest::$popups[ $params['type'] ], $body ) );
 
-
 		self::send_json_success(
 			'',
 			$data
+		);
+	}
+
+	/**
+	 * Get the emails set to receive performance report email.
+	 *
+	 * @since 7.4.0
+	 *
+	 * @param Object $request The request object.
+	 */
+	public function get_performance_report_recipient( $request ) {
+		// Send the options to react app.
+		return self::send_json_success(
+			'',
+			array(
+				'entry'       => get_option( 'siteground_optimizer_performace_receipient', null ),
+				'max_emails' => 1,
+			)
+		);
+	}
+
+	/**
+	 * Manage the performance report notification email address.
+	 *
+	 * @since 7.4.0
+	 *
+	 * @param Object $request The request object.
+	 */
+	public function manage_notification_email( $request ) {
+		$data = json_decode( $request->get_body(), true );
+
+		if (
+			! isset( $data['entry'] ) ||
+			( ! empty( $data['entry'] ) && ! filter_var( $data['entry'], FILTER_VALIDATE_EMAIL ) )
+		) {
+			self::send_json_error( __( 'Invalid email address.', 'sg-cachepress' ) );
+		}
+
+		// Update the option.
+		update_option( 'siteground_optimizer_performace_receipient', $data['entry'] );
+
+		return self::send_json_success(
+			__( 'Notification email updated.', 'sg-cachepress' ),
+			array(
+				'performanceReports' => array(
+					get_option( 'siteground_optimizer_performace_receipient', null ),
+				),
+			)
 		);
 	}
 }

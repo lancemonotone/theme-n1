@@ -15,6 +15,7 @@ class Activator {
 	 */
 	public function activate() {
 		$this->maybe_create_memcache_dropin();
+		$this->maybe_set_data_consent_default();
 
 		$install_service = new Install_Service();
 		$install_service->install();
@@ -36,4 +37,20 @@ class Activator {
 		}
 	}
 
+	/**
+	 * Set the default data consent.
+	 *
+	 * @since 7.4.3
+	 */
+	public function maybe_set_data_consent_default() {
+		// Check if we have a new installation and bail if we do not meet the new user criteria or the user has modified its consent settings.
+		if ( ! empty( get_option( 'siteground_data_consent_timestamp', '' ) ) ) {
+			return;
+		}
+
+		if ( '0.0.0' === get_option( 'siteground_optimizer_version', '0.0.0' ) ) {
+			// Update the consent option.
+			update_option( 'siteground_data_consent', 1 );
+		}
+	}
 }
