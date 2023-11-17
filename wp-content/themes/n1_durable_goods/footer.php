@@ -15,8 +15,8 @@ $footer_copy = get_field( 'options_footer_copy', 'options' );
 
         <section class="footer-nav">
             <?php // get menu name from WP
-            $menu_slug   = 'about-n+1';
-            $menu_object = wp_get_nav_menu_object( $menu_slug );
+            $menu_id   = 146;
+            $menu_object = wp_get_nav_menu_object( $menu_id );
             if ( $menu_object ) {
                 $menu_name = $menu_object->name;
                 ?>
@@ -27,8 +27,8 @@ $footer_copy = get_field( 'options_footer_copy', 'options' );
             <?php } ?>
 
             <?php // get menu name from WP
-            $menu_slug   = 'the-magazine';
-            $menu_object = wp_get_nav_menu_object( $menu_slug );
+            $menu_id   = 145;
+            $menu_object = wp_get_nav_menu_object( $menu_id );
             if ( $menu_object ) {
                 $menu_name = $menu_object->name;
                 ?>
