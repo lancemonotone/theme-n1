@@ -12,7 +12,7 @@
             $issue_obj = N1_Magazine::get_issue_by_slug( $issue );
             ?>
             <section id="content" class="content-post issue-content<?php echo Metered_Paywall::paywall_meter_reached( $post->ID ) ? ' unlogged' : '' ?>">
-                <?php if ( Metered_Paywall::get_meter_enabled() ) { ?>
+                <?php if ( Metered_Paywall::is_meter_enabled() ) { ?>
                     <h3 class="issue-title text-center"><?= Metered_Paywall::get_metered_message() ?></h3>
                 <?php } ?>
 
@@ -96,18 +96,14 @@
                             $the_content = get_the_content();
 
                             // Is this check necessary? Should we bypass shortcodes for everyone who passes the paywall test?
+                            // 231117 - Removed because N1_Magazine::is_paywalled() already checks for this.
                             // if ( N1_Magazine::is_institution() ) {
-                            $regex       = '/' . get_shortcode_regex( [ 'MM_Access_Decision access=\'true\'', 'MM_Access_Decision access=\'false\'' ] ) . '/s';
-                            $the_content = preg_replace( $regex, '', $the_content );  # strip shortcodes, keep shortcode content
-                            $the_content = str_replace( '[/MM_Access_Decision]', '', $the_content );
-                            // }
-                            // else {
-                            //     $the_content = apply_filters( 'the_content', $the_content );
+                            //     $regex       = '/' . get_shortcode_regex( [ 'MM_Access_Decision access=\'true\'', 'MM_Access_Decision access=\'false\'' ] ) . '/s';
+                            //     $the_content = preg_replace( $regex, '', $the_content );  # strip shortcodes, keep shortcode content
+                            //     $the_content = str_replace( '[/MM_Access_Decision]', '', $the_content );
                             // }
 
-                            $the_content = apply_filters( 'the_content', $the_content );
-
-                            $the_content = '<div class="post-wrapper">' . $the_content . '</div>';
+                            $the_content = '<div class="post-wrapper">' . apply_filters( 'the_content', $the_content ) . '</div>';
 
                             $app = '';
                             if ( $appendix = get_field( 'article_appendix', $post->ID ) ) {
