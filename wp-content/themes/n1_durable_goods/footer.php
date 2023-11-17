@@ -12,26 +12,46 @@ $footer_copy = get_field( 'options_footer_copy', 'options' );
             </a>
             <?php echo str_replace( [ '{{issue-number}}', '{{issue-name}}' ], [ $issue_title, $issue_name ], $footer_copy ) ?>
         </section><!-- /#about -->
+
         <section class="footer-nav">
-            <nav>
-                <h6 class="footer-nav-title">About n+1</h6>
-                <?php wp_nav_menu( [ 'menu' => 'about-n+1', 'menu_class' => 'footer-nav-list', 'container' => false ] ); ?>
-            </nav>
-            <nav>
-                <h6 class="footer-nav-title">Magazine</h6>
-                <ul class="footer-nav-list">
-                    <li class="footer-nav-entry">
-                        <a href="<?php echo N1_Magazine::get_current_issue_url() ?>">Current Issue</a>
-                    </li>
-                </ul>
-                <?php wp_nav_menu( [ 'menu' => 'the-magazine', 'menu_class' => 'footer-nav-list', 'container' => false ] ); ?>
-            </nav>
+            <?php // get menu name from WP
+            $menu_slug   = 'about-n+1';
+            $menu_object = wp_get_nav_menu_object( $menu_slug );
+            if ( $menu_object ) {
+                $menu_name = $menu_object->name;
+                ?>
+                <nav>
+                    <h6 class="footer-nav-title"><?= $menu_name ?></h6>
+                    <?php wp_nav_menu( [ 'menu' => 'about-n+1', 'menu_class' => 'footer-nav-list', 'container' => false ] ); ?>
+                </nav>
+            <?php } ?>
+
+            <?php // get menu name from WP
+            $menu_slug   = 'the-magazine';
+            $menu_object = wp_get_nav_menu_object( $menu_slug );
+            if ( $menu_object ) {
+                $menu_name = $menu_object->name;
+                ?>
+                <nav>
+                    <h6 class="footer-nav-title"><?= $menu_name ?></h6>
+                    <ul class="footer-nav-list">
+                        <li class="footer-nav-entry">
+                            <a href="<?php echo N1_Magazine::get_current_issue_url() ?>">Current Issue</a>
+                        </li>
+                    </ul>
+                    <?php wp_nav_menu( [ 'menu' => 'the-magazine', 'menu_class' => 'footer-nav-list', 'container' => false ] ); ?>
+                </nav>
+            <?php } ?>
+
             <div class="footer-divider"></div>
+
             <div class="footer-social">
                 <?php the_widget( '\N1_Durable_Goods\Module_Newsletter' ) ?>
                 <?php the_widget( '\N1_Durable_Goods\Module_Social' ) ?>
             </div>
+
         </section>
+
         <section class="footer-bottom">
             <p class="footer-copyright">Copyright &copy; <?php echo date( 'Y' ) ?> n+1 Foundation</p>
             <p class="footer-legal">
