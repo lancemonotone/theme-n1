@@ -1,0 +1,10 @@
+body.search {
+    .flavor-archive.articles {
+        article.type-online-only.term-events {
+            &:hover {
+                background-color: transparent;
+                border-color: var(--white);
+            }
+        }
+    }
+}
