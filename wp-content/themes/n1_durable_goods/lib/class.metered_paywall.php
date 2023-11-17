@@ -79,7 +79,7 @@ class Metered_Paywall {
         session_start();
     }
 
-    static function get_meter_enabled(): bool {
+    static function is_meter_enabled(): bool {
         return self::$meter_enabled;
     }
 
