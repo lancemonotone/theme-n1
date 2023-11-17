@@ -24,6 +24,9 @@
         }
 
         .meta {
+            width: auto;
+            max-width: 75%;
+
             .title {
                 font-size: clamp(1rem, 1.3vw, 1.2rem);
             }
