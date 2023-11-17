@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/admin-menu-editor/includes/PHP-CSS-Parser/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/membermouse/lib/braintree" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/membermouse/lib/hybridauth/Hybrid/thirdparty" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/membermouse/lib/recaptcha" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/membermouse/lib/stripe/lib" isTestSource="false" packagePrefix="Stripe" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/official-facebook-pixel" isTestSource="false" packagePrefix="FacebookPixelPlugin" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/sg-cachepress/core" isTestSource="false" packagePrefix="SiteGround_Optimizer" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/sg-security/core" isTestSource="false" packagePrefix="SG_Security" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-includes" isTestSource="false" packagePrefix="PHPMailer" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
