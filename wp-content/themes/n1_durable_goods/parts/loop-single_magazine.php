@@ -105,7 +105,9 @@
                             //     $the_content = apply_filters( 'the_content', $the_content );
                             // }
 
-                            $the_content = '<div class="post-wrapper">' . nl2br( $the_content ) . '</div>';
+                            $the_content = apply_filters( 'the_content', $the_content );
+
+                            $the_content = '<div class="post-wrapper">' . $the_content . '</div>';
 
                             $app = '';
                             if ( $appendix = get_field( 'article_appendix', $post->ID ) ) {
