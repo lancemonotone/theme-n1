@@ -5,9 +5,12 @@
  */
 
 require_once( $_SERVER[ 'DOCUMENT_ROOT' ] . '/wp-load.php' );
-require_once( $_SERVER[ 'DOCUMENT_ROOT' ] . '/wp-content/plugins/membermouse/includes/mm-constants.php' );
-require_once( $_SERVER[ 'DOCUMENT_ROOT' ] . '/wp-content/plugins/membermouse/includes/init.php' );
-require_once( $_SERVER[ 'DOCUMENT_ROOT' ] . '/wp-content/plugins/membermouse/includes/php_interface.php' );
+
+if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ] . '/wp-content/plugins/membermouse/includes/mm-constants.php' ) ) {
+    require_once( $_SERVER[ 'DOCUMENT_ROOT' ] . '/wp-content/plugins/membermouse/includes/mm-constants.php' );
+    require_once( $_SERVER[ 'DOCUMENT_ROOT' ] . '/wp-content/plugins/membermouse/includes/init.php' );
+    require_once( $_SERVER[ 'DOCUMENT_ROOT' ] . '/wp-content/plugins/membermouse/includes/php_interface.php' );
+}
 
 class N1_Magazine {
     static bool $is_institution;
