@@ -1,0 +1,1 @@
+<p>This module has no configurable settings.</p>

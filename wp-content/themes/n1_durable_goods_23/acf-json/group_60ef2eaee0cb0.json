@@ -1,0 +1,48 @@
+{
+    "key": "group_60ef2eaee0cb0",
+    "title": "Access Options",
+    "fields": [
+        {
+            "key": "field_5287ee029a756",
+            "label": "Allow Access",
+            "name": "article_free",
+            "type": "true_false",
+            "instructions": "Allow all site users to view a magazine article without purchasing a subscription. This setting has no effect for online only articles.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "article"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "discussion",
+        "comments",
+        "author",
+        "format"
+    ],
+    "active": true,
+    "description": "",
+    "modified": 1626632454
+}
