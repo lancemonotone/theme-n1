@@ -147,12 +147,28 @@
 
                     </div><!-- .post-body -->
                 </article><!-- #post -->
-                <?php if ( Metered_Paywall::paywall_meter_reached( $post->ID ) ) { ?>
+                <?php if ( Metered_Paywall::paywall_meter_reached( $post->ID ) ) {
+                    function numberToWords($number) {
+                        $formatter = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
+                        return $formatter->format($number);
+                    }
+
+                    function getElapsedYearsSince2004() {
+                        $startYear = 2004;
+                        $currentYear = (int)date('Y');
+                        $yearsElapsed = $currentYear - $startYear;
+
+                        return $yearsElapsed;
+                    }
+
+
+                    $num_years = numberToWords(getElapsedYearsSince2004()); // Outputs: eighteen
+                    ?>
 
                     <div class="roadblock">
                         <!-- subscribe -->
                         <section class="subscribe roadblock">
-                            <h3 class="subscribe roadblock"><?php _e( 'Unlock eighteen years of n+1.' ) ?></h3>
+                            <h3 class="subscribe roadblock"><?php _e( "Unlock {$num_years} years of n+1." ) ?></h3>
                             <p class="subscribe roadblock subhed"><?php _e( 'It only takes 2 minutes to subscribe.' ) ?></p>
                             <p class="subscribe roadblock subscribe prompt"><?php echo get_field( 'options_subscribe_prompt', 'options' ) ?></p>
                             <div class="module subscribe prompt wrapper">
