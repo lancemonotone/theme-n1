@@ -14,6 +14,7 @@ import './index.scss';
 
 import './js/class.accordion.js';
 import './js/class.header.js';
+import './js/class.issue-slider.js';
 
 /**
  * Modules
