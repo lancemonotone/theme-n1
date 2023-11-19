@@ -43,6 +43,12 @@ switch ( $type ) {
 
     case 'article':
         if ( $context_issue_obj ) { ?>
+            <a id="issue-display-trigger" class="issue meta pubinfo wrapper" href="<?=$context_issue_obj->permalink?>">
+                <ul class="issue meta postinfo pubinfo trigger">
+                    <li class="issue meta pubinfo issuenumber"><span><?php echo $context_issue->post_title?></span></li>
+                    <li class="issue meta pubinfo issuetitle"><?php echo get_field('issue_name', $context_issue->ID)?></li>
+                </ul>
+            </a>
             <section class="article-toc cf">
                 <?php while ( the_repeater_field( 'issue_sections', $context_issue_obj->ID ) ) {
                     $section       = get_sub_field( 'issue_section' );

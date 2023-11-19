@@ -133,4 +133,16 @@
             font-family: var(--adelle-sans)
         }
     }
+
+    a.issue.meta.pubinfo.wrapper {
+        display: none;
+        background-color: transparent;
+        overflow: visible;
+        cursor: text;
+        border-top: none;
+
+        &:after {
+            display: none;
+        }
+    }
 }

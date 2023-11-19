@@ -199,7 +199,7 @@ input[type=submit],
     font-size: clamp(1rem, 3vw, 1.3rem);
     width: auto;
     display: inline-block;
-    white-space: nowrap;
+    //white-space: nowrap;
     cursor: pointer;
 }
 
@@ -7476,7 +7476,7 @@ h6.footer {
         }
     }
 
-    a.issue.meta.pubinfo.wrapper {
+    /*a.issue.meta.pubinfo.wrapper {
         background-color: transparent;
         overflow: visible;
         cursor: text;
@@ -7485,7 +7485,7 @@ h6.footer {
         &:after {
             display: none;
         }
-    }
+    }*/
 
     li.issue.meta.pubinfo {
         display: block;
