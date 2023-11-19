@@ -1,4 +1,7 @@
 body.magazine.landing {
+    #issue-slider {
+        margin-inline: 48px;
+    }
     @media only screen and (min-width: 640px) {
         section.issue {
             padding-inline-end: 2rem !important;

@@ -1,6 +1,5 @@
 .mm-button,
 .post-edit-link {
-    display: none;
     border-radius: 4em;
     font-family: "adelle-sans", sans-serif;
     font-weight: 600;
@@ -28,6 +27,11 @@
     &:active {
         background-color: var(--light-blue);
     }
+}
+
+.mm-button {
+    display: block;
+    text-decoration: none !important;
 }
 
 .post-edit-link {
