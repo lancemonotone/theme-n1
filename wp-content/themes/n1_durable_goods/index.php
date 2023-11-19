@@ -11,7 +11,7 @@ $page_type = N1_Magazine::get_page_type();
 
 get_header();
 
-if ( is_plugin_active( 'lj-maintenance-mode/lj-maintenance-mode.php' ) ) {
+if ( !current_user_can( 'administrator' ) && is_plugin_active( 'lj-maintenance-mode/lj-maintenance-mode.php' ) ) {
     $page_type = 'static-page';
     ?>
 
@@ -19,11 +19,10 @@ if ( is_plugin_active( 'lj-maintenance-mode/lj-maintenance-mode.php' ) ) {
         <section id="content">
             <article>
                 <div class="entry-header">
-                    <h1 class="entry-title">n+1 is upgrading!</h1>
+                    <h1 class="entry-title">Apologies!</h1>
                 </div>
                 <div class="entry-content">
-                    <p>Our website will be available soon. We are upgrading our server and content platforms
-                       for security and speed and will be back with you momentarily!</p>
+                    <p style="text-align:center">We're currently updating the n+1 site. We'll be back shortly.</p>
                 </div><!-- .entry-content -->
             </article><!-- #post -->
         </section> <!-- #content -->
