@@ -3,21 +3,20 @@
 <?php
 get_header();
 
-if (is_plugin_active('lj-maintenance-mode/lj-maintenance-mode.php')) {
+if (!current_user_can( 'administrator' ) && is_plugin_active('lj-maintenance-mode/lj-maintenance-mode.php')) {
     $page_type = 'static-page';
     ?>
 
   <div id="main" class="main wrapper cf static-page">
     <section id="content">
-      <article>
-        <div class="entry-header">
-          <h1 class="entry-title">n+1 is upgrading!</h1>
-        </div>
-        <div class="entry-content">
-          <p>Our website will be available soon. We are upgrading our server and content platforms
-            for security and speed and will be back with you momentarily!</p>
-        </div><!-- .entry-content -->
-      </article><!-- #post -->
+        <article>
+            <div class="entry-header">
+                <h1 class="entry-title">Apologies!</h1>
+            </div>
+            <div class="entry-content">
+                <p style="text-align:center">We're currently updating the n+1 site. We'll be back shortly.</p>
+            </div><!-- .entry-content -->
+        </article><!-- #post -->
     </section> <!-- #content -->
   </div><!-- #main -->
   <script>
