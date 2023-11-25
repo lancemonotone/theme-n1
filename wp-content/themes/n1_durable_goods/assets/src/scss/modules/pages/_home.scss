@@ -42,6 +42,7 @@ body.home {
 
             article {
                 --color: var(--white);
+                border-top: 1px solid var(--inactive-dark);
 
                 &:hover {
                     --color: inherit;

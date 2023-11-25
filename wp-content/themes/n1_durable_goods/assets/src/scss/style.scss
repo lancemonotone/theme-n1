@@ -3491,7 +3491,7 @@ div.reviews {
         font-weight: 600;
         padding: 0.2em 0.6em;
         min-width: 2em;
-        color: rgba(0, 0, 0, 0.2);
+        //color: rgba(0, 0, 0, 0.2);
         border: 1px solid rgba(0, 0, 0, 0.2);
         height: 1.5em;
         margin: 0 0.3em;
@@ -3715,7 +3715,7 @@ body {
         }
 
         .post-meta {
-            background-color: #242424;
+            //background-color: #242424;
             margin-top: 0;
             margin-bottom: 0;
             padding-bottom: 0;
@@ -8657,7 +8657,7 @@ h6.footer {
         &.online-only {
             .post-meta {
                 margin-top: 64px;
-                background-color: rgba(0, 0, 0, 0.015);
+                //background-color: rgba(0, 0, 0, 0.015);
             }
 
             .post-meta-pubinfo {
@@ -8735,7 +8735,7 @@ h6.footer {
 
         &.single-article {
             .post-meta {
-                background-color: rgba(0, 0, 0, 0.015) !important;
+                //background-color: rgba(0, 0, 0, 0.015) !important;
 
                 div {
                     &.left {
@@ -8757,8 +8757,8 @@ h6.footer {
 
                 .post-meta-pubinfo {
                     .post-meta-hed {
-                        font-size: 1.4rem;
-                        font-weight: 100;
+                        //font-size: 1.4rem;
+                        //font-weight: 100;
                     }
 
                     p.post-meta-entry {
