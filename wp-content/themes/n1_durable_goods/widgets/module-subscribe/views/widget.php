@@ -6,7 +6,7 @@ $current_issue = N1_Magazine::get_current_issue();
 <?php if ( Metered_Paywall::is_paywalled() ) { ?>
     <section>
         <span class="module-hed"><?php _e( 'Available Now' ) ?></span>
-        <h3 class="issuetitle"><?= $current_issue->post_title ?>: <?= get_field( 'issue_name', $context_issue->ID ) ?></h3>
+        <h3 class="issuetitle"><?= $current_issue->post_title ?>: <?= get_field( 'issue_name', $current_issue->ID ) ?></h3>
         <p class="prompt"><?= get_field( 'options_subscribe_prompt', 'options' ) ?></p>
         <a class="button" href="<?= home_url() ?>/subscribe"><?php _e( 'Subscribe' ) ?></a>
         <?php if ( ! is_user_logged_in() ) { ?>
