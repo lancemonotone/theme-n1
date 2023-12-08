@@ -60,6 +60,12 @@ body.home {
             .flags {
                 display: none;
             }
+
+            .module-multi {
+                article {
+                    border-top: none;
+                }
+            }
         }
     }
 

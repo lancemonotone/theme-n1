@@ -1070,7 +1070,7 @@ div {
 //}
 
 form fieldset label {
-    @extend .visually-hidden;
+    //@extend .visually-hidden;
 }
 
 section, div, nav, header, footer {
@@ -1804,6 +1804,15 @@ p.newsletter.dek {
 
 form.newsletter.signup {
     padding-top: 16px;
+
+    label.email {
+        // visually hidden
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
 }
 
 input.newsletter {
@@ -5302,16 +5311,56 @@ a[title*="Payment"] {
     text-align: center;
 }
 
+.mm-myaccount-module {
+    a.mm-button {
+        margin: 16px auto 0 auto;
+        display: block;
+        width: 11em;
+        font-weight: 600;
+        background-color: #ce4f25;
+        border-radius: 4px;
+        color: white;
+        padding: 8px;
+        border: none;
+
+        &:hover {
+            background-color: #333;
+        }
+
+        &:active {
+            background-color: #1cecfb;
+            color: #333;
+        }
+    }
+}
+
+.mm-checkoutInfo, .mm-checkoutInfoBlock {
+    h3 {
+        font-weight: 600;
+        font-size: 1rem;
+        display: inline-block;
+        //white-space: nowrap;
+        color: #ce4f25;
+        border-bottom: 3px solid #ce4f25;
+        padding-bottom: .3em;
+        margin-top: 30px;
+        margin-bottom: 16px;
+    }
+}
+
 .mm-purchaseSection a.mm-button {
-    margin-top: 1em;
-    background-color: #53b625 !important;
+    background: #53b625 !important;
+    text-shadow: none;
+    margin: auto;
 
     &:hover {
-        background-color: #229fe2 !important;
+        background: #229fe2 !important;
+        color: var(--white);
     }
 
     &:active {
-        background-color: #1cecfb !important;
+        background: #1cecfb !important;
+        color: var(--white);
     }
 }
 
@@ -6351,7 +6400,8 @@ h6.footer {
         font-size: 2.5rem;
     }
 
-    span.section-hed:before/*, .magazine.issue-landing .supp-more-by-title:before */{
+    span.section-hed:before /*, .magazine.issue-landing .supp-more-by-title:before */
+    {
         content: "";
         display: block;
         height: 40px;
