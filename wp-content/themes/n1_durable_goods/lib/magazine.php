@@ -17,8 +17,8 @@ class N1_Magazine {
     static array $issues;
     static \WP_Post $current_issue;
     static \WP_Post $context_issue;
-    static string $page_type;
-    static string $page_class;
+    static string $page_type = '';
+    static string $page_class = '';
 
     private function __construct() {
         $this->add_shortcodes();
@@ -101,15 +101,17 @@ class N1_Magazine {
                 Metered_Paywall::set_meter_reached();
                 self::$page_type  = 'magazine';
                 self::$page_class = 'magazine';
-            } elseif ( is_preview() && ! empty( wp_get_post_terms( $_REQUEST[ 'preview_id' ], 'category' ) ) ) {
+            } elseif ( is_preview() && ! empty( wp_get_post_terms( $_REQUEST[ 'p' ], 'category' ) ) ) {
                 self::$page_type  = 'magazine';
                 self::$page_class = 'magazine';
+            } elseif ( is_preview() && ! empty( wp_get_post_terms( $_REQUEST[ 'p' ], 'online-only' ) ) ) {
+                self::$page_type  = 'online-only';
+                self::$page_class = 'online-only';
             } elseif ( ! empty( $wp_query->query[ 'online-only' ] ) ) {
+                self::$page_type  = 'online-only';
                 if ( $wp_query->query[ 'online-only' ] === 'events' ) {
-                    self::$page_type  = 'online-only';
                     self::$page_class = 'events online-only';
                 } else {
-                    self::$page_type  = 'online-only';
                     self::$page_class = 'online-only';
                 }
             }
@@ -126,7 +128,7 @@ class N1_Magazine {
     }
 
     static function get_page_type(): string {
-        if ( ! isset( self::$page_type ) ) {
+        if ( self::$page_type == '' ) {
             self::set_page_type();
         }
 
