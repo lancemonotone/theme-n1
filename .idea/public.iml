@@ -11,6 +11,7 @@
       <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/sg-cachepress/core" isTestSource="false" packagePrefix="SiteGround_Optimizer" />
       <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/sg-security/core" isTestSource="false" packagePrefix="SG_Security" />
       <sourceFolder url="file://$MODULE_DIR$/wp-includes" isTestSource="false" packagePrefix="PHPMailer" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/copilot/chatSessions" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
