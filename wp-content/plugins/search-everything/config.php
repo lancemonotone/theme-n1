@@ -32,6 +32,11 @@ function se_get_options() {
 		$se_options = get_option('se_options');
 	}
 
+    // Check if $se_options is an array, if not initialize it as an empty array
+    if (!is_array($se_options)) {
+        $se_options = array();
+    }
+
 	$se_meta = new ArrayObject($se_meta);
 	$se_options = new ArrayObject($se_options);
 

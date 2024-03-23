@@ -11,6 +11,15 @@ Version: 999 (8.1.9)
 
 wp-content/plugins/search-everything/config.php:29
 if(!$se_options || !$se_meta || $se_meta['version'] !== SE_VERSION) {
+
+wp-content/plugins/search-everything/config.php:29
+// Check if $se_options is an array, if not initialize it as an empty array
+if (!is_array($se_options)) {
+    $se_options = array();
+}
+
+wp-content/plugins/search-everything/search-everything.php:245
+$search_terms = array_filter(array_map( function($a) { return trim($a, "\"'\n\r "); }, $matches[0] ));
 */
 
 define('SE_VERSION', '8.1.9');
@@ -236,7 +245,7 @@ class SearchEverything {
 				$search_terms = array( $s );
 			} else {
 				preg_match_all( '/".*?("|$)|((?<=[\\s",+])|^)[^\\s",+]+/', $s, $matches );
-				$search_terms = array_filter(array_map( create_function( '$a', 'return trim($a, "\\"\'\\n\\r ");' ), $matches[0] ));
+                $search_terms = array_filter(array_map( function($a) { return trim($a, "\"'\n\r "); }, $matches[0] ));
 			}
 		}
 
