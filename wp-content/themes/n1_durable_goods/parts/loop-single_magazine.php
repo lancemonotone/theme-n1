@@ -9,6 +9,7 @@
             the_post();
             $cats      = wp_get_post_terms( $post->ID, 'category' );
             $cat       = reset( $cats );
+            $cat_name  = $cat->name ?? '';
             $issue_obj = N1_Magazine::get_issue_by_slug( $issue );
             ?>
             <section id="content" class="content-post issue-content<?php echo Metered_Paywall::paywall_meter_reached( $post->ID ) ? ' unlogged' : '' ?>">
@@ -19,7 +20,9 @@
                 <!-- includes POST and PREV-NEXT -->
                 <article id="post-<?php the_ID(); ?>" <?php post_class( 'post issue-content-post' ); ?>>
                     <div class="post-header issue-content-post-header">
-                        <p class="post-category issue-content-post-header-category"><?php echo $cat->name ?></p>
+                        <?php if ( $cat_name ) { ?>
+                            <p class="post-category issue-content-post-header-category"><?php echo $cat_name ?></p><?php
+                        } ?>
                         <p class="post-author issue-content-post-header-author"><?php echo N1_Magazine::get_authors( $post->ID ) ?></p>
                         <h1 class="post-title issue-content-post-header-title"><?php the_title() ?></h1>
                         <?php if ( $article_subhead = get_field( 'article_subhead', $post->ID ) ) { ?>
@@ -95,13 +98,11 @@
                         } else { // no paywall...show complete article.
                             $the_content = get_the_content();
 
-                            // Is this check necessary? Should we bypass shortcodes for everyone who passes the paywall test?
-                            // 231117 - Removed because N1_Magazine::is_paywalled() already checks for this.
-                            // if ( N1_Magazine::is_institution() ) {
-                            //     $regex       = '/' . get_shortcode_regex( [ 'MM_Access_Decision access=\'true\'', 'MM_Access_Decision access=\'false\'' ] ) . '/s';
-                            //     $the_content = preg_replace( $regex, '', $the_content );  # strip shortcodes, keep shortcode content
-                            //     $the_content = str_replace( '[/MM_Access_Decision]', '', $the_content );
-                            // }
+                            if ( N1_Magazine::is_institution() ) {
+                                $regex       = '/' . get_shortcode_regex( [ 'MM_Access_Decision access=\'true\'', 'MM_Access_Decision access=\'false\'' ] ) . '/s';
+                                $the_content = preg_replace( $regex, '', $the_content );  # strip shortcodes, keep shortcode content
+                                $the_content = str_replace( '[/MM_Access_Decision]', '', $the_content );
+                            }
 
                             $the_content = '<div class="post-wrapper">' . apply_filters( 'the_content', $the_content ) . '</div>';
 
@@ -113,7 +114,7 @@
                             echo $the_content . $app; ?>
 
                             <!-- START SUBSCRIBE LINK -->
-                            <?php if ( $cat->name !== 'Letters' ) { ?>
+                            <?php if ( $cat_name !== 'Letters' ) { ?>
                                 <hr/>
 
                                 <?php if ( get_field( 'article_free', $post->ID ) && ! is_user_logged_in() ) { ?>
@@ -148,21 +149,21 @@
                     </div><!-- .post-body -->
                 </article><!-- #post -->
                 <?php if ( Metered_Paywall::paywall_meter_reached( $post->ID ) ) {
-                    function numberToWords($number) {
-                        $formatter = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
-                        return $formatter->format($number);
+                    function numberToWords( $number ) {
+                        $formatter = new \NumberFormatter( "en", \NumberFormatter::SPELLOUT );
+
+                        return $formatter->format( $number );
                     }
 
                     function getElapsedYearsSince2004() {
-                        $startYear = 2004;
-                        $currentYear = (int)date('Y');
+                        $startYear    = 2004;
+                        $currentYear  = (int)date( 'Y' );
                         $yearsElapsed = $currentYear - $startYear;
 
                         return $yearsElapsed;
                     }
 
-
-                    $num_years = numberToWords(getElapsedYearsSince2004()); // Outputs: eighteen
+                    $num_years = numberToWords( getElapsedYearsSince2004() ); // Outputs: eighteen
                     ?>
 
                     <div class="roadblock">

@@ -7,10 +7,34 @@ class Metered_Paywall {
     private static array $is_paywalled = [];
 
     public function __construct() {
+        self::set_meter_enabled();
+
+        // add_action( 'the_post', function () {
+        //     self::log_visitor();
+        // } );
         add_action( 'admin_bar_menu', [ $this, 'add_reset_metered_paywall_button' ], 999 );
         add_action( 'wp_ajax_reset_metered_paywall', [ $this, 'reset_metered_paywall_handler' ] ); // For logged-in users
         add_action( 'wp_ajax_nopriv_reset_metered_paywall', [ $this, 'reset_metered_paywall_handler' ] ); // For logged-out users
         add_action( 'wp_footer', [ $this, 'print_inline_script' ] ); // Print inline JavaScript
+    }
+
+    /**
+     * @return void
+     */
+    public static function log_visitor(): void {
+        if ( isset( $GLOBALS[ 'post' ]->post_name ) /*&& $GLOBALS[ 'post' ]->post_name === 'under-the-cartels'*/ ) {
+            $current_user = '';
+            if ( is_user_logged_in() ) {
+                $current_user = wp_get_current_user()->user_login;
+            }
+            $fields = [
+                'current_user' => $current_user ?: 'Not logged in',
+                'post_name'    => $GLOBALS[ 'post' ]->post_name,
+                'REMOTE_ADDR'  => ! empty( $_SERVER[ 'REMOTE_ADDR' ] ) ? $_SERVER[ 'REMOTE_ADDR' ] : null,
+            ];
+
+            console_log( 'log_visitor', $fields );
+        }
     }
 
     public function add_reset_metered_paywall_button( $wp_admin_bar ) {
@@ -79,6 +103,10 @@ class Metered_Paywall {
         session_start();
     }
 
+    static function set_meter_enabled() {
+        self::$meter_enabled = get_field( 'enable_metered_paywall', 'option' );
+    }
+
     static function is_meter_enabled(): bool {
         return self::$meter_enabled;
     }
@@ -105,7 +133,7 @@ class Metered_Paywall {
         }
 
         // get ACF option enable_metered_paywall
-        if ( ! self::$meter_enabled = get_field( 'enable_metered_paywall', 'option' ) ) {
+        if ( ! self::$meter_enabled ) {
             self::$meter_reached   = true;
             self::$metered_message = "Metered paywall is disabled.";
 
@@ -186,9 +214,6 @@ class Metered_Paywall {
     }
 
     static function is_paywalled( $post_id = null ): bool {
-        // global $post;
-        // $post_id = $post->ID ?? null;
-
         if ( isset( self::$is_paywalled[ $post_id ] ) ) {
             return self::$is_paywalled[ $post_id ];
         }
@@ -200,28 +225,30 @@ class Metered_Paywall {
         // If the article doesn't have a post ID, it's coming from the Multi Module
         if ( ! $post_id ) {
             $paywall = true;
+            $reason = 'No post ID.';
         }
         // If the article has a term in the default category taxonomy (these are protected).
-        if ( $post_id && count( wp_get_post_terms( $post_id, 'category' ) ) ) {
+        if ( ! empty( $post_id ) && count( wp_get_post_terms( $post_id, 'category' ) ) ) {
             $paywall = true;
+            $reason = 'Article has a term in the default category taxonomy.';
         }
-        // If the member is an institution
-        if ( N1_Magazine::is_institution() ) {
-            $paywall = false;
-        }
+
         // If the user can edit posts.
         if ( current_user_can( 'edit_posts' ) && ! $force_paywall ) {
             $paywall = false;
+            $reason = 'User can edit posts.';
         }
 
         if ( function_exists( 'mm_member_decision' ) ) {
             // If this is an MM Core page.
             if ( $post_id && \MM_CorePage::getCorePageInfo( $post_id ) ) {
                 $paywall = false;
+                $reason = 'This is an MM Core page.';
             }
             // If a member is logged in
             if ( mm_member_decision( [ "isMember" => "true", "status" => "active|pending_cancel" ] ) && ! $force_paywall ) {
                 $paywall = false;
+                $reason = 'Member is logged in.';
             }
             // If a member is a Gift Sub Giver or Free Membership, paywall is true.
             if ( mm_member_decision( [
@@ -230,26 +257,38 @@ class Metered_Paywall {
                 'membershipID' => "1|29"
             ] ) ) {
                 $paywall = true;
+                $reason = 'Member is a Gift Sub Giver or Free Membership.';
             }
         }
 
         // If the article has been tagged publicly viewable.
         if ( $post_id && get_field( 'article_free', $post_id ) ) {
             $paywall = false;
+            $reason = 'Article has been tagged publicly viewable.';
         }
 
         // If an article is also in an Online Only category it is not protected.
         if ( $post_id && count( wp_get_post_terms( $post_id, 'online-only' ) ) ) {
             $paywall = true;
+            $reason = 'Article is also in an Online Only category.';
         }
 
         // If an article is also in an Online Only category it is not protected.
         global $pagename;
         if ( $pagename == 'online-only' ) {
             $paywall = true;
+            $reason = 'Article is also in an Online Only category.';
+        }
+
+        // If the member is an institution
+        if ( N1_Magazine::is_institution() ) {
+            $paywall = false;
+            $reason = 'Member is an institution.';
         }
 
         if ( $post_id ) {
+            $is_paywalled = $paywall ? 'YES' : 'NO';
+            console_log( $is_paywalled, [ $_SERVER[ 'REMOTE_ADDR' ], $reason, $pagename ] );
             self::$is_paywalled[ $post_id ] = $paywall;
         }
 

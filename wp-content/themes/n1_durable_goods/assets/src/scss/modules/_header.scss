@@ -71,7 +71,8 @@
     position: var(--header-position);
     transition: 200ms;
     //transition: none;
-    z-index: 9999999;
+    //z-index: 9999999;
+    z-index: 2;
     top: 0;
     display: flex;
     justify-content: center;

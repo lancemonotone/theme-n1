@@ -35,6 +35,15 @@ EOD;
         if ( ! class_exists( '\MM_User' ) ) {
             return $request;
         }
+
+        // Check if $user is a WP_Error object
+        if ( is_wp_error( $user ) ) {
+            // Log the error message
+            // console_log( 'MM User Error', $user->get_error_message() );
+            // Return early
+            return $request;
+        }
+
         /**
          * @todo Check that $request is not a 404. If so, go home.
          */

@@ -1,9 +1,10 @@
 <?php namespace N1_Durable_Goods;
 $context_issue = N1_Magazine::get_context_issue();
 $current_issue = N1_Magazine::get_current_issue();
+$post_id = get_the_ID() ?: null;
 ?>
 
-<?php if ( Metered_Paywall::is_paywalled() ) { ?>
+<?php if ( Metered_Paywall::is_paywalled($post_id) ) { ?>
     <section>
         <span class="module-hed"><?php _e( 'Available Now' ) ?></span>
         <h3 class="issuetitle"><?= $current_issue->post_title ?>: <?= get_field( 'issue_name', $current_issue->ID ) ?></h3>
