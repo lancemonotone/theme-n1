@@ -343,56 +343,62 @@ class Module_Multi extends \WP_Widget {
     function print_post( $flavor, $the_p ) {
         // Boy, this function escalated quickly.
         // Try to get the category of the post
+        // Initialization for $flags
+        $flags = null; // or an appropriate default value
+
+        // Try to get the category of the post
         $terms        = wp_get_post_terms( $the_p->ID, 'issue' );
-        $section      = reset( $terms );
+        $section      = ! empty( $terms ) ? reset( $terms ) : null; // Ensure $terms is not empty
         $taxonomy     = 'category';
         $article_type = 'magazine';
-        // If there is no category, then it might be an Online Only post.
-        if ( empty( $section ) ) {
+
+        // Additional checks for $section being an object
+        if ( ! is_object( $section ) ) {
             $sections = wp_get_post_terms( $the_p->ID, 'online-only' );
-            if ( count( $sections ) > 1 ) {
-                $section = $sections[ 1 ];
-            } else {
-                $section = $sections[ 0 ];
-            }
+            // Ensure $sections is not empty, then get the second element if count > 1 and the only element if count == 1
+            $section      = ! empty( $sections ) ? ( count( $sections ) > 1 ? $sections[ 1 ] : $sections[ 0 ] ) : null;
             $taxonomy     = 'online-only';
             $article_type = 'online-only';
         }
 
-        // If $sections is still empty, it's not in the scroll, so it must be a page.
-        if ( empty( $section ) ) {
-            $article_type = 'page';
-        }
-
-        $is_event       = $section->slug === 'events';
-        $is_online_only = $section->taxonomy === 'online-only';
-        $is_issue       = $section->taxonomy === 'issue';
+        // Further check before accessing properties
+        $is_event       = is_object( $section ) && $section->slug === 'events';
+        $is_online_only = is_object( $section ) && $section->taxonomy === 'online-only';
+        $is_issue       = is_object( $section ) && $section->taxonomy === 'issue';
         $is_search      = N1_Magazine::get_page_type() == 'search';
+
+        if ( is_object( $section ) ) {
+            if ( $section->taxonomy == 'category' ) {
+                $the_tax = 'magazine';
+            } else {
+                $the_tax = $section->taxonomy;
+            }
+        } else {
+            $the_tax = '';
+        }
 
         $flags = $this->get_flags( $flavor, $the_p, $section );
 
         $format = get_field( 'article_teaser_format', $the_p->ID );
-        if ( $is_event/* || $is_search*/ ) {
+        if ( $is_event ) {
             $format = 'pullquote';
-        } else {
-            $format = $format ? $format : 'default';
         }
+        // Check if the post has a featured image. If not, use a pullquote.
+        if ( $format === 'with_image' && ! has_post_thumbnail( $the_p->ID ) ) {
+            $format = 'pullquote';
+        }
+        $format = $format ?: 'default';
+
 
         // cache content for use later
         $content  = $this->get_content( $the_p, $flavor, $format, $is_event );
         $authors  = N1_Magazine::get_authors( $the_p->ID );
         $featured = ! is_search() && get_field( 'article_featured', $the_p->ID ) ? 'article-featured' : '';
         $subhead  = get_field( 'article_subhead', $the_p->ID );
+
         switch ( $flavor ) {
             case 'archive':
             case 'sticky':
-                // Force excerpt display on search results page.
-                // if ( N1_Magazine::get_page_type() == 'search' ) {
-                //     $format = 'pullquote';
-                // }
-                // if ( $is_event ) {
-                //     $format = 'pullquote';
-                // }
                 switch ( $format ) {
                     case 'pullquote':
                         if ( $is_event ) {
@@ -410,7 +416,6 @@ class Module_Multi extends \WP_Widget {
             case 'home-flow':
             case 'featured-default':
             default:
-                $the_tax = $section->taxonomy == 'category' ? 'magazine' : $section->taxonomy;
                 if ( $is_event ) {
                     $title = $this->get_pullquote( $the_p );
                     include( plugin_dir_path( __FILE__ ) . '/views/cards/event.php' );
@@ -445,9 +450,12 @@ class Module_Multi extends \WP_Widget {
                 $img_id   = get_post_thumbnail_id( $the_p->ID );
                 $img_meta = wp_prepare_attachment_for_js( $img_id );
                 $img_url  = $img_meta[ 'url' ] ?? '';
+                $alt      = $img_meta[ 'alt' ] ?? '';
+                $height   = $img_meta[ 'height' ] ?? '';
+                $width    = $img_meta[ 'width' ] ?? '';
                 $content  = <<<EOD
 <figure class="article-image" style="" />
-<img src="{$img_url}" alt="{$img_meta['alt']}" height="{$img_meta['height']}" width="{$img_meta['width']}" />
+<img src="{$img_url}" alt="{$alt}" height="{$height}" width="{$width}" />
 </figure>
 EOD;
                 break;
@@ -471,6 +479,8 @@ EOD;
 
     function get_pullquote( $the_p ) {
         $found = false;
+        $quote = '';
+
         if ( $pullquotes = get_field( 'article_pullquote_repeater', $the_p->ID ) ) {
             foreach ( $pullquotes as $pullquote ) {
                 if ( $pullquote[ 'article_pullquote_featured' ] ) {
@@ -488,13 +498,16 @@ EOD;
     }
 
     function print_post_head( $the_p, $article_type, $section, $authors ) {
+        $section_slug = $section->slug ?? '';
         switch ( $article_type ) {
             case 'online-only':
-                $date = $section->slug == 'events' ? get_field( 'event_date', $the_p->ID ) : $the_p->post_date ?>
+                $date = $section_slug == 'events' ? get_field( 'event_date', $the_p->ID ) : $the_p->post_date ?>
                 <p class="date"><?= date( 'F j, Y', strtotime( $date ) ) ?></p>
                 <?php break;
             case 'magazine':
-                $issue = N1_Magazine::get_issue_by_slug( $section->slug );
+                if ( ! $issue = N1_Magazine::get_issue_by_slug( $section_slug ) ) {
+                    break;
+                }
                 $issue_art = get_field( 'issue_art', $issue->ID );
                 ?>
                 <figure class="issue-icon">
@@ -510,6 +523,14 @@ EOD;
     }
 
     function get_flags( $flavor, $the_p, $section ): string {
+        // Initialize $flags to avoid "undefined variable" warning.
+        $flags = '';
+
+        // Ensure $section is an object before accessing its properties.
+        if ( ! is_object( $section ) ) {
+            return '<div class="flags"></div>';
+        }
+
         $is_event       = $section->slug === 'events';
         $is_online_only = $section->taxonomy === 'online-only';
         $is_issue       = $section->taxonomy === 'issue';
@@ -682,8 +703,14 @@ EOD;
         if ( $term ) {
             array_push( $st, $term );
         } else {
-            foreach ( get_terms( $taxonomy ) as $temp ) {
-                array_push( $st, $temp->slug );
+            $terms = get_terms( $taxonomy );
+            if ( ! is_wp_error( $terms ) ) {
+                foreach ( $terms as $temp ) {
+                    // Ensure each term is an object before accessing its properties.
+                    if ( is_object( $temp ) ) {
+                        array_push( $st, $temp->slug );
+                    }
+                }
             }
         }
 

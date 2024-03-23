@@ -1,5 +1,7 @@
 <?php namespace N1_Durable_Goods;
 
+use WP_Post;
+
 /**
  * Static class for magazine functionality
  */
@@ -15,8 +17,8 @@ if ( file_exists( $_SERVER[ 'DOCUMENT_ROOT' ] . '/wp-content/plugins/membermouse
 class N1_Magazine {
     static bool $is_institution;
     static array $issues;
-    static \WP_Post $current_issue;
-    static \WP_Post $context_issue;
+    static WP_Post $current_issue;
+    static WP_Post $context_issue;
     static string $page_type = '';
     static string $page_class = '';
 
@@ -28,6 +30,17 @@ class N1_Magazine {
         add_shortcode( 'latest-issue', function () {
             return self::get_current_issue_url();
         } );
+    }
+
+    static function isIPInCleanIPs( $ip, $cleanIPs ) {
+        foreach ( $cleanIPs as $cleanIP ) {
+            // Check for exact match or if the clean IP is a prefix of the actual IP (indicating a range match)
+            if ( $cleanIP === $ip || ( strpos( $cleanIP, '.' ) === strlen( $cleanIP ) - 1 && strpos( $ip, $cleanIP ) === 0 ) ) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -45,6 +58,8 @@ class N1_Magazine {
 
         self::$is_institution = false;
 
+        $ip = self::get_client_ip();
+
         global $wpdb;
 
         $sql = /** @lang sql */
@@ -55,10 +70,32 @@ class N1_Magazine {
         WHERE mmc.custom_field_id IN(1) # IP range
         AND mmud.`status` IN (1); # active subscription";
 
-        $institutions = $wpdb->get_results( $sql );
+        $institutions = $wpdb->get_results( $sql, ARRAY_A );
 
-        foreach ( $institutions as $institution ) {
-            $ips = $institution->value;
+        $institutions_ips = array_column( $institutions, 'value' );
+
+        // Flatten the array
+        $flattened_ips = array_reduce( $institutions_ips, function ( $carry, $item ) {
+            return array_merge( $carry, explode( PHP_EOL, $item ) );
+        }, [] );
+
+        // Clean the IPs
+        $clean_ips = array_map( function ( $ip ) {
+            return str_replace( '*', '', trim( $ip ) );
+        }, $flattened_ips );
+
+
+        // Check if the client IP is in the array
+        self::$is_institution = in_array( $ip, $clean_ips );
+
+        $isInstitution = self::isIPInCleanIPs( $ip, $clean_ips );
+        // console_log( 'IP', $ip );
+        // console_log( 'Clean IPs: ' . implode(',', $clean_ips) );
+        // console_log( 'Is institution', ( self::$is_institution ? 'true' : 'false' ) );
+        // console_log( 'Is institution', ( $isInstitution ? 'true' : 'false' ) );
+
+        /*foreach ( $institutions as $institution ) {
+            $ips = $institution[ 'value' ];
             $ips = explode( PHP_EOL, $ips );
             foreach ( $ips as $ip ) {
                 if ( '' != $ip ) {
@@ -66,15 +103,15 @@ class N1_Magazine {
                     if ( '' != $ip_clean && false !== @stristr( self::get_client_ip(), $ip_clean ) ) {
                         self::$is_institution = true;
                         break;
-                    }/*else{
-                        echo "<!-- 1: ".$ip."-->";
-                        echo "<!-- 2: ".$ip_clean."-->";
-                        echo "<!-- 3: ".self::get_client_ip()."-->";
-                        echo "<!-- 4: ".@stristr(self::get_client_ip(), $ip_clean)."-->\n";
-                      }*/
+                    } else {
+                        // echo "<!-- 1: ".$ip."-->";
+                        // echo "<!-- 2: ".$ip_clean."-->";
+                        // echo "<!-- 3: ".self::get_client_ip()."-->";
+                        // echo "<!-- 4: ".@stristr(self::get_client_ip(), $ip_clean)."-->\n";
+                    }
                 }
             }
-        }
+        }*/
 
         return self::$is_institution;
     }
@@ -108,7 +145,7 @@ class N1_Magazine {
                 self::$page_type  = 'online-only';
                 self::$page_class = 'online-only';
             } elseif ( ! empty( $wp_query->query[ 'online-only' ] ) ) {
-                self::$page_type  = 'online-only';
+                self::$page_type = 'online-only';
                 if ( $wp_query->query[ 'online-only' ] === 'events' ) {
                     self::$page_class = 'events online-only';
                 } else {
@@ -171,7 +208,7 @@ class N1_Magazine {
      *
      * @return void
      */
-    static function set_context_issue( $slug = null ) {
+    static function set_context_issue( $slug = '' ) {
         global $wp_query;
         if ( ! $slug && ! empty( $wp_query->query_vars[ 'issue' ] ) ) {
             $slug = $wp_query->query_vars[ 'issue' ] ? $wp_query->query_vars[ 'issue' ] : self::get_current_issue()->post_name;
@@ -214,9 +251,9 @@ class N1_Magazine {
      *
      * @param $slug string eg. 'name'
      *
-     * @return false|int|WP_Post toc_desc post
+     * @return WP_Post toc_desc post
      */
-    static function get_issue_by_slug( $slug ) {
+    static function get_issue_by_slug( string $slug ): WP_Post {
         $args = [
             'post_type'      => 'toc_desc',
             'post_status'    => 'publish',
@@ -224,15 +261,20 @@ class N1_Magazine {
             'posts_per_page' => 1,
         ];
 
-        return current( get_posts( $args ) );
+        $posts = get_posts( $args );
+        if ( ! empty( $posts ) ) {
+            return current( $posts );
+        } else {
+            return false;
+        }
     }
 
     /**
      * Returns link to most recent issue, as defined by the theme options.
      *
-     * @return \WP_Post
+     * @return WP_Post
      */
-    static function get_context_issue(): \WP_Post {
+    static function get_context_issue(): WP_Post {
         if ( ! isset( self::$context_issue ) ) {
             self::set_context_issue();
         }
@@ -243,9 +285,9 @@ class N1_Magazine {
     /**
      * Returns link to most recent issue, as defined by the theme options.
      *
-     * @return \WP_Post
+     * @return WP_Post
      */
-    static function get_current_issue(): \WP_Post {
+    static function get_current_issue(): WP_Post {
         if ( ! isset( self::$current_issue ) ) {
             self::set_current_issue();
         }
@@ -386,7 +428,9 @@ class N1_Magazine {
         global $wp_query;
         $query_array = $wp_query->query;
 
-        return ( 1 === count( $query_array ) && array_key_exists( 'issue', $query_array ) );
+        $count = is_countable( $query_array ) ? count( $query_array ) : 0;
+
+        return ( 1 === $count && array_key_exists( 'issue', $query_array ) );
     }
 
     /**
@@ -397,9 +441,25 @@ class N1_Magazine {
      * Read more: http://techtalk.virendrachandak.com/getting-real-client-ip-address-in-php-2/#ixzz2wiVvD15e
      * Follow us: @virendrachandak on Twitter
      */
-    static function get_client_ip() {
-        $ip_address = false;
-        if ( ! empty( $_SERVER[ 'HTTP_CLIENT_IP' ] ) ) {
+    static function get_client_ip(): string {
+        $ip_address = '';
+
+        if ( ! empty( $_SERVER[ 'REMOTE_ADDR' ] ) ) {
+            $ip_address = $_SERVER[ 'REMOTE_ADDR' ];
+        }
+
+        // Split the IP address into segments
+        $ip_segments = explode('.', $ip_address);
+
+        // Remove the last segment
+        array_pop($ip_segments);
+
+        // Join the remaining segments back together
+        $ip_address = implode('.', $ip_segments) . '.';
+
+        // Metered_Paywall::log_visitor();
+
+        /*if ( ! empty( $_SERVER[ 'HTTP_CLIENT_IP' ] ) ) {
             $ip_address = $_SERVER[ 'HTTP_CLIENT_IP' ];
         } elseif ( ! empty( $_SERVER[ 'HTTP_X_FORWARDED_FOR' ] ) ) {
             $ip_address = $_SERVER[ 'HTTP_X_FORWARDED_FOR' ];
@@ -411,7 +471,7 @@ class N1_Magazine {
             $ip_address = $_SERVER[ 'HTTP_FORWARDED' ];
         } elseif ( ! empty( $_SERVER[ 'REMOTE_ADDR' ] ) ) {
             $ip_address = $_SERVER[ 'REMOTE_ADDR' ];
-        }
+        }*/
 
         return $ip_address;
     }
@@ -516,15 +576,19 @@ class N1_Magazine {
         $query = "SELECT DISTINCT p.ID FROM {$wpdb->posts} p
         JOIN {$wpdb->term_relationships} tr1 ON p.ID = tr1.object_id
         JOIN {$wpdb->term_relationships} tr2 ON p.ID = tr2.object_id";
-        if ( isset( $issue ) ) { // Online Only doesn't have an issue
+
+        if ( isset( $issue ) ) {
+            // Online Only doesn't have an issue
             $query   .= " AND tr1.term_taxonomy_id = $issue";
             $orderby = " ORDER BY p.menu_order;";
-        } elseif ( 'events' === $section->slug ) {
+        } elseif ( $section instanceof \WP_Term && 'events' === $section->slug ) {
+            // Events are ordered by date
             $query   .= " JOIN {$wpdb->postmeta} pm ON (p.ID = pm.post_id)";
             $query   .= " WHERE pm.meta_key = 'event_date'";
             $orderby = " ORDER BY STR_TO_DATE(pm.meta_value, '%Y%m%d') ASC";
-        } else { // The Magazine doesn't care about categories
-            $query   .= ! empty( $section ) ? " AND tr2.term_taxonomy_id = {$section->term_taxonomy_id}" : '';
+        } else {
+            // The Magazine doesn't care about categories
+            $query   .= $section instanceof \WP_Term ? " AND tr2.term_taxonomy_id = {$section->term_taxonomy_id}" : '';
             $orderby = " ORDER BY p.post_date ASC;";
         }
 

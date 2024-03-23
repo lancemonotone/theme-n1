@@ -67,8 +67,12 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>'; ?>
 		$featured_img = "";
 		$img_id = get_post_thumbnail_id( $post->ID );
 		$img = wp_get_attachment_image_src( $img_id, 'thumbnail' );
-		$src = $img[0];
-		if($src) $featured_img = "<img src=\"$src\"><br>";
+        if (is_array($img)) {
+            $src = $img[0];
+            if($src) {
+                $featured_img = "<img src=\"$src\"><br>";
+            }
+        }
 	?>
 	<item>
 		<title><?php the_title_rss() ?></title>

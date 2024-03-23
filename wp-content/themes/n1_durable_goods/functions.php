@@ -1,4 +1,17 @@
 <?php namespace N1_Durable_Goods;
+/**
+ * Function to log data to the console
+ *
+ * @param $key
+ * @param $data
+ * @param bool $to_error_log
+ *
+ * @return void
+ */
+function console_log($key, $data = null, bool $to_error_log = false): void {
+    $output = json_encode(! empty($data) ? array($key, $data) : $key);
+    error_log(stripslashes($output));
+}
 
 class N1 {
     public function __construct() {
@@ -122,6 +135,12 @@ class N1 {
         global $post;
         $pullquotes = get_field( 'article_pullquote_repeater', $post->ID );
         $which      = intval( $which[ 0 ] ) - 1;
+        if (!isset($pullquotes[$which])) {
+            // Handle the case when the index does not exist in the array
+            // You can return a default value or an error message
+            return '';
+        }
+
         $pq         = $pullquotes[ $which ][ 'article_pullquote' ];
         $url        = urlencode( wp_get_shortlink( $post->ID ) );
         $href       = 'https://twitter.com/share?text=' . urlencode( $pq . ' | n+1 |' ) . /*&via=nplusonemag*/

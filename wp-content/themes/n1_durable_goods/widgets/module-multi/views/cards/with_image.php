@@ -20,7 +20,9 @@
         <?php }
     } ?>
 
-    <?= $section->name ? '<p class="category"><a href="' . get_term_link( $section, $taxonomy ) . '">' . $section->name . '</a></p>' : '' ?>
+    <?php $section_name = $section->name ?? '' ?>
+
+    <?= $section_name ? '<p class="category"><a href="' . get_term_link( $section, $taxonomy ) . '">' . $section_name . '</a></p>' : '' ?>
 
     <?= $authors ? '<p class="author">' . $authors . '</p>' : '' ?>
 
