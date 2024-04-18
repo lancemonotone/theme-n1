@@ -288,7 +288,7 @@ class Metered_Paywall {
 
         if ( $post_id ) {
             $is_paywalled = $paywall ? 'YES' : 'NO';
-            console_log( $is_paywalled, [ $_SERVER[ 'REMOTE_ADDR' ], $reason, $pagename ] );
+            // console_log( $is_paywalled, [ $_SERVER[ 'REMOTE_ADDR' ], $reason, $pagename ] );
             self::$is_paywalled[ $post_id ] = $paywall;
         }
 

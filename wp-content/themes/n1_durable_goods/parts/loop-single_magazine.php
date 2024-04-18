@@ -10,7 +10,7 @@
             $cats      = wp_get_post_terms( $post->ID, 'category' );
             $cat       = reset( $cats );
             $cat_name  = $cat->name ?? '';
-            $issue_obj = N1_Magazine::get_issue_by_slug( $issue );
+            $issue_obj = N1_Magazine::get_issue_by_slug( $issue ?? '' );
             ?>
             <section id="content" class="content-post issue-content<?php echo Metered_Paywall::paywall_meter_reached( $post->ID ) ? ' unlogged' : '' ?>">
                 <?php if ( Metered_Paywall::is_meter_enabled() ) { ?>
