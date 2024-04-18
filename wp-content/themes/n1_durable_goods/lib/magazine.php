@@ -64,8 +64,8 @@ class N1_Magazine {
 
         $sql = /** @lang sql */
             "SELECT mmc.value
-        FROM mm_custom_field_data mmc
-        JOIN mm_user_data mmud
+        FROM wp_mm_custom_field_data mmc
+        JOIN wp_mm_user_data mmud
         ON mmc.user_id = mmud.wp_user_id
         WHERE mmc.custom_field_id IN(1) # IP range
         AND mmud.`status` IN (1); # active subscription";
@@ -140,10 +140,10 @@ class N1_Magazine {
                 self::$page_class = 'magazine';
             } elseif ( is_preview() && ! empty( wp_get_post_terms( $_REQUEST[ 'p' ], 'category' ) ) ) {
                 self::$page_type  = 'magazine';
-                self::$page_class = 'magazine';
+                self::$page_class = 'magazine single-article';
             } elseif ( is_preview() && ! empty( wp_get_post_terms( $_REQUEST[ 'p' ], 'online-only' ) ) ) {
                 self::$page_type  = 'online-only';
-                self::$page_class = 'online-only';
+                self::$page_class = 'online-only single-article';
             } elseif ( ! empty( $wp_query->query[ 'online-only' ] ) ) {
                 self::$page_type = 'online-only';
                 if ( $wp_query->query[ 'online-only' ] === 'events' ) {
@@ -210,9 +210,10 @@ class N1_Magazine {
      */
     static function set_context_issue( $slug = '' ) {
         global $wp_query;
-        if ( ! $slug && ! empty( $wp_query->query_vars[ 'issue' ] ) ) {
-            $slug = $wp_query->query_vars[ 'issue' ] ? $wp_query->query_vars[ 'issue' ] : self::get_current_issue()->post_name;
+        if ( ! $slug ) {
+            $slug = $wp_query->query_vars[ 'issue' ] ?? self::get_current_issue()->post_name;
         }
+
         // get issue name by taxonomy slug
         $issue = self::get_issue_by_slug( $slug );
 
@@ -449,13 +450,13 @@ class N1_Magazine {
         }
 
         // Split the IP address into segments
-        $ip_segments = explode('.', $ip_address);
+        $ip_segments = explode( '.', $ip_address );
 
         // Remove the last segment
-        array_pop($ip_segments);
+        array_pop( $ip_segments );
 
         // Join the remaining segments back together
-        $ip_address = implode('.', $ip_segments) . '.';
+        $ip_address = implode( '.', $ip_segments ) . '.';
 
         // Metered_Paywall::log_visitor();
 
@@ -565,11 +566,15 @@ class N1_Magazine {
     static function same_edition_and_section_adjacent_post_link( string $format = '&laquo; %link', string $link = '%title', bool $previous = true, bool $echo = true ) {
         global $wp_query, $wpdb, $post;
 
+        $issue   = '';
+        $section = '';
+        $orderby = '';
+
         if ( isset( $wp_query->query[ 'category_name' ] ) ) {
             $issue   = get_term_by( 'slug', $wp_query->query[ 'issue' ], 'issue' );
             $issue   = $issue->term_taxonomy_id;
             $section = get_term_by( 'slug', $wp_query->query[ 'category_name' ], 'category' );
-        } else {
+        } elseif ( isset( $wp_query->query[ 'online-only' ] ) ) {
             $section = get_term_by( 'slug', $wp_query->query[ 'online-only' ], 'online-only' );
         }
 
@@ -577,23 +582,27 @@ class N1_Magazine {
         JOIN {$wpdb->term_relationships} tr1 ON p.ID = tr1.object_id
         JOIN {$wpdb->term_relationships} tr2 ON p.ID = tr2.object_id";
 
-        if ( isset( $issue ) ) {
+        if ( ! empty( $issue ) ) {
             // Online Only doesn't have an issue
             $query   .= " AND tr1.term_taxonomy_id = $issue";
             $orderby = " ORDER BY p.menu_order;";
-        } elseif ( $section instanceof \WP_Term && 'events' === $section->slug ) {
+        } elseif ( ! empty( $section ) && $section instanceof \WP_Term && 'events' === $section->slug ) {
             // Events are ordered by date
             $query   .= " JOIN {$wpdb->postmeta} pm ON (p.ID = pm.post_id)";
             $query   .= " WHERE pm.meta_key = 'event_date'";
             $orderby = " ORDER BY STR_TO_DATE(pm.meta_value, '%Y%m%d') ASC";
-        } else {
+        } elseif ( ! empty( $section ) ) {
             // The Magazine doesn't care about categories
             $query   .= $section instanceof \WP_Term ? " AND tr2.term_taxonomy_id = {$section->term_taxonomy_id}" : '';
             $orderby = " ORDER BY p.post_date ASC;";
+        } else {
+            return null;
         }
 
         $query .= " AND p.post_status = 'publish'";
-        $query .= $orderby;
+        if ( ! empty( $orderby ) ) {
+            $query .= $orderby;
+        }
 
         $results = $wpdb->get_col( $query );
 

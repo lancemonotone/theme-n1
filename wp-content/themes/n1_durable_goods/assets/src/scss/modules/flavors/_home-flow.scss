@@ -1,5 +1,5 @@
 .flavor-home-flow.articles {
-    --article-columns: 1fr;
+    //--article-columns: 1fr;
 
     .module-bookstore {
         @media (min-width: 600px) {
@@ -16,13 +16,13 @@
         }
     }
 
-    @media screen and (min-width: 600px) {
-        --article-columns: repeat(2, 1fr);
-        grid-gap: clamp(1rem, 3vw, 2rem);
-    }
+    //@media screen and (min-width: 600px) {
+    //    --article-columns: repeat(2, 1fr);
+    //    grid-gap: clamp(1rem, 3vw, 2rem);
+    //}
 
-    grid-area: grid;
-    grid-template-columns: var(--article-columns);
+    //grid-area: grid;
+    //grid-template-columns: var(--article-columns);
 
     .widget-title {
         display: none;
