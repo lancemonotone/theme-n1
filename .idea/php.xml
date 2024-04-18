@@ -12,12 +12,10 @@
   </component>
   <component name="PhpProjectServersManager">
     <servers>
-      <server host="nplusonemag.local" id="079de3d9-beff-4413-99b5-a8202d8607d3" name="Local" />
+      <server host="nplusonemag.local" id="a6ff6362-c010-494a-9955-9394c648d964" name="Local" />
     </servers>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
-    <option name="suggestChangeDefaultLanguageLevel" value="false" />
-  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
   </component>
