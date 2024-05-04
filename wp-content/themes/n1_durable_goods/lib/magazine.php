@@ -86,9 +86,19 @@ class N1_Magazine {
 
 
         // Check if the client IP is in the array
-        self::$is_institution = in_array( $ip, $clean_ips );
+        // This doesn't work if the third segment of the IP is a wildcard
+        //self::$is_institution = in_array( $ip, $clean_ips );
 
-        $isInstitution = self::isIPInCleanIPs( $ip, $clean_ips );
+        // Check if the client IP starts with any of the institution IPs
+        foreach ( $clean_ips as $institution_ip ) {
+            if ( strpos( $ip, $institution_ip ) === 0 ) {
+                self::$is_institution = true;
+                break;
+            }
+        }
+
+        //$isInstitution = self::isIPInCleanIPs( $ip, $clean_ips );
+
         // console_log( 'IP', $ip );
         // console_log( 'Clean IPs: ' . implode(',', $clean_ips) );
         // console_log( 'Is institution', ( self::$is_institution ? 'true' : 'false' ) );
