@@ -22,16 +22,6 @@ class N1_Magazine {
     static string $page_type = '';
     static string $page_class = '';
 
-    private function __construct() {
-        $this->add_shortcodes();
-    }
-
-    function add_shortcodes() {
-        add_shortcode( 'latest-issue', function () {
-            return self::get_current_issue_url();
-        } );
-    }
-
     static function isIPInCleanIPs( $ip, $cleanIPs ) {
         foreach ( $cleanIPs as $cleanIP ) {
             // Check for exact match or if the clean IP is a prefix of the actual IP (indicating a range match)

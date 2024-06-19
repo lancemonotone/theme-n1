@@ -29,6 +29,9 @@ class N1 {
         //add_filter( 'force_ssl',  array(&$this, 'http_feed_force_ssl', 10, 3));
         add_shortcode( 'pullquote', [ $this, 'article_pullquote' ] );
         add_shortcode( 'date_today', [ $this, 'date_shortcode' ] );
+        add_shortcode( 'latest-issue', function () {
+            return N1_Magazine::get_current_issue_url();
+        } );
         include_once( 'lib/twentytwelve_functions.php' );
     }
 
