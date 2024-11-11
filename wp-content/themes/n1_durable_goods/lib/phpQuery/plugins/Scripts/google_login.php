@@ -34,7 +34,7 @@ $self->document->xhr = phpQuery::$plugins->browserGet(
 	'https://www.google.com/accounts/Login',
 	$ndfasui8923
 );
-//$self->document->xhr = phpQuery::$plugins->browserGet('https://www.google.com/accounts/Login', create_function('$browser', "
+//$self->document->xhr = phpQuery::$plugins->browserGet('https://www.google.com/accounts/Login', function($browser) {
 //	\$browser
 //		->WebBrowser()
 //		->find('#Email')
@@ -42,6 +42,6 @@ $self->document->xhr = phpQuery::$plugins->browserGet(
 //		->find('#Passwd')
 //			->val('".str_replace("'", "\\'", $config['google_login'][1])."')
 //			->parents('form')
-//				->submit();"
-//));
+//				->submit();
+//});
 ?>

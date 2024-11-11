@@ -53,3 +53,7 @@ n1-styles.min.css
 /wp-content/themes/n1_durable_goods/assets/build/css/nplusone.min.css
 /wp-content/themes/n1_durable_goods/facebook/hooks/pageview.php
 downgrade_expired_members.php
+local-xdebuginfo.php
+wp-content/themes/n1_durable_goods/lib/phpQuery.zip
+wp-content/plugins/advanced-custom-fields-pro.zip
+local-phpinfo.php

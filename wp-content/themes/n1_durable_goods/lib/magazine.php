@@ -53,12 +53,14 @@ class N1_Magazine {
         global $wpdb;
 
         $sql = /** @lang sql */
-            "SELECT mmc.value
-        FROM wp_mm_custom_field_data mmc
-        JOIN wp_mm_user_data mmud
-        ON mmc.user_id = mmud.wp_user_id
-        WHERE mmc.custom_field_id IN(1) # IP range
-        AND mmud.`status` IN (1); # active subscription";
+            "SELECT mmc.value, u.user_login
+            FROM wp_mm_custom_field_data mmc
+            JOIN wp_mm_user_data mmud 
+            ON mmc.user_id = mmud.wp_user_id
+            JOIN wp_users u 
+            ON mmc.user_id = u.ID
+            WHERE mmc.custom_field_id IN(1) # IP range
+            AND mmud.`status` IN (1); # active subscription";
 
         $institutions = $wpdb->get_results( $sql, ARRAY_A );
 
@@ -74,10 +76,8 @@ class N1_Magazine {
             return str_replace( '*', '', trim( $ip ) );
         }, $flattened_ips );
 
-
-        // Check if the client IP is in the array
-        // This doesn't work if the third segment of the IP is a wildcard
-        //self::$is_institution = in_array( $ip, $clean_ips );
+        // Remove empty values
+        $clean_ips = array_filter( $clean_ips );
 
         // Check if the client IP starts with any of the institution IPs
         foreach ( $clean_ips as $institution_ip ) {
@@ -86,32 +86,6 @@ class N1_Magazine {
                 break;
             }
         }
-
-        //$isInstitution = self::isIPInCleanIPs( $ip, $clean_ips );
-
-        // console_log( 'IP', $ip );
-        // console_log( 'Clean IPs: ' . implode(',', $clean_ips) );
-        // console_log( 'Is institution', ( self::$is_institution ? 'true' : 'false' ) );
-        // console_log( 'Is institution', ( $isInstitution ? 'true' : 'false' ) );
-
-        /*foreach ( $institutions as $institution ) {
-            $ips = $institution[ 'value' ];
-            $ips = explode( PHP_EOL, $ips );
-            foreach ( $ips as $ip ) {
-                if ( '' != $ip ) {
-                    $ip_clean = str_replace( '*', '', trim( $ip ) );
-                    if ( '' != $ip_clean && false !== @stristr( self::get_client_ip(), $ip_clean ) ) {
-                        self::$is_institution = true;
-                        break;
-                    } else {
-                        // echo "<!-- 1: ".$ip."-->";
-                        // echo "<!-- 2: ".$ip_clean."-->";
-                        // echo "<!-- 3: ".self::get_client_ip()."-->";
-                        // echo "<!-- 4: ".@stristr(self::get_client_ip(), $ip_clean)."-->\n";
-                    }
-                }
-            }
-        }*/
 
         return self::$is_institution;
     }

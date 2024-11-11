@@ -94,6 +94,8 @@ abstract class phpQuery {
 		'data' => null,
 		'username' => null,
 		'password' => null,
+		'dataType' => null,
+		'ifModified' => null,
 		'accepts' => array(
 			'xml' => "application/xml, text/xml",
 			'html' => "text/html",
@@ -331,11 +333,11 @@ abstract class phpQuery {
 			while (preg_match($regex, $php, $matches)) {
 				$php = preg_replace_callback(
 					$regex,
-//					create_function('$m, $charset = "'.$charset.'"',
+//					function($m, $charset = $charset) {
 //						'return $m[1].$m[2]
 //							.htmlspecialchars("<"."?php".$m[4]."?".">", ENT_QUOTES|ENT_NOQUOTES, $charset)
-//							.$m[5].$m[2];'
-//					),
+//							.$m[5].$m[2];
+//					},
 					array('phpQuery', '_phpToMarkupCallback'),
 					$php
 				);
@@ -367,9 +369,9 @@ abstract class phpQuery {
 		/* <php>...</php> to <?php...? > */
 		$content = preg_replace_callback(
 			'@<php>\s*<!--(.*?)-->\s*</php>@s',
-//			create_function('$m',
-//				'return "<'.'?php ".htmlspecialchars_decode($m[1])." ?'.'>";'
-//			),
+//			function($m) {
+//				return "<'.'?php ".htmlspecialchars_decode($m[1])." ?'.'>";
+//			},
 			array('phpQuery', '_markupToPHPCallback'),
 			$content
 		);
@@ -382,15 +384,15 @@ abstract class phpQuery {
 			while (preg_match($regex, $content))
 				$content = preg_replace_callback(
 					$regex,
-					create_function('$m',
-						'return $m[1].$m[2].$m[3]."<?php "
+					function($m) {
+						return $m[1].$m[2].$m[3]."<?php "
 							.str_replace(
 								array("%20", "%3E", "%09", "&#10;", "&#9;", "%7B", "%24", "%7D", "%22", "%5B", "%5D"),
-								array(" ", ">", "	", "\n", "	", "{", "$", "}", \'"\', "[", "]"),
+								array(" ", ">", "	", "\n", "	", "{", "$", "}", '"', "[", "]"),
 								htmlspecialchars_decode($m[4])
 							)
-							." ?>".$m[5].$m[2];'
-					),
+							." ?>".$m[5].$m[2];
+					},
 					$content
 				);
 		return $content;

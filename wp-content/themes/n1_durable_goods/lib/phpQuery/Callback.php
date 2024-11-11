@@ -23,7 +23,7 @@ interface ICallbackNamed {
  * @link http://code.google.com/p/phpquery/wiki/Callbacks#Param_Structures
  * @author Tobiasz Cudnik <tobiasz.cudnik/gmail.com>
  * 
- * @TODO??? return fake forwarding function created via create_function
+ * @TODO??? return fake forwarding function created via anonymous function
  * @TODO honor paramStructure
  */
 class Callback
@@ -31,10 +31,7 @@ class Callback
 	public $callback = null;
 	public $params = null;
 	protected $name;
-	public function __construct($callback, $param1 = null, $param2 = null, 
-			$param3 = null) {
-		$params = func_get_args();
-		$params = array_slice($params, 1);
+	public function __construct($callback, ...$params) {
 		if ($callback instanceof Callback) {
 			// TODO implement recurention
 		} else {
@@ -59,16 +56,13 @@ class Callback
 //	}
 }
 /**
- * Shorthand for new Callback(create_function(...), ...);
+ * Shorthand for new Callback(function(...), ...);
  * 
  * @author Tobiasz Cudnik <tobiasz.cudnik/gmail.com>
  */
 class CallbackBody extends Callback {
-	public function __construct($paramList, $code, $param1 = null, $param2 = null, 
-			$param3 = null) {
-		$params = func_get_args();
-		$params = array_slice($params, 2);
-		$this->callback = create_function($paramList, $code);
+	public function __construct($callback, ...$params) {
+		$this->callback = $callback;
 		$this->params = $params;
 	}
 }
